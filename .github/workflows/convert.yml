@@ -1,0 +1,31 @@
+name: Convert files
+
+on: push
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-20.04
+    container: python:3.11.1-bullseye
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Update apt cache
+        run: apt-get update
+
+      - name: Install tex
+        run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended
+
+      - name: Convert input files
+        run: python3 convert.py
+
+      - name: Create pdf output
+        run: pdflatex -output-directory latex demo.tex
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: |
+            latex/demo.pdf
+            html/demo.html

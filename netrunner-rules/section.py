@@ -68,7 +68,6 @@ class Section:
     if self.lore:
       result += f'{self.lore.to_latex(id_map)}\n'
     prefix = id_map[self.id].reference
-    result += f'\setlist[enumerate,1]{{label={prefix}.\\arabic*.,leftmargin=*,labelindent=4pt}}\n'
     result += '\\begin{outline}[enumerate]\n'
     for elem in self.elements:
       match elem:
@@ -101,7 +100,6 @@ class Header:
     result = f'\section{{{self.text}}}\n'
     for section in self.elements:
       result += section.to_latex(id_map)
-    result += '\end{document}'
     return result
 
   def id_map(self, i: int, dict: RefDict):
@@ -123,17 +121,18 @@ class Document:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = '\documentclass{article}\n'
-    result += '\\usepackage[a4paper,bindingoffset=0.1in,left=0.8in,right=0.8in,top=0.8in,bottom=0.8in,footskip=.25in]{geometry}\n'
-    result += '\\usepackage{outlines}\n'
-    result += '\\usepackage{enumitem}\n'
-    result += '\\usepackage{changepage}\n'
-    result += '\\setlist[enumerate,2]{label=\\alph*.}\n'
-    result += '\\begin{document}\n'
-    for subsection in self.elements:
-      result += subsection.to_latex(id_map)
-    result += '\end{document}\n'
-    return result
+    latex_template = open("templates/latex/template.tex", "r")
+    latex_content = latex_template.read()
+    latex_template.close()
+    
+    latex_content = latex_content.replace("__CHANGELOG_PLACEHOLDER__", "")
+
+    document_content = ''
+    for element in self.elements:
+      document_content += element.to_latex(id_map)
+    latex_content = latex_content.replace("__DOCUMENT_PLACEHOLDER__", document_content)
+
+    return latex_content
 
   def id_map(self):
     id_map = {}

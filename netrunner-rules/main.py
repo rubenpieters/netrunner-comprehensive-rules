@@ -19,7 +19,7 @@ def standalone_html(document: Document, id_map: RefDict):
   return result
 
 def standalone_latex(document: Document, id_map: RefDict):
-  result += document.to_latex(id_map)
+  result = document.to_latex(id_map)
   return result
 
 def write_to_file(folder: str, filename: str, content: str):

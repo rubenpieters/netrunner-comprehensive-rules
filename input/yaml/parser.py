@@ -1,4 +1,9 @@
+import re
 import yaml
+
+def parseFormatText(str):
+  result = re.split('[\{\}]', rule['text'])
+  print(result)
 
 with open("data/input/rules.yaml", "r") as stream:
   try:
@@ -9,6 +14,8 @@ with open("data/input/rules.yaml", "r") as stream:
       for subsection in section['sections']:
         print('subsection ' + subsection['id'] + ' - ' + subsection['name'])
         for rule in subsection['rules']:
-          print('rule ' + rule['id'] + ' - ' + rule['text'].rstrip())
+          text = rule['text'].rstrip()
+          print('rule ' + rule['id'] + ' - ' + text)
+          parseFormatText(text)
   except yaml.YAMLError as exc:
     print(exc)

@@ -17,7 +17,7 @@ jobs:
         run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended
 
       - name: Convert input files
-        run: python3 netrunner-rules/main.py
+        run: python3 rules_doc_generator
 
       - name: Create pdf output
         run: pdflatex -output-directory latex demo.tex

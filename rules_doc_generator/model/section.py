@@ -1,9 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Union, Optional
-from text import (RefDict, RefInfo, FormatText, Example)
-
 import string
+
+from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Example)
 
 @dataclass
 class Rule:

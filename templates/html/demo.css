@@ -1,0 +1,75 @@
+ol {
+  counter-reset: section;
+  list-style: none;
+}
+
+ol li.Header:before {
+  counter-increment: section;
+  content: counters(section, ".") ".";
+  display: inline-block;
+}
+
+ol li.Header li.Section:before {
+  counter-increment: section;
+  content: counters(section ,".") ".";
+  display: inline-block;
+}
+
+ol li.Header li.Section li.Rule:before {
+  counter-increment: section;
+  counter-reset: subrule;
+  content: counters(section, ".") ".";
+}
+
+ol li.Header li.Section li.Rule li.SubRule:before {
+  counter-increment: subrule;
+  content: counters(subrule, "", lower-alpha) ".";
+}
+
+li.Header:before {
+  font-size: xx-large;
+  font-weight: bolder;
+  padding-right: 10px;
+}
+
+li.Header > h1 {
+  display: inline-block;
+}
+
+li.Section:before {
+  font-size: x-large;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+li.Section > h2 {
+  display: inline-block;
+}
+
+li.Rule:before {
+  padding-right: 10px;
+}
+
+li.SubRule:before {
+  padding-right: 10px;
+}
+
+ol {
+  display: table;
+}
+
+ol > li {
+  display: table-row;
+}
+
+ol > li:before {
+  display: table-cell;
+}
+
+.Term {
+  font-variant: small-caps;
+}
+
+.Symbol {
+  height: 0.75em;
+}

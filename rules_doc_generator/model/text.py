@@ -57,10 +57,11 @@ class Term:
   def to_latex(self, id_map: RefDict) -> str:
     return self.text
 
+TextElement = Union[Text, Ref, Term, Image]
 
 @dataclass
 class FormatText:
-  textElements: list[Union[Text, Ref, Term, Image]]
+  textElements: list[TextElement]
 
   def to_plaintext(self) -> str:
     result = ''

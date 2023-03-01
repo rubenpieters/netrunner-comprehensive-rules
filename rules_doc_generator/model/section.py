@@ -50,26 +50,26 @@ class Rule:
 class Section:
   id: str
   text: str
-  lore: Optional[FormatText]
-  elements: list[Union[Rule, Example]]
+  snippet: Optional[FormatText]
+  rules: list[Rule]
 
   def to_html(self, id_map: RefDict) -> str:
     result = f'<h2>{self.text}</h2>'
-    if self.lore:
-      result += f'<p>{self.lore.to_html(id_map)}</p>'
+    if self.snippet:
+      result += f'<p>{self.snippet.to_html(id_map)}</p>'
     result += '<ol>'
-    for elem in self.elements:
+    for elem in self.rules:
       result += f'<li class="Rule" id="{id_map[elem.id].reference}">{elem.to_html(id_map)}</li>'
     result += '</ol>'
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
     result = f'\subsection{{{self.text}}}\n'
-    if self.lore:
-      result += f'{self.lore.to_latex(id_map)}\n'
+    if self.snippet:
+      result += f'{self.snippet.to_latex(id_map)}\n'
     prefix = id_map[self.id].reference
     result += '\\begin{outline}[enumerate]\n'
-    for elem in self.elements:
+    for elem in self.rules:
       match elem:
         case Rule(): result += f'\\1 {elem.to_latex(id_map)}\n'
         case Example(): result += f'\\0 \begin{{adjustwidth}}{{37pt}}{{0pt}} {elem.to_latex(id_map)} \end{{adjustwidth}}\n'
@@ -80,25 +80,25 @@ class Section:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', self.text)
-    for j, elem in enumerate(self.elements):
+    for j, elem in enumerate(self.rules):
       elem.id_map(f'{ctx}.{i}', j + 1, dict)
 
 @dataclass
 class Header:
   id: str
   text: str
-  elements: list[Section]
+  sections: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
     result = f'<h1>{self.text}</h1><ol>'
-    for section in self.elements:
+    for section in self.sections:
       result += f'<li class="Section" id="{id_map[section.id].reference}">{section.to_html(id_map)}</li>'
     result += '</ol>'
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
     result = f'\section{{{self.text}}}\n'
-    for section in self.elements:
+    for section in self.sections:
       result += section.to_latex(id_map)
     return result
 
@@ -106,16 +106,16 @@ class Header:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}', self.text)
     dict[self.id] = RefInfo(f'{i}', 'header', self.text)
-    for j, elem in enumerate(self.elements):
+    for j, elem in enumerate(self.sections):
       elem.id_map(f'{i}', j + 1, dict)
 
 @dataclass
 class Document:
-  elements: list[Section]
+  headers: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
     result = '<ol>'
-    for header in self.elements:
+    for header in self.headers:
       result += f'<li class="Header" id="{id_map[header.id].reference}">{header.to_html(id_map)}</li>'
     result += '</ol>'
     return result
@@ -128,7 +128,7 @@ class Document:
     latex_content = latex_content.replace("__CHANGELOG_PLACEHOLDER__", "")
 
     document_content = ''
-    for element in self.elements:
+    for element in self.headers:
       document_content += element.to_latex(id_map)
     latex_content = latex_content.replace("__DOCUMENT_PLACEHOLDER__", document_content)
 
@@ -136,6 +136,6 @@ class Document:
 
   def id_map(self):
     id_map = {}
-    for j, elem in enumerate(self.elements):
+    for j, elem in enumerate(self.headers):
       elem.id_map(j + 1, id_map)
     return id_map

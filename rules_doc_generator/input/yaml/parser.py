@@ -2,8 +2,8 @@ import re
 from typing import Any
 import yaml
 
-from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term)
-from rules_doc_generator.model.section import (Rule)
+from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example)
+from rules_doc_generator.model.section import (Rule, Section, Header, Document)
 
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
@@ -15,26 +15,53 @@ def parseTextElement(str: str) -> TextElement:
   else:
     return Text(str)
 
-def parseFormatText(str: str) -> FormatText:
-  splitCurly = re.split('[\{\}]', str)
-  parsed = map(parseTextElement, splitCurly)
-  return FormatText(list(parsed))
+def parse_format_text(str: str) -> FormatText:
+  split_curly = re.split('[\{\}]', str)
+  parsed = list(map(parseTextElement, split_curly))
+  return FormatText(parsed)
 
-def parseRule(yaml_rule: Any) -> Rule:
+def parse_example(yaml_example: Any) -> Example:
+  text = parse_format_text(yaml_example['text'].rstrip())
+  return Example(text)
+
+def parse_rule(yaml_rule: Any) -> Rule:
   id = yaml_rule['id']
   text = yaml_rule['text'].rstrip()
-  return Rule(id, parseFormatText(text), [], [])
+  rules = []
+  if 'rules' in yaml_rule:
+    rules = list(map(parse_rule, yaml_rule['rules']))
+  examples = []
+  if 'examples' in yaml_rule:
+    examples = list(map(parse_example, yaml_rule['examples']))
+  return Rule(id, parse_format_text(text), rules, examples)
 
-if __name__ == "__main__":
+def parse_section(yaml_section: Any) -> Section:
+  id = yaml_section['id']
+  text = yaml_section['text']
+  snippet = None
+  if 'snippet' in yaml_section:
+    snippet = parse_format_text(yaml_section['snippet'])
+  rules = list(map(parse_rule, yaml_section['rules']))
+  return Section(id, text, snippet, rules)
+
+def parse_header(yaml_header: Any) -> Header:
+  id = yaml_header['id']
+  text = yaml_header['text']
+  sections = list(map(parse_section, yaml_header['sections']))
+  return Header(id, text, sections)
+
+def parse_document(yaml_document: Any) -> Document:
+  headers = list(map(parse_header, yaml_document))
+  return Document(headers)
+
+def yaml_to_document():
   with open("data/input/rules.yaml", "r") as stream:
     try:
-      obj = yaml.safe_load(stream)
-
-      for section in obj:
-        print('section ' + section['id'] + ' - ' + section['name'])
-        for subsection in section['sections']:
-          print('subsection ' + subsection['id'] + ' - ' + subsection['name'])
-          for rule in subsection['rules']:
-            print(parseRule(rule))
+      yaml_input = yaml.safe_load(stream)
+      return parse_document(yaml_input)
     except yaml.YAMLError as exc:
       print(exc)
+
+if __name__ == "__main__":
+  doc = yaml_to_document()
+  print(doc)

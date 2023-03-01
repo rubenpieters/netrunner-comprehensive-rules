@@ -16,7 +16,7 @@ jobs:
       - name: Install tex
         run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended
 
-      - name: Convert input files
+      - name: Install requirements
         run: pip install -r requirements.txt
 
       - name: Convert input files

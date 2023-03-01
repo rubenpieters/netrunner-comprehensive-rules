@@ -39,7 +39,7 @@
       - text: |
           The Corp has one rezzed piece of ice installed and Liquidation in HQ. Because the Corp has at least one rezzed card that could be trashed (which would change the game state), they can play Liquidation, spending a click and paying its play cost. The Corp then chooses any number of their rezzed cards to trash, which could be zero cards.
       - text: |
-          Example: The Runner is playing Armand "Geist" Walker and has Forger installed. The Runner can only trash Forger and trigger Geist's ability when they are about to take a tag (which Forger could avoid) or while they have a tag (which Forger could remove). Using Forger at any other time has no potential to change the game state.
+          The Runner is playing Armand "Geist" Walker and has Forger installed. The Runner can only trash Forger and trigger Geist's ability when they are about to take a tag (which Forger could avoid) or while they have a tag (which Forger could remove). Using Forger at any other time has no potential to change the game state.
   - id: sec_counters_tokens
     text: Counters and Tokens
     snippet: |

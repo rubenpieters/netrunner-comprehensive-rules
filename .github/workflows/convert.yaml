@@ -17,6 +17,9 @@ jobs:
         run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended
 
       - name: Convert input files
+        run: pip install -r requirements.txt
+
+      - name: Convert input files
         run: python3 -m rules_doc_generator
 
       - name: Create pdf output

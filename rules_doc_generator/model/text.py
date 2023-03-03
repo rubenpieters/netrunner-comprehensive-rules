@@ -8,6 +8,7 @@ class RefInfo:
   reference: str
   type: str
   text: str
+  id: str
 
 RefDict = dict[str, RefInfo]
 
@@ -45,7 +46,7 @@ class Ref:
     if not self.referenced_id in id_map:
       raise Exception(f'id does not exist: {self.referenced_id}')
     ref_info = id_map[self.referenced_id]
-    return ref_info.reference
+    return f'\hyperref[{ref_info.id}]{{{ref_info.reference}}}'
 
 @dataclass
 class Term:

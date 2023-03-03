@@ -9,6 +9,7 @@ from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Exampl
 class Rule:
   id: str
   formatText: FormatText
+  section: bool
   rules: list[Rule]
   examples: list[Example]
 
@@ -37,12 +38,12 @@ class Rule:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     letters = string.ascii_lowercase[:14]
-    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', 'rule', '')
+    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', 'rule', '', self.id)
 
   def id_map(self, ctx: str, i: int, dict: dict[int, str]) -> int:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    dict[self.id] = RefInfo(f'{ctx}.{i}', 'rule', '')
+    dict[self.id] = RefInfo(f'{ctx}.{i}', 'rule', '', self.id)
     for j, rule in enumerate(self.rules):
       rule.id_map_sub_rules(f'{ctx}.{i}', j, dict)
 
@@ -71,7 +72,12 @@ class Section:
     result += '\\begin{outline}[enumerate]\n'
     for elem in self.rules:
       match elem:
-        case Rule(): result += f'\\1 {elem.to_latex(id_map)}\n'
+        case Rule(): 
+          if elem.section:
+            result += '\\addtocounter{subsubsection}{1}\n'
+            result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + elem.formatText.to_latex(id_map) + '}\n'
+            result += f'\\refstepcounter{{rule_section}}\label{{{elem.id}}}'
+          result += f'\\1 {elem.to_latex(id_map)}\n'
         case Example(): result += f'\\0 \begin{{adjustwidth}}{{37pt}}{{0pt}} {elem.to_latex(id_map)} \end{{adjustwidth}}\n'
     result += '\end{outline}\n'
     return result
@@ -79,7 +85,7 @@ class Section:
   def id_map(self, ctx: str, i: int, dict: dict[int, str]):
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', self.text)
+    dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', self.text, self.id)
     for j, elem in enumerate(self.rules):
       elem.id_map(f'{ctx}.{i}', j + 1, dict)
 
@@ -105,7 +111,7 @@ class Header:
   def id_map(self, i: int, dict: RefDict):
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}', self.text)
-    dict[self.id] = RefInfo(f'{i}', 'header', self.text)
+    dict[self.id] = RefInfo(f'{i}', 'header', self.text, self.id)
     for j, elem in enumerate(self.sections):
       elem.id_map(f'{i}', j + 1, dict)
 

@@ -27,13 +27,16 @@ def parse_example(yaml_example: Any) -> Example:
 def parse_rule(yaml_rule: Any) -> Rule:
   id = yaml_rule['id']
   text = yaml_rule['text'].rstrip()
+  section = False
+  if 'section' in yaml_rule:
+    section = True
   rules = []
   if 'rules' in yaml_rule:
     rules = list(map(parse_rule, yaml_rule['rules']))
   examples = []
   if 'examples' in yaml_rule:
     examples = list(map(parse_example, yaml_rule['examples']))
-  return Rule(id, parse_format_text(text), rules, examples)
+  return Rule(id, parse_format_text(text), section, rules, examples)
 
 def parse_section(yaml_section: Any) -> Section:
   id = yaml_section['id']

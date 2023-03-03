@@ -42,8 +42,6 @@
           The Runner is playing Armand "Geist" Walker and has Forger installed. The Runner can only trash Forger and trigger Geist's ability when they are about to take a tag (which Forger could avoid) or while they have a tag (which Forger could remove). Using Forger at any other time has no potential to change the game state.
   - id: sec_counters_tokens
     text: Counters and Tokens
-    snippet: |
-      my snippet
     rules:
     - id: rule_counters_cards
       text: |
@@ -51,3 +49,20 @@
       rules:
       - id: rule_counter_token
         text: The terms "counter" and "token" are interchangeable.
+  - id: sec_credits
+    text: Credits
+    snippet: |
+      Each of the Runner's credits represents enough money to upgrade some basic parts for their console, have a meal at a decent restaurant, or buy a ticket and some concessions for a night at the sensies.
+      Each of the Corp's credits represents enough money to manufacture a run of computer parts, buy out a decent restaurant, or film a low-budget sensie.
+    rules:
+    - id: rule_credit
+      text: |
+        A {term:credit} ([c]) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked. {ref:rule_sec_recurring}
+    - id: rule_sec_recurring
+      section:
+      text: Recurring Credits
+      rules:
+      - id: rule_recurring_credits
+        text: |
+          {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
+      

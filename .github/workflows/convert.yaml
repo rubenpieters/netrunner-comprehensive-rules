@@ -1,6 +1,13 @@
 name: Convert files
 
-on: push
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   convert_files:
@@ -25,10 +32,38 @@ jobs:
       - name: Create pdf output
         run: latexmk -pdf -jobname=latex/demo latex/demo.tex
 
-      - name: Upload artifact
+      - name: Upload pdf output
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts
-          path: |
-            latex/demo.pdf
-            html/demo.html
+          name: pdf-output
+          path: latex/demo.pdf
+
+      - name: Upload pdf output
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-output
+          path: html/demo.html
+
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: html-output
+        path: index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

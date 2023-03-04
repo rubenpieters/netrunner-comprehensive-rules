@@ -2,20 +2,23 @@ import re
 from typing import Any
 import yaml
 
-from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType)
+from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card)
 from rules_doc_generator.model.section import (Rule, Section, Header, Document)
 
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
-    text = str[4:]
+    text = str[4:].lower()
     capitalize = str[4].isupper()
-    return Ref(text.lower(), capitalize)
+    ids = text.split(',')
+    return Ref(ids, capitalize)
   elif str.startswith('img:'):
     return Image(str[4:])
   elif str.startswith('term:'):
     return Term(str[5:])
   elif str.startswith('subtype:'):
     return SubType(str[8:])
+  elif str.startswith('card:'):
+    return Card(str[5:])
   else:
     return Text(str)
 

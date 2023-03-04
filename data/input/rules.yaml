@@ -1,7 +1,7 @@
 - id: hdr_game_concepts
   text: Game Concepts
   sections:
-  - id: sec_general
+  - id: sec_concepts_general
     text: General
     snippet: |-
       These rules are compatible with cards from the game {term:android: netrunner} by Fantasy Flight Games. {term:android: netrunner} is a game about the cyber-struggle between massive Corporations and subversive hackers known as Runners.
@@ -59,7 +59,7 @@
       rules:
       - id: rule_gateway_identities
         text: |-
-          The identities The Catalyst and The Syndicate from the System Gateway Starter Pack are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
+          The identities {card:The Catalyst} and {card:The Syndicate} from the System Gateway Starter Pack are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
     - id: rule_legal_deck
       text: Each deck must meet all requirements in this section to be legal for play.
 
@@ -96,6 +96,15 @@
         text: |-
           {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
 
+  - id: sec_clicks
+    text: Clicks
+    snippet: |
+      Working a job, making connections, and especially jacking in—everything you do takes time, and it always goes by faster than you think. A click represents an abstract amount of time spent on a particular activity, either several hours all at once or scattered across the day.
+    rules:
+    - id: rule_allotted_clicks
+      text: |-
+        As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:hdr_turns} for details about the procedures of player turns.
+
   - id: sec_host
     text: Host, Hosted and Hosting
     rules:
@@ -114,7 +123,7 @@
     rules:
     - id: rule_targets_gone
       text: |-
-        At the time an instruction resolves, if any of its targets either have become invalid or were not announced, as much of that ability resolves as possible without acting on the unannounced or invalid targets, following {ref:rule_if_able} and {ref:rule_do_as_much_as_you_can} of the Golden Rules. A target can be invalid because the chosen object or subroutine no longer exists or because the target no longer meets other requirements specified by the targeting ability.
+        At the time an instruction resolves, if any of its targets either have become invalid or were not announced, as much of that ability resolves as possible without acting on the unannounced or invalid targets, following {ref:rule_if_able,rule_do_as_much_as_you_can} of the Golden Rules. A target can be invalid because the chosen object or subroutine no longer exists or because the target no longer meets other requirements specified by the targeting ability.
 
   - id: sec_costs
     text: Costs
@@ -137,6 +146,16 @@
       - id: rule_nested_cost_otherwise
         text: |-
           Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in rule {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
+
+- id: hdr_turns
+  text: Turns
+  sections:
+  - id: sec_turn_general
+    text: General
+    rules:
+    - id: rule_turn
+      text: |-
+        A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
 
 - id: hdr_card_manipulation
   text: Card Manipulation

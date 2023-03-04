@@ -116,6 +116,7 @@ class Header:
 
   def to_latex(self, id_map: RefDict) -> str:
     result = f'\section{{{self.text}}}\n'
+    result += f'\label{{{self.id}}}\n'
     for section in self.sections:
       result += section.to_latex(id_map)
     return result
@@ -123,7 +124,7 @@ class Header:
   def id_map(self, i: int, dict: RefDict):
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}', self.text)
-    dict[self.id] = RefInfo(f'{i}', 'header', self.text, self.id)
+    dict[self.id] = RefInfo(f'{i}', 'section', self.text, self.id)
     for j, elem in enumerate(self.sections):
       elem.id_map(f'{i}', j + 1, dict)
 

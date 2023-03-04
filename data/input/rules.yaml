@@ -89,12 +89,22 @@
       text: |-
         A {term:credit} ([c]) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
     - id: rule_sec_recurring
-      section:
+      section: rule_section
       text: Recurring Credits
       rules:
       - id: rule_recurring_credits
         text: |-
           {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
+
+  - id: sec_host
+    text: Host, Hosted and Hosting
+    rules:
+    - id: rule_host_relationship
+      text: Any card in an eligible location can act as a host, but a host relationship can only be created or permitted by a card ability.
+      rules:
+      - id: rule_implicit_host
+        text: |-
+          If a card has an ability describing the types and/or numbers of cards it can host, but it does not have an ability that directly hosts cards onto itself, then the card is permitted as an eligible installation destination for the types of cards listed, up to the number specified. A host card is chosen as an installation destination during {ref:rule_steps_installing_destination} of the installation process.
 
   - id: sec_targets
     text: Targets
@@ -124,3 +134,18 @@
       - id: rule_nested_cost_otherwise
         text: |-
           Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in rule {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
+
+- id: hdr_card_manipulation
+  text: Card Manipulation
+  sections:
+  - id: sec_install_uninstall
+    text: Installing and Uninstalling Cards
+    rules:
+    - id: rule_sec_steps_installing
+      section: steps
+      text: Steps of Installing a Card
+      rules:
+      - id: rule_steps_installing_place
+        text: Place the card into the play area with the same faceup or facedown status it will have when the installation is complete. It is not yet installed or active.
+      - id: rule_steps_installing_destination
+        text: Choose and declare the install destination appropriate to the card that will be installed, including any host relationships, if applicable.

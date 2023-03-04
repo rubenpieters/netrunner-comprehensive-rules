@@ -29,9 +29,9 @@ def parse_example(yaml_example: Any) -> Example:
 def parse_rule(yaml_rule: Any, sub_rule: bool = False) -> Rule:
   id = yaml_rule['id']
   text = yaml_rule['text'].rstrip()
-  section = False
+  section = None
   if 'section' in yaml_rule:
-    section = True
+    section = yaml_rule['section']
   rules = []
   if 'rules' in yaml_rule:
     rules = list(map(lambda x: parse_rule(x, True), yaml_rule['rules']))

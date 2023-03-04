@@ -9,7 +9,7 @@ from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Exampl
 class Rule:
   id: str
   format_text: FormatText
-  section: bool
+  section: str | None
   sub_rule: bool
   rules: list[Rule]
   examples: list[Example]
@@ -41,18 +41,19 @@ class Rule:
         result += f'\\2 {rule.to_latex(id_map)}'
     return result
 
-  def id_map_sub_rules(self, ctx: str, i: int, dict: dict[int, str]) -> int:
+  def id_map_sub_rules(self, ctx: str, i: int, dict: dict[int, str], ref_type: str) -> int:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     letters = string.ascii_lowercase[:14]
-    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', 'rule', '', self.id)
+    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', ref_type, '', self.id)
 
   def id_map(self, ctx: str, i: int, dict: dict[int, str]) -> int:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     dict[self.id] = RefInfo(f'{ctx}.{i}', 'rule', '', self.id)
+    sub_ref_type = 'step' if self.section == 'steps' else 'rule'
     for j, rule in enumerate(self.rules):
-      rule.id_map_sub_rules(f'{ctx}.{i}', j, dict)
+      rule.id_map_sub_rules(f'{ctx}.{i}', j, dict, sub_ref_type)
 
 @dataclass
 class Section:
@@ -79,7 +80,6 @@ class Section:
       for snippet_text in snippet_lines:
         result += f'\\noindent\emph{{{snippet_text}}}\n\n'
 
-    prefix = id_map[self.id].reference
     result += '\\begin{outline}[enumerate]\n'
     for elem in self.rules:
       match elem:

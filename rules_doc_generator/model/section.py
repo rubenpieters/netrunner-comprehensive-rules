@@ -66,6 +66,7 @@ class Section:
 
   def to_latex(self, id_map: RefDict) -> str:
     result = f'\subsection{{{self.text}}}\n'
+    result += f'\label{{{self.id}}}\n'
     if self.snippet:
       result += f'{self.snippet.to_latex(id_map)}\n'
     prefix = id_map[self.id].reference

@@ -14,7 +14,7 @@ jobs:
         run: apt-get update
 
       - name: Install tex
-        run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended
+        run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended latexmk
 
       - name: Install requirements
         run: pip install -r requirements.txt
@@ -23,7 +23,7 @@ jobs:
         run: python3 -m rules_doc_generator
 
       - name: Create pdf output
-        run: pdflatex -output-directory latex demo.tex
+        run: latexmk -pdf -jobname=latex/demo latex/demo.tex
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

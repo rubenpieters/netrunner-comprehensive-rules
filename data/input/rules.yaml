@@ -20,7 +20,7 @@
     - id: rule_cannot_precedence
       text: If a rule or ability directs something to happen, but another effect states that it cannot happen, the "cannot" ability takes precedence.
       rules:
-      - id: rule_cannot_over_can
+      - id: rule_cannot_ncigs
         text: If a "cannot" effect prohibits all of the effects of another ability, that ability cannot be triggered.
       - id: rule_partially_cannot
         text: If a "cannot" effect prohibits only part of another ability, that ability can be triggered, but the prohibited steps of resolving that ability are not carried out.
@@ -242,11 +242,11 @@
     - id: rule_timing_structure_reference_only
       text: |-
         These guides are intended to serve as shorthand references only; for comprehensive rules relating to each timing structure, see the accompanying rules sections.
-  - id: sec_appendix_timing_structure_turns
-    text: Timing Structure of Turns
+  - id: sec_appendix_timing_structure_corps_turn
+    toc_entry: Timing Structure of The Corp's Turn
+    text: Timing Structure of The Corp's Turn ({ref:sec_steps_corps_turn})
     rules:
     - section: timing_structure
-      text: Corp's Turn ({ref:sec_steps_corps_turn})
       elements:
       - text: Draw Phase
       - text: Action Phase
@@ -254,4 +254,13 @@
         - text: Does the Corp have unspent clicks?
           elements:
           - text: If yes, the Corp takes an action.
+      - text: Discard Phase
+  - id: sec_appendix_timing_structure_runners_turn
+    toc_entry: Timing Structure of The Runner's Turn
+    text: Timing Structure of The Runner's Turn ()
+    rules:
+    - section: timing_structure
+      elements:
+      - text: Draw Phase
+      - text: Action Phase
       - text: Discard Phase

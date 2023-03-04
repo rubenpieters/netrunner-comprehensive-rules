@@ -18,11 +18,10 @@ class SubRule:
     return result
   
   def to_latex(self, id_map: RefDict) -> str:
-    result = f'\\refstepcounter{{manual_refs}}\label{{{self.id}}}\n'
-    result += f'  \\2 {self.format_text.to_latex(id_map)}\n'
-    if len(self.examples) > 0:
-      result += '\n'
-    for example in self.examples:
+    result = f'% SubRule {self.id}\n'
+    result += f'  \\2 \\refstepcounter{{manual_refs}}\label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    for i, example in enumerate(self.examples):
+      result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     return result
 
@@ -53,16 +52,15 @@ class Rule:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = ''
+    result = f'% Rule {self.id}\n'
+    result += '\\1 '
     if self.toc:
-      result += '\\phantomsection\n'
-      result += '\\addtocounter{subsubsection}{1}\n'
-      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '}\n'
-    result += f'\\refstepcounter{{manual_refs}}\label{{{self.id}}}\n'
-    result += f'\\1 {self.format_text.to_latex(id_map)}\n'
-    if len(self.examples) > 0:
-      result += '\n'
-    for example in self.examples:
+      result += '\\phantomsection '
+      result += '\\addtocounter{subsubsection}{1} '
+      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
+    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    for i, example in enumerate(self.examples):
+      result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     if self.rules:
       for rule in self.rules:
@@ -80,12 +78,13 @@ class Rule:
 @dataclass
 class Section:
   id: str
-  text: str
+  toc_entry: str | None
+  text: FormatText
   snippet: Optional[FormatText]
   rules: list[Union[Rule, TimingStructureElement]]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = f'<h2>{self.text}</h2>'
+    result = f'<h2>{self.text.to_html(id_map)}</h2>'
     if self.snippet:
       result += f'<p>{self.snippet.to_html(id_map)}</p>'
     result += '<ol>'
@@ -96,7 +95,13 @@ class Section:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = f'\subsection{{{self.text}}}\n'
+    result = f'% Section {self.id}.\n'
+    if self.toc_entry:
+      result += '\\addtocounter{subsection}{1}\n'
+      result += '\\addcontentsline{toc}{subsection}{\\arabic{section}.\\arabic{subsection}~~ ' + self.toc_entry + '}\n'
+      result += f'\subsection*{{\\arabic{{section}}.\\arabic{{subsection}}~~ {self.text.to_latex(id_map)}}}\n'
+    else:
+      result += f'\subsection{{{self.text.to_latex(id_map)}}}\n'
     result += f'\label{{{self.id}}}\n'
     if self.snippet:
       snippet_lines = self.snippet.to_latex(id_map).split('\n')
@@ -131,7 +136,8 @@ class Header:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = f'\section{{{self.text}}}\n'
+    result = f'% Header {self.id}.\n'
+    result += f'\section{{{self.text}}}\n'
     result += f'\label{{{self.id}}}\n'
     for section in self.sections:
       result += section.to_latex(id_map)
@@ -178,20 +184,20 @@ class Document:
 
 @dataclass
 class TimingStructureElement:
-  text: FormatText
+  text: FormatText | None
   elements: list[TimingStructureElement]
 
   def to_html(self, id_map: RefDict) -> str:
     return ''
 
   def to_latex_l1(self, id_map: RefDict) -> str:
-    result = f'\\1 {self.text.to_latex(id_map)}\n'
+    result = f'\\1 \\textbf{{{self.text.to_latex(id_map)}}}\n'
     for elem in self.elements:
       result += elem.to_latex_l2(id_map)
     return result
 
   def to_latex_l2(self, id_map: RefDict) -> str:
-    result = f'  \\2 \\textbf{{{self.text.to_latex(id_map)}}}\n'
+    result = f'  \\2 {self.text.to_latex(id_map)}\n'
     for elem in self.elements:
       result += elem.to_latex_l3(id_map)
     return result
@@ -200,6 +206,9 @@ class TimingStructureElement:
     return f'    \\3 {self.text.to_latex(id_map)}\n'
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = '\setlist[enumerate,2]{label=\\textbf{\\arabic*)}}\n'
-    result += self.to_latex_l1(id_map)
+    result = '\setlist[enumerate,1]{label=\\textbf{\\arabic*)}}\n'
+    result += '\setlist[enumerate,2]{label=\\alph*)}\n'
+    result += '\setlist[enumerate,3]{label=\\roman*)}\n'
+    for elem in self.elements:
+      result += elem.to_latex_l1(id_map)
     return result

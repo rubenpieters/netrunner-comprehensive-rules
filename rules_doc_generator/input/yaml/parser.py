@@ -39,7 +39,9 @@ def parse_example(yaml_example: Any) -> Example:
   return Example(text)
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
-  text = parse_format_text(yaml_timing_structure['text'])
+  text = None
+  if 'text' in yaml_timing_structure:
+    text = parse_format_text(yaml_timing_structure['text'])
   elements = []
   if 'elements' in yaml_timing_structure:
     elements = list(map(parse_timing_structure, yaml_timing_structure['elements']))
@@ -77,12 +79,15 @@ def parse_rule(yaml_rule: Any) -> Union[Rule, TimingStructureElement]:
 
 def parse_section(yaml_section: Any) -> Section:
   id = yaml_section['id']
-  text = yaml_section['text']
+  toc_entry = None
+  if 'toc_entry' in yaml_section:
+    toc_entry = yaml_section['toc_entry']
+  text = parse_format_text(yaml_section['text'])
   snippet = None
   if 'snippet' in yaml_section:
     snippet = parse_format_text(yaml_section['snippet'].rstrip())
   rules = list(map(parse_rule, yaml_section['rules']))
-  return Section(id, text, snippet, rules)
+  return Section(id, toc_entry, text, snippet, rules)
 
 def parse_header(yaml_header: Any) -> Header:
   id = yaml_header['id']

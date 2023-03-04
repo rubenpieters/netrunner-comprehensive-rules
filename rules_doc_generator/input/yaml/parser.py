@@ -2,7 +2,7 @@ import re
 from typing import Any
 import yaml
 
-from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example)
+from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType)
 from rules_doc_generator.model.section import (Rule, Section, Header, Document)
 
 def parseTextElement(str: str) -> TextElement:
@@ -14,6 +14,8 @@ def parseTextElement(str: str) -> TextElement:
     return Image(str[4:])
   elif str.startswith('term:'):
     return Term(str[5:])
+  elif str.startswith('subtype:'):
+    return SubType(str[8:])
   else:
     return Text(str)
 

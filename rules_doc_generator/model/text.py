@@ -62,7 +62,17 @@ class Term:
   def to_latex(self, id_map: RefDict) -> str:
     return f'\\textsc{{{self.text}}}'
 
-TextElement = Union[Text, Ref, Term, Image]
+@dataclass
+class SubType:
+  text: str
+
+  def to_html(self, id_map: RefDict) -> str:
+    return f'<span class="SubType">{self.text}</span>'
+
+  def to_latex(self, id_map: RefDict) -> str:
+    return f'\\textbf{{{self.text}}}'
+
+TextElement = Union[Text, Ref, Term, Image, SubType]
 
 @dataclass
 class FormatText:

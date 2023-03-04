@@ -105,6 +105,9 @@
       - id: rule_implicit_host
         text: |-
           If a card has an ability describing the types and/or numbers of cards it can host, but it does not have an ability that directly hosts cards onto itself, then the card is permitted as an eligible installation destination for the types of cards listed, up to the number specified. A host card is chosen as an installation destination during {ref:rule_steps_installing_destination} of the installation process.
+        examples:
+          - text: |-
+              Off-Campus Apartment has the ability, "Off-Campus Apartment can host any number of {subtype:connections}." This means that whenever the Runner installs a {subtype:connection} card, they can choose to install that card into the play area hosted on Off-Campus Apartment or as normal directly into the play area.
 
   - id: sec_targets
     text: Targets

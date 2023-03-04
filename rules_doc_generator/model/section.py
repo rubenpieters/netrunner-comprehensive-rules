@@ -85,6 +85,7 @@ class Section:
       match elem:
         case Rule(): 
           if elem.section:
+            result += '\\phantomsection\n'
             result += '\\addtocounter{subsubsection}{1}\n'
             result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + elem.format_text.to_latex(id_map) + '}\n'
           result += f'\\refstepcounter{{manual_refs}}\label{{{elem.id}}}\n'

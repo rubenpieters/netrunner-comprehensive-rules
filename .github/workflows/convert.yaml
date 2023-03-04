@@ -62,9 +62,8 @@ jobs:
           name: html-output
           path: '.'
 
-      - name: test
-        run: |
-          ls
+      - name: Move index.htl
+        run: mv demo.html index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

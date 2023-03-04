@@ -50,10 +50,10 @@ class Rule:
   def id_map(self, ctx: str, i: int, dict: dict[int, str]) -> int:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    dict[self.id] = RefInfo(f'{ctx}.{i}', 'rule', '', self.id)
-    sub_ref_type = 'step' if self.section == 'steps' else 'rule'
+    ref_type = 'step' if self.section == 'steps' else 'rule'
+    dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, '', self.id)
     for j, rule in enumerate(self.rules):
-      rule.id_map_sub_rules(f'{ctx}.{i}', j, dict, sub_ref_type)
+      rule.id_map_sub_rules(f'{ctx}.{i}', j, dict, ref_type)
 
 @dataclass
 class Section:

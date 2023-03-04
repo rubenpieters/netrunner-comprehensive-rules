@@ -10,7 +10,14 @@ def parseTextElement(str: str) -> TextElement:
     text = str[4:].lower()
     capitalize = str[4].isupper()
     ids = text.split(',')
-    return Ref(ids, capitalize)
+    return Ref(ids, capitalize, None)
+  if str.startswith('ref/'):
+    text = str[4:].lower()
+    combiner_and_ids = re.split(':|,', text)
+    combiner = combiner_and_ids[0]
+    ids = combiner_and_ids[1:]
+    capitalize = ids[0].isupper()
+    return Ref(ids, capitalize, combiner)
   elif str.startswith('img:'):
     return Image(str[4:])
   elif str.startswith('term:'):

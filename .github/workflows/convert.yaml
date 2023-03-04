@@ -60,7 +60,14 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: html-output
-          path: index.html
+          path: html-output
+
+      - name: test
+        run: |
+          ls
+          unzip -l html-output
+          unzip html-output
+          ls
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

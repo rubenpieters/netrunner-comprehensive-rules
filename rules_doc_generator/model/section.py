@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Union
 import string
 
 from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Example)
@@ -60,7 +60,7 @@ class Section:
   id: str
   text: str
   snippet: Optional[FormatText]
-  rules: list[Rule]
+  rules: list[Union[Rule, TimingStructureElement]]
 
   def to_html(self, id_map: RefDict) -> str:
     result = f'<h2>{self.text}</h2>'
@@ -68,7 +68,8 @@ class Section:
       result += f'<p>{self.snippet.to_html(id_map)}</p>'
     result += '<ol>'
     for elem in self.rules:
-      result += f'<li class="Rule" id="{id_map[elem.id].reference}">{elem.to_html(id_map)}</li>'
+      match elem:
+        case Rule(): result += f'<li class="Rule" id="{id_map[elem.id].reference}">{elem.to_html(id_map)}</li>'
     result += '</ol>'
     return result
 
@@ -90,6 +91,8 @@ class Section:
             result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + elem.format_text.to_latex(id_map) + '}\n'
           result += f'\\refstepcounter{{manual_refs}}\label{{{elem.id}}}\n'
           result += f'\\1 {elem.to_latex(id_map)}\n'
+        case TimingStructureElement():
+          result += elem.to_latex(id_map)
         case Example(): result += f'\\0 {elem.to_latex(id_map)}\n'
     result += '\end{outline}\n'
     return result
@@ -99,7 +102,8 @@ class Section:
       raise Exception(f'id defined twice: {self.id}')
     dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', self.text, self.id)
     for j, elem in enumerate(self.rules):
-      elem.id_map(f'{ctx}.{i}', j + 1, dict)
+      match elem:
+        case Rule(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
 
 @dataclass
 class Header:
@@ -158,3 +162,32 @@ class Document:
     for j, elem in enumerate(self.headers):
       elem.id_map(j + 1, id_map)
     return id_map
+
+
+@dataclass
+class TimingStructureElement:
+  text: FormatText
+  elements: list[TimingStructureElement]
+
+  def to_html(self, id_map: RefDict) -> str:
+    return ''
+
+  def to_latex_l1(self, id_map: RefDict) -> str:
+    result = f'\\1 {self.text.to_latex(id_map)}\n'
+    for elem in self.elements:
+      result += elem.to_latex_l2(id_map)
+    return result
+
+  def to_latex_l2(self, id_map: RefDict) -> str:
+    result = f'  \\2 \\textbf{{{self.text.to_latex(id_map)}}}\n'
+    for elem in self.elements:
+      result += elem.to_latex_l3(id_map)
+    return result
+
+  def to_latex_l3(self, id_map: RefDict) -> str:
+    return f'    \\3 {self.text.to_latex(id_map)}\n'
+
+  def to_latex(self, id_map: RefDict) -> str:
+    result = '\setlist[enumerate,2]{label=\\textbf{\\arabic*)}}\n'
+    result += self.to_latex_l1(id_map)
+    return result

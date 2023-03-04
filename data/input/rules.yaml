@@ -156,6 +156,16 @@
     - id: rule_turn
       text: |-
         A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
+  - id: sec_steps_corps_turn
+    text: Steps of the Corp's Turn
+    rules:
+    - id: rule_sec_corp_draw_phase
+      section: steps
+      text: |-
+        During the draw phase, the following steps occur in order:
+      rules:
+      - id: step_corp_allotted_clicks
+        text: The Corp gains their allotted clicks (default [click][click][click]).
 
 - id: hdr_Runs
   text: Runs
@@ -172,7 +182,7 @@
     - id: rule_run_initiation_phase
       text: The {term:initiation phase} sets the parameters for the run and begins the run.
   - id: sec_run_ends_phase
-    text: General
+    text: Run Ends Phase
     rules:
     - id: rule_run_ends_phase
       text: The {term:run ends phase} formalizes the end of the run and prepares the game to return to the timing structure from which the run was initiated.
@@ -233,13 +243,13 @@
   - id: sec_appendix_timing_structure_turns
     text: Timing Structure of Turns
     rules:
-    - id: sec_appendix_timing_structure_turn_corps_turn
-      section: steps
-      text: Corp's Turn
-      rules:
-      - id: sec_appendix_timing_structure_turn_corps_turn_draw_phase
-        text: Draw Phase
-      - id: sec_appendix_timing_structure_turn_corps_turn_action_phase
-        text: Action Phase
-      - id: sec_appendix_timing_structure_turn_corps_turn_discard_phase
-        text: Discard Phase
+    - section: timing_structure
+      text: Corp's Turn ({ref:sec_steps_corps_turn})
+      elements:
+      - text: Draw Phase
+      - text: Action Phase
+        elements:
+        - text: Does the Corp have unspent clicks?
+          elements:
+          - text: If yes, the Corp takes an action.
+      - text: Discard Phase

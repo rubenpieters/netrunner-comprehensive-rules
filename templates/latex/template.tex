@@ -59,6 +59,10 @@ __CHANGELOG_PLACEHOLDER__
 % Change style for enumerate sections.
 \setlist[enumerate,1]{label=\arabic{section}.\arabic{subsection}.\arabic*.,leftmargin=*,labelindent=15pt}
 \setlist[enumerate,2]{label=\alph*.}
+% These levels are used for timing structures.
+% Level 2 is not defined here as it is temporarily overriden when a timing structure is emitted.
+\setlist[enumerate,3]{label=\alph*)}
+\setlist[enumerate,4]{label=\roman*)}
 
 __DOCUMENT_PLACEHOLDER__
 

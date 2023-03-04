@@ -1,9 +1,9 @@
 import re
-from typing import Any
+from typing import Any, Union
 import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card)
-from rules_doc_generator.model.section import (Rule, Section, Header, Document)
+from rules_doc_generator.model.section import (Rule, Section, Header, Document, TimingStructureElement)
 
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
@@ -38,12 +38,21 @@ def parse_example(yaml_example: Any) -> Example:
   text = parse_format_text(yaml_example['text'].rstrip())
   return Example(text)
 
-def parse_rule(yaml_rule: Any, sub_rule: bool = False) -> Rule:
-  id = yaml_rule['id']
-  text = yaml_rule['text'].rstrip()
+def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
+  text = parse_format_text(yaml_timing_structure['text'])
+  elements = []
+  if 'elements' in yaml_timing_structure:
+    elements = list(map(parse_timing_structure, yaml_timing_structure['elements']))
+  return TimingStructureElement(text, elements)
+
+def parse_rule(yaml_rule: Any, sub_rule: bool = False) -> Union[Rule, TimingStructureElement]:
   section = None
   if 'section' in yaml_rule:
     section = yaml_rule['section']
+    if section == 'timing_structure':
+      return parse_timing_structure(yaml_rule)
+  id = yaml_rule['id']
+  text = yaml_rule['text'].rstrip()
   rules = []
   if 'rules' in yaml_rule:
     rules = list(map(lambda x: parse_rule(x, True), yaml_rule['rules']))

@@ -6,12 +6,39 @@ import string
 from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Example)
 
 @dataclass
+class SubRule:
+  id: str
+  format_text: FormatText
+  examples: list[Example]
+
+  def to_html(self, id_map: RefDict) -> str:
+    result = self.format_text.to_html(id_map)
+    for example in self.examples:
+      result += f'<p>{example.to_html(id_map)}</p>'
+    return result
+  
+  def to_latex(self, id_map: RefDict) -> str:
+    result = f'\\refstepcounter{{manual_refs}}\label{{{self.id}}}\n'
+    result += f'  \\2 {self.format_text.to_latex(id_map)}\n'
+    if len(self.examples) > 0:
+      result += '\n'
+    for example in self.examples:
+      result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+    return result
+
+  def id_map(self, ctx: str, i: int, dict: dict[int, str], ref_type: str) -> int:
+    if self.id in dict:
+      raise Exception(f'id defined twice: {self.id}')
+    letters = string.ascii_lowercase[:14]
+    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', ref_type, '', self.id)
+
+@dataclass
 class Rule:
   id: str
   format_text: FormatText
-  section: str | None
-  sub_rule: bool
-  rules: list[Rule]
+  toc: bool
+  steps: bool
+  rules: list[SubRule]
   examples: list[Example]
 
   def to_html(self, id_map: RefDict) -> str:
@@ -26,34 +53,29 @@ class Rule:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = self.format_text.to_latex(id_map)
-    result += '\n'
+    result = ''
+    if self.toc:
+      result += '\\phantomsection\n'
+      result += '\\addtocounter{subsubsection}{1}\n'
+      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '}\n'
+    result += f'\\refstepcounter{{manual_refs}}\label{{{self.id}}}\n'
+    result += f'\\1 {self.format_text.to_latex(id_map)}\n'
     if len(self.examples) > 0:
       result += '\n'
     for example in self.examples:
-      if self.sub_rule:
-        result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
-      else:  
-        result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+      result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     if self.rules:
       for rule in self.rules:
-        result += f'\\refstepcounter{{manual_refs}}\label{{{rule.id}}}\n'
-        result += f'\\2 {rule.to_latex(id_map)}'
+        result += rule.to_latex(id_map)
     return result
-
-  def id_map_sub_rules(self, ctx: str, i: int, dict: dict[int, str], ref_type: str) -> int:
-    if self.id in dict:
-      raise Exception(f'id defined twice: {self.id}')
-    letters = string.ascii_lowercase[:14]
-    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', ref_type, '', self.id)
 
   def id_map(self, ctx: str, i: int, dict: dict[int, str]) -> int:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    ref_type = 'step' if self.section == 'steps' else 'rule'
+    ref_type = 'step' if self.steps == 'steps' else 'rule'
     dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, '', self.id)
     for j, rule in enumerate(self.rules):
-      rule.id_map_sub_rules(f'{ctx}.{i}', j, dict, ref_type)
+      rule.id_map(f'{ctx}.{i}', j, dict, ref_type)
 
 @dataclass
 class Section:
@@ -83,17 +105,7 @@ class Section:
 
     result += '\\begin{outline}[enumerate]\n'
     for elem in self.rules:
-      match elem:
-        case Rule(): 
-          if elem.section:
-            result += '\\phantomsection\n'
-            result += '\\addtocounter{subsubsection}{1}\n'
-            result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + elem.format_text.to_latex(id_map) + '}\n'
-          result += f'\\refstepcounter{{manual_refs}}\label{{{elem.id}}}\n'
-          result += f'\\1 {elem.to_latex(id_map)}\n'
-        case TimingStructureElement():
-          result += elem.to_latex(id_map)
-        case Example(): result += f'\\0 {elem.to_latex(id_map)}\n'
+      result += elem.to_latex(id_map)
     result += '\end{outline}\n'
     return result
 
@@ -144,7 +156,7 @@ class Document:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    latex_template = open("templates/latex/template.tex", "r")
+    latex_template = open("data/templates/latex/template.tex", "r")
     latex_content = latex_template.read()
     latex_template.close()
     

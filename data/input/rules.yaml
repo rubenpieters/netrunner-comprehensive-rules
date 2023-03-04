@@ -87,9 +87,9 @@
     rules:
     - id: rule_credit
       text: |-
-        A {term:credit} ([c]) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
+        A {term:credit} ({img:credit}) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
     - id: rule_sec_recurring
-      section: rule_section
+      toc:
       text: Recurring Credits
       rules:
       - id: rule_recurring_credits
@@ -160,7 +160,7 @@
     text: Steps of the Corp's Turn
     rules:
     - id: rule_sec_corp_draw_phase
-      section: steps
+      steps:
       text: |-
         During the draw phase, the following steps occur in order:
       rules:
@@ -190,7 +190,8 @@
     text: Steps of a Run
     rules:
     - id: rule_sec_run_initiation_phase
-      section: steps
+      steps:
+      toc:
       text: Initiation Phase
       rules:
       - id: step_initiation_announce
@@ -203,13 +204,13 @@
         text: |-
           The Initiation Phase is complete. If the attacked server has at least one piece of ice protecting it, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the outermost piece of ice protecting the attacked server. If the attacked server is not protected by ice, proceed to {ref:rule_sec_run_encounter_ice_phase}, Movement Phase.
     - id: rule_sec_run_approach_ice_phase
-      section: steps
+      steps:
       text: Approach Ice Phase
     - id: rule_sec_run_encounter_ice_phase
-      section: steps
+      steps:
       text: Encounter Ice Phase
     - id: rule_sec_run_movement_phase
-      section: steps
+      steps:
       text: Movement Phase
 
 - id: hdr_card_manipulation
@@ -219,7 +220,8 @@
     text: Installing and Uninstalling Cards
     rules:
     - id: rule_sec_steps_installing
-      section: steps
+      steps:
+      toc:
       text: Steps of Installing a Card
       rules:
       - id: rule_steps_installing_place

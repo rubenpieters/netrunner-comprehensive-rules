@@ -25,7 +25,7 @@ class Image:
     return f'<img class="Symbol" src="{self.text}.svg" alt="{self.text}"/>'
 
   def to_latex(self, id_map: RefDict) -> str:
-    return self.text
+    return f'\includegraphics[height=8pt]{{{self.text}.png}}'
 
 @dataclass
 class Text:

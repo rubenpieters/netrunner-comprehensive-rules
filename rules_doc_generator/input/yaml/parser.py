@@ -3,7 +3,7 @@ from typing import Any, Union
 import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card)
-from rules_doc_generator.model.section import (Rule, Section, Header, Document, TimingStructureElement)
+from rules_doc_generator.model.section import (Rule, SubRule, Section, Header, Document, TimingStructureElement)
 
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
@@ -45,21 +45,35 @@ def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement
     elements = list(map(parse_timing_structure, yaml_timing_structure['elements']))
   return TimingStructureElement(text, elements)
 
-def parse_rule(yaml_rule: Any, sub_rule: bool = False) -> Union[Rule, TimingStructureElement]:
+def parse_sub_rule(yaml_sub_rule: Any = False) -> SubRule:
+  id = yaml_sub_rule['id']
+  text = yaml_sub_rule['text'].rstrip()
+  examples = []
+  if 'examples' in yaml_sub_rule:
+    examples = list(map(parse_example, yaml_sub_rule['examples']))
+  return SubRule(id, parse_format_text(text), examples)
+
+def parse_rule(yaml_rule: Any) -> Union[Rule, TimingStructureElement]:
   section = None
   if 'section' in yaml_rule:
     section = yaml_rule['section']
     if section == 'timing_structure':
       return parse_timing_structure(yaml_rule)
+  toc = False
+  if 'toc' in yaml_rule:
+    toc = True
+  steps = False
+  if 'steps' in yaml_rule:
+    steps = True
   id = yaml_rule['id']
   text = yaml_rule['text'].rstrip()
   rules = []
   if 'rules' in yaml_rule:
-    rules = list(map(lambda x: parse_rule(x, True), yaml_rule['rules']))
+    rules = list(map(parse_sub_rule, yaml_rule['rules']))
   examples = []
   if 'examples' in yaml_rule:
     examples = list(map(parse_example, yaml_rule['examples']))
-  return Rule(id, parse_format_text(text), section, sub_rule, rules, examples)
+  return Rule(id, parse_format_text(text), toc, steps, rules, examples)
 
 def parse_section(yaml_section: Any) -> Section:
   id = yaml_section['id']

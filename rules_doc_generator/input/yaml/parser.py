@@ -7,7 +7,9 @@ from rules_doc_generator.model.section import (Rule, Section, Header, Document)
 
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
-    return Ref(str[4:])
+    text = str[4:]
+    capitalize = str[4].isupper()
+    return Ref(text.lower(), capitalize)
   elif str.startswith('img:'):
     return Image(str[4:])
   elif str.startswith('term:'):
@@ -24,7 +26,7 @@ def parse_example(yaml_example: Any) -> Example:
   text = parse_format_text(yaml_example['text'].rstrip())
   return Example(text)
 
-def parse_rule(yaml_rule: Any) -> Rule:
+def parse_rule(yaml_rule: Any, sub_rule: bool = False) -> Rule:
   id = yaml_rule['id']
   text = yaml_rule['text'].rstrip()
   section = False
@@ -32,18 +34,18 @@ def parse_rule(yaml_rule: Any) -> Rule:
     section = True
   rules = []
   if 'rules' in yaml_rule:
-    rules = list(map(parse_rule, yaml_rule['rules']))
+    rules = list(map(lambda x: parse_rule(x, True), yaml_rule['rules']))
   examples = []
   if 'examples' in yaml_rule:
     examples = list(map(parse_example, yaml_rule['examples']))
-  return Rule(id, parse_format_text(text), section, rules, examples)
+  return Rule(id, parse_format_text(text), section, sub_rule, rules, examples)
 
 def parse_section(yaml_section: Any) -> Section:
   id = yaml_section['id']
   text = yaml_section['text']
   snippet = None
   if 'snippet' in yaml_section:
-    snippet = parse_format_text(yaml_section['snippet'])
+    snippet = parse_format_text(yaml_section['snippet'].rstrip())
   rules = list(map(parse_rule, yaml_section['rules']))
   return Section(id, text, snippet, rules)
 

@@ -1,24 +1,32 @@
 \documentclass{article}
 
 \usepackage[a4paper,bindingoffset=0.1in,left=0.8in,right=0.8in,top=0.8in,bottom=0.8in,footskip=.25in]{geometry}
+\usepackage{soul}
+\usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{outlines}
 \usepackage{enumitem}
 \usepackage{changepage}
 \usepackage[hidelinks]{hyperref}
 
-\newcommand{\chapsubhead}[1]{{\Large #1 \vspace{2ex}}}
+% Subtitle.
+\newcommand{\subtitle}[1]{{\Large #1 \vspace{2ex}}}
 
-\newcounter{rule_section}
+% Counter for manually added references.
+\newcounter{manual_refs}
 
+% Change heading for table of contents.
 \renewcommand{\contentsname}{Table of Contents}
+
+% Command for underlined links
+\newcommand{\reful}[2]{\hyperref[#1]{\color{blue}\setulcolor{blue}\ul{#2}}}
 
 \begin{document}
 
 % Prelude
 
 \section*{Netrunner Comprehensive Rules}
-\chapsubhead{Null Signal Games}
+\subtitle{Null Signal Games}
 
 \noindent
 This rules document is to be used as reference material. It is not intended to be read straight through. If you still have questions after consulting this document, please ask us online via email or Twitter.
@@ -48,6 +56,7 @@ __CHANGELOG_PLACEHOLDER__
 
 \newpage
 
+% Change style for enumerate sections.
 \setlist[enumerate,1]{label=\arabic{section}.\arabic{subsection}.\arabic*.,leftmargin=*,labelindent=4pt}
 \setlist[enumerate,2]{label=\alph*.}
 

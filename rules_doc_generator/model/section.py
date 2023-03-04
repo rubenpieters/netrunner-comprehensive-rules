@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Union, Optional
+from typing import Optional
 import string
 
 from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Example)
@@ -8,13 +8,14 @@ from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Exampl
 @dataclass
 class Rule:
   id: str
-  formatText: FormatText
+  format_text: FormatText
   section: bool
+  sub_rule: bool
   rules: list[Rule]
   examples: list[Example]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = self.formatText.to_html(id_map)
+    result = self.format_text.to_html(id_map)
     for example in self.examples:
       result += f'<p>{example.to_html(id_map)}</p>'
     if self.rules:
@@ -25,12 +26,18 @@ class Rule:
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = self.formatText.to_latex(id_map)
+    result = self.format_text.to_latex(id_map)
     result += '\n'
+    if len(self.examples) > 0:
+      result += '\n'
     for example in self.examples:
-      result += f'\\0 {example.to_latex(id_map)}\n'
+      if self.sub_rule:
+        result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+      else:  
+        result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     if self.rules:
       for rule in self.rules:
+        result += f'\\refstepcounter{{manual_refs}}\label{{{rule.id}}}\n'
         result += f'\\2 {rule.to_latex(id_map)}'
     return result
 
@@ -68,7 +75,10 @@ class Section:
     result = f'\subsection{{{self.text}}}\n'
     result += f'\label{{{self.id}}}\n'
     if self.snippet:
-      result += f'{self.snippet.to_latex(id_map)}\n'
+      snippet_lines = self.snippet.to_latex(id_map).split('\n')
+      for snippet_text in snippet_lines:
+        result += f'\\noindent\emph{{{snippet_text}}}\n\n'
+
     prefix = id_map[self.id].reference
     result += '\\begin{outline}[enumerate]\n'
     for elem in self.rules:
@@ -76,10 +86,10 @@ class Section:
         case Rule(): 
           if elem.section:
             result += '\\addtocounter{subsubsection}{1}\n'
-            result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + elem.formatText.to_latex(id_map) + '}\n'
-            result += f'\\refstepcounter{{rule_section}}\label{{{elem.id}}}'
+            result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + elem.format_text.to_latex(id_map) + '}\n'
+          result += f'\\refstepcounter{{manual_refs}}\label{{{elem.id}}}\n'
           result += f'\\1 {elem.to_latex(id_map)}\n'
-        case Example(): result += f'\\0 \begin{{adjustwidth}}{{37pt}}{{0pt}} {elem.to_latex(id_map)} \end{{adjustwidth}}\n'
+        case Example(): result += f'\\0 {elem.to_latex(id_map)}\n'
     result += '\end{outline}\n'
     return result
 

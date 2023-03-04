@@ -35,6 +35,7 @@ class Text:
 @dataclass
 class Ref:
   referenced_id: str
+  capitalize: bool
 
   def to_html(self, id_map: RefDict) -> str:
     if not self.referenced_id in id_map:
@@ -46,7 +47,10 @@ class Ref:
     if not self.referenced_id in id_map:
       raise Exception(f'id does not exist: {self.referenced_id}')
     ref_info = id_map[self.referenced_id]
-    return f'\hyperref[{ref_info.id}]{{{ref_info.reference}}}'
+    ref_text = ref_info.type
+    if self.capitalize:
+      ref_text = ref_text.capitalize()
+    return f'\\reful{{{ref_info.id}}}{{{ref_text} {ref_info.reference}}}'
 
 @dataclass
 class Term:
@@ -56,7 +60,7 @@ class Term:
     return f'<span class="Term">{self.text}</span>'
 
   def to_latex(self, id_map: RefDict) -> str:
-    return self.text
+    return f'\\textsc{{{self.text}}}'
 
 TextElement = Union[Text, Ref, Term, Image]
 

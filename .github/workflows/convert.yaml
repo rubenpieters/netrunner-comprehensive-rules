@@ -60,13 +60,10 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: html-output
-          path: html-output
+          path: '.'
 
       - name: test
         run: |
-          ls
-          unzip -l html-output
-          unzip html-output
           ls
 
       - name: Setup Pages

@@ -62,7 +62,7 @@ jobs:
           name: html-output
           path: '.'
 
-      - name: Move index.htl
+      - name: Move index.html
         run: mv demo.html index.html
 
       - name: Setup Pages

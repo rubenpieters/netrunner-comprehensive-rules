@@ -1,16 +1,16 @@
 import re
-from typing import Any, Union
+from typing import Any, Callable, TypeVar
 import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card)
-from rules_doc_generator.model.section import (Rule, SubRule, Section, Header, Document, TimingStructureElement)
+from rules_doc_generator.model.section import (Rule, SubRule, Section, Header, Document, SectionElement, TimingStructureElement)
 
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
     text = str[4:].lower()
     capitalize = str[4].isupper()
     ids = text.split(',')
-    return Ref(ids, capitalize, None)
+    return Ref(ids, capitalize, 'and')
   if str.startswith('ref/'):
     text = str[4:].lower()
     combiner_and_ids = re.split(':|,', text)
@@ -35,64 +35,50 @@ def parse_format_text(str: str) -> FormatText:
   return FormatText(parsed)
 
 def parse_example(yaml_example: Any) -> Example:
-  text = parse_format_text(yaml_example['text'].rstrip())
+  text = parse_format_text_field(yaml_example, 'text')
   return Example(text)
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
   text = None
   if 'text' in yaml_timing_structure:
     text = parse_format_text(yaml_timing_structure['text'])
-  elements = []
-  if 'elements' in yaml_timing_structure:
-    elements = list(map(parse_timing_structure, yaml_timing_structure['elements']))
+  elements = parse_subelements(yaml_timing_structure, 'elements', parse_timing_structure)
   return TimingStructureElement(text, elements)
 
 def parse_sub_rule(yaml_sub_rule: Any = False) -> SubRule:
-  id = yaml_sub_rule['id']
-  text = yaml_sub_rule['text'].rstrip()
-  examples = []
-  if 'examples' in yaml_sub_rule:
-    examples = list(map(parse_example, yaml_sub_rule['examples']))
-  return SubRule(id, parse_format_text(text), examples)
+  id = parse_id(yaml_sub_rule, 'sub_rule')
+  text = parse_format_text_field(yaml_sub_rule, 'text')
+  examples = parse_subelements(yaml_sub_rule, 'examples', parse_example)
+  return SubRule(id, text, examples)
 
-def parse_rule(yaml_rule: Any) -> Union[Rule, TimingStructureElement]:
-  section = None
-  if 'section' in yaml_rule:
-    section = yaml_rule['section']
-    if section == 'timing_structure':
-      return parse_timing_structure(yaml_rule)
-  toc = False
-  if 'toc' in yaml_rule:
-    toc = True
-  steps = False
-  if 'steps' in yaml_rule:
-    steps = True
-  id = yaml_rule['id']
-  text = yaml_rule['text'].rstrip()
-  rules = []
-  if 'rules' in yaml_rule:
-    rules = list(map(parse_sub_rule, yaml_rule['rules']))
-  examples = []
-  if 'examples' in yaml_rule:
-    examples = list(map(parse_example, yaml_rule['examples']))
-  return Rule(id, parse_format_text(text), toc, steps, rules, examples)
+def parse_rule(yaml_rule: Any) -> Rule:
+  id = parse_id(yaml_rule, 'rule')
+  toc = parse_boolean(yaml_rule, 'toc')
+  steps = parse_boolean(yaml_rule, 'steps')
+  text = parse_format_text_field(yaml_rule, 'text')
+  rules = parse_subelements(yaml_rule, 'rules', parse_sub_rule)
+  examples = parse_subelements(yaml_rule, 'examples', parse_example)
+  return Rule(id, text, toc, steps, rules, examples)
+
+def parse_section_element(yaml_section_element: Any) -> SectionElement:
+  return parse_union(
+    yaml_section_element,
+    ['rule', 'timing_structure'],
+    [parse_rule, parse_timing_structure]
+  )
 
 def parse_section(yaml_section: Any) -> Section:
-  id = yaml_section['id']
-  toc_entry = None
-  if 'toc_entry' in yaml_section:
-    toc_entry = yaml_section['toc_entry']
-  text = parse_format_text(yaml_section['text'])
-  snippet = None
-  if 'snippet' in yaml_section:
-    snippet = parse_format_text(yaml_section['snippet'].rstrip())
-  rules = list(map(parse_rule, yaml_section['rules']))
-  return Section(id, toc_entry, text, snippet, rules)
+  id = parse_id(yaml_section, 'section')
+  text = parse_format_text_field(yaml_section, 'text')
+  toc_entry = parse_with_default(yaml_section, 'toc_entry', None, parse_str_field)
+  snippet = parse_with_default(yaml_section, 'snippet', None, parse_format_text_field)
+  section_elements = parse_subelements(yaml_section, 'rules', parse_section_element)
+  return Section(id, text, toc_entry, snippet, section_elements)
 
 def parse_header(yaml_header: Any) -> Header:
-  id = yaml_header['id']
-  text = yaml_header['text']
-  sections = list(map(parse_section, yaml_header['sections']))
+  id = parse_id(yaml_header, 'header')
+  text = parse_str_field(yaml_header, 'text')
+  sections = parse_subelements(yaml_header, 'sections', parse_section)
   return Header(id, text, sections)
 
 def parse_document(yaml_document: Any) -> Document:
@@ -106,6 +92,51 @@ def yaml_to_document():
       return parse_document(yaml_input)
     except yaml.YAMLError as exc:
       print(exc)
+
+# Utility methods for parsing fields from the YAML dicts.
+
+A = TypeVar('A')
+B = TypeVar('B')
+
+def parse_id(obj: Any, id_type: str) -> str:
+  if not id_type in obj:
+    raise Exception(f'Expected id type: {id_type}, instead got fields: {str(obj.keys())}')
+  return obj[id_type]
+
+def parse_str_field(obj: Any, field_type: str) -> str:
+  return parse_str_field_generic(obj, field_type, lambda x: x)
+
+def parse_format_text_field(obj: Any, field_type: str) -> FormatText:
+  return parse_str_field_generic(obj, field_type, parse_format_text)
+
+def parse_str_field_generic(obj: Any, field_type: str, func: Callable[[str], A]) -> A:
+  if not field_type in obj:
+    raise Exception(f'Expected field: {field_type}, instead got fields: {str(obj.keys())}')
+  field_content = obj[field_type]
+  if not isinstance(field_content, str):
+    raise Exception(f'Expected str field for {field_type}, instead got: {type(field_content)}')
+  return func(field_content.rstrip())
+
+def parse_subelements(obj: Any, element_type: str, func: Callable[[Any], A]) -> list[A]:
+  if not element_type in obj:
+    return []
+  return list(map(func, obj[element_type]))
+
+def parse_union(obj: Any, element_types: list[str], funcs: list[Callable[[Any], A]]) -> A:
+  for i, element_type in enumerate(element_types):
+    if element_type in obj:
+      return funcs[i](obj)
+  raise Exception(f'None of the expected fields found: {str(element_types)}, instead got fields: {str(obj.keys())}')
+
+def parse_boolean(obj: Any, field_type: str) -> bool:
+  if field_type in obj:
+    return True
+  return False
+
+def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callable[[Any, str], A]) -> A:
+  if not field_type in obj:
+    return default
+  return parse_func(obj, field_type)
 
 if __name__ == "__main__":
   doc = yaml_to_document()

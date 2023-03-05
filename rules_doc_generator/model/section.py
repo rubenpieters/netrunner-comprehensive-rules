@@ -6,6 +6,37 @@ import string
 from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Example)
 
 @dataclass
+class TimingStructureElement:
+  text: FormatText | None
+  elements: list[TimingStructureElement]
+
+  def to_html(self, id_map: RefDict) -> str:
+    return ''
+
+  def to_latex_l1(self, id_map: RefDict) -> str:
+    result = f'\\1 \\textbf{{{self.text.to_latex(id_map)}}}\n'
+    for elem in self.elements:
+      result += elem.to_latex_l2(id_map)
+    return result
+
+  def to_latex_l2(self, id_map: RefDict) -> str:
+    result = f'  \\2 {self.text.to_latex(id_map)}\n'
+    for elem in self.elements:
+      result += elem.to_latex_l3(id_map)
+    return result
+
+  def to_latex_l3(self, id_map: RefDict) -> str:
+    return f'    \\3 {self.text.to_latex(id_map)}\n'
+
+  def to_latex(self, id_map: RefDict) -> str:
+    result = '\setlist[enumerate,1]{label=\\textbf{\\arabic*)}}\n'
+    result += '\setlist[enumerate,2]{label=\\alph*)}\n'
+    result += '\setlist[enumerate,3]{label=\\roman*)}\n'
+    for elem in self.elements:
+      result += elem.to_latex_l1(id_map)
+    return result
+
+@dataclass
 class SubRule:
   id: str
   format_text: FormatText
@@ -75,20 +106,22 @@ class Rule:
     for j, rule in enumerate(self.rules):
       rule.id_map(f'{ctx}.{i}', j, dict, ref_type)
 
+SectionElement = Union[Rule, TimingStructureElement]
+
 @dataclass
 class Section:
   id: str
-  toc_entry: str | None
   text: FormatText
+  toc_entry: str | None
   snippet: Optional[FormatText]
-  rules: list[Union[Rule, TimingStructureElement]]
+  section_elements: list[SectionElement]
 
   def to_html(self, id_map: RefDict) -> str:
     result = f'<h2>{self.text.to_html(id_map)}</h2>'
     if self.snippet:
       result += f'<p>{self.snippet.to_html(id_map)}</p>'
     result += '<ol>'
-    for elem in self.rules:
+    for elem in self.section_elements:
       match elem:
         case Rule(): result += f'<li class="Rule" id="{id_map[elem.id].reference}">{elem.to_html(id_map)}</li>'
     result += '</ol>'
@@ -109,7 +142,7 @@ class Section:
         result += f'\\noindent\emph{{{snippet_text}}}\n\n'
 
     result += '\\begin{outline}[enumerate]\n'
-    for elem in self.rules:
+    for elem in self.section_elements:
       result += elem.to_latex(id_map)
     result += '\end{outline}\n'
     return result
@@ -118,7 +151,7 @@ class Section:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', self.text, self.id)
-    for j, elem in enumerate(self.rules):
+    for j, elem in enumerate(self.section_elements):
       match elem:
         case Rule(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
 
@@ -180,35 +213,3 @@ class Document:
     for j, elem in enumerate(self.headers):
       elem.id_map(j + 1, id_map)
     return id_map
-
-
-@dataclass
-class TimingStructureElement:
-  text: FormatText | None
-  elements: list[TimingStructureElement]
-
-  def to_html(self, id_map: RefDict) -> str:
-    return ''
-
-  def to_latex_l1(self, id_map: RefDict) -> str:
-    result = f'\\1 \\textbf{{{self.text.to_latex(id_map)}}}\n'
-    for elem in self.elements:
-      result += elem.to_latex_l2(id_map)
-    return result
-
-  def to_latex_l2(self, id_map: RefDict) -> str:
-    result = f'  \\2 {self.text.to_latex(id_map)}\n'
-    for elem in self.elements:
-      result += elem.to_latex_l3(id_map)
-    return result
-
-  def to_latex_l3(self, id_map: RefDict) -> str:
-    return f'    \\3 {self.text.to_latex(id_map)}\n'
-
-  def to_latex(self, id_map: RefDict) -> str:
-    result = '\setlist[enumerate,1]{label=\\textbf{\\arabic*)}}\n'
-    result += '\setlist[enumerate,2]{label=\\alph*)}\n'
-    result += '\setlist[enumerate,3]{label=\\roman*)}\n'
-    for elem in self.elements:
-      result += elem.to_latex_l1(id_map)
-    return result

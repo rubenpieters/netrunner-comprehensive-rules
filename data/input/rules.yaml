@@ -1,37 +1,37 @@
-- id: hdr_game_concepts
+- header: hdr_game_concepts
   text: Game Concepts
   sections:
-  - id: sec_concepts_general
+  - section: sec_concepts_general
     text: General
     snippet: |-
       These rules are compatible with cards from the game {term:android: netrunner} by Fantasy Flight Games. {term:android: netrunner} is a game about the cyber-struggle between massive Corporations and subversive hackers known as Runners.
     rules:
-    - id: rule_player_definitions
+    - rule: rule_player_definitions
       text: |-
         The game is played between two players. One player takes the role of the Corp (Corporation) and the other takes the role of the Runner. This rules document will frequently refer to a player interchangeably with their game role.
-    - id: rule_requirements
+    - rule: rule_requirements
       text: |-
         Each player needs a legal deck, an identity card for their role, and any extra cards used from outside their deck. They also need a supply of tokens as described in {ref:sec_counters_tokens}. The constraints that define the legality of a deck are defined in {ref:sec_deck_construction}, and the cases where cards outside the deck and identity can be used are defined in {ref:sec_extra_cards}.
-  - id: sec_golden_rules
+  - section: sec_golden_rules
     text: Golden Rules
     rules:
-    - id: rule_card_precedence
+    - rule: rule_card_precedence
       text: If the text of a card directly contradicts these rules, the text of the card takes precedence.
-    - id: rule_cannot_precedence
+    - rule: rule_cannot_precedence
       text: If a rule or ability directs something to happen, but another effect states that it cannot happen, the "cannot" ability takes precedence.
       rules:
-      - id: rule_cannot_ncigs
+      - sub_rule: rule_cannot_ncigs
         text: If a "cannot" effect prohibits all of the effects of another ability, that ability cannot be triggered.
-      - id: rule_partially_cannot
+      - sub_rule: rule_partially_cannot
         text: If a "cannot" effect prohibits only part of another ability, that ability can be triggered, but the prohibited steps of resolving that ability are not carried out.
         examples:
         - text: |-
             During a run, {card:Lockdown}'s subroutine resolves, preventing the Runner from drawing cards for the remainder of the turn. The Runner has a {card:Diesel} and a {card:Process Automation} in their grip. For the remainder of this turn, they cannot play {card:Diesel} as its entire ability is prohibited, but they can play {card:Process Automation}. Even though cards cannot be drawn through {card:Process Automation}, the Runner can play it to gain 2[c].
-    - id: rule_if_able
+    - rule: rule_if_able
       text: If an instruction includes the words "if able," it can only be carried out fully or not at all. If any part of the instruction is not possible to carry out, the entire instruction is ignored.
-    - id: rule_do_as_much_as_you_can
+    - rule: rule_do_as_much_as_you_can
       text: If an instruction does not include the words "if able," as much of that instruction as possible is carried out. Any parts of the instruction that are not possible to carry out are ignored.
-    - id: rule_ncigs
+    - rule: rule_ncigs
       text: A player can only take an action or use an ability if its effect has the potential to change the game state. This potential is assessed strictly by what the action or ability can be expected to accomplish, without regard to the consequences of paying any costs to initiate that action or ability and without regard to any other abilities that may meet their conditions in the process of initiating or resolving that action or ability.
       examples:
       - text: |-
@@ -41,212 +41,212 @@
       - text: |-
           The Runner is playing {card:Armand "Geist" Walker} and has {card:Forger} installed. The Runner can only trash {card:Forger} and trigger {card:Geist}'s ability when they are about to take a tag (which {card:Forger} could avoid) or while they have a tag (which {card:Forger} could remove). Using {card:Forger} at any other time has no potential to change the game state.
 
-  - id: sec_symbols
+  - section: sec_symbols
     text: Symbols
     rules:
-    - id: rule_symbols
+    - rule: rule_symbols
       text: Several non-English symbols appear on cards and in this rules document. This section serves as a basic guide to those symbols.
-    - id: rule_symbol_recurring
+    - rule: rule_symbol_recurring
       text: |-
         The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a numeral, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
 
-  - id: sec_deck_construction
+  - section: sec_deck_construction
     text: Deck Construction
     rules:
-    - id: rule_identity
+    - rule: rule_identity
       text: |-
         Each player's deck is associated with a single identity card that determines the faction, minimum deck size, and influence limit of that deck. The identity card may also stipulate other variances from the standard deckbuilding rules.
       rules:
-      - id: rule_gateway_identities
+      - sub_rule: rule_gateway_identities
         text: |-
           The identities {card:The Catalyst} and {card:The Syndicate} from the System Gateway Starter Pack are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
-    - id: rule_legal_deck
+    - rule: rule_legal_deck
       text: Each deck must meet all requirements in this section to be legal for play.
 
-  - id: sec_extra_cards
+  - section: sec_extra_cards
     text: Extra Cards
     rules:
-    - id: rule_outside_deck
+    - rule: rule_outside_deck
       text: Some abilities allow for the use of additional cards from outside the deck.
 
-  - id: sec_counters_tokens
+  - section: sec_counters_tokens
     text: Counters and Tokens
     rules:
-    - id: rule_counters_cards
+    - rule: rule_counters_cards
       text: |-
         {term:Counters} and {term:tokens} are game pieces (or equivalent) that track various resources, effects, and statuses of players and their cards.
       rules:
-      - id: rule_counter_token
+      - sub_rule: rule_counter_token
         text: The terms "counter" and "token" are interchangeable.
 
-  - id: sec_credits
+  - section: sec_credits
     text: Credits
     snippet: |
       Each of the Runner's credits represents enough money to upgrade some basic parts for their console, have a meal at a decent restaurant, or buy a ticket and some concessions for a night at the sensies.
       Each of the Corp's credits represents enough money to manufacture a run of computer parts, buy out a decent restaurant, or film a low-budget sensie.
     rules:
-    - id: rule_credit
+    - rule: rule_credit
       text: |-
         A {term:credit} ({img:credit}) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
-    - id: rule_sec_recurring
+    - rule: rule_sec_recurring
       toc:
       text: Recurring Credits
       rules:
-      - id: rule_recurring_credits
+      - sub_rule: rule_recurring_credits
         text: |-
           {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
 
-  - id: sec_clicks
+  - section: sec_clicks
     text: Clicks
     snippet: |
       Working a job, making connections, and especially jacking in—everything you do takes time, and it always goes by faster than you think. A click represents an abstract amount of time spent on a particular activity, either several hours all at once or scattered across the day.
     rules:
-    - id: rule_allotted_clicks
+    - rule: rule_allotted_clicks
       text: |-
         As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:hdr_turns} for details about the procedures of player turns.
 
-  - id: sec_host
+  - section: sec_host
     text: Host, Hosted and Hosting
     rules:
-    - id: rule_host_relationship
+    - rule: rule_host_relationship
       text: Any card in an eligible location can act as a host, but a host relationship can only be created or permitted by a card ability.
       rules:
-      - id: rule_implicit_host
+      - sub_rule: rule_implicit_host
         text: |-
           If a card has an ability describing the types and/or numbers of cards it can host, but it does not have an ability that directly hosts cards onto itself, then the card is permitted as an eligible installation destination for the types of cards listed, up to the number specified. A host card is chosen as an installation destination during {ref:rule_steps_installing_destination} of the installation process.
         examples:
           - text: |-
               {card:Off-Campus Apartment} has the ability, "{card:Off-Campus Apartment} can host any number of {subtype:connections}." This means that whenever the Runner installs a {subtype:connection} card, they can choose to install that card into the play area hosted on {card:Off-Campus Apartment} or as normal directly into the play area.
 
-  - id: sec_targets
+  - section: sec_targets
     text: Targets
     rules:
-    - id: rule_targets_gone
+    - rule: rule_targets_gone
       text: |-
         At the time an instruction resolves, if any of its targets either have become invalid or were not announced, as much of that ability resolves as possible without acting on the unannounced or invalid targets, following {ref:rule_if_able,rule_do_as_much_as_you_can} of the Golden Rules. A target can be invalid because the chosen object or subroutine no longer exists or because the target no longer meets other requirements specified by the targeting ability.
 
-  - id: sec_costs
+  - section: sec_costs
     text: Costs
     rules:
-    - id: rule_nested
+    - rule: rule_nested
       text: |-
         A {term:nested cost} is a cost appearing within an ability's instructions that must be paid while the ability is resolving in order for some or all of the rest of the effects of that ability to resolve.
       rules:
-      - id: rule_nested_cost_may
+      - sub_rule: rule_nested_cost_may
         text: |-
           Nested costs are usually written in the format "[player] may [cost] to [instructions]" or "[player] may [cost]. If [you/they] do, [instructions]." If the indicated player pays the indicated cost, the indicated instructions are resolved. Otherwise, that part of the ability is not resolved.
-      - id: rule_nested_cost_unless
+      - sub_rule: rule_nested_cost_unless
         text: |-
           Nested costs can also be written in the format "[instructions] unless [player] [cost]" or "[player] may [cost]. If [you/they] do not, [instructions]." If the indicated player pays the indicated cost, the indicated instructions are not resolved. Otherwise, that instruction is resolved.
         examples:
         - text: |-
             A subroutine reading "End the run unless the Runner pays 1[c]." contains a nested cost. If the Runner chooses to pay 1[c], the subroutine will not end the run.
-      - id: rule_nested_cost_no_may
+      - sub_rule: rule_nested_cost_no_may
         text: An ability that reads "If [you/they] do" or "If [you/they] do not" without a preceding "may" does not indicate a nested cost.
-      - id: rule_nested_cost_otherwise
+      - sub_rule: rule_nested_cost_otherwise
         text: |-
           Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
 
-- id: hdr_turns
+- header: hdr_turns
   text: Turns
   sections:
-  - id: sec_turn_general
+  - section: sec_turn_general
     text: General
     rules:
-    - id: rule_turn
+    - rule: rule_turn
       text: |-
         A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
-  - id: sec_steps_corps_turn
+  - section: sec_steps_corps_turn
     text: Steps of the Corp's Turn
     rules:
-    - id: rule_sec_corp_draw_phase
+    - rule: rule_sec_corp_draw_phase
       steps:
       text: |-
         During the draw phase, the following steps occur in order:
       rules:
-      - id: step_corp_allotted_clicks
+      - sub_rule: step_corp_allotted_clicks
         text: The Corp gains their allotted clicks (default [click][click][click]).
 
-- id: hdr_Runs
+- header: hdr_Runs
   text: Runs
   sections:
-  - id: sec_run_general
+  - section: sec_run_general
     text: General
     rules:
-    - id: rule_run
+    - rule: rule_run
       text: |-
         A {term:run} is a Runner's attack on a server. There are 6 phases used in the procedure of carrying out a run, described in {ref/through:sec_run_initiation,sec_run_ends_phase}. A run always begins with the Initiation Phase. {ref:Sec_steps_of_a_run} contains the full set of steps carried out during each phase, and should be referred to in conjunction with the sections discussing the phases.
-  - id: sec_run_initiation
+  - section: sec_run_initiation
     text: Initiation
     rules:
-    - id: rule_run_initiation_phase
+    - rule: rule_run_initiation_phase
       text: The {term:initiation phase} sets the parameters for the run and begins the run.
-  - id: sec_run_ends_phase
+  - section: sec_run_ends_phase
     text: Run Ends Phase
     rules:
-    - id: rule_run_ends_phase
+    - rule: rule_run_ends_phase
       text: The {term:run ends phase} formalizes the end of the run and prepares the game to return to the timing structure from which the run was initiated.
-  - id: sec_steps_of_a_run
+  - section: sec_steps_of_a_run
     text: Steps of a Run
     rules:
-    - id: rule_sec_run_initiation_phase
+    - rule: rule_sec_run_initiation_phase
       steps:
       toc:
       text: Initiation Phase
       rules:
-      - id: step_initiation_announce
+      - sub_rule: step_initiation_announce
         text: The Runner announces the attacked server.
-      - id: step_initiation_bad_publicity
+      - sub_rule: step_initiation_bad_publicity
         text: The Runner gains 1[c] to spend during the run for each bad publicity the Corp has.
-      - id: step_initiation_formal_begin
+      - sub_rule: step_initiation_formal_begin
         text: The run formally begins. Conditions related to the run beginning or initiating are met.
-      - id: step_initiation_complete
+      - sub_rule: step_initiation_complete
         text: |-
           The Initiation Phase is complete. If the attacked server has at least one piece of ice protecting it, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the outermost piece of ice protecting the attacked server. If the attacked server is not protected by ice, proceed to {ref:rule_sec_run_encounter_ice_phase}, Movement Phase.
-    - id: rule_sec_run_approach_ice_phase
+    - rule: rule_sec_run_approach_ice_phase
       steps:
       text: Approach Ice Phase
-    - id: rule_sec_run_encounter_ice_phase
+    - rule: rule_sec_run_encounter_ice_phase
       steps:
       text: Encounter Ice Phase
-    - id: rule_sec_run_movement_phase
+    - rule: rule_sec_run_movement_phase
       steps:
       text: Movement Phase
 
-- id: hdr_card_manipulation
+- header: hdr_card_manipulation
   text: Card Manipulation
   sections:
-  - id: sec_install_uninstall
+  - section: sec_install_uninstall
     text: Installing and Uninstalling Cards
     rules:
-    - id: rule_sec_steps_installing
+    - rule: rule_sec_steps_installing
       steps:
       toc:
       text: Steps of Installing a Card
       rules:
-      - id: rule_steps_installing_place
+      - sub_rule: rule_steps_installing_place
         text: Place the card into the play area with the same faceup or facedown status it will have when the installation is complete. It is not yet installed or active.
-      - id: rule_steps_installing_destination
+      - sub_rule: rule_steps_installing_destination
         text: Choose and declare the install destination appropriate to the card that will be installed, including any host relationships, if applicable.
 
-- id: hdr_appendix_timing_structures
+- header: hdr_appendix_timing_structures
   text: |-
     Appendix: Timing Structure Reference
   sections:
-  - id: sec_timing_structure_overview
+  - section: sec_timing_structure_overview
     text: Overview
     rules:
-    - id: rule_timing_structure_quick_ref
+    - rule: rule_timing_structure_quick_ref
       text: |-
         The following pages contain quick reference guides for the main timing structures in the game. When initiating a new timing structure, begin at the first numbered step and proceed through the structure sequentially, unless instructed to move to a different phase or step.
-    - id: rule_timing_structure_reference_only
+    - rule: rule_timing_structure_reference_only
       text: |-
         These guides are intended to serve as shorthand references only; for comprehensive rules relating to each timing structure, see the accompanying rules sections.
-  - id: sec_appendix_timing_structure_corps_turn
-    toc_entry: Timing Structure of The Corp's Turn
+  - section: sec_appendix_timing_structure_corps_turn
     text: Timing Structure of The Corp's Turn ({ref:sec_steps_corps_turn})
+    toc_entry: Timing Structure of The Corp's Turn
     rules:
-    - section: timing_structure
+    - timing_structure:
       elements:
       - text: Draw Phase
       - text: Action Phase
@@ -255,11 +255,11 @@
           elements:
           - text: If yes, the Corp takes an action.
       - text: Discard Phase
-  - id: sec_appendix_timing_structure_runners_turn
-    toc_entry: Timing Structure of The Runner's Turn
+  - section: sec_appendix_timing_structure_runners_turn
     text: Timing Structure of The Runner's Turn ()
+    toc_entry: Timing Structure of The Runner's Turn
     rules:
-    - section: timing_structure
+    - timing_structure:
       elements:
       - text: Draw Phase
       - text: Action Phase

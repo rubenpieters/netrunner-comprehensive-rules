@@ -191,7 +191,6 @@
     rules:
     - rule: rule_sec_run_initiation_phase
       steps:
-      toc:
       text: Initiation Phase
       rules:
       - sub_rule: step_initiation_announce

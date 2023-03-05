@@ -5,6 +5,8 @@ import yaml
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card)
 from rules_doc_generator.model.section import (Rule, SubRule, Section, Header, Document, SectionElement, TimingStructureElement)
 
+# Parsing model elements.
+
 def parseTextElement(str: str) -> TextElement:
   if str.startswith('ref:'):
     text = str[4:].lower()
@@ -39,9 +41,7 @@ def parse_example(yaml_example: Any) -> Example:
   return Example(text)
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
-  text = None
-  if 'text' in yaml_timing_structure:
-    text = parse_format_text(yaml_timing_structure['text'])
+  text = parse_with_default(yaml_timing_structure, 'text', None, parse_format_text_field)
   elements = parse_subelements(yaml_timing_structure, 'elements', parse_timing_structure)
   return TimingStructureElement(text, elements)
 
@@ -84,14 +84,6 @@ def parse_header(yaml_header: Any) -> Header:
 def parse_document(yaml_document: Any) -> Document:
   headers = list(map(parse_header, yaml_document))
   return Document(headers)
-
-def yaml_to_document():
-  with open("data/input/rules.yaml", "r") as stream:
-    try:
-      yaml_input = yaml.safe_load(stream)
-      return parse_document(yaml_input)
-    except yaml.YAMLError as exc:
-      print(exc)
 
 # Utility methods for parsing fields from the YAML dicts.
 
@@ -137,6 +129,16 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
   if not field_type in obj:
     return default
   return parse_func(obj, field_type)
+
+# General utility.
+
+def yaml_to_document():
+  with open("data/input/rules.yaml", "r") as stream:
+    try:
+      yaml_input = yaml.safe_load(stream)
+      return parse_document(yaml_input)
+    except yaml.YAMLError as exc:
+      print(exc)
 
 if __name__ == "__main__":
   doc = yaml_to_document()

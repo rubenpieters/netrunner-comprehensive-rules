@@ -7,13 +7,13 @@ def create_toc_html(id_map: RefDict):
   result = ''
   for id in id_map:
     ref_info = id_map[id]
-    if not (ref_info.type == 'rule' or ref_info.type == 'subrule'):
-      result += f'<div>{ref_info.reference} {ref_info.text}</div>'
+    if ref_info.toc:
+      result += f'<li>{ref_info.reference} {ref_info.text}</li>'
   return result
 
 def standalone_html(document: Document, id_map: RefDict):
   result = '<!DOCTYPE html><html><head><link rel="stylesheet" href="demo.css"></head><body>'
-  result += f'<div>{create_toc_html(id_map)}</div>'
+  result += f'<ul class="toc">{create_toc_html(id_map)}</ul>'
   result += f'<div>{document.to_html(id_map)}</div>'
   result += '</body></html>'
   return result

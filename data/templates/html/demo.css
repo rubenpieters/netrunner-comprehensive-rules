@@ -1,3 +1,9 @@
+.toc {
+  float: left;
+  list-style-type: none;
+  width: 15%;
+}
+
 ol {
   counter-reset: section;
   list-style: none;
@@ -72,4 +78,8 @@ ol > li:before {
 
 .Symbol {
   height: 0.75em;
+}
+
+.Example {
+  font-style: italic;
 }

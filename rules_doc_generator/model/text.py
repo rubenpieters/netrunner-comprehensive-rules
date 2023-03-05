@@ -9,6 +9,7 @@ class RefInfo:
   type: str
   text: str
   id: str
+  toc: bool
 
 RefDict = dict[str, RefInfo]
 
@@ -31,6 +32,9 @@ class Image:
 class Text:
   text: str
 
+  def to_plaintext(self) -> str:
+    return self.text
+
   def to_html(self, id_map: RefDict) -> str:
     return self.text
 
@@ -45,13 +49,13 @@ class Ref:
 
   def to_html(self, id_map: RefDict) -> str:
     if len(self.referenced_ids) == 1:
-      referenced_id = self.referenced_ids[0]
-      if not referenced_id in id_map:
-        raise Exception(f'id does not exist: {referenced_id}')
-      ref_info = id_map[referenced_id]
-      return f'<a href=#{ref_info.reference}>{ref_info.type} {ref_info.reference}</a>'
+      ref_info = lookup_ref(id_map, self.referenced_ids[0])
+      ref_text = ref_info.type
+      if self.capitalize:
+        ref_text = ref_text.capitalize()
+      return f'<a href=#{ref_info.id}>{ref_text} {ref_info.reference}</a>'
     else:
-      html_refs = list(map(lambda x: f'<a href=#{lookup_ref(id_map, x).reference}>{lookup_ref(id_map, x).reference}</a>', self.referenced_ids))
+      html_refs = list(map(lambda x: f'<a href=#{x}>{lookup_ref(id_map, x).reference}</a>', self.referenced_ids))
       joined = f' {self.combiner} '.join([', '.join(html_refs[:-1]), html_refs[-1]])
       ref_info = id_map[self.referenced_ids[0]]
       ref_text = ref_info.type
@@ -67,7 +71,7 @@ class Ref:
         ref_text = ref_text.capitalize()
       return f'\\reful{{{ref_info.id}}}{{{ref_text} {ref_info.reference}}}'
     if len(self.referenced_ids) > 1:
-      latex_refs = list(map(lambda x: f'\\reful{{{lookup_ref(id_map, x).id}}}{{{lookup_ref(id_map, x).reference}}}', self.referenced_ids))
+      latex_refs = list(map(lambda x: f'\\reful{{{x}}}{{{lookup_ref(id_map, x).reference}}}', self.referenced_ids))
       joined = f' {self.combiner} '.join([', '.join(latex_refs[:-1]), latex_refs[-1]])
       ref_info = id_map[self.referenced_ids[0]]
       ref_text = ref_info.type
@@ -114,7 +118,7 @@ class FormatText:
   def to_plaintext(self) -> str:
     result = ''
     for element in self.textElements:
-      result += element.to_plaintext(id_map)
+      result += element.to_plaintext()
     return result
 
   def to_html(self, id_map: RefDict) -> str:
@@ -134,7 +138,7 @@ class Example:
   text: FormatText
 
   def to_html(self, id_map: RefDict) -> str:
-    return f'Example: {self.text.to_html(id_map)}'
+    return f'<p class="Example">Example: {self.text.to_html(id_map)}</p>'
 
   def to_latex(self, id_map: RefDict) -> str:
     return f'\emph{{Example: {self.text.to_latex(id_map)}}}'

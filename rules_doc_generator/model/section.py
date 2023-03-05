@@ -45,7 +45,7 @@ class SubRule:
   def to_html(self, id_map: RefDict) -> str:
     result = self.format_text.to_html(id_map)
     for example in self.examples:
-      result += f'<p>{example.to_html(id_map)}</p>'
+      result += example.to_html(id_map)
     return result
   
   def to_latex(self, id_map: RefDict) -> str:
@@ -60,7 +60,7 @@ class SubRule:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     letters = string.ascii_lowercase[:14]
-    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', ref_type, '', self.id)
+    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', ref_type, '', self.id, False)
 
 @dataclass
 class Rule:
@@ -74,7 +74,7 @@ class Rule:
   def to_html(self, id_map: RefDict) -> str:
     result = self.format_text.to_html(id_map)
     for example in self.examples:
-      result += f'<p>{example.to_html(id_map)}</p>'
+      result += example.to_html(id_map)
     if self.rules:
       result += '<ol>'
       for rule in self.rules:
@@ -101,8 +101,9 @@ class Rule:
   def id_map(self, ctx: str, i: int, dict: dict[int, str]) -> int:
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    ref_type = 'step' if self.steps == 'steps' else 'rule'
-    dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, '', self.id)
+    ref_type = 'step' if self.steps else 'rule'
+    toc_text = self.format_text.to_plaintext() if self.toc else ''
+    dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, toc_text, self.id, self.toc)
     for j, rule in enumerate(self.rules):
       rule.id_map(f'{ctx}.{i}', j, dict, ref_type)
 
@@ -123,7 +124,7 @@ class Section:
     result += '<ol>'
     for elem in self.section_elements:
       match elem:
-        case Rule(): result += f'<li class="Rule" id="{id_map[elem.id].reference}">{elem.to_html(id_map)}</li>'
+        case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
     result += '</ol>'
     return result
 
@@ -150,7 +151,8 @@ class Section:
   def id_map(self, ctx: str, i: int, dict: dict[int, str]):
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', self.text, self.id)
+    toc_text = self.toc_entry if self.toc_entry else self.text.to_plaintext()
+    dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', toc_text, self.id, True)
     for j, elem in enumerate(self.section_elements):
       match elem:
         case Rule(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
@@ -164,7 +166,7 @@ class Header:
   def to_html(self, id_map: RefDict) -> str:
     result = f'<h1>{self.text}</h1><ol>'
     for section in self.sections:
-      result += f'<li class="Section" id="{id_map[section.id].reference}">{section.to_html(id_map)}</li>'
+      result += f'<li class="Section" id="{section.id}">{section.to_html(id_map)}</li>'
     result += '</ol>'
     return result
 
@@ -179,7 +181,7 @@ class Header:
   def id_map(self, i: int, dict: RefDict):
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}', self.text)
-    dict[self.id] = RefInfo(f'{i}', 'section', self.text, self.id)
+    dict[self.id] = RefInfo(f'{i}', 'section', self.text, self.id, True)
     for j, elem in enumerate(self.sections):
       elem.id_map(f'{i}', j + 1, dict)
 
@@ -190,7 +192,7 @@ class Document:
   def to_html(self, id_map: RefDict) -> str:
     result = '<ol>'
     for header in self.headers:
-      result += f'<li class="Header" id="{id_map[header.id].reference}">{header.to_html(id_map)}</li>'
+      result += f'<li class="Header" id="{header.id}">{header.to_html(id_map)}</li>'
     result += '</ol>'
     return result
 

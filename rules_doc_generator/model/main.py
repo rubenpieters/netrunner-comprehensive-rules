@@ -1,8 +1,7 @@
 import os
-import shutil
 
-from rules_doc_generator.model.text import (RefDict, Text, Ref, Term, FormatText, Example, Image)
-from rules_doc_generator.model.section import (Rule, Section, Header, Document)
+from rules_doc_generator.model.text import (RefDict)
+from rules_doc_generator.model.section import (Document)
 
 def create_toc_html(id_map: RefDict):
   result = ''
@@ -20,7 +19,6 @@ def standalone_html(document: Document, id_map: RefDict):
   return result
 
 def standalone_latex(document: Document, id_map: RefDict):
-  #shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('latex', 'credit.svg'))
   result = document.to_latex(id_map)
   return result
 

@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: html-output
-          path: html/demo.html
+          path: html/*
 
 
   deploy:

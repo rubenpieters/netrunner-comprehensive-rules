@@ -1,75 +1,54 @@
-.toc {
-  float: left;
-  list-style-type: none;
-  width: 15%;
+.RulesGrid {
+  display: grid;
+  grid-template-columns: 15% 85%;
 }
 
-ol {
-  counter-reset: section;
+.RulesToc {
+  grid-column: 1;
+  list-style-type: none;
+}
+
+.RulesContent {
+  grid-column: 2;
+  counter-reset: hdr_counter;
+}
+
+.Header {
+  counter-reset: sec_counter;
+}
+
+.Rules {
+  counter-reset: rule_counter;
   list-style: none;
 }
 
-ol li.Header:before {
-  counter-increment: section;
-  content: counters(section, ".") ".";
-  display: inline-block;
+.SubRules {
+  counter-reset: sub_rule_counter;
+  list-style: none;
 }
 
-ol li.Header li.Section:before {
-  counter-increment: section;
-  content: counters(section ,".") ".";
-  display: inline-block;
-}
-
-ol li.Header li.Section li.Rule:before {
-  counter-increment: section;
-  counter-reset: subrule;
-  content: counters(section, ".") ".";
-}
-
-ol li.Header li.Section li.Rule li.SubRule:before {
-  counter-increment: subrule;
-  content: counters(subrule, "", lower-alpha) ".";
-}
-
-li.Header:before {
-  font-size: xx-large;
-  font-weight: bolder;
+.Header:before {
+  content: counter(hdr_counter) ".";
+  counter-increment: hdr_counter;
   padding-right: 10px;
 }
 
-li.Header > h1 {
-  display: inline-block;
-}
-
-li.Section:before {
-  font-size: x-large;
-  font-weight: bold;
+.Section:before {
+  content: counter(hdr_counter) "." counter(sec_counter) ".";
+  counter-increment: sec_counter;
   padding-right: 10px;
 }
 
-li.Section > h2 {
-  display: inline-block;
-}
-
-li.Rule:before {
+.Rule:before {
+  content: counter(hdr_counter) "." counter(sec_counter) "." counter(rule_counter) ".";
+  counter-increment: rule_counter;
   padding-right: 10px;
 }
 
-li.SubRule:before {
+.SubRule:before {
+  content: counters(sub_rule_counter, "", lower-alpha) ".";
+  counter-increment: sub_rule_counter;
   padding-right: 10px;
-}
-
-ol {
-  display: table;
-}
-
-ol > li {
-  display: table-row;
-}
-
-ol > li:before {
-  display: table-cell;
 }
 
 .Term {

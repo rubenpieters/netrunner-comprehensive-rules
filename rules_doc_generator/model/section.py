@@ -76,7 +76,7 @@ class Rule:
     for example in self.examples:
       result += example.to_html(id_map)
     if self.rules:
-      result += '<ol>'
+      result += '<ol class="SubRules">'
       for rule in self.rules:
         result += f'<li class="SubRule" id="{id_map[rule.id].reference}">{rule.to_html(id_map)}</li>'
       result += '</ol>'
@@ -118,10 +118,10 @@ class Section:
   section_elements: list[SectionElement]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = f'<h2>{self.text.to_html(id_map)}</h2>'
+    result = f'<h2 class="Section">{self.text.to_html(id_map)}</h2>'
     if self.snippet:
       result += f'<p>{self.snippet.to_html(id_map)}</p>'
-    result += '<ol>'
+    result += '<ol class="Rules">'
     for elem in self.section_elements:
       match elem:
         case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
@@ -164,10 +164,9 @@ class Header:
   sections: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = f'<h1>{self.text}</h1><ol>'
+    result = f'<h1 class="Header">{self.text}</h1>'
     for section in self.sections:
-      result += f'<li class="Section" id="{section.id}">{section.to_html(id_map)}</li>'
-    result += '</ol>'
+      result += section.to_html(id_map)
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
@@ -190,10 +189,9 @@ class Document:
   headers: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = '<ol>'
+    result = ''
     for header in self.headers:
-      result += f'<li class="Header" id="{header.id}">{header.to_html(id_map)}</li>'
-    result += '</ol>'
+      result += header.to_html(id_map)
     return result
 
   def to_latex(self, id_map: RefDict) -> str:

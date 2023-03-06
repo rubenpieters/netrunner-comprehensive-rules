@@ -1,0 +1,35 @@
+header: hdr_appendix_timing_structures
+text: |- 
+  Appendix: Timing Structure Reference
+sections:
+- section: sec_timing_structure_overview
+  text: Overview
+  rules:
+  - rule: rule_timing_structure_quick_ref
+    text: |-
+      The following pages contain quick reference guides for the main timing structures in the game. When initiating a new timing structure, begin at the first numbered step and proceed through the structure sequentially, unless instructed to move to a different phase or step.
+  - rule: rule_timing_structure_reference_only
+    text: |-
+      These guides are intended to serve as shorthand references only; for comprehensive rules relating to each timing structure, see the accompanying rules sections.
+- section: sec_appendix_timing_structure_corps_turn
+  text: Timing Structure of The Corp's Turn ({ref:sec_steps_corps_turn})
+  toc_entry: Timing Structure of The Corp's Turn
+  rules:
+  - timing_structure:
+    elements:
+    - text: Draw Phase
+    - text: Action Phase
+      elements:
+      - text: Does the Corp have unspent clicks?
+        elements:
+        - text: If yes, the Corp takes an action.
+    - text: Discard Phase
+- section: sec_appendix_timing_structure_runners_turn
+  text: Timing Structure of The Runner's Turn ()
+  toc_entry: Timing Structure of The Runner's Turn
+  rules:
+  - timing_structure:
+    elements:
+    - text: Draw Phase
+    - text: Action Phase
+    - text: Discard Phase

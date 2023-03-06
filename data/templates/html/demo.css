@@ -62,3 +62,42 @@
 .Example {
   font-style: italic;
 }
+
+.TimingStructureList {
+  counter-reset: timing_structure_l1;
+}
+
+.TimingStructureL1 {
+  counter-reset: timing_structure_l2;
+  list-style: none;
+  font-weight: bold;
+}
+
+.TimingStructureL2 {
+  counter-reset: timing_structure_l3;
+  list-style: none;
+  font-weight: normal;
+}
+
+.TimingStructureL3 {
+  list-style: none;
+  font-weight: normal;
+}
+
+.TimingStructureL1:before {
+  content: counter(timing_structure_l1) ")";
+  counter-increment: timing_structure_l1;
+  padding-right: 7px;
+}
+
+.TimingStructureL2:before {
+  content: counters(timing_structure_l2, "", lower-alpha) ")";
+  counter-increment: timing_structure_l2;
+  padding-right: 7px;
+}
+
+.TimingStructureL3:before {
+  content: counters(timing_structure_l3, "", lower-roman) ")";
+  counter-increment: timing_structure_l3;
+  padding-right: 7px;
+}

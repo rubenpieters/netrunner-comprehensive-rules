@@ -10,8 +10,31 @@ class TimingStructureElement:
   text: FormatText | None
   elements: list[TimingStructureElement]
 
+  def to_html_l1(self, id_map: RefDict) -> str:
+    result = f'<li class="TimingStructureL1">{self.text.to_html(id_map)}'
+    result += f'<ol>'
+    for elem in self.elements:
+      result += elem.to_html_l2(id_map)
+    result += '</ol></li>'
+    return result
+
+  def to_html_l2(self, id_map: RefDict) -> str:
+    result = f'<li class="TimingStructureL2">{self.text.to_html(id_map)}'
+    result += f'<ol>'
+    for elem in self.elements:
+      result += elem.to_html_l3(id_map)
+    result += '</ol></li>'
+    return result
+
+  def to_html_l3(self, id_map: RefDict) -> str:
+    return f'<li class="TimingStructureL3">{self.text.to_html(id_map)}</li>'
+
   def to_html(self, id_map: RefDict) -> str:
-    return ''
+    result = '<ol class="TimingStructureList">'
+    for elem in self.elements:
+      result += elem.to_html_l1(id_map)
+    result += '</ol>'
+    return result
 
   def to_latex_l1(self, id_map: RefDict) -> str:
     result = f'\\1 \\textbf{{{self.text.to_latex(id_map)}}}\n'
@@ -78,7 +101,7 @@ class Rule:
     if self.rules:
       result += '<ol class="SubRules">'
       for rule in self.rules:
-        result += f'<li class="SubRule" id="{id_map[rule.id].reference}">{rule.to_html(id_map)}</li>'
+        result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(id_map)}</li>'
       result += '</ol>'
     return result
 
@@ -118,13 +141,14 @@ class Section:
   section_elements: list[SectionElement]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = f'<h2 class="Section">{self.text.to_html(id_map)}</h2>'
+    result = f'<h2 class="Section" id="{self.id}">{self.text.to_html(id_map)}</h2>'
     if self.snippet:
       result += f'<p>{self.snippet.to_html(id_map)}</p>'
     result += '<ol class="Rules">'
     for elem in self.section_elements:
       match elem:
         case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
+        case TimingStructureElement(): result += elem.to_html(id_map)
     result += '</ol>'
     return result
 
@@ -164,7 +188,7 @@ class Header:
   sections: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = f'<h1 class="Header">{self.text}</h1>'
+    result = f'<h1 class="Header" id="{self.id}">{self.text}</h1>'
     for section in self.sections:
       result += section.to_html(id_map)
     return result

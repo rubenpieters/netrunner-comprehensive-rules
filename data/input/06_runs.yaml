@@ -1,0 +1,44 @@
+header: hdr_runs
+text: Runs
+sections:
+- section: sec_run_general
+  text: General
+  rules:
+  - rule: rule_run
+    text: |-
+      A {term:run} is a Runner's attack on a server. There are 6 phases used in the procedure of carrying out a run, described in {ref/through:sec_run_initiation,sec_run_ends_phase}. A run always begins with the Initiation Phase. {ref:Sec_steps_of_a_run} contains the full set of steps carried out during each phase, and should be referred to in conjunction with the sections discussing the phases.
+- section: sec_run_initiation
+  text: Initiation
+  rules:
+  - rule: rule_run_initiation_phase
+    text: The {term:initiation phase} sets the parameters for the run and begins the run.
+- section: sec_run_ends_phase
+  text: Run Ends Phase
+  rules:
+  - rule: rule_run_ends_phase
+    text: The {term:run ends phase} formalizes the end of the run and prepares the game to return to the timing structure from which the run was initiated.
+- section: sec_steps_of_a_run
+  text: Steps of a Run
+  rules:
+  - rule: rule_sec_run_initiation_phase
+    steps:
+    text: Initiation Phase
+    rules:
+    - sub_rule: step_initiation_announce
+      text: The Runner announces the attacked server.
+    - sub_rule: step_initiation_bad_publicity
+      text: The Runner gains 1[c] to spend during the run for each bad publicity the Corp has.
+    - sub_rule: step_initiation_formal_begin
+      text: The run formally begins. Conditions related to the run beginning or initiating are met.
+    - sub_rule: step_initiation_complete
+      text: |-
+        The Initiation Phase is complete. If the attacked server has at least one piece of ice protecting it, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the outermost piece of ice protecting the attacked server. If the attacked server is not protected by ice, proceed to {ref:rule_sec_run_movement_phase}, Movement Phase.
+  - rule: rule_sec_run_approach_ice_phase
+    steps:
+    text: Approach Ice Phase
+  - rule: rule_sec_run_encounter_ice_phase
+    steps:
+    text: Encounter Ice Phase
+  - rule: rule_sec_run_movement_phase
+    steps:
+    text: Movement Phase

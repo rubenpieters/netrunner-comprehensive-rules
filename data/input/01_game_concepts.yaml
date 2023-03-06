@@ -1,0 +1,148 @@
+header: hdr_game_concepts
+text: Game Concepts
+sections:
+- section: sec_concepts_general
+  text: General
+  snippet: |-
+    These rules are compatible with cards from the game {term:android: netrunner} by Fantasy Flight Games. {term:android: netrunner} is a game about the cyber-struggle between massive Corporations and subversive hackers known as Runners.
+  rules:
+  - rule: rule_player_definitions
+    text: |-
+      The game is played between two players. One player takes the role of the Corp (Corporation) and the other takes the role of the Runner. This rules document will frequently refer to a player interchangeably with their game role.
+  - rule: rule_requirements
+    text: |-
+      Each player needs a legal deck, an identity card for their role, and any extra cards used from outside their deck. They also need a supply of tokens as described in {ref:sec_counters_tokens}. The constraints that define the legality of a deck are defined in {ref:sec_deck_construction}, and the cases where cards outside the deck and identity can be used are defined in {ref:sec_extra_cards}.
+- section: sec_golden_rules
+  text: Golden Rules
+  rules:
+  - rule: rule_card_precedence
+    text: If the text of a card directly contradicts these rules, the text of the card takes precedence.
+  - rule: rule_cannot_precedence
+    text: If a rule or ability directs something to happen, but another effect states that it cannot happen, the "cannot" ability takes precedence.
+    rules:
+    - sub_rule: rule_cannot_ncigs
+      text: If a "cannot" effect prohibits all of the effects of another ability, that ability cannot be triggered.
+    - sub_rule: rule_partially_cannot
+      text: If a "cannot" effect prohibits only part of another ability, that ability can be triggered, but the prohibited steps of resolving that ability are not carried out.
+      examples:
+      - text: |-
+          During a run, {card:Lockdown}'s subroutine resolves, preventing the Runner from drawing cards for the remainder of the turn. The Runner has a {card:Diesel} and a {card:Process Automation} in their grip. For the remainder of this turn, they cannot play {card:Diesel} as its entire ability is prohibited, but they can play {card:Process Automation}. Even though cards cannot be drawn through {card:Process Automation}, the Runner can play it to gain 2[c].
+  - rule: rule_if_able
+    text: If an instruction includes the words "if able," it can only be carried out fully or not at all. If any part of the instruction is not possible to carry out, the entire instruction is ignored.
+  - rule: rule_do_as_much_as_you_can
+    text: If an instruction does not include the words "if able," as much of that instruction as possible is carried out. Any parts of the instruction that are not possible to carry out are ignored.
+  - rule: rule_ncigs
+    text: A player can only take an action or use an ability if its effect has the potential to change the game state. This potential is assessed strictly by what the action or ability can be expected to accomplish, without regard to the consequences of paying any costs to initiate that action or ability and without regard to any other abilities that may meet their conditions in the process of initiating or resolving that action or ability.
+    examples:
+    - text: |-
+        The Corp has one unrezzed piece of ice installed and {card:Liquidation} in HQ. As {card:Liquidation} requires the Corp to have at least one rezzed card to trash, the Corp cannot play {card:Liquidation} as it cannot change the game state.
+    - text: |-
+        The Corp has one rezzed piece of ice installed and {card:Liquidation} in HQ. Because the Corp has at least one rezzed card that could be trashed (which would change the game state), they can play {card:Liquidation}, spending a click and paying its play cost. The Corp then chooses any number of their rezzed cards to trash, which could be zero cards.
+    - text: |-
+        The Runner is playing {card:Armand "Geist" Walker} and has {card:Forger} installed. The Runner can only trash {card:Forger} and trigger {card:Geist}'s ability when they are about to take a tag (which {card:Forger} could avoid) or while they have a tag (which {card:Forger} could remove). Using {card:Forger} at any other time has no potential to change the game state.
+
+- section: sec_symbols
+  text: Symbols
+  rules:
+  - rule: rule_symbols
+    text: Several non-English symbols appear on cards and in this rules document. This section serves as a basic guide to those symbols.
+  - rule: rule_symbol_recurring
+    text: |-
+      The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a numeral, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
+
+- section: sec_deck_construction
+  text: Deck Construction
+  rules:
+  - rule: rule_identity
+    text: |-
+      Each player's deck is associated with a single identity card that determines the faction, minimum deck size, and influence limit of that deck. The identity card may also stipulate other variances from the standard deckbuilding rules.
+    rules:
+    - sub_rule: rule_gateway_identities
+      text: |-
+        The identities {card:The Catalyst} and {card:The Syndicate} from the System Gateway Starter Pack are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
+  - rule: rule_legal_deck
+    text: Each deck must meet all requirements in this section to be legal for play.
+
+- section: sec_extra_cards
+  text: Extra Cards
+  rules:
+  - rule: rule_outside_deck
+    text: Some abilities allow for the use of additional cards from outside the deck.
+
+- section: sec_counters_tokens
+  text: Counters and Tokens
+  rules:
+  - rule: rule_counters_cards
+    text: |-
+      {term:Counters} and {term:tokens} are game pieces (or equivalent) that track various resources, effects, and statuses of players and their cards.
+    rules:
+    - sub_rule: rule_counter_token
+      text: The terms "counter" and "token" are interchangeable.
+
+- section: sec_credits
+  text: Credits
+  snippet: |
+    Each of the Runner's credits represents enough money to upgrade some basic parts for their console, have a meal at a decent restaurant, or buy a ticket and some concessions for a night at the sensies.
+    Each of the Corp's credits represents enough money to manufacture a run of computer parts, buy out a decent restaurant, or film a low-budget sensie.
+  rules:
+  - rule: rule_credit
+    text: |-
+      A {term:credit} ({img:credit}) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
+  - rule: rule_sec_recurring
+    toc:
+    text: Recurring Credits
+    rules:
+    - sub_rule: rule_recurring_credits
+      text: |-
+        {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
+
+- section: sec_clicks
+  text: Clicks
+  snippet: |
+    Working a job, making connections, and especially jacking in—everything you do takes time, and it always goes by faster than you think. A click represents an abstract amount of time spent on a particular activity, either several hours all at once or scattered across the day.
+  rules:
+  - rule: rule_allotted_clicks
+    text: |-
+      As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:hdr_turns} for details about the procedures of player turns.
+
+- section: sec_host
+  text: Host, Hosted and Hosting
+  rules:
+  - rule: rule_host_relationship
+    text: Any card in an eligible location can act as a host, but a host relationship can only be created or permitted by a card ability.
+    rules:
+    - sub_rule: rule_implicit_host
+      text: |-
+        If a card has an ability describing the types and/or numbers of cards it can host, but it does not have an ability that directly hosts cards onto itself, then the card is permitted as an eligible installation destination for the types of cards listed, up to the number specified. A host card is chosen as an installation destination during {ref:rule_steps_installing_destination} of the installation process.
+      examples:
+        - text: |-
+            {card:Off-Campus Apartment} has the ability, "{card:Off-Campus Apartment} can host any number of {subtype:connections}." This means that whenever the Runner installs a {subtype:connection} card, they can choose to install that card into the play area hosted on {card:Off-Campus Apartment} or as normal directly into the play area.
+
+- section: sec_targets
+  text: Targets
+  rules:
+  - rule: rule_targets_gone
+    text: |-
+      At the time an instruction resolves, if any of its targets either have become invalid or were not announced, as much of that ability resolves as possible without acting on the unannounced or invalid targets, following {ref:rule_if_able,rule_do_as_much_as_you_can} of the Golden Rules. A target can be invalid because the chosen object or subroutine no longer exists or because the target no longer meets other requirements specified by the targeting ability.
+
+- section: sec_costs
+  text: Costs
+  rules:
+  - rule: rule_nested
+    text: |-
+      A {term:nested cost} is a cost appearing within an ability's instructions that must be paid while the ability is resolving in order for some or all of the rest of the effects of that ability to resolve.
+    rules:
+    - sub_rule: rule_nested_cost_may
+      text: |-
+        Nested costs are usually written in the format "[player] may [cost] to [instructions]" or "[player] may [cost]. If [you/they] do, [instructions]." If the indicated player pays the indicated cost, the indicated instructions are resolved. Otherwise, that part of the ability is not resolved.
+    - sub_rule: rule_nested_cost_unless
+      text: |-
+        Nested costs can also be written in the format "[instructions] unless [player] [cost]" or "[player] may [cost]. If [you/they] do not, [instructions]." If the indicated player pays the indicated cost, the indicated instructions are not resolved. Otherwise, that instruction is resolved.
+      examples:
+      - text: |-
+          A subroutine reading "End the run unless the Runner pays 1[c]." contains a nested cost. If the Runner chooses to pay 1[c], the subroutine will not end the run.
+    - sub_rule: rule_nested_cost_no_may
+      text: An ability that reads "If [you/they] do" or "If [you/they] do not" without a preceding "may" does not indicate a nested cost.
+    - sub_rule: rule_nested_cost_otherwise
+      text: |-
+        Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.

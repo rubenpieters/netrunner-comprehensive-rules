@@ -1,0 +1,19 @@
+header: hdr_turns
+text: Turns
+sections:
+- section: sec_turn_general
+  text: General
+  rules:
+  - rule: rule_turn
+    text: |-
+      A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
+- section: sec_steps_corps_turn
+  text: Steps of the Corp's Turn
+  rules:
+  - rule: rule_sec_corp_draw_phase
+    steps:
+    text: |-
+      During the draw phase, the following steps occur in order:
+    rules:
+    - sub_rule: step_corp_allotted_clicks
+      text: The Corp gains their allotted clicks (default [click][click][click]).

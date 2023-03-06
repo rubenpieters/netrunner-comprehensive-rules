@@ -132,13 +132,30 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 
 # General utility.
 
+def read_section_from_file(section_file: str) -> Section:
+    with open(f'data/input/{section_file}.yaml', "r") as stream:
+      try:
+        yaml_input = yaml.safe_load(stream)
+        return parse_header(yaml_input)
+      except yaml.YAMLError as exc:
+        print(exc)
+
 def yaml_to_document():
-  with open("data/input/rules.yaml", "r") as stream:
-    try:
-      yaml_input = yaml.safe_load(stream)
-      return parse_document(yaml_input)
-    except yaml.YAMLError as exc:
-      print(exc)
+  section_files = \
+    [ "01_game_concepts"
+    , "02_parts_of_a_card"
+    , "03_card_types"
+    , "04_game_zones"
+    , "05_turns"
+    , "06_runs"
+    , "07_access_breach"
+    , "08_card_manipulation"
+    , "09_abilities"
+    , "10_additional_rules"
+    , "11_appendix_timing_structures"
+    ]
+  sections = list(map(read_section_from_file, section_files))
+  return Document(sections)
 
 if __name__ == "__main__":
   doc = yaml_to_document()

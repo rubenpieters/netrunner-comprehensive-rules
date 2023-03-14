@@ -46,9 +46,23 @@ sections:
   rules:
   - rule: rule_symbols
     text: Several non-English symbols appear on cards and in this rules document. This section serves as a basic guide to those symbols.
+  - rule: rule_plaintext_symbolds
+    text: When this document is presented in a format without images, plaintext replacements are used. These replacements are listed along with the symbols themselves for reference.
+  - rule: rule_symbol_credits
+    text: |-
+      The symbol [c] (plaintext: [c]) stands for "credit". It always appears with a numeral, such as 1[c], which means "one credit," or 3[c], which means "three credits." See {ref:sec_credits} for rules about credits.
+  - rule: rule_symbol_clicks
+    text: |-
+      The symbol [click] (plaintext: [click]) stands for "click". Multiple clicks can be represented either by multiple symbols, such as [click][click], or by a numeral and symbol, such as 2[click], both meaning "two clicks." See {ref:sec_clicks} for rules about clicks.
   - rule: rule_symbol_recurring
     text: |-
       The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a numeral, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
+  - rule: rule_symbol_link
+    text: |-
+      The symbol [link] (plaintext: [link]) stands for “link”. It is always used with a quantity, such as 1[link], which means "1 link." See {ref:sec_link} for rules about link.
+  - rule: rule_symbol_mu
+    text: |-
+      The symbol [MU] (plaintext: [MU]) stands for "memory unit". It always appears with a quantity, such as 2[MU], which means "2 memory units." See {ref:sec_memory} for rules about memory.
 
 - section: sec_deck_construction
   text: Deck Construction
@@ -146,3 +160,6 @@ sections:
     - sub_rule: rule_nested_cost_otherwise
       text: |-
         Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
+
+- section: sec_memory
+  text: Memory

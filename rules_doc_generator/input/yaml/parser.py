@@ -85,6 +85,14 @@ def parse_document(yaml_document: Any) -> Document:
   headers = list(map(parse_header, yaml_document))
   return Document(headers)
 
+def parse_changelog_entry(yaml_changelog_entry: Any) -> FormatText:
+  text = parse_format_text_field(yaml_changelog_entry, 'text')
+  return text
+
+def parse_changelog(yaml_changelog: Any) -> list[FormatText]:
+  changelog = parse_subelements(yaml_changelog, 'changelog', parse_changelog_entry)
+  return changelog
+
 # Utility methods for parsing fields from the YAML dicts.
 
 A = TypeVar('A')
@@ -132,6 +140,14 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 
 # General utility.
 
+def read_changelog_from_file() -> Section:
+    with open(f'data/input/00_changelog.yaml', "r") as stream:
+      try:
+        yaml_input = yaml.safe_load(stream)
+        return parse_changelog(yaml_input)
+      except yaml.YAMLError as exc:
+        print(exc)
+
 def read_section_from_file(section_file: str) -> Section:
     with open(f'data/input/{section_file}.yaml', "r") as stream:
       try:
@@ -141,6 +157,7 @@ def read_section_from_file(section_file: str) -> Section:
         print(exc)
 
 def yaml_to_document():
+  changelog = read_changelog_from_file()
   section_files = \
     [ "01_game_concepts"
     , "02_parts_of_a_card"
@@ -155,7 +172,7 @@ def yaml_to_document():
     , "11_appendix_timing_structures"
     ]
   sections = list(map(read_section_from_file, section_files))
-  return Document(sections)
+  return Document(changelog, sections)
 
 if __name__ == "__main__":
   doc = yaml_to_document()

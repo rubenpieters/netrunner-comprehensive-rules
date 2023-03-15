@@ -59,7 +59,7 @@ sections:
       The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a numeral, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
   - rule: rule_symbol_link
     text: |-
-      The symbol [link] (plaintext: [link]) stands for “link”. It is always used with a quantity, such as 1[link], which means "1 link." See {ref:sec_link} for rules about link.
+      The symbol [link] (plaintext: [link]) stands for "link". It is always used with a quantity, such as 1[link], which means "1 link." See {ref:sec_link} for rules about link.
   - rule: rule_symbol_mu
     text: |-
       The symbol [MU] (plaintext: [MU]) stands for "memory unit". It always appears with a quantity, such as 2[MU], which means "2 memory units." See {ref:sec_memory} for rules about memory.

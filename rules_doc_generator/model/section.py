@@ -210,6 +210,7 @@ class Header:
 
 @dataclass
 class Document:
+  changelog: list[FormatText]
   headers: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
@@ -223,11 +224,10 @@ class Document:
     latex_content = latex_template.read()
     latex_template.close()
     
-    latex_content = latex_content.replace("__CHANGELOG_PLACEHOLDER__", "")
+    changelog_content = ''.join(map(lambda x: x.to_latex(id_map), self.changelog))
+    latex_content = latex_content.replace("__CHANGELOG_PLACEHOLDER__", changelog_content)
 
-    document_content = ''
-    for element in self.headers:
-      document_content += element.to_latex(id_map)
+    document_content = ''.join(map(lambda x: x.to_latex(id_map), self.headers))
     latex_content = latex_content.replace("__DOCUMENT_PLACEHOLDER__", document_content)
 
     return latex_content

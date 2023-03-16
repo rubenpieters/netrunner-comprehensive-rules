@@ -1,6 +1,11 @@
 header: hdr_additional_rules
 text: Additional Rules
 sections:
+- section: sec_additional_general
+  text: General
+  rules:
+  - rule: rule_self_reference
+    text: Some cards are written with self-referential language. If a card references its own name without using the word "copy", treat that name as if it said "this object".
 - section: sec_link
   text: Link
   snippet: |-

@@ -224,11 +224,11 @@ class Document:
     latex_content = latex_template.read()
     latex_template.close()
     
-    changelog_content = ''.join(map(lambda x: x.to_latex(id_map), self.changelog))
-    latex_content = latex_content.replace("__CHANGELOG_PLACEHOLDER__", changelog_content)
+    changelog_content = "\n\\1 ".join(map(lambda x: x.to_latex(id_map), self.changelog))
+    latex_content = latex_content.replace("%__CHANGELOG_PLACEHOLDER__%", f'\\1 {changelog_content}')
 
     document_content = ''.join(map(lambda x: x.to_latex(id_map), self.headers))
-    latex_content = latex_content.replace("__DOCUMENT_PLACEHOLDER__", document_content)
+    latex_content = latex_content.replace("%__DOCUMENT_PLACEHOLDER__%", document_content)
 
     return latex_content
 

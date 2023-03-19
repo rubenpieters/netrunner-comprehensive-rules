@@ -109,7 +109,28 @@ class Card:
   def to_latex(self, id_map: RefDict) -> str:
     return f'\\textit{{{self.text}}}'
 
-TextElement = Union[Text, Ref, Term, Image, SubType]
+@dataclass
+class Product:
+  text: str
+
+  def to_html(self, id_map: RefDict) -> str:
+    return f'<span class="Product">{self.text}</span>'
+
+  def to_latex(self, id_map: RefDict) -> str:
+    return f'\\textit{{{self.text}}}'
+
+@dataclass
+class Link:
+  text: str
+  link: str
+
+  def to_html(self, id_map: RefDict) -> str:
+    return f'<a href={self.link}>{self.text}</a>'
+
+  def to_latex(self, id_map: RefDict) -> str:
+    return f'\\hreful{{{self.link}}}{{{self.text}}}'
+
+TextElement = Union[Text, Ref, Term, Image, SubType, Product, Link]
 
 @dataclass
 class FormatText:

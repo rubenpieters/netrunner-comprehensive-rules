@@ -73,7 +73,7 @@ sections:
     rules:
     - sub_rule: rule_gateway_identities
       text: |-
-        The identities {card:The Catalyst} and {card:The Syndicate} from the System Gateway Starter Pack are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
+        The identities {card:The Catalyst} and {card:The Syndicate} from the {product:System Gateway Starter Pack} are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
   - rule: rule_legal_deck
     text: Each deck must meet all requirements in this section to be legal for play.
 

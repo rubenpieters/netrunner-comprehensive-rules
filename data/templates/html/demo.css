@@ -51,6 +51,14 @@
   padding-right: 10px;
 }
 
+.Card {
+  font-style: italic;
+}
+
+.Product {
+  font-style: italic;
+}
+
 .Term {
   font-variant: small-caps;
 }

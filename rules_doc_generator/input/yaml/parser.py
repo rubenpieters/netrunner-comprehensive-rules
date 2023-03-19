@@ -2,7 +2,7 @@ import re
 from typing import Any, Callable, TypeVar
 import yaml
 
-from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card)
+from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link)
 from rules_doc_generator.model.section import (Rule, SubRule, Section, Header, Document, SectionElement, TimingStructureElement)
 
 # Parsing model elements.
@@ -28,6 +28,14 @@ def parseTextElement(str: str) -> TextElement:
     return SubType(str[8:])
   elif str.startswith('card:'):
     return Card(str[5:])
+  elif str.startswith('product:'):
+    return Product(str[8:])
+  elif str.startswith('link:'):
+    full_text = str[5:].lower()
+    text_and_link = full_text.split('|')
+    text = text_and_link[0]
+    link = text_and_link[1]
+    return Link(text, link)
   else:
     return Text(str)
 

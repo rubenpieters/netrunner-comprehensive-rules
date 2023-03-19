@@ -146,6 +146,22 @@ Indicates a card name.
 {card:Fermenter}
 ```
 
+### Product Names
+
+Indicates a product name.
+
+```
+{product:System Gateway}
+```
+
+### Links
+
+Indicates a link to a website.
+
+```
+{link:website|https://nullsignal.games}
+```
+
 ### Note on literal scalar style
 
 The use of the [literal scalar style](https://yaml.org/spec/1.2.2/#literal-style) of the YAML spec is useful to define literal text.

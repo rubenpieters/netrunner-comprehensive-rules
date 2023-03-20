@@ -1,4 +1,4 @@
-header: hdr_card_manipulation
+chapter: chpt_card_manipulation
 text: Card Manipulation
 sections:
 - section: sec_install_uninstall

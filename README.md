@@ -16,13 +16,13 @@ changelog:
 - text: entry2
 ```
 
-### Header
+### Chapter
 
-Defines a chapter header (numbered with 1.).
+Defines a chapter (numbered with 1.).
 
 ```
-header: header_id
-text: Header Title
+chapter: chapter_id
+text: Chapter Title
 sections:
 - section:
   ...
@@ -96,7 +96,7 @@ elements:
 
 ### References
 
-Reference any identifier of a header, section, rule, or subrule.
+Reference any identifier of a chapter, section, rule, or subrule.
 
 ```
 {ref:ref_id}

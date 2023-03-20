@@ -182,19 +182,19 @@ class Section:
         case Rule(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
 
 @dataclass
-class Header:
+class Chapter:
   id: str
   text: str
   sections: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
-    result = f'<h1 class="Header" id="{self.id}">{self.text}</h1>'
+    result = f'<h1 class="Chapter" id="{self.id}">{self.text}</h1>'
     for section in self.sections:
       result += section.to_html(id_map)
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = f'% Header {self.id}.\n'
+    result = f'% Chapter {self.id}.\n'
     result += f'\section{{{self.text}}}\n'
     result += f'\label{{{self.id}}}\n'
     for section in self.sections:
@@ -211,12 +211,12 @@ class Header:
 @dataclass
 class Document:
   changelog: list[FormatText]
-  headers: list[Section]
+  chapters: list[Section]
 
   def to_html(self, id_map: RefDict) -> str:
     result = ''
-    for header in self.headers:
-      result += header.to_html(id_map)
+    for chapter in self.chapters:
+      result += chapter.to_html(id_map)
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
@@ -227,13 +227,13 @@ class Document:
     changelog_content = "\n\\1 ".join(map(lambda x: x.to_latex(id_map), self.changelog))
     latex_content = latex_content.replace("%__CHANGELOG_PLACEHOLDER__%", f'\\1 {changelog_content}')
 
-    document_content = ''.join(map(lambda x: x.to_latex(id_map), self.headers))
+    document_content = ''.join(map(lambda x: x.to_latex(id_map), self.chapters))
     latex_content = latex_content.replace("%__DOCUMENT_PLACEHOLDER__%", document_content)
 
     return latex_content
 
   def id_map(self):
     id_map = {}
-    for j, elem in enumerate(self.headers):
+    for j, elem in enumerate(self.chapters):
       elem.id_map(j + 1, id_map)
     return id_map

@@ -13,7 +13,7 @@
   counter-reset: hdr_counter;
 }
 
-.Header {
+.Chapter {
   counter-reset: sec_counter;
 }
 
@@ -27,7 +27,7 @@
   list-style: none;
 }
 
-.Header:before {
+.Chapter:before {
   content: counter(hdr_counter) ".";
   counter-increment: hdr_counter;
   padding-right: 10px;

@@ -1,4 +1,4 @@
-header: hdr_game_concepts
+chapter: chpt_game_concepts
 text: Game Concepts
 sections:
 - section: sec_concepts_general
@@ -117,7 +117,7 @@ sections:
   rules:
   - rule: rule_allotted_clicks
     text: |-
-      As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:hdr_turns} for details about the procedures of player turns.
+      As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:chpt_turns} for details about the procedures of player turns.
 
 - section: sec_host
   text: Host, Hosted and Hosting

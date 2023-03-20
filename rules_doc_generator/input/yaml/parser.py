@@ -3,7 +3,7 @@ from typing import Any, Callable, TypeVar
 import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link)
-from rules_doc_generator.model.section import (Rule, SubRule, Section, Header, Document, SectionElement, TimingStructureElement)
+from rules_doc_generator.model.section import (Rule, SubRule, Section, Chapter, Document, SectionElement, TimingStructureElement)
 
 # Parsing model elements.
 
@@ -83,15 +83,15 @@ def parse_section(yaml_section: Any) -> Section:
   section_elements = parse_subelements(yaml_section, 'rules', parse_section_element)
   return Section(id, text, toc_entry, snippet, section_elements)
 
-def parse_header(yaml_header: Any) -> Header:
-  id = parse_id(yaml_header, 'header')
-  text = parse_str_field(yaml_header, 'text')
-  sections = parse_subelements(yaml_header, 'sections', parse_section)
-  return Header(id, text, sections)
+def parse_chapter(yaml_chapter: Any) -> Chapter:
+  id = parse_id(yaml_chapter, 'chapter')
+  text = parse_str_field(yaml_chapter, 'text')
+  sections = parse_subelements(yaml_chapter, 'sections', parse_section)
+  return Chapter(id, text, sections)
 
 def parse_document(yaml_document: Any) -> Document:
-  headers = list(map(parse_header, yaml_document))
-  return Document(headers)
+  chapters = list(map(parse_chapter, yaml_document))
+  return Document(chapters)
 
 def parse_changelog_entry(yaml_changelog_entry: Any) -> FormatText:
   text = parse_format_text_field(yaml_changelog_entry, 'text')
@@ -160,7 +160,7 @@ def read_section_from_file(section_file: str) -> Section:
     with open(f'data/input/{section_file}.yaml', "r") as stream:
       try:
         yaml_input = yaml.safe_load(stream)
-        return parse_header(yaml_input)
+        return parse_chapter(yaml_input)
       except yaml.YAMLError as exc:
         print(exc)
 

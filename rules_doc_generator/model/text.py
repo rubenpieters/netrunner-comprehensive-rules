@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Union
+from typing import Callable, Union
 
 import re
 
@@ -48,30 +48,20 @@ class Ref:
   combiner: str
 
   def to_html(self, id_map: RefDict) -> str:
-    if len(self.referenced_ids) == 1:
-      ref_info = lookup_ref(id_map, self.referenced_ids[0])
-      ref_text = ref_info.type
-      if self.capitalize:
-        ref_text = ref_text.capitalize()
-      return f'<a href=#{ref_info.id}>{ref_text} {ref_info.reference}</a>'
-    else:
-      html_refs = list(map(lambda x: f'<a href=#{x}>{lookup_ref(id_map, x).reference}</a>', self.referenced_ids))
-      joined = f' {self.combiner} '.join([', '.join(html_refs[:-1]), html_refs[-1]])
-      ref_info = id_map[self.referenced_ids[0]]
-      ref_text = ref_info.type
-      if self.capitalize:
-        ref_text = ref_text.capitalize()
-      return f'{ref_text}s {joined}'
+    return self.to_text(id_map, lambda ref_id, ref_text: fr'<a href=#{ref_id}>{ref_text}</a>')
 
   def to_latex(self, id_map: RefDict) -> str:
+    return self.to_text(id_map, lambda ref_id, ref_text: fr'\reful{{{ref_id}}}{{{ref_text}}}')
+
+  def to_text(self, id_map: RefDict, mk_link: Callable[[str, str], str]) -> str:
     if len(self.referenced_ids) == 1:
       ref_info = lookup_ref(id_map, self.referenced_ids[0])
       ref_text = ref_info.type
       if self.capitalize:
         ref_text = ref_text.capitalize()
-      return f'\\reful{{{ref_info.id}}}{{{ref_text} {ref_info.reference}}}'
+      return mk_link(ref_info.id, f'{ref_text} {ref_info.reference}')
     if len(self.referenced_ids) > 1:
-      latex_refs = list(map(lambda x: f'\\reful{{{x}}}{{{lookup_ref(id_map, x).reference}}}', self.referenced_ids))
+      latex_refs = list(map(lambda ref_id: mk_link(ref_id, lookup_ref(id_map, ref_id).reference), self.referenced_ids))
       joined = f' {self.combiner} '.join([', '.join(latex_refs[:-1]), latex_refs[-1]])
       ref_info = id_map[self.referenced_ids[0]]
       ref_text = ref_info.type
@@ -130,7 +120,7 @@ class Link:
   def to_latex(self, id_map: RefDict) -> str:
     return f'\\hreful{{{self.link}}}{{{self.text}}}'
 
-TextElement = Union[Text, Ref, Term, Image, SubType, Product, Link]
+TextElement = Union[Text, Ref, Term, Image, SubType, Product, Card, Link]
 
 @dataclass
 class FormatText:

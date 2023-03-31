@@ -61,7 +61,7 @@ class TimingStructureElement:
 
 @dataclass
 class SubRule:
-  id: str
+  id: Union[str, None]
   format_text: FormatText
   examples: list[Example]
 
@@ -79,7 +79,9 @@ class SubRule:
       result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     return result
 
-  def id_map(self, ctx: str, i: int, dict: dict[int, str], ref_type: str) -> int:
+  def id_map(self, ctx: str, i: int, dict: dict[int, str], ref_type: str):
+    if not self.id:
+      return
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     letters = string.ascii_lowercase[:14]
@@ -87,7 +89,7 @@ class SubRule:
 
 @dataclass
 class Rule:
-  id: str
+  id: Union[str, None]
   format_text: FormatText
   toc: bool
   steps: bool
@@ -121,7 +123,9 @@ class Rule:
         result += rule.to_latex(id_map)
     return result
 
-  def id_map(self, ctx: str, i: int, dict: dict[int, str]) -> int:
+  def id_map(self, ctx: str, i: int, dict: dict[int, str]):
+    if not self.id:
+      return
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
     ref_type = 'step' if self.steps else 'rule'

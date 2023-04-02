@@ -3,7 +3,7 @@ from typing import Any, Callable, TypeVar
 import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link)
-from rules_doc_generator.model.section import (Rule, SubRule, Section, Chapter, Document, SectionElement, TimingStructureElement)
+from rules_doc_generator.model.section import (Rule, SubRule, SubSection, Section, Chapter, Document, SectionElement, TimingStructureElement)
 
 # Parsing model elements.
 
@@ -53,8 +53,8 @@ def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement
   elements = parse_subelements(yaml_timing_structure, 'elements', parse_timing_structure)
   return TimingStructureElement(text, elements)
 
-def parse_sub_rule(yaml_sub_rule: Any = False) -> SubRule:
-  id = parse_id(yaml_sub_rule, 'sub_rule')
+def parse_subrule(yaml_sub_rule: Any = False) -> SubRule:
+  id = parse_id(yaml_sub_rule, 'rule')
   text = parse_format_text_field(yaml_sub_rule, 'text')
   examples = parse_subelements(yaml_sub_rule, 'examples', parse_example)
   return SubRule(id, text, examples)
@@ -64,15 +64,22 @@ def parse_rule(yaml_rule: Any) -> Rule:
   toc = parse_boolean(yaml_rule, 'toc')
   steps = parse_boolean(yaml_rule, 'steps')
   text = parse_format_text_field(yaml_rule, 'text')
-  rules = parse_subelements(yaml_rule, 'rules', parse_sub_rule)
   examples = parse_subelements(yaml_rule, 'examples', parse_example)
-  return Rule(id, text, toc, steps, rules, examples)
+  return Rule(id, text, toc, steps, examples)
+
+def parse_subsection(yaml_rule: Any) -> Rule:
+  id = parse_id(yaml_rule, 'subsection')
+  toc = parse_boolean(yaml_rule, 'toc')
+  steps = parse_boolean(yaml_rule, 'steps')
+  text = parse_format_text_field(yaml_rule, 'text')
+  rules = parse_subelements(yaml_rule, 'rules', parse_subrule)
+  return SubSection(id, text, toc, steps, rules)
 
 def parse_section_element(yaml_section_element: Any) -> SectionElement:
   return parse_union(
     yaml_section_element,
-    ['rule', 'timing_structure'],
-    [parse_rule, parse_timing_structure]
+    ['rule', 'timing_structure', 'subsection'],
+    [parse_rule, parse_timing_structure, parse_subsection]
   )
 
 def parse_section(yaml_section: Any) -> Section:

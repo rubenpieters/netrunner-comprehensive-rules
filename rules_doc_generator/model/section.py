@@ -93,18 +93,12 @@ class Rule:
   format_text: FormatText
   toc: bool
   steps: bool
-  rules: list[SubRule]
   examples: list[Example]
 
   def to_html(self, id_map: RefDict) -> str:
     result = self.format_text.to_html(id_map)
     for example in self.examples:
       result += example.to_html(id_map)
-    if self.rules:
-      result += '<ol class="SubRules">'
-      for rule in self.rules:
-        result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(id_map)}</li>'
-      result += '</ol>'
     return result
 
   def to_latex(self, id_map: RefDict) -> str:
@@ -118,6 +112,42 @@ class Rule:
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+    return result
+
+  def id_map(self, ctx: str, i: int, dict: dict[int, str]):
+    if not self.id:
+      return
+    if self.id in dict:
+      raise Exception(f'id defined twice: {self.id}')
+    ref_type = 'step' if self.steps else 'rule'
+    toc_text = self.format_text.to_plaintext() if self.toc else ''
+    dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, toc_text, self.id, self.toc)
+
+@dataclass
+class SubSection:
+  id: Union[str, None]
+  format_text: FormatText
+  toc: bool
+  steps: bool
+  rules: list[SubRule]
+
+  def to_html(self, id_map: RefDict) -> str:
+    result = self.format_text.to_html(id_map)
+    if self.rules:
+      result += '<ol class="SubRules">'
+      for rule in self.rules:
+        result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(id_map)}</li>'
+      result += '</ol>'
+    return result
+
+  def to_latex(self, id_map: RefDict) -> str:
+    result = f'% SubSection {self.id}\n'
+    result += '\\1 '
+    if self.toc:
+      result += '\\phantomsection '
+      result += '\\addtocounter{subsubsection}{1} '
+      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
+    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
     if self.rules:
       for rule in self.rules:
         result += rule.to_latex(id_map)
@@ -134,7 +164,7 @@ class Rule:
     for j, rule in enumerate(self.rules):
       rule.id_map(f'{ctx}.{i}', j, dict, ref_type)
 
-SectionElement = Union[Rule, TimingStructureElement]
+SectionElement = Union[Rule, SubSection, TimingStructureElement]
 
 @dataclass
 class Section:
@@ -152,6 +182,7 @@ class Section:
     for elem in self.section_elements:
       match elem:
         case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
         case TimingStructureElement(): result += elem.to_html(id_map)
     result += '</ol>'
     return result
@@ -184,6 +215,7 @@ class Section:
     for j, elem in enumerate(self.section_elements):
       match elem:
         case Rule(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
+        case SubSection(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
 
 @dataclass
 class Chapter:

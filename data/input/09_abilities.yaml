@@ -4,11 +4,11 @@ sections:
 - section: sec_abilities_general
   text: General
   rules:
-  - rule: rule_resolve_ability
+  - subsection: rule_resolve_ability
     text: |-
       To {term:resolve an ability} means to resolve each of that ability's instructions in the order they appear. If an ability contains more than one instruction, a checkpoint occurs between each consecutive instruction. To {term:resolve an instruction} means to carry out that instruction.
     rules:
-    - sub_rule: rule_chain_reaction
+    - rule: rule_chain_reaction
       text: |-
         While resolving an ability, other abilities can meet their conditions. When this happens, a "chain reaction" is created. The current instruction finishes resolving, then more recent abilities fully resolve before the next instruction of the original ability. If any other abilities meet their conditions while resolving the "chained" abilities, then another "chain" is created before continuing to resolve the previous chained abilities. Resolve each set of chained abilities one at a time, from the most recently met condition to the oldest, before continuing with the original ability that started the chain reaction.
 - section: sec_identifying_instructions

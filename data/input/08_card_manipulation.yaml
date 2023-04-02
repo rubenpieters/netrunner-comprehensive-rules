@@ -4,12 +4,12 @@ sections:
 - section: sec_install_uninstall
   text: Installing and Uninstalling Cards
   rules:
-  - rule: rule_sec_steps_installing
+  - subsection: rule_sec_steps_installing
     steps:
     toc:
     text: Steps of Installing a Card
     rules:
-    - sub_rule: rule_steps_installing_place
+    - rule: rule_steps_installing_place
       text: Place the card into the play area with the same faceup or facedown status it will have when the installation is complete. It is not yet installed or active.
-    - sub_rule: rule_steps_installing_destination
+    - rule: rule_steps_installing_destination
       text: Choose and declare the install destination appropriate to the card that will be installed, including any host relationships, if applicable.

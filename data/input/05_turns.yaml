@@ -10,10 +10,10 @@ sections:
 - section: sec_steps_corps_turn
   text: Steps of the Corp's Turn
   rules:
-  - rule: rule_sec_corp_draw_phase
+  - subsection: rule_sec_corp_draw_phase
     steps:
     text: |-
       During the draw phase, the following steps occur in order:
     rules:
-    - sub_rule: step_corp_allotted_clicks
+    - rule: step_corp_allotted_clicks
       text: The Corp gains their allotted clicks (default [click][click][click]).

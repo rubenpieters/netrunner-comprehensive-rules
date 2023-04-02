@@ -20,17 +20,17 @@ sections:
 - section: sec_steps_of_a_run
   text: Steps of a Run
   rules:
-  - rule: rule_sec_run_initiation_phase
+  - subsection: rule_sec_run_initiation_phase
     steps:
     text: Initiation Phase
     rules:
-    - sub_rule: step_initiation_announce
+    - rule: step_initiation_announce
       text: The Runner announces the attacked server.
-    - sub_rule: step_initiation_bad_publicity
+    - rule: step_initiation_bad_publicity
       text: The Runner gains 1[c] to spend during the run for each bad publicity the Corp has.
-    - sub_rule: step_initiation_formal_begin
+    - rule: step_initiation_formal_begin
       text: The run formally begins. Conditions related to the run beginning or initiating are met.
-    - sub_rule: step_initiation_complete
+    - rule: step_initiation_complete
       text: |-
         The Initiation Phase is complete. If the attacked server has at least one piece of ice protecting it, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the outermost piece of ice protecting the attacked server. If the attacked server is not protected by ice, proceed to {ref:rule_sec_run_movement_phase}, Movement Phase.
   - rule: rule_sec_run_approach_ice_phase

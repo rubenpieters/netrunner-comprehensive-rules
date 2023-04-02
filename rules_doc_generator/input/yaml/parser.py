@@ -62,10 +62,9 @@ def parse_subrule(yaml_sub_rule: Any = False) -> SubRule:
 def parse_rule(yaml_rule: Any) -> Rule:
   id = parse_id(yaml_rule, 'rule')
   toc = parse_boolean(yaml_rule, 'toc')
-  steps = parse_boolean(yaml_rule, 'steps')
   text = parse_format_text_field(yaml_rule, 'text')
   examples = parse_subelements(yaml_rule, 'examples', parse_example)
-  return Rule(id, text, toc, steps, examples)
+  return Rule(id, text, toc, examples)
 
 def parse_subsection(yaml_rule: Any) -> Rule:
   id = parse_id(yaml_rule, 'subsection')

@@ -92,7 +92,6 @@ class Rule:
   id: Union[str, None]
   format_text: FormatText
   toc: bool
-  steps: bool
   examples: list[Example]
 
   def to_html(self, id_map: RefDict) -> str:
@@ -119,9 +118,8 @@ class Rule:
       return
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    ref_type = 'step' if self.steps else 'rule'
     toc_text = self.format_text.to_plaintext() if self.toc else ''
-    dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, toc_text, self.id, self.toc)
+    dict[self.id] = RefInfo(f'{ctx}.{i}', 'rule', toc_text, self.id, self.toc)
 
 @dataclass
 class SubSection:
@@ -158,11 +156,12 @@ class SubSection:
       return
     if self.id in dict:
       raise Exception(f'id defined twice: {self.id}')
-    ref_type = 'step' if self.steps else 'rule'
+    ref_type = 'step' if self.steps else 'section'
+    sub_ref_type = 'step' if self.steps else 'rule'
     toc_text = self.format_text.to_plaintext() if self.toc else ''
     dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, toc_text, self.id, self.toc)
     for j, rule in enumerate(self.rules):
-      rule.id_map(f'{ctx}.{i}', j, dict, ref_type)
+      rule.id_map(f'{ctx}.{i}', j, dict, sub_ref_type)
 
 SectionElement = Union[Rule, SubSection, TimingStructureElement]
 

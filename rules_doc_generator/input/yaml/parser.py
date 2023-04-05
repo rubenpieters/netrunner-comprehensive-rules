@@ -66,7 +66,7 @@ def parse_rule(yaml_rule: Any) -> Rule:
   examples = parse_subelements(yaml_rule, 'examples', parse_example)
   return Rule(id, text, toc, examples)
 
-def parse_subsection(yaml_rule: Any) -> Rule:
+def parse_subsection(yaml_rule: Any) -> SubSection:
   id = parse_id(yaml_rule, 'subsection')
   toc = parse_boolean(yaml_rule, 'toc')
   steps = parse_boolean(yaml_rule, 'steps')
@@ -75,10 +75,11 @@ def parse_subsection(yaml_rule: Any) -> Rule:
   return SubSection(id, text, toc, steps, rules)
 
 def parse_section_element(yaml_section_element: Any) -> SectionElement:
+  funcs: list[Callable[[Any], SectionElement]] = [parse_rule, parse_timing_structure, parse_subsection]
   return parse_union(
     yaml_section_element,
     ['rule', 'timing_structure', 'subsection'],
-    [parse_rule, parse_timing_structure, parse_subsection]
+    funcs
   )
 
 def parse_section(yaml_section: Any) -> Section:
@@ -94,10 +95,6 @@ def parse_chapter(yaml_chapter: Any) -> Chapter:
   text = parse_str_field(yaml_chapter, 'text')
   sections = parse_subelements(yaml_chapter, 'sections', parse_section)
   return Chapter(id, text, sections)
-
-def parse_document(yaml_document: Any) -> Document:
-  chapters = list(map(parse_chapter, yaml_document))
-  return Document(chapters)
 
 def parse_changelog_entry(yaml_changelog_entry: Any) -> FormatText:
   text = parse_format_text_field(yaml_changelog_entry, 'text')
@@ -154,25 +151,19 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 
 # General utility.
 
-def read_changelog_from_file() -> Section:
-    with open(f'data/input/00_changelog.yaml', "r") as stream:
-      try:
-        yaml_input = yaml.safe_load(stream)
-        return parse_changelog(yaml_input)
-      except yaml.YAMLError as exc:
-        print(exc)
+def read_changelog_from_file() -> list[FormatText]:
+  with open(f'data/input/00_changelog.yaml', "r") as stream:
+    yaml_input = yaml.safe_load(stream)
+    return parse_changelog(yaml_input)
 
-def read_section_from_file(section_file: str) -> Section:
-    with open(f'data/input/{section_file}.yaml', "r") as stream:
-      try:
-        yaml_input = yaml.safe_load(stream)
-        return parse_chapter(yaml_input)
-      except yaml.YAMLError as exc:
-        print(exc)
+def read_chapter_from_file(section_file: str) -> Chapter:
+  with open(f'data/input/{section_file}.yaml', "r") as stream:
+    yaml_input = yaml.safe_load(stream)
+    return parse_chapter(yaml_input)
 
-def yaml_to_document():
+def yaml_to_document() -> Document:
   changelog = read_changelog_from_file()
-  section_files = \
+  chapter_files = \
     [ "01_game_concepts"
     , "02_parts_of_a_card"
     , "03_card_types"
@@ -185,8 +176,8 @@ def yaml_to_document():
     , "10_additional_rules"
     , "11_appendix_timing_structures"
     ]
-  sections = list(map(read_section_from_file, section_files))
-  return Document(changelog, sections)
+  chapters = list(map(read_chapter_from_file, chapter_files))
+  return Document(changelog, chapters)
 
 if __name__ == "__main__":
   doc = yaml_to_document()

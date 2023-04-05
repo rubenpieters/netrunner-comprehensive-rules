@@ -246,7 +246,7 @@ class Chapter:
 @dataclass
 class Document:
   changelog: list[FormatText]
-  chapters: list[Section]
+  chapters: list[Chapter]
 
   def to_html(self, id_map: RefDict) -> str:
     result = ''

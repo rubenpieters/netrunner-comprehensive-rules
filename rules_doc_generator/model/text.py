@@ -60,7 +60,7 @@ class Ref:
       if self.capitalize:
         ref_text = ref_text.capitalize()
       return mk_link(ref_info.id, f'{ref_text} {ref_info.reference}')
-    if len(self.referenced_ids) > 1:
+    elif len(self.referenced_ids) > 1:
       latex_refs = list(map(lambda ref_id: mk_link(ref_id, lookup_ref(id_map, ref_id).reference), self.referenced_ids))
       joined = f' {self.combiner} '.join([', '.join(latex_refs[:-1]), latex_refs[-1]])
       ref_info = id_map[self.referenced_ids[0]]
@@ -68,6 +68,8 @@ class Ref:
       if self.capitalize:
         ref_text = ref_text.capitalize()
       return f'{ref_text}s {joined}'
+    else:
+      raise Exception('No referenced ids')
 
 @dataclass
 class Term:

@@ -2,3 +2,4 @@
 /latex/
 __pycache__/
 .venv
+.vscode

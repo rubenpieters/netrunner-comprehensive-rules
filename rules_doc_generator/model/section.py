@@ -1,9 +1,8 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional, Union
-import string
 
-from rules_doc_generator.model.text import (RefDict, RefInfo, FormatText, Example)
+from rules_doc_generator.model.text import (RefDict, FormatText, Example)
 
 @dataclass
 class TimingStructureElement:
@@ -79,14 +78,6 @@ class SubRule:
       result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     return result
 
-  def id_map(self, ctx: str, i: int, dict: dict[int, str], ref_type: str):
-    if not self.id:
-      return
-    if self.id in dict:
-      raise Exception(f'id defined twice: {self.id}')
-    letters = string.ascii_lowercase[:14]
-    dict[self.id] = RefInfo(f'{ctx}{letters[i]}', ref_type, '', self.id, False)
-
 @dataclass
 class Rule:
   id: Union[str, None]
@@ -112,14 +103,6 @@ class Rule:
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     return result
-
-  def id_map(self, ctx: str, i: int, dict: dict[int, str]):
-    if not self.id:
-      return
-    if self.id in dict:
-      raise Exception(f'id defined twice: {self.id}')
-    toc_text = self.format_text.to_plaintext() if self.toc else ''
-    dict[self.id] = RefInfo(f'{ctx}.{i}', 'rule', toc_text, self.id, self.toc)
 
 @dataclass
 class SubSection:
@@ -150,18 +133,9 @@ class SubSection:
       for rule in self.rules:
         result += rule.to_latex(id_map)
     return result
-
-  def id_map(self, ctx: str, i: int, dict: dict[int, str]):
-    if not self.id:
-      return
-    if self.id in dict:
-      raise Exception(f'id defined twice: {self.id}')
-    ref_type = 'step' if self.steps else 'section'
-    sub_ref_type = 'step' if self.steps else 'rule'
-    toc_text = self.format_text.to_plaintext() if self.toc else ''
-    dict[self.id] = RefInfo(f'{ctx}.{i}', ref_type, toc_text, self.id, self.toc)
-    for j, rule in enumerate(self.rules):
-      rule.id_map(f'{ctx}.{i}', j, dict, sub_ref_type)
+  
+  def toc_text(self):
+    return self.format_text.to_plaintext() if self.toc else ''
 
 SectionElement = Union[Rule, SubSection, TimingStructureElement]
 
@@ -205,16 +179,9 @@ class Section:
       result += elem.to_latex(id_map)
     result += '\end{outline}\n'
     return result
-
-  def id_map(self, ctx: str, i: int, dict: dict[int, str]):
-    if self.id in dict:
-      raise Exception(f'id defined twice: {self.id}')
-    toc_text = self.toc_entry if self.toc_entry else self.text.to_plaintext()
-    dict[self.id] = RefInfo(f'{ctx}.{i}', 'section', toc_text, self.id, True)
-    for j, elem in enumerate(self.section_elements):
-      match elem:
-        case Rule(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
-        case SubSection(): elem.id_map(f'{ctx}.{i}', j + 1, dict)
+  
+  def toc_text(self):
+    return self.toc_entry if self.toc_entry else self.text.to_plaintext()
 
 @dataclass
 class Chapter:
@@ -235,13 +202,6 @@ class Chapter:
     for section in self.sections:
       result += section.to_latex(id_map)
     return result
-
-  def id_map(self, i: int, dict: RefDict):
-    if self.id in dict:
-      raise Exception(f'id defined twice: {self.id}', self.text)
-    dict[self.id] = RefInfo(f'{i}', 'section', self.text, self.id, True)
-    for j, elem in enumerate(self.sections):
-      elem.id_map(f'{i}', j + 1, dict)
 
 @dataclass
 class Document:
@@ -267,8 +227,4 @@ class Document:
 
     return latex_content
 
-  def id_map(self):
-    id_map = {}
-    for j, elem in enumerate(self.chapters):
-      elem.id_map(j + 1, id_map)
-    return id_map
+ModelElement = Union[Document, Chapter, Section, SectionElement, SubRule]

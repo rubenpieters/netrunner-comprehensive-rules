@@ -1,2 +1,85 @@
 chapter: chpt_parts_of_a_card
 text: Parts of a Card
+sections:
+- section: sec_card_name
+  text: Name
+  rules:
+  - rule: rule_card_name_definition
+    text: |-
+      The identifier of a card is its {term:name}, alternatively referred to as its title. It is written along the top of the card for identities, agendas, ice, operations, events, and resources, or immediately below the art box in the case of assets, upgrades, hardware, and programs.
+  - rule: rule_identity_subtitles
+    text: Identities have a subtitle written immediately below the main title line. Their full name is the combination of their main title and subtitle.
+  - rule: rule_self_reference
+    text: |-
+      When a card refers to its own name, it is a self-reference. See {ref:sec_old_self_reference_rules}.
+  - rule: rule_copies_of
+    text: When a card refers to "copies of" cards with a particular name, it refers to any card with that name.
+
+- section: sec_unique_symbol
+  text: Unique Symbol
+  rules:
+  - rule: rule_unique_symbol
+    text: |-
+      Some cards are {term:unique}, and have a unique symbol ({symbol:unique}) before their name to designate this. See rule {ref:rule_uniqueness}.
+
+- section: sec_printed_cost
+  text: Play Cost, Install Cost, or Rez Cost
+  rules:
+  - rule: rule_printed_cost_definition
+    text: |-
+      The play, install, or rez cost of a card is a number that appears in the top-left corner of most card types. Play and install costs appear within a large circular icon, while rez costs appear within a small octagonal icon.
+  - rule: rule_paying_printed_costs
+    text: |-
+      Play, install, and rez costs on cards are all paid in credits. {ref:chpt_card_manipulation} details how cards are played, installed, and rezzed.
+  - rule: rule_card_types_with_play_costs
+    text: Events and operations have a play cost.
+  - subsection: rule_card_types_with_install_costs
+    text: Hardware, programs, and resources have an install cost.
+    rules:
+    - rule: rule_ice_have_install_costs_too
+      text: |-
+        Ice also has an install cost, but it does not appear on the card. The install cost of ice is determined by the configuration of other installed ice rather than being intrinsic to the card. See {ref:subsec_install_costs}.
+  - rule: rule_card_types_with_rez_costs
+    text: Assets, ice, and upgrades have a rez cost.
+
+- section: sec_adv_req
+  text: Advancement Requirement
+
+- section: sec_agenda_points
+  text: Agenda Points
+
+- section: sec_trash_cost
+  text: Trash Cost
+
+- section: sec_strength
+  text: Strength
+
+- section: sec_memory_cost
+  text: Memory Cost
+
+- section: sec_base_link
+  text: Base Link
+
+- section: sec_memory_limit
+  text: Starting Memory Limit
+
+- section: sec_min_deck_size
+  text: Minimum Deck Size
+
+- section: sec_inf_limit
+  text: Influence Limit
+
+- section: sec_faction
+  text: Faction Affiliation
+
+- section: sec_inf_cost
+  text: Influence Cost
+
+- section: sec_card_type
+  text: Card Type
+
+- section: sec_subtypes
+  text: Subtypes
+
+- section: sec_text_box
+  text: Text Box

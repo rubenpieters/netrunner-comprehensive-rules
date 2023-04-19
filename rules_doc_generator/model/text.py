@@ -75,7 +75,7 @@ class Ref:
       if "does not exist" in str(e):
         # TODO: make this configurable with a strict option.
         # For now, emit an unknown ref string.
-        return f"UNKNOWN_REF({str(self.referenced_ids)})"
+        return f"UNKNOWNREF({str(self.referenced_ids)})"
       else:
         raise e
 

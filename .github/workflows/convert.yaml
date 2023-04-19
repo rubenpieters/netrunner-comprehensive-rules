@@ -50,6 +50,7 @@ jobs:
           path: html/*
 
   deploy:
+    if: github.repository == 'rubenpieters/netrunner-comprehensive-rules '
     needs: convert_files
     environment:
       name: github-pages

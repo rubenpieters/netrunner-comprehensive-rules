@@ -134,8 +134,7 @@ sections:
   rules:
   - subsection: rule_faction_list
     text: |-
-      Cards are divided into ten factions: four Corp factions, three Runner factions, and three Runner mini-factions. Factions and influence restrict deckbuilding options, allowing each
-faction to have distinct play differences from one another.
+      Cards are divided into ten factions: four Corp factions, three Runner factions, and three Runner mini-factions. Factions and influence restrict deckbuilding options, allowing each faction to have distinct play differences from one another.
     rules:
     - rule: rule_corp_faction_list
       text: The Corp factions are Haas-Bioroid, Jinteki, NBN, and the Weyland Consortium.
@@ -168,7 +167,7 @@ faction to have distinct play differences from one another.
   rules:
   - rule: rule_type_line_location
     text: |-
-      A card's types appear as a line of text across the center of non-ice cards above the text box. For ice, they run along the left side of the text box, rotated 90° from the rest of the text.
+      A card's types appear as a line of text across the center of non-ice cards above the text box. For ice, they run along the left side of the text box, rotated 90Â° from the rest of the text.
   - rule: rule_card_type_list
     text: |-
       Each card has one card type, which can be identity, agenda, asset, ice, operation, upgrade, event, hardware, program, or resource. It is written in bold at the beginning of the type line.

@@ -152,11 +152,13 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 # General utility.
 
 def read_changelog_from_file() -> list[FormatText]:
+  print(f"Parsing changelog")
   with open(f'data/input/00_changelog.yaml', "r") as stream:
     yaml_input = yaml.safe_load(stream)
     return parse_changelog(yaml_input)
 
 def read_chapter_from_file(section_file: str) -> Chapter:
+  print(f"Parsing {section_file}")
   with open(f'data/input/{section_file}.yaml', "r") as stream:
     yaml_input = yaml.safe_load(stream)
     return parse_chapter(yaml_input)

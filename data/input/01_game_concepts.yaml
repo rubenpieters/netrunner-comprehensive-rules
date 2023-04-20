@@ -31,7 +31,7 @@ sections:
     text: If an instruction includes the words "if able," it can only be carried out fully or not at all. If any part of the instruction is not possible to carry out, the entire instruction is ignored.
   - rule: rule_do_as_much_as_you_can
     text: If an instruction does not include the words "if able," as much of that instruction as possible is carried out. Any parts of the instruction that are not possible to carry out are ignored.
-  - subsection: rule_ncigs
+  - rule: rule_ncigs
     text: A player can only take an action or use an ability if its effect has the potential to change the game state. This potential is assessed strictly by what the action or ability can be expected to accomplish, without regard to the consequences of paying any costs to initiate that action or ability and without regard to any other abilities that may meet their conditions in the process of initiating or resolving that action or ability.
     examples:
     - text: |-

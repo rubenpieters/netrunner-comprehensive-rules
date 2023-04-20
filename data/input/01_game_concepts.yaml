@@ -63,6 +63,15 @@ sections:
   - rule: rule_symbol_mu
     text: |-
       The symbol [MU] (plaintext: [MU]) stands for "memory unit". It always appears with a quantity, such as 2[MU], which means "2 memory units." See {ref:sec_memory} for rules about memory.
+  - rule: rule_symbol_sub
+    text: |-
+      The symbol [sub] (plaintext: [sub]) stands for "subroutine". Each symbol marks a single subroutine on a piece of ice. See {ref:sec_subroutines} for information about subroutines.
+  - rule: rule_symbol_trash
+    text: |-
+      The symbol [trash] (plaintext: [trash]) stands for "trash this card". It is used as a self-referential cost in card text, such as "[trash]: Draw 2 cards," which means "Trash this card to draw 2 cards." See {ref:sec_costs} for rules about costs, and {ref:sec_trashing} for rules about trashing cards.
+  - rule: rule_symbol_interrupt
+    text: |-
+      The symbol [interrupt] (plaintext: [interrupt]) stands for "interrupt timing". It is used to designate abilities that resolve immediately before other abilities. See {ref:sec_interrupts_replacements} for rules about interrupt abilities.
 
 - section: sec_deck_construction
   text: Deck Construction
@@ -76,12 +85,57 @@ sections:
         The identities {card:The Catalyst} and {card:The Syndicate} from the {product:System Gateway Starter Pack} are intended for use only with the decks included in that pack. They are not legal for play under the full deck construction rules.
   - rule: rule_legal_deck
     text: Each deck must meet all requirements in this section to be legal for play.
+  - subsection: rule_minimum_deck_size
+    text: The deck must contain at least as many cards as the minimum deck size indicated on the corresponding identity.
+    rules:
+    - rule: rule_outside_the_deck
+      text: |-
+        Identity cards, extra cards that begin the game outside the deck, and player aid cards are not part of the deck and are not counted towards the size of the deck.
+    - rule: rule_maximum_deck_size
+      text: There is no maximum deck size.
+  - rule: rule_disallowed_cards
+    text: Decks cannot contain identity cards, player aid cards, cards from the wrong side (Corp cards in a Runner deck or vice-versa), or out-of-faction cards that lack influence costs.
+  - subsection: rule_influence_limit
+    text: |-
+      Neutral cards and cards that belong to a faction other than the corresponding identity's faction are all considered out-of-faction. The total influence cost of out-of-faction cards in the deck must not exceed the influence limit of that identity.
+    rules:
+    - rule: rule_influence_by_copy
+      text: The total influence cost of out-of-faction cards is counted by copy and not by name.
+      examples:
+      - text: |-
+          Including a single copy of {card:Diesel} in a non-Shaper deck adds 2 to the total influence in that deck, while including two copies of {card:Diesel} in a non-Shaper deck adds 4 to the total influence in that deck.
+  - subsection: rule_agenda_points
+    text: A Corp deck must contain agendas totalling a certain number of agenda points, as determined by the total number of cards in the deck.
+    rules:
+    - rule: rule_40_44
+      text: A deck with 40 to 44 cards must contain 18 or 19 agenda points.
+    - rule: rule_45_49
+      text: A deck with 45 to 49 cards must contain 20 or 21 agenda points.
+    - rule: rule_50_54
+      text: A deck with 50 to 54 cards must contain 22 or 23 agenda points.
+    - rule: rule_54+
+      text: A deck with more than 54 cards must contain 22 or 23 agenda points, plus an additional 2 agenda points for every full 5 cards in the deck over 50.
+      examples:
+      - text: A 66 card deck requires 6 additional agenda points, since it includes 3 sets of 5 cards beyond 50. This gives a final requirement of either 28 or 29 agenda points.
+  - rule: rule_maximum_copies
+    text: The deck cannot contain more than 3 copies of any single card, by name. Some cards stipulate alternative copy limits in their card text.
+  - rule: rule_special_tournament_rules
+    text: Tournament play may impose other restrictions or requirements on the legal configurations of identities and decks. 
 
 - section: sec_extra_cards
   text: Extra Cards
   rules:
   - rule: rule_outside_deck
     text: Some abilities allow for the use of additional cards from outside the deck.
+
+- section: sec_starting_the_game
+  text: Starting the Game
+
+- section: sec_ending_the_game
+  text: Ending the Game
+
+- section: sec_cards
+  text: Cards
 
 - section: sec_counters_tokens
   text: Counters and Tokens
@@ -119,6 +173,9 @@ sections:
     text: |-
       As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:chpt_turns} for details about the procedures of player turns.
 
+- section: sec_objects
+  text: Objects
+
 - section: sec_host
   text: Host, Hosted and Hosting
   rules:
@@ -131,6 +188,9 @@ sections:
       examples:
         - text: |-
             {card:Off-Campus Apartment} has the ability, "{card:Off-Campus Apartment} can host any number of {subtype:connections}." This means that whenever the Runner installs a {subtype:connection} card, they can choose to install that card into the play area hosted on {card:Off-Campus Apartment} or as normal directly into the play area.
+
+- section: sec_ownership
+  text: Ownership and Control
 
 - section: sec_targets
   text: Targets
@@ -161,5 +221,17 @@ sections:
       text: |-
         Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
 
+- section: sec_score
+  text: Score, Scoring and Stealing
+
+- section: sec_advancing_cards
+  text: Advancing Cards
+
+- section: sec_trashing
+  text: Trashing
+
 - section: sec_memory
   text: Memory
+
+- section: sec_card_visibilty
+  text: Card Visibility

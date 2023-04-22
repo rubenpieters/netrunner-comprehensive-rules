@@ -127,6 +127,45 @@ sections:
   rules:
   - rule: rule_outside_deck
     text: Some abilities allow for the use of additional cards from outside the deck.
+  - subsection: rule_jinteki_biotech
+    text: |-
+      One Corp identity, {card:Jinteki Biotech: Life Imagined}, has the ability, "Before taking your first turn, you may switch this card with any copy of Jinteki Biotech." There are 3 versions of this identity, which have different abilities on their reverse side.
+    rules:
+    - rule: rule_jinteki_biotech_detail
+      text: |-
+        A player playing Jinteki Biotech as their identity may bring any number of copies of that identity along with their deck. After completing game setup, that player may choose any copy they own to be their active identity for the duration of the game. All other copies are placed outside the game.
+  - subsection: rule_adam
+    text: |-
+      One Runner identity, {card:Adam: Compulsive Hacker}, has the ability, "You start the game with 3 different {subtype:directive} cards installed (these cards are not considered part of your deck)."
+    rules:
+    - rule: rule_adam_different_directives
+      text: |-
+        A player playing Adam as their identity must bring at least 3 differently named cards with the {subtype:directive} subtype along with their deck. The player may bring any number of {subtype:directive} cards over the required 3.
+    - rule: rule_adam_directives_install
+      text: |-
+        After players reveal their identities, the player playing Adam selects exactly 3 of their provided {subtype:directive} cards. Those cards begin the game installed in the play area. All other {subtype:directives} the player brought this way remain outside the game.
+    - rule: rule_adam_directives_deck
+      text: |-
+        A player playing Adam can also include {subtype:directives} cards in their deck. The cards chosen to be installed at the beginning of the game do not impact the deck's influence requirements or the maximum allowed number of copies of those cards.
+    - rule: rule_adam_directives_during_game
+      text: |-
+        Once the game has begun, the cards installed this way are treated exactly as any other installed cards. Abilities that move these cards to other zones function normally, including shuffling them into the stack.
+  - subsection: rule_additional_identity
+    text: |-
+      Two cards, {card:Rebirth} and {card:DJ Fenris}, make use of identity cards other than the one selected by the player during deck construction.
+    rules:
+    - rule: rule_additional_identities_pile
+      text: |-
+        A player may bring any number of additional Runner identity cards along with their deck. These cards are kept in a pile outside the game. The Runner may look at these cards at any time.
+    - rule: rule_additional_identities_reference
+      text: |-
+        When an ability refers to an identity other than the Runner's current identity, it refers to the cards provided this way. If an identity card leaves the play area, it must be returned to the pile outside the game.
+    - rule: rule_legal_additional_identities
+      text: |-
+        In a tournament, all identities brought to the game this way must be legal for players to use as their actual identity in that tournament.
+    - rule: rule_additional_identity_double_sided
+      text: |-
+        One Runner identity, {card:Hoshiko Shiro}, is double-sided (see {ref:sec_identities}). If the Runner switches their identity with Hoshiko, it enters play with the front side faceup. If the Runner switches Hoshiko with another identity, the new identity enters play faceup regardless of Hoshiko's current status.
 
 - section: sec_starting_the_game
   text: Starting the Game

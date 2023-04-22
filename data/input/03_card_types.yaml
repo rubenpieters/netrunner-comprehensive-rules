@@ -1,2 +1,19 @@
 chapter: chpt_card_types
 text: Card Types
+sections:
+- section: sec_identities
+  text: Identities
+  rules:
+  - subsection: rule_identity_play_area
+    text: Each player starts the game with a single identity active in the play area. See {ref:sec_starting_the_game}.
+    rules:
+    - rule: rule_identity_double_sided
+      text: |-
+        Some identities are double-sided. Only the front side of a double-sided identity will have values for its minimum deck size and influence limit. Only the side of a double-sided identity that is currently faceup is active at any given time.
+    - rule: rule_identity_not_installed 
+      text: Identities are not installed.
+  - rule: rule_identity_deck_size_influence
+    text: |-
+      Only identity cards have minimum deck sizes and influence limits. These values do not apply during the game; instead, they determine deckbuilding constraints for decks associated with that identity. See {ref:sec_deck_construction}.
+  - rule: rule_identity_base_link
+    text: Only Runner identities have a base link. This value is used in calculating the Runner's link value. See {ref:sec_link}.

@@ -169,6 +169,35 @@ sections:
 
 - section: sec_starting_the_game
   text: Starting the Game
+  rules:
+  - subsection: rule_player_roles
+    text: |-
+      The players decide who will play as the Corp and who will play as the Runner. Each player places an appropriate identity card for the side they are to play faceup in the play area, then supplies a corresponding deck, placing it facedown in the play area, and any appropriate extra cards.
+    rules:
+    - rule: rule_setup_identity
+      text: Some identity cards have abilities that affect setup. Even though cards are not active until the game begins, these identities still alter setup at the appropriate step as indicated by their text.
+    - rule: rule_double_sided_identity
+      text: Some identities are double-sided (see {ref:sec_identities}). If a player is playing a double-sided identity, it begins the game with the front side faceup.
+  - rule: rule_setup_abilities
+    text: |-
+      If a player's identity has an ability that affects setup or the start of the game, and that ability does not directly correspond to a setup step outlined in this section of the rules, that player makes any necessary decisions and changes for their identity's special setup or start of game abilities at this time. If both players have setup or start of game abilities at this time, the Corp resolves theirs first.
+  - rule: rule_start_tokens
+    text: |-
+      The players create the bank by gathering all types of tokens described in {ref:sec_counters_and_tokens}.
+  - rule: rule_start_credits
+    text: Each player takes five credits from the bank, placing the credits in their credit pool.
+  - rule: rule_start_shuffle
+    text: Each player shuffles their deck.
+  - subsection: rule_start_hand
+    text: Each player draws 5 cards from the top of their deck to form their starting hand.
+    rules:
+    - rule: rule_mulligan
+      text: After drawing starting hands, the Corp may choose to take a mulligan; then, the Runner may choose to take a mulligan. To take a mulligan, the player shuffles their starting hand back into their deck, then draws a new starting hand. They must keep the second hand as their starting hand.
+  - subsection: rule_start_corp_turn
+    text: The game begins and the Corp takes their first turn.
+    rules:
+    - rule: rule_before_first_turn
+      text: If the Corp's identity has an ability with instructions for "before taking your first turn," the Corp resolves that ability immediately before taking their first turn, and thus before the game starts.
 
 - section: sec_ending_the_game
   text: Ending the Game
@@ -176,7 +205,7 @@ sections:
 - section: sec_cards
   text: Cards
 
-- section: sec_counters_tokens
+- section: sec_counters_and_tokens
   text: Counters and Tokens
   rules:
   - subsection: rule_counters_cards

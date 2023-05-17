@@ -153,7 +153,9 @@ class FormatText:
     result = ''
     for element in self.textElements:
       result += element.to_latex(id_map)
-    return re.sub(r'\"(.*?)\"', r"``\1''", result)
+    result = re.sub(r'\"(.*?)\"', r"``\1''", result)
+    result = re.sub('&', '\&', result)
+    return result
 
 @dataclass
 class Example:

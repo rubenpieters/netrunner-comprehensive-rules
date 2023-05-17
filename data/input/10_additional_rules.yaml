@@ -9,8 +9,16 @@ sections:
       Some cards are {term:unique}, and have a unique symbol ([uniqsym]) before their name to designate this. There can be only one unique card of the same name active at a time. If a unique card becomes active, any other card that shares its name is trashed during the next checkpoint. Trashing a card this way cannot be prevented. See {ref:sec_checkpoints}.
   - rule: sec_old_self_reference_rules
     text: Some cards are written with self-referential language. If a card references its own name without using the word "copy", treat that name as if it said "this object".
+
+- section: sec_information
+  text: Information
+
 - section: sec_checkpoints
   text: Checkpoints
+
+- section: sec_damage
+  text: Damage
+
 - section: sec_link
   text: Link
   snippet: |-

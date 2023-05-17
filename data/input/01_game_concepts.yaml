@@ -201,6 +201,24 @@ sections:
 
 - section: sec_ending_the_game
   text: Ending the Game
+  rules:
+  - subsection: rule_game_end
+    text: The game ends when a player meets one of their win conditions.
+    rules:
+    - rule: rule_simultaneous_win
+      text: If both players would simultaneously satisfy their win conditions, the game ends in a draw.
+  - subsection: rule_win_conditions
+    text: Each player has two possible win conditions available.
+    rules:
+    - rule: rule_win_agenda_points
+      text: |-
+        Either player can win by collecting agenda points in their score area (usually done by scoring or stealing agendas; see {ref:sec_score_steal}). A player with a score of 7 or more wins the game.
+    - rule: rule_flatline
+      text: |-
+        The Corp wins if the Runner is flatlined. The Runner is flatlined immediately if they suffer more damage than they have cards in their grip. The Runner is also flatlined if, at the beginning of their discard phase, their maximum hand size is less than 0. See {ref:sec_damage} for more information about damage.
+    - rule: rule_empty_rnd
+      text: |-
+        The Runner wins if the Corp is required to draw a card from R&D but cannot because R&D is empty.
 
 - section: sec_cards
   text: Cards
@@ -289,7 +307,7 @@ sections:
       text: |-
         Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
 
-- section: sec_score
+- section: sec_score_steal
   text: Score, Scoring and Stealing
 
 - section: sec_advancing_cards

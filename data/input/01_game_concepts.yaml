@@ -222,6 +222,46 @@ sections:
 
 - section: sec_cards
   text: Cards
+  rules:
+  - rule: rule_corp_card_types
+    text: |-
+      There are six types of Corp cards: agendas, assets, ice, identities, operations, and upgrades. All cards except the identity card are shuffled into the Corp's deck at the beginning of the game.
+  - rule: rule_runner_card_types
+    text: |-
+      There are five types of Runner cards: events, hardware, identities, programs, and resources. All cards except the identity card are shuffled into the Runner's deck at the beginning of the game.
+  - subsection: rule_active_cards
+    text: Cards that are {term:active} are able to affect the game through their abilities.
+    rules:
+    - rule: rule_default_active_card_locations
+      text: |-
+        Runner cards that are installed and faceup in the play area, Corp cards that are installed and rezzed, events and operations in the play area, agendas in the Corp's score area, and both players' identities are active.
+    - rule: rule_runner_become_active
+      text: |-
+        Unless otherwise stated, Runner cards become active as part of the process of playing or installing them.
+    - rule: rule_corp_become_active
+      text: |-
+        Unless otherwise stated, Corp cards other than operations are installed unrezzed, and thus inactive, into the play area. Assets, ice, and upgrades become active when they are rezzed; agendas become active when they are scored. Operations become active as part of the process of playing them.
+    - rule: rule_identity_become_active
+      text: |-
+        Identity cards become active when the game begins.
+  - subsection: rule_inactive_cards
+    text: Cards that are {term:inactive} are unable to affect the game or have most of their abilities used.
+    rules:
+    - rule: rule_default_inactive_card_locations
+      text: |-
+        Cards are inactive in R&D, HQ, Archives, the heap, the grip, the stack, the Runner's score area, while set aside, and while removed from the game. Facedown cards in the play area are also inactive.
+    - rule: rule_inactive_cards_characteristics
+      text: |-
+        Inactive cards in most zones retain their printed characteristics (name, card type, faction, cost, subtypes, influence, etc). Facedown installed Runner cards have no characteristics.
+  - rule: rule_card_draw
+    text: |-
+      For a player to {term:draw} 1 or more cards is to take that many cards from the top of their deck and put them into their hand. {ref:Sec_drawing_cards} provides more details about drawing cards.
+  - rule: rule_inactive_ability_exception_link
+    text: |-
+      Most abilities are active if and only if the card they appear on is active. {ref:Sec_inactive_ability_exceptions} details the cases where abilities on inactive cards are still active.
+  - rule: rule_card_conversion
+    text: |-
+      Abilities can convert cards from one type into another type, or even from a card into a counter. {ref:Sec_add_card_to_score_area} and {ref:sec_card_to_counter} explain the details of card conversion.
 
 - section: sec_counters_and_tokens
   text: Counters and Tokens

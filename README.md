@@ -42,7 +42,7 @@ snippet: (optional) snippet for the section
 rules:
 - rule:
   ...
-- rule:
+- subsection:
   ...
 ```
 

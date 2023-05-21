@@ -46,31 +46,28 @@ rules:
   ...
 ```
 
+### Subsection
+
+Defines a subsection (numbered with 1.1.1.).
+
+```
+subsection: subsection_id
+text: Formatted Subsection Text
+toc: (optional indicator whether this subsection should be added to the table of contents)
+steps: (optional indicator whether this subsection and any subelements should be referred to as 'step')
+rules:
+- rule:
+  ...
+- rule:
+  ...
+```
+
 ### Rule
 
-Defines a rule (numbered with 1.1.1.).
+Defines a rule. A rule can be under a section (numbered with 1.1.1.) or nested below a rule (numbered with a.).
 
 ```
 rule: rule_id
-text: Formatted Rule Text
-toc: (optional indicator whether this rule should be added to the table of contents)
-steps: (optional indicator whether this rule and any subelements should be referred to as 'step')
-rules:
-- sub_rule:
-  ...
-- sub_rule:
-  ...
-examples:
-- text: Formatted Example Text
-- text: Formatted Example Text
-```
-
-### SubRule
-
-Defines a subrule, which is nested below a rule (numbered with a.).
-
-```
-sub_rule: sub_rule_id
 text: Formatted Rule Text
 examples:
 - text: Formatted Example Text
@@ -100,6 +97,12 @@ Reference any identifier of a chapter, section, rule, or subrule.
 
 ```
 {ref:ref_id}
+```
+
+A reference can contain a capital letter at the start, to indicate the reference text should be capitalized.
+
+```
+{ref:Ref_id}
 ```
 
 Referencing multiple identifiers at once is possible with a `,`.

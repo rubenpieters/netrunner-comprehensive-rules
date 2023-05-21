@@ -22,6 +22,10 @@
   list-style: none;
 }
 
+.SubType {
+  font-weight: bold;
+}
+
 .SubRules {
   counter-reset: sub_rule_counter;
   list-style: none;

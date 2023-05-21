@@ -261,7 +261,7 @@ sections:
       Most abilities are active if and only if the card they appear on is active. {ref:Sec_inactive_ability_exceptions} details the cases where abilities on inactive cards are still active.
   - rule: rule_card_conversion
     text: |-
-      Abilities can convert cards from one type into another type, or even from a card into a counter. {ref:Sec_add_card_to_score_area} and {ref:sec_card_to_counter} explain the details of card conversion.
+      Abilities can convert cards from one type into another type, or even from a card into a counter. {ref:Rule_add_card_to_score_area,rule_card_to_counter} explain the details of card conversion.
 
 - section: sec_counters_and_tokens
   text: Counters and Tokens
@@ -272,6 +272,54 @@ sections:
     rules:
     - rule: rule_counter_token
       text: The terms "counter" and "token" are interchangeable.
+  - subsection: rule_bank
+    text: |-
+      The {term:bank} is the supply of counters not yet in play. Counters in the bank are available to both players to take and use as dictated by the game rules and card abilities. Players do not control counters in the bank and cannot spend them. The bank is an unlimited supply; running out of game pieces to track a type of counter does not prohibit a player from gaining counters of that type or placing them on cards.
+    rules:
+    - rule: rule_bank_default
+      text: If an instruction directs players to place counters on a card without designating where those counters come from, take those counters from the bank.
+    - rule: rule_counters_placed_condition
+      text: A condition or restriction that looks for counters being placed on a card can be met by either counters from the bank or counters moved from another location.
+  - rule: rule_card_conversion_game_piece
+    text: |-
+      Some abilities can convert a card into a counter. A counter put into play in this way is tracked with the card acting as a game piece. See {ref:rule_card_to_counter}.
+  - rule: rule_additional_counters
+    text: |-
+      Some abilities can cause a player or card to have or be "considered to have" 1 or more counters or additional counters without placing or giving those counters. A counter considered to exist in this way conveys all the same information and effects as a counter of the specified type would, except that it cannot be moved or removed from the card or player it belongs to, nor can it be spent to pay a cost.
+  - subsection: rule_counter_types
+    text: |-
+      There are ten types of counters: credit counters, click counters, tag counters, bad publicity counters, core damage counters, advancement counters, virus counters, power counters, agenda counters, and condition counters.
+    rules:
+    - rule: rule_type_credit_counter
+      text: |-
+        {term:Credit counters} are used to track the number of credits each player has in their credit pool; they can also be placed on cards. Rules for credits, the credit pool, and other related concepts are in {ref:sec_credits}.
+    - rule: rule_type_click_counter
+      text: |-
+        {term:Click counters} are a gameplay aid used to track the clicks the active player has spent or has left to spend during their turn. Rules for clicks are in {ref:sec_clicks}.
+    - rule: rule_type_tag_counter
+      text: |-
+        {term:Tag counters} are used to represent tags on the Runner. Rules for tags are given in {ref:sec_tags}.
+    - rule: rule_type_bad_pub_counter
+      text: |-
+        {term:Bad publicity counters} represent bad publicity the Corp has earned. Rules for bad publicity are in {ref:sec_bad_publicity}.
+    - rule: rule_type_core_damage_counter
+      text: |-
+        {term:Core damage counters} are a gameplay aid used to track core damage the Runner has suffered. Each point of core damage the Runner suffers forces them to take a core damage counter. See {ref:sec_damage}.
+    - rule: rule_type_advancement_counter
+      text: |-
+        {term:Advancement counters} are a counter used primarily on installed agendas to track the Corp's progress toward being able to score them.
+    - rule: rule_type_virus_counter
+      text: |-
+        {term:Virus counters} are a generic counter, used primarily by {subtype:virus} programs, that can be removed by the Corp purging them. See {ref:rule_purge}.
+    - rule: rule_type_power_counter
+      text: |-
+        {term:Power counters} are a generic counter used by a variety of cards. They have no special rules.
+    - rule: rule_type_agenda_counter
+      text: |-
+        {term:Agenda counters} are a generic counter used primarily on scored agendas. They have no special rules.
+    - rule: rule_type_condition_counter
+      text: |-
+        {term:Condition counters} are counters that have rules text. Their abilities are active as long as they are hosted on a card.
 
 - section: sec_credits
   text: Credits

@@ -330,6 +330,36 @@ sections:
   - rule: rule_credit
     text: |-
       A {term:credit} ({img:credit}) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
+  - rule: rule_credit_pool
+    text: |-
+      Each player has a {term:credit pool} where they keep a supply of credit counters matching the credits they have available to spend. The number of credits in a player's credit pool is open information.
+  - subsection: rule_gain_spend_lose_credits
+    text: Credits enter and leave a player's credit pool as that player gains, loses, or spends credits.
+    rules:
+    - rule: rule_gain_credits
+      text: A player {term:gains} credits whenever credits enter their credit pool from any location. 
+    - rule: rule_lose_credits
+      text: If a player is required to {term:lose} credits, that player is forced to move the specified number of credits from their credit pool to the bank. Players cannot lose credits from cards.
+      examples:
+      - text: |-
+          If a subroutine on {card:DNA Tracker} resolves, the Runner must lose 2[c] from their credit pool, or 1[c] if that is all they have. If the Runner's credit pool is empty, the effect does nothing.
+    - rule: rule_spend_credits
+      text: To {term:spend} or {term:pay} credits, a player puts the specified number of credits back into the bank. By default, the credits must come from the player's credit pool. Abilities can also allow players to spend credits hosted on their cards under certain conditions. If any such abilities apply, the player chooses how to divide the credits they are spending from among the allowed locations. The terms "spend" and "pay" are synonymous.
+      examples:
+      - text: The Runner may use the credit from {card:Cyberfeeder} to pay for {card:Atman}'s first ability.
+      - text: The Runner may use credits from {card:Ghost Runner} when secretly spending credits to resolve a Psi ability (such as {card:The Future Perfect}).
+      - text: The Runner must use credits from {card:Ghost Runner} if this is the only way for them to pay 3[c] when resolving the "when encountered" ability on {card:Tollbooth}.
+  - subsection: rule_hosted_credits
+    text: Abilities can place credits on cards, as discussed in {ref:sec_host}. Credits on a player's card are not in that player's credit pool; the player can only interact with those credits as instructed by card abilities.
+    rules:
+    - rule: rule_take_credits
+      text: If a player is instructed to {term:take} credits from a card, they remove that many credits from that card and gain those credits.
+    - rule: rule_spend_hosted_credits
+      text: If an ability specifies how a player is allowed to spend credits from a card, they can be spent from that card as if they were in the player's credit pool for the specified actions or abilities.
+    - rule: rule_spend_hosted_credits_during
+      text: If an ability specifies a time period during which a player is allowed to spend credits from a card, they can be spent from that card as if they were in the player's credit pool for any purpose (other than losing credits) as long as the specified time period is active or the specified duration has not expired.
+    - rule: rule_hosted_credits_use
+      text: Spending credits from a card is considered "using" the card that allowed those credits to be spent. See {ref:rule_using_abilities}.
   - subsection: rule_sec_recurring
     toc:
     text: Recurring Credits
@@ -337,6 +367,17 @@ sections:
     - rule: rule_recurring_credits
       text: |-
         {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
+    - rule: rule_placing_recurring_credits
+      text: |-
+        Recurring credits are first placed on a card as soon as it becomes active. This occurs at {ref:step_installed_card_active} of installing the card if it is installed active, {ref:step_played_card_active} of playing an event or operation, or as soon as the card is turned faceup or scored, as applicable.
+    - rule: rule_refill_recurring_credits
+      text: |-
+        Recurring credits are refilled during {ref:step_corp_refill_recurring_credits} of the Corp's turn and {ref:step_runner_refill_recurring_credits} of the Runner's turn, before other abilities that apply at the start of the turn resolve.
+    - rule: rule_recurring_credits_do_not_accumulate
+      text: |-
+        Recurring credits do not accumulate. They are refilled only up to the indicated number.
+      examples:
+      - text: The Runner installs {card:Spinal Modem}, which has 2[recurring]. 2 credits are placed on {card:Spinal Modem} now. The Runner spends 1 of those credits later in their turn. At the beginning of the Runner's next turn, the credits on {card:Spinal Modem} should be replenished up to 2[c], so 1 more credit is placed on it.
 
 - section: sec_clicks
   text: Clicks

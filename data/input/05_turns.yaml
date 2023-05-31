@@ -7,6 +7,10 @@ sections:
   - rule: rule_turn
     text: |-
       A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
+
+- section: sec_actions
+  text: Actions
+
 - section: sec_steps_corps_turn
   text: Steps of the Corp's Turn
   rules:

@@ -384,9 +384,26 @@ sections:
   snippet: |
     Working a job, making connections, and especially jacking in—everything you do takes time, and it always goes by faster than you think. A click represents an abstract amount of time spent on a particular activity, either several hours all at once or scattered across the day.
   rules:
-  - rule: rule_allotted_clicks
-    text: |-
-      As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:chpt_turns} for details about the procedures of player turns.
+  - rule: rule_click
+    text: A {term:click} ([click]) is the basic unit of activity. Players spend their clicks to perform actions and trigger abilities. Each click counter represents 1 click.
+  - subsection: rule_allotted_clicks
+    text: As the first step of a player's turn, they gain an allotted number of clicks to spend during the action phase of that turn. See {ref:chpt_turns} for details about the procedures of player turns.
+    rules:
+    - rule: rule_corp_allotted_clicks
+      text: The Corp receives 3[click] on each of their turns.
+    - rule: rule_runner_allotted_clicks
+      text: The Runner receives 3[click] on each of their turns.
+  - subsection: rule_gain_spend_lose_clicks
+    text: Players can gain, lose, or spend clicks.
+    rules:
+    - rule: rule_gain_clicks
+      text: A player {term:gains} clicks whenever the number of clicks they have is increased.
+    - rule: rule_lose_spend_clicks
+      text: If a player {term:loses} or {term:spends} clicks, the number of clicks they have is reduced by that amount. The terms "lose" and "spend" are not synonymous for the purposes of meeting conditions and restrictions of card abilities.
+    - rule: rule_click_actions
+      text: Paid abilities that begin with [click] are actions and have special timing rules (see {ref:sec_actions}). Aside from taking actions, there are no special restrictions to how or when a player can spend their clicks during their turn.
+  - rule: rule_priority
+    text: Some cards have the subtype {subtype:priority} and the text, "Play only as your first [click]." A player can only play a {subtype:priority} card using the basic action to play an event or operation, and only if they have not spent any other clicks that turn. Losing clicks does not affect a player's ability to play a {subtype:priority} card.
 
 - section: sec_objects
   text: Objects

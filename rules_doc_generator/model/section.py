@@ -110,12 +110,15 @@ class SubSection:
   format_text: FormatText
   toc: bool
   steps: bool
+  examples: list[Example]
   rules: list[SubRule]
 
   def to_html(self, id_map: RefDict) -> str:
     result = self.format_text.to_html(id_map)
     if self.rules:
       result += '<ol class="SubRules">'
+      for example in self.examples:
+        result += example.to_html(id_map)
       for rule in self.rules:
         result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(id_map)}</li>'
       result += '</ol>'
@@ -129,6 +132,9 @@ class SubSection:
       result += '\\addtocounter{subsubsection}{1} '
       result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    for i, example in enumerate(self.examples):
+      result += f'% Example {i}\n'
+      result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
     if self.rules:
       for rule in self.rules:
         result += rule.to_latex(id_map)

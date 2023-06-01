@@ -407,6 +407,39 @@ sections:
 
 - section: sec_objects
   text: Objects
+  rules:
+  - rule: rule_object
+    text: An {term:object} is an occurrence of a card or counter existing in a particular zone. When a card or counter moves from one zone to another, it becomes a new object.
+  - subsection: rule_no_memory
+    text: Restrictions and effects on a card or counter only apply for as long as that card or counter remains the same object. Cards and counters have no memory of the objects they were in the past.
+    examples:
+    - text: The Corp uses the first ability on {card:Vaporframe Fabricator}, which specifies that it can only be used once per turn, and trashes {card:Vaporframe Fabricator} during the installation process. Then the Corp plays Restore, reinstalling the same copy of {card:Vaporframe Fabricator} from Archives. Even though it is the same physical card, the reinstalled {card:Vaporframe Fabricator} is a new object, and its "once per turn" ability is available to be used this turn.
+    - text: The Runner accesses {card:Ganked!} from the root of a server they are breaching. The Corp uses {card:Ganked!}'s ability to trash it and force the Runner to encounter {card:Drafter}. While resolving {card:Drafter}'s subroutines during that encounter, the Corp reinstalls the same copy of {card:Ganked!} from Archives into the same root. Since the {card:Ganked!} card left and reentered the zone it was accessed from, it is now a new object, and the Runner must access that object before completing the breach. Thus, if the Runner does not interfere (such as by breaking {card:Drafter}'s subroutines), the Corp could repeat this sequence of events several times.
+    rules:
+    - rule:
+      text: An ability that moves cards can identify the new objects that those cards become and continue to act on them.
+      examples:
+      - text: The Corp plays {card:Priority Construction}, installing a piece of ice from HQ. That ice is now a new object in the play area, but {card:Priority Construction}'s second instruction can still find it and place advancement counters on it.
+  - rule: rule_object_move_location
+    text: A card that moves from its location to a hidden or secret location becomes a new object, even if the new location is in the same zone.
+    examples:
+    - text: |-
+        The Corp scores {card:Accelerated Beta Test}, looks at the top 3 cards of R&D, and installs and rezzes a piece of ice from among them. As a chain reaction, the Corp then uses {card:The Foundry: Refining the Process} to search R&D, with the result that the other cards currently being looked at by {card:Accelerated Beta Test} are shuffled along with the rest of R&D. Since the cards were moved to an unknown location in R&D, {card:Accelerated Beta Test} can no longer act on them, so those cards can no longer be looked at and will not be installed or trashed.
+    - text: |-
+        The top card of R&D in the current game state is an object. So is the 2nd card from the top of R&D, the 3rd card, and so on. If the Corp plays {card:Precognition} and rearranges the top 5 cards of R&D, the Runner will not know which cards correspond to which objects in the previous order, so the cards become new objects under their new order.
+  - rule: rule_object_move_known_location
+    text: A card or counter that moves to a known location in the same zone is still the same object.
+    examples:
+    - text: The Runner has chosen a piece of ice with {card:Femme Fatale}, and the Corp uses {card:Thimblerig}'s ability to move that ice to another location. But the ice has not left the play area, so it is still the same object and the Runner can still use {card:Femme Fatale}'s ability to bypass it.
+  - rule: rule_object_turn_faceup_facedown
+    text: A card that is turned faceup or facedown is still the same object.
+    examples:
+    - text: The Corp uses {card:Vaporframe Fabricator}, installing a piece of ice at no cost, and then plays Divert Power to derez {card:Vaporframe Fabricator} and rez their newly-installed ice at a discount. The Corp can rez {card:Vaporframe Fabricator} again, but since it is still the same object, its "once per turn" ability cannot be used again this turn.
+  - rule: rule_previous_object
+    text: When a card or counter becomes a new object, its previous object ceases to exist, but can still be remembered by rules or abilities that refer to past game states.
+    examples:
+    - text: The Runner plays {card:Bravado}. During the run, a piece of ice that the Runner has already passed is trashed. When the run ends, {card:Bravado}'s ability must determine how many pieces of ice the Runner passed during that run. It does this by reviewing the game history and counting each distinct ice object that the Runner passed. Even though the object corresponding to the trashed ice no longer exists in the present game state, {card:Bravado} can still count it.
+    - text: The Runner trashes the top card of R&D while accessing it. The object corresponding to that card in its location on top of R&D ceases to exist, but still counts against the number of cards the Runner can access from R&D during this breach.
 
 - section: sec_host
   text: Host, Hosted and Hosting

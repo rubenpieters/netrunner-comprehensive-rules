@@ -55,6 +55,8 @@ subsection: subsection_id
 text: Formatted Subsection Text
 toc: (optional indicator whether this subsection should be added to the table of contents)
 steps: (optional indicator whether this subsection and any subelements should be referred to as 'step')
+examples:
+- text: Formatted Example Text
 rules:
 - rule:
   ...

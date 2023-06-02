@@ -444,15 +444,62 @@ sections:
 - section: sec_host
   text: Host, Hosted and Hosting
   rules:
+  - subsection: rule_placed_loaded
+    text: Whenever an object is "placed" or "loaded" onto a card, a host relationship is created between those two objects. The object placed on top of a card is {term:hosted} on that card. The card onto which the other object is placed is the {term:host}.
+    rules:
+    - rule: rule_host_restriction
+      text: Only cards in score areas and the play area can host objects.
+  - rule: rule_hosted_installed_state
+    text: The state of being hosted is distinct, but not exclusive from, the state of being installed. If an ability instructs a player to host a card from an inactive state without reference to installing it, the hosted card remains inactive.
+  - rule: rule_hosted_limit
+    text: An object can only be hosted on a single card at any given time.
+  - rule: rule_hosting_limit
+    text: A card can host any number of other objects, except where explicitly restricted by a card ability.
   - subsection: rule_host_relationship
     text: Any card in an eligible location can act as a host, but a host relationship can only be created or permitted by a card ability.
     rules:
-    - rule: rule_implicit_host
-      text: |-
-        If a card has an ability describing the types and/or numbers of cards it can host, but it does not have an ability that directly hosts cards onto itself, then the card is permitted as an eligible installation destination for the types of cards listed, up to the number specified. A host card is chosen as an installation destination during {ref:rule_steps_installing_destination} of the installation process.
+    - rule: rule_host_via_install
+      text: If a card has an ability describing the types and/or numbers of cards it can host, but it does not have an ability that directly hosts cards onto itself, then the card is permitted as an eligible installation destination for the types of cards listed, up to the number specified. A host card is chosen as an installation destination during {ref:rule_steps_installing_destination} of the installation process.
       examples:
-        - text: |-
-            {card:Off-Campus Apartment} has the ability, "{card:Off-Campus Apartment} can host any number of {subtype:connections}." This means that whenever the Runner installs a {subtype:connection} card, they can choose to install that card into the play area hosted on {card:Off-Campus Apartment} or as normal directly into the play area.
+      - text: |-
+          {card:Off-Campus Apartment} has the ability, "{card:Off-Campus Apartment} can host any number of {subtype:connections}." This means that whenever the Runner installs a {subtype:connection} card, they can choose to install that card into the play area hosted on {card:Off-Campus Apartment} or as normal directly into the play area.
+    - rule: rule_host_via_ability
+      text: If a card has an ability describing cards it can host, but also one or more abilities that can create host relationships onto itself, then it only allows cards to become hosted on it through those abilities. A card cannot be installed directly onto the card through an unrelated install effect.
+      examples:
+      - text: |-
+          {card:Glenn Station} reads, "{card:Glenn Station} can host a single card", but also has a paid ability that hosts a card on itself. Therefore, {card:Glenn Station} only lets the Corp host cards through that paid ability, not through an install action.
+    - rule: rule_host_on_ability
+      text: If a card has an ability stipulating that it can only be installed hosted onto another card, then during the installation process a player that wishes to install that card must choose a valid destination matching the description provided. If no such destination exists before the installation process begins, the card cannot be installed.
+      examples:
+      - text: |-
+          {card:Egret} states, "Install only on a rezzed piece of ice." The Runner can only install Egret if there is an installed, rezzed piece of ice available before the installation process begins; otherwise, it is illegal for the Runner to install {card:Egret}.
+    - rule: rule_condition_counter
+      text: Some operations and events convert themselves into condition counters and install themselves hosted onto other cards. An operation or event can never be installed through an install effect; it can only become an installed counter through its conversion ability. See {ref:rule_card_to_counter}.
+  - subsection: rule_host_faceup_facedown
+    text: Cards can be hosted faceup or facedown.
+    rules:
+    - rule: rule_hosted_when_installed
+      text: Unless otherwise specified, a card that is hosted while it is being installed is hosted onto the destination card in the same faceup or facedown status it would normally be installed in.
+    - rule: rule_hosted_when_not_installed
+      text: Unless otherwise specified, a card that is hosted without being installed is hosted faceup.
+    - rule: rule_hosted_facedown_distinct
+      text: Like other facedown installed cards, installed cards hosted facedown are distinct. The order in which they were installed (or turned facedown) is open information.
+    - rule: rule_hosted_facedown_groups
+      text: Cards hosted facedown without being installed must be kept in distinct groups according to their host. Cards within such a group are not ordered and can be freely arranged by their controller.
+  - rule: rule_change_hosted
+    text: Once a card is installed, hosted or not, a player cannot change that card's hosted status unless a card ability explicitly directs it to be hosted onto a new card.
+  - rule: rule_host_transitivity
+    text: Host relationships are not transitive. If card A is hosted on card B, and card B is hosted on card C, card A is not considered to be hosted on card C.
+    examples:
+    - text: If the Runner installs a {card:Leprechaun} hosted on a {card:Dhegdheer}, programs hosted on {card:Leprechaun} do not have their install costs reduced because they are hosted on {card:Leprechaun} and not on {card:Dhegdheer}.
+  - rule: rule_hosted_word_meaning
+    text: If an ability on a card refers to a "hosted" card or counter, that ability only references objects hosted on that card.
+  - rule: rule_remove_spend_hosted_objects
+    text: Hosted objects can be removed or spent from their host without affecting the host.
+  - rule: rule_trash_hosted_objects_when_host_trashed
+    text: If a host card changes zones, all objects hosted on that card (and all objects hosted on those objects, and so on) are trashed during the next checkpoint. This cannot be prevented. See {ref:sec_checkpoints} for details on checkpoints.
+  - rule: rule_condition_counters_can_host
+    text: Condition counters are the only type of counter that can host other objects. Hosting on condition counters follows the same rules as hosting on cards.
 
 - section: sec_ownership
   text: Ownership and Control

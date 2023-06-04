@@ -503,6 +503,53 @@ sections:
 
 - section: sec_ownership
   text: Ownership and Control
+  rules:
+  - subsection: rule_owner
+    text: The {term:owner} of a card is the player who provided that card at the start of the game as their identity, part of their deck, or an extra card along with their deck.
+    rules:
+    - rule: rule_owner_converted_to_counter
+      text: A card that is converted into a counter retains its owner.
+    - rule: rule_owner_counters
+      text: No player owns counters that are not converted cards.
+  - subsection: rule_controller_object
+    text: The {term:controller of an object} is the player responsible for that object.
+    rules:
+    - rule: rule_controller_card_play_area
+      text: The controller of a card in the play area is the player who installed or placed it there.
+    - rule: rule_controller_agenda
+      text: The Corp controls each agenda in the Corp's score area. The Runner controls each agenda in the Runner's score area.
+    - rule: rule_controller_default_owner
+      text: Cards in other zones are controlled by their owner.
+    - rule: rule_controller_credits
+      text: Each player controls the credits in their credit pool.
+    - rule: rule_controller_bad_publicity_tag
+      text: The Corp controls each bad publicity counter. The Runner controls each tag counter. However, see rule {ref:rule_cost_tag} and {ref:rule_cost_bad_publicity} regarding paying costs that involve tags and bad publicity, respectively.
+    - rule: rule_controller_hosted_counter
+      text: The controller of a counter hosted on a card is the player who controls the host card.
+    - rule: rule_controller_click_core_damage
+      text: Click counters and core damage counters are gameplay aids only and have no controller.
+  - rule: rule_pay_costs_controlled_objects
+    text: A player can only pay costs using objects they control.
+  - subsection: rule_controller_ability
+    text: The {term:controller of an ability} is the player responsible for that ability. By default, this is the player who controls the ability's source. See also {ref:sec_ability_source}. A player can only use abilities they control.
+    rules:
+    - rule: rule_controller_agenda_abilities
+      text: Unless specifically stated otherwise, abilities on agendas are controlled by the Corp, even for agendas in the Runner's score area.
+    - rule: rule_ability_controller_specified
+      text: Some abilities state that they can only be used by a specific player. The specified player controls each such ability, even if they do not control its source.
+  - subsection: rule_controller_choices
+    text: Unless otherwise noted, the controller of an ability carries out its effects and makes any choices required. If a player is specified to perform all or part of an effect, the specified player carries out that part of the effect and makes any choices required instead.
+    examples:
+    - text: |-
+        {card:Rototurret}'s first subroutine reads, "Trash 1 installed program." Since {card:Rototurret} is a Corp card, the Corp chooses which installed program to trash. Conversely, {card:Bulwark}'s first subroutine reads, "The Runner trashes 1 installed program." Since the Runner is specified to be carrying out this effect, they choose which of their installed programs to trash.
+    rules:
+    - rule: rule_trigger_condition_effect_by_player
+      text: Some trigger conditions care about effects performed by a particular player. These conditions are only met when that player is the one to carry out the relevant effect.
+      examples:
+      - text: |-
+          The Corp has a rezzed {card:Hostile Infrastructure}. Apocalypse does not specify who trashes the cards, so the Runner is responsible for the trashing and {card:Hostile Infrastructure} meets its trigger condition.
+      - text: |-
+          {card:Alice Merchant} states that "the Corp must trash 1 card from HQ", so the Corp carries out this effect even though {card:Alice Merchant} is a Runner card, and therefore {card:Hostile Infrastructure} does not meet its trigger condition.
 
 - section: sec_targets
   text: Targets

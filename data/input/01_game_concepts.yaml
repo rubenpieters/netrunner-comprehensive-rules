@@ -554,9 +554,50 @@ sections:
 - section: sec_targets
   text: Targets
   rules:
+  - subsection: rule_target
+    text: Many abilities require players to choose 1 or more objects or subroutines to affect. Each object and subroutine chosen for an ability is a {term:target} of that ability.
+    examples:
+    - text: |-
+        {card:Top Hat} reads in part, "you may choose 1 of the top 5 cards of R&D and access it." The target of this instruction is the card in R&D the Runner chooses.
+    - text: |-
+        One of the subroutines on {card:Colossus} reads in part, "Trash 1 installed program and 1 installed resource." The targets of this subroutine are the two cards that will be trashed.
+    - text: |-
+        {card:Trick of Light} reads, "Choose 1 installed card you can advance. Move up to 2 advancement counters from 1 other card to the chosen card." The targets of this operation are the advancement counters to be moved and the destination card. If 2 tokens are chosen, they must be hosted on the same card.
+    - text: |-
+        The Runner is encountering a barrier and uses {card:Cleaver} to break subroutines. The targets of {card:Cleaver}'s' interface ability are the 1 or 2 subroutines that it will break.
+    rules:
+    - rule: rule_searching_does_not_target
+      text: Cards found during a search are not considered targets of the instruction that performs the search. Players do not need to announce what card(s) they expect to find before the search actually takes place. See {ref:sec_searching_cards} for rules about searching.
+    - rule: rule_object_subroutine_targets
+      text: Only objects and subroutines are announced as targets. If an instruction directs a player to choose (or "name") a number, a card type, a subtype, a card name, a server, or one of a specified set of effects, that choice is not made until the instruction resolves.
+  - subsection: rule_announce_targets
+    text: Immediately before an instruction becomes imminent, the player resolving that instruction must first choose the targets required by that instruction. For each time the instruction requires a player to choose 1 or more objects and/or subroutines, that player {term:announces} appropriate targets. Once players are finished announcing targets for an instruction, the instruction becomes imminent, and players have the opportunity to modify the effects of that instruction with interrupt abilities before it resolves. See {ref:sec_interrupts_replacements}.
+    rules:
+    - rule: rule_target_indicate
+      text: When a player announces a card as a target, they indicate clearly which card is being chosen without changing its facedown/faceup status or location.
+    - rule: rule_targets_must_be_valid
+      text: The player resolving the instruction can only choose targets that are valid for that instruction. A target is valid for an instruction if it meets any specified requirements of that instruction or can otherwise be acted upon by that instruction.
+    - rule: rule_targets_must_be_in_play_area
+      text: Unless an instruction explicitly specifies the zone from which an object must be selected as a target, only counters in the play area and installed cards are valid targets for that instruction.
+      examples:
+      - text: The Corp resolves a subroutine that says "[sub] The Runner trashes 1 program." The Runner must trash 1 of their installed programs and may not trash a program from their grip or stack.
+    - rule: rule_multiple_targets
+      text: Some effects allow a player to choose multiple cards as targets for a single announcement. {ref:Sec_quantities_and_sets} contains rules about resolving effects involving sets of cards.
+    - rule: rule_distinct_targets
+      text: A player may announce the targets for an instruction in any order, but each object or subroutine can only be chosen as a target once for each announcement. If there are not enough valid targets available, then that player chooses as many distinct targets as possible and the remaining targets are not announced.
+      examples:
+      - text: The Runner accesses an {card:Aggressive Secretary} with three advancement counters on it. The Runner only has two installed programs, so the Corp chooses both of those programs for {card:Aggressive Secretary}. After the programs have been chosen, they are both trashed simultaneously.
+    - rule: rule_targeting_only_once
+      text: Targets cannot be chosen for an instruction at any other time. Even if the game state changes due to interrupt abilities while the instruction is imminent, unannounced targets remain unchosen.
   - rule: rule_targets_gone
     text: |-
       At the time an instruction resolves, if any of its targets either have become invalid or were not announced, as much of that ability resolves as possible without acting on the unannounced or invalid targets, following {ref:rule_if_able,rule_do_as_much_as_you_can} of the Golden Rules. A target can be invalid because the chosen object or subroutine no longer exists or because the target no longer meets other requirements specified by the targeting ability.
+  - rule: rule_target_beyond_move
+    text: |-
+      After the resolution of an instruction that chose a particular target, subsequent instructions of the same ability can continue to act on that target without needing to select it again, even if the ability moves the target or changes its properties. See also {ref:rule_no_memory}.
+    examples:
+    - text: |-
+       {card:Howler}'s ability targets a card in HQ. Its first instruction installs that card, and its second instruction creates a delayed conditional ability that refers to that card in the play area. The latter ability can find and act on the card as long as it is still installed. 
 
 - section: sec_costs
   text: Costs

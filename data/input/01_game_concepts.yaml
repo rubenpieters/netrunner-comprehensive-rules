@@ -602,7 +602,102 @@ sections:
 - section: sec_costs
   text: Costs
   rules:
-  - subsection: rule_nested
+  - subsection: rule_cost
+    text: In order to use an ability or apply an effect, a player may be required to pay a cost. A cost can take the form of any card, counter, or other item a player must spend; an effect a player must resolve; or other type of requirement a player must meet. If a player cannot pay the full cost of an action or ability all at once with cards and counters they control, they cannot use the effect associated with that cost.
+    rules:
+    - rule: rule_cost_no_interrupt
+      text: The act of paying a cost cannot be modified or cancelled by optional interrupt abilities.
+      examples:
+      - text: The Runner can trash {card:Clone Chip} to trigger its paid ability, but cannot use {card:LLDS Energy Regulator} to prevent {card:Clone Chip} from being trashed this way.
+    - rule: rule_cost_interrupt_static_mandatory
+      text: If a static ability or a mandatory conditional ability interrupt would prevent the steps of paying a cost from being carried out if they were performed as an effect, that cost cannot be paid.
+      examples:
+      - text: |-
+          The Runner cannot pay the additional cost to steal {card:Obokata Protocol} while {card:Guru Davinder} is installed, because the Runner could not currently take 4 damage if instructed to: {card:Guru Davinder}'s first ability would prevent the damage.
+      - text: The Runner is playing as {card:Jesminder Sareen} and encounters {card:Funhouse}, without any other tag-related effects resolving earlier in the run. Since {card:Jesminder}'s ability would prevent taking 1 tag, the Runner cannot take 1 tag to pay the nested cost in {card:Funhouse}'s ability. {card:Funhouse} will end the run.
+    - rule: rule_cost_restrictions
+      text: If triggering an ability or resolving an effect is subject to both costs and other restrictions, the cost cannot be paid unless all such restrictions are met, and cannot be paid in a way that would result in any restriction no longer being met.
+      examples:
+      - text: The Runner controls {card:Zer0} and {card:Clan Vengeance}, and wants to accumulate more power counters on {card:Clan Vengeance}. {card:Zer0}'s ability has the restriction "Use this ability only once per turn." If the Runner has already used the ability this turn, they cannot suffer additional net damage by attempting (even unsuccessfully) to use the ability again.
+      - text: The Corp installs {card:Azef Protocol} in the root of a server with a rezzed {card:SanSan City Grid} and advances {card:Azef Protocol} twice. Since {card:SanSan City Grid} reduces {card:Azef Protocol}'s advancement requirement to 2, the Corp now meets the restriction necessary to score {card:Azef Protocol}, but must also pay its additional cost to score. The Corp cannot trash the {card:SanSan City Grid} to pay this cost, because paying the cost this way would return {card:Azef Protocol}'s advancement requirement to 3, and the restriction to score it would no longer be met.
+    - rule: rule_cost_zero
+      text: A cost of 0 can still be paid by a player, even though no items are paid. Costs of 0 are not paid automatically. A player pays a cost of 0 by explicitly announcing they are paying it.
+      examples:
+      - text: |-
+          The Runner accesses a {card:Beanstalk Royalties} from R&D and announces that they are using the ability of {card:Freedom Khumalo: Crypto-Anarchist} to trash the {card:Beanstalk Royalties}. Even though the Runner does not remove any virus counters from any cards, they have still paid the cost.
+  - subsection: rule_modified_costs
+    text: The actual contents of a cost can be dependent on the game state. Abilities can modify their own costs, modify costs of a certain type or that meet certain criteria, or include costs that need to be calculated.
+    rules:
+    - rule: rule_cost_calculation
+      text: If a quantity in a cost is subject to effects modifying its value, determine the final value of that quantity by taking its default value, applying each effect that increases the cost, and then applying each effect that lowers the cost. Finally, if the value determined by this process is less than 0, set the value to 0.
+    - rule: rule_cost_quantities
+      text: Some abilities calculate a quantity using phrases like "for each", "for every", or "plus". Any time such a calculation appears in a cost, the result of that calculation is determined at the time the cost is to be paid. The result is taken as an aggregate, so that paying the cost is a single instance of whatever was paid. Note that additional costs ({ref:rule_nested_cost}) are not aggregated with other costs. See also {ref:sec_quantities_and_sets} for rules about calculated quantities that appear in other contexts.
+      examples:
+      - text: The Runner approaches a server protected by 3 advanced pieces of ice and with a rezzed {card:Cayambe Grid} in its root. They pay the nested cost in {card:Cayambe Grid}'s ability. This cost is 1 payment of 6[c], not 3 payments of 2[c], so this only meets the trigger condition for 1 instance of {card:GameNET}'s ability.
+    - rule: rule_cost_x
+      text: Some costs contain the variable X. Before a player pays such a cost, they choose and announce a positive integer or 0 to be the value for X. The chosen value must follow any applicable restrictions.
+      examples:
+      - text: |-
+          {card:Psychographics} is an operation with a play cost of X. It also has the ability, "X must be equal to or less than the number of tags the Runner has." If the Runner has 3 tags, the Corp can choose 0, 1, 2, or 3 as the value for X when they play {card:Psychographics}.
+    - rule: rule_cost_x_out_of_context
+      text: If an ability needs to know the value of a cost in a context where that cost is not being paid, treat any X that appears in that cost as 0.
+  - rule: rule_cost_checkpoint
+    text: After a player pays a cost, a checkpoint occurs. See {ref:sec_checkpoints}.
+  - subsection: rule_types_of_costs
+    text: |-
+      There are six main types of costs: install costs (found mainly on hardware, programs, and resources, and incurred when installing ice), play costs (found on operations and events), rez costs (found on assets, upgrades, and ice), paid ability trigger costs, additional costs, and nested costs.
+    rules:
+    - rule: rule_inherent_cost
+      text: Install costs, rez costs, and play costs are all costs that are inherent properties of cards. These costs are automatically applied to any ability that performs the corresponding effects (installing, rezzing, or playing) unless that ability stipulates otherwise. See also {ref:TODO} (for more about these costs as they appear on cards) and {ref:TODO}, {ref:TODO} and {ref:TODO} (for more about paying costs to install, rez, and play cards).
+    - rule: rule_inherent_cost_in_ability
+      text: The presence of an install cost, rez cost, or play cost does not change the optional or mandatory status of an ability. If an effect directs a player to install, rez, or play a card, they must pay the associated cost if able. If they cannot, the card is not installed, rezzed, or played.
+    - rule: rule_inherent_and_additional_cost
+      text: If an effect directs a player to install, rez, or play a card, but doing so has an additional cost, the player is not forced to pay the additional cost. If they decline to do so, they do not pay the install, rez, or play cost either, and the card is not installed, rezzed, or played.
+    - rule: rule_inherent_cost_aggregates
+      text: When a player takes an action that plays or installs one or more cards and has no other effects, the play cost or install cost of each of those cards is considered to have been spent to take that action, even though other steps take place between initiating the action and paying that cost.
+      examples:
+      - text: |-
+          The Corp has {card:Jeeves Model Bioroids} rezzed, and uses the basic action "[Click]: Play an operation." to play {card:Blue Level Clearance}. Both the click spent for the cost of the basic action and the click spent for {card:Blue Level Clearance}'s additional cost count as clicks spent to take the "[Click]: Play an operation." action.
+  - subsection: rule_ignoring_costs
+    text: Some abilities direct a player to ignore certain costs when performing particular effects.
+    rules:
+    - rule: rule_ignore_general_cost
+      text: If a player is directed to ignore 1 or more of the 6 main types of costs, the specified costs are removed from the total cost that must be paid. Any other costs (usually additional costs) that are not specified to be ignored still apply normally.
+    - rule: rule_ignore_credit_cost
+      text: If a player is directed to ignore "credit costs", any credits to be paid from any type of cost are removed from the total cost. Any costs that do not consist of credits still apply normally.
+    - rule: rule_ignore_all_costs
+      text: If a player is directed to ignore "all costs", all elements of the relevant cost are removed, including additional costs, so that the total cost becomes 0.
+  - subsection: rule_install_cost
+    text: The {term:install cost} of a card must be paid to install that card.
+    rules:
+    - rule: rule_install_cost_on_card
+      text: The install cost of a program, resource, or piece of hardware is listed on the card itself.
+    - rule: rule_install_cost_ice
+      text: The install cost of a piece of ice is a number of credits equal to the number of pieces of ice already protecting the server that ice will be installed protecting.
+    - rule: rule_no_install_cost
+      text: There is no cost to install an asset, upgrade, or agenda.
+  - rule: rule_play_cost
+    text: The {term:play cost} of an operation or event must be paid to play that card. It is listed on the card itself.
+  - rule: rule_rez_cost
+    text: The {term:rez cost} of an asset, upgrade, or piece of ice must be paid in order to rez that card. It is listed on the card itself.
+  - rule: rule_trigger_cost
+    text: The {term:trigger cost} of each paid ability is the first part of that ability's text. It is followed by a colon (:) and then the ability's effect. See {ref:sec_paid_abilities} for more details on paid abilities.
+  - subsection: rule_additional_cost
+    text: An {term:additional cost} adds something to the regular cost of initiating a particular game effect. A player must pay all additional costs along with any regular costs in order to initiate an effect.
+    rules:
+    - rule: rule_decline_additional_cost
+      text: If a player would be forced to carry out a game effect, but doing so has an additional cost, that player may decline to pay the additional cost, even if they are able to pay it, thus preventing that effect from occurring.
+      examples:
+      - text: The Runner accesses {card:Obokata Protocol}. Normally the Runner must steal agendas that they access, but because {card:Obokata Protocol} has an additional cost to steal, the Runner can decline to suffer the net damage and not steal the agenda.
+    - rule: rule_additonal_cost_simultaenous
+      text: A player must pay all additional costs simultaneously with the cost that is being added to, even if multiple cards or abilities are adding separate additional costs. A player cannot pay the original cost or any of the additional costs individually. If they cannot pay for all of the costs at once, then they do not pay any of the costs and the corresponding effects cannot occur.
+      examples:
+      - text: The Runner accesses {card:Obokata Protocol} while {card:Ben Musashi} and {card:Predictive Algorithm} are both active. The Runner must be able to pay 2 credits and suffer 6 net damage all at once in order to steal the {card:Obokata Protocol}, even though each of the three costs are from different card abilities. After all costs have been paid, abilities that meet their trigger conditions from the paying of any of those costs, such as {card:I've Had Worse} or {card:Order of Sol}, can then resolve as applicable.
+    - rule: rule_additional_cost_checkpoint
+      text: If an additional cost is required for an effect that does not normally require paying any cost, the additional cost is paid and a checkpoint is resolved before performing the usual procedure to carry out that effect. See also {ref:TODO}.
+      examples:
+      - text: The Corp is playing {card:Ob Superheavy Logistics} and initiates scoring {card:Azef Protocol}, which has an additional cost to score of "trash one of your other installed cards." If the Corp trashes a rezzed card, meeting the trigger condition for {card:Ob}'s ability, this ability will resolve following the checkpoint associated with paying the cost. This happens before {card:Azef Protocol} is added to the Corp's score area or any trigger conditions related to scoring an agenda are met.
+  - subsection: rule_nested_cost
     text: |-
       A {term:nested cost} is a cost appearing within an ability's instructions that must be paid while the ability is resolving in order for some or all of the rest of the effects of that ability to resolve.
     rules:

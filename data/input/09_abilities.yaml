@@ -12,6 +12,9 @@ sections:
       text: |-
         While resolving an ability, other abilities can meet their conditions. When this happens, a "chain reaction" is created. The current instruction finishes resolving, then more recent abilities fully resolve before the next instruction of the original ability. If any other abilities meet their conditions while resolving the "chained" abilities, then another "chain" is created before continuing to resolve the previous chained abilities. Resolve each set of chained abilities one at a time, from the most recently met condition to the oldest, before continuing with the original ability that started the chain reaction.
 
+- section: sec_paid_abilities
+  text: Paid Abilities
+
 - section: sec_subroutines
   text: Subroutines
 

@@ -564,7 +564,7 @@ sections:
     - text: |-
         {card:Trick of Light} reads, "Choose 1 installed card you can advance. Move up to 2 advancement counters from 1 other card to the chosen card." The targets of this operation are the advancement counters to be moved and the destination card. If 2 tokens are chosen, they must be hosted on the same card.
     - text: |-
-        The Runner is encountering a barrier and uses {card:Cleaver} to break subroutines. The targets of {card:Cleaver}'s' interface ability are the 1 or 2 subroutines that it will break.
+        The Runner is encountering a {subtype:barrier} and uses {card:Cleaver} to break subroutines. The targets of {card:Cleaver}'s' interface ability are the 1 or 2 subroutines that it will break.
     rules:
     - rule: rule_searching_does_not_target
       text: Cards found during a search are not considered targets of the instruction that performs the search. Players do not need to announce what card(s) they expect to find before the search actually takes place. See {ref:sec_searching_cards} for rules about searching.

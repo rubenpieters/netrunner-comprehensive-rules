@@ -733,7 +733,7 @@ sections:
     - rule: rule_score_not_an_action
       text: Scoring an agenda does not cost [click] and is not an action. 
     - rule: rule_decline_to_steal
-      text: The Runner cannot decline to steal an agenda they access, unless there is an additional cost to steal that agenda and the Runner cannot or does not wish to pay it. {ref:Chpt_access_breach} details accessing, and {ref:sec_additional_cost} details additional costs.
+      text: The Runner cannot decline to steal an agenda they access, unless there is an additional cost to steal that agenda and the Runner cannot or does not wish to pay it. {ref:Chpt_access_breach} details accessing, and {ref:rule_additional_cost} details additional costs.
     - rule: rule_add_agenda_to_score_area
       text: If an effect directly adds an agenda to a score area or otherwise moves an agenda from any zone to a score area, that agenda is not considered scored or stolen.
     - rule: rule_added_agendas_not_scored_or_stolen

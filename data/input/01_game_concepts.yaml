@@ -212,7 +212,7 @@ sections:
     rules:
     - rule: rule_win_agenda_points
       text: |-
-        Either player can win by collecting agenda points in their score area (usually done by scoring or stealing agendas; see {ref:sec_score_steal}). A player with a score of 7 or more wins the game.
+        Either player can win by collecting agenda points in their score area (usually done by scoring or stealing agendas; see {ref:sec_score_scoring_steal}). A player with a score of 7 or more wins the game.
     - rule: rule_flatline
       text: |-
         The Corp wins if the Runner is flatlined. The Runner is flatlined immediately if they suffer more damage than they have cards in their grip. The Runner is also flatlined if, at the beginning of their discard phase, their maximum hand size is less than 0. See {ref:sec_damage} for more information about damage.
@@ -716,8 +716,38 @@ sections:
       text: |-
         Some abilities use the word "otherwise" to indicate that different instructions should be resolved depending on whether a nested cost was paid or not. In an ability with a nested cost of a form described in {ref:rule_nested_cost_may}, treat "otherwise" as an "if [you/they] do not" clause attached to the same cost. Conversely, in an ability with a nested cost of a form described in {ref:rule_nested_cost_unless}, treat "otherwise" as an "if [you/they] do" clause attached to the same cost. Note that "otherwise" can also appear in the context of other types of conditions, and does not by itself indicate a nested cost.
 
-- section: sec_score_steal
+- section: sec_score_scoring_steal
   text: Score, Scoring and Stealing
+  rules:
+  - rule: rule_score
+    text: The sum of all agenda points on agendas in a player's score area is that player's {term:score}.
+  - rule: rule_game_win
+    text: If at any time a player's score is greater than or equal to 7, they win the game at the next checkpoint. See {ref:sec_ending_the_game} regarding winning the game, and {ref:sec_checkpoints} for details about checkpoints.
+  - subsection: rule_score_steal
+    text: Players add agendas to their score areas by {term:scoring} or {term:stealing} them. The Corp can score an agenda to their score area as an option during certain paid ability windows on their turn. The Runner can steal an agenda to their score area while accessing it.
+    rules:
+    - rule: rule_advancement_requirement
+      text: The {term:advancement requirement} of an agenda restricts when the Corp can score it. The Corp can only score an agenda that has advancement counters on it greater than or equal to its advancement requirement. See {ref:sec_advancing_cards}.
+    - rule: rule_not_required_to_score
+      text: The Corp is not required to score an agenda immediately upon satisfying its advancement requirement.
+    - rule: rule_score_not_an_action
+      text: Scoring an agenda does not cost [click] and is not an action. 
+    - rule: rule_decline_to_steal
+      text: The Runner cannot decline to steal an agenda they access, unless there is an additional cost to steal that agenda and the Runner cannot or does not wish to pay it. {ref:Chpt_access_breach} details accessing, and {ref:sec_additional_cost} details additional costs.
+    - rule: rule_add_agenda_to_score_area
+      text: If an effect directly adds an agenda to a score area or otherwise moves an agenda from any zone to a score area, that agenda is not considered scored or stolen.
+    - rule: rule_added_agendas_not_scored_or_stolen
+      text: If an effect causes another card to be added to a score area "as an agenda", the newly converted agenda is not considered scored or stolen. See {ref:rule_add_card_to_score_area}.
+  - rule: rule_score_area_faceup
+    text: Agendas are always added to the score area faceup, regardless of their previous faceup/facedown status.
+  - rule: rule_score_area_uninstalled
+    text: If an installed agenda is scored or stolen, it becomes uninstalled. Any advancement counters on the scored or stolen agenda are returned to the bank. See {ref:rule_trash_hosted_objects_when_host_trashed}.
+  - rule: rule_agenda_scored
+    text: Some agendas and other cards have abilities with a trigger condition related to an agenda being scored. These abilities become pending after the Corp moves the agenda from its current zone to their score area.
+  - rule: rule_agenda_stolen
+    text: Some agendas and other cards have abilities with a trigger condition related to an agenda being stolen. These abilities become pending after the Runner moves the agenda from its current zone to their score area.
+  - rule: rule_advancement_counters_reference
+    text: If an ability meets its trigger condition from an agenda being scored or stolen, the agenda's last known number of advancement counters before being scored or stolen is used for any references to the number of advancement counters in the effects of that ability.
 
 - section: sec_advancing_cards
   text: Advancing Cards

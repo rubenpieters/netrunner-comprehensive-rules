@@ -1,2 +1,5 @@
 chapter: chpt_game_zones
 text: Game Zones
+sections:
+- section: sec_game_zones_general
+  text: General

@@ -17,3 +17,28 @@ sections:
       Only identity cards have minimum deck sizes and influence limits. These values do not apply during the game; instead, they determine deckbuilding constraints for decks associated with that identity. See {ref:sec_deck_construction}.
   - rule: rule_identity_base_link
     text: Only Runner identities have a base link. This value is used in calculating the Runner's link value. See {ref:sec_link}.
+  - rule: rule_identity_HQ
+    text: The Corp's identity card is used to mark the location of HQ. See {ref:TODO}.
+
+- section: sec_agendas
+  text: Agendas
+  snippet: Agendas represent valuable pieces of Corporate data. When the Corp advances and scores agendas, it represents completion of critical Corporate projects. When the Runner steals agendas, it represents their acquisition of secret Corporate data.
+  rules:
+  - rule: rule_agendas_in_roots
+    text: The Corp may install agendas only in the roots of remote servers. There can be only one agenda or one asset installed in the root of any given remote server at a time. See {ref:TODO}.
+  - subsection: rule_agenda_advancement_requirement_agenda_points
+    text: Only agendas have advancement requirements and agenda points. See {ref:sec_score_scoring_steal}.
+    rules:
+    - rule: rule_agenda_advancement_requirement
+      text: An agenda's advancement requirement is the minimum number of advancement counters that must be on that agenda for the Corp to score it.
+    - rule: rule_score_from_score_area
+      text: The agenda points on an agenda contribute to a player's score while the agenda is in their score area.
+  - subsection: rule_agendas_not_rezzed
+    text: Agendas cannot be rezzed and are inactive while installed. Agendas are active in the Corp's score area. Agendas are inactive in the Runner's score area unless the agenda's card text specifies otherwise. See {ref:TODO}.
+    rules:
+    - rule: rule_agendas_faceup
+      text: Some agendas may be installed faceup or turned faceup through card abilities. Faceup agendas are neither rezzed nor unrezzed. If an agenda's printed text directs the Corp to install it faceup, that agenda's abilities are active while it is installed.
+    - rule: rule_advancemenet_requirements_modification
+      text: Some agendas modify the requirements for stealing or scoring them. These abilities are always active, according to any restrictions or requirements specified. See {ref:TODO}.
+  - rule: rule_agendas_advanced
+    text: Agendas can always be advanced. See {ref:sec_advancing_cards}.

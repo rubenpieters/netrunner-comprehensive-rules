@@ -42,3 +42,64 @@ sections:
       text: Some agendas modify the requirements for stealing or scoring them. These abilities are always active, according to any restrictions or requirements specified. See {ref:TODO}.
   - rule: rule_agendas_advanced
     text: Agendas can always be advanced. See {ref:sec_advancing_cards}.
+
+- section: sec_assets
+  text: Assets
+  snippet: Assets represent various resources and connections at the Corp's disposal.
+  rules:
+  - rule: rule_asset_root_remote
+    text: The Corp may install assets only in the roots of remote servers. There can be only one agenda or one asset installed in the root of any given remote server at a time. See {ref:TODO}.
+  - rule: rule_asset_rez_cost
+    text: Assets are among the card types that have rez costs. They are installed unrezzed and remain inactive until the Corp rezzes them by paying their rez costs during a paid ability window. See {ref:TODO}.
+  - rule: rule_asset_trash_cost
+    text: Assets are among the card types that have trash costs. If the Runner accesses an asset, they may pay the trash cost to trash that asset. See {ref:TODO}.
+  - rule: rule_asset_lady_liberty
+    text: One asset, {card:Lady Liberty}, has the subtype {subtype:region} and the text "Limit 1 {subtype:region} per server." See {ref:TODO} for rules governing {subtype:region} cards.
+
+- section: sec_ice
+  text: Ice
+  snippet: Ice are sophisticated security systems that protect Corporate servers through a variety of means. "Ice" has been suggested to stand for a variety of expressions, but is most commonly expanded as "Intrusion Countermeasures Electronics".
+  rules:
+  - rule: rule_ice_piece_of_ice
+    text: |-
+      "Ice" and "piece of ice" are synonymous.
+  - subsection: rule_ice_protect_server
+    text: Ice are the only type of card installed protecting servers. Ice are not installed in the roots of servers. See {ref:TODO}.
+    rules:
+    - rule: rule_ice_layout
+      text: Ice protecting a server are laid out horizontally in front of that server, with the outermost piece of ice furthest from the server.
+    - rule: rule_ice_instal_outermost
+      text: When the Corp installs a piece of ice, they must install it in the outermost position protecting a server. See {ref:TODO}.
+  - subsection: rule_ice_rez_cost
+    text: Ice are among the card types that have rez costs. They are installed unrezzed and remain inactive until the Corp rezzes them by paying their rez costs. See {ref:TODO}.
+    rules:
+    - rule: rule_ice_rez_window
+      text: Unlike assets and upgrades, ice can normally only be rezzed while being approached during a run. See {ref:TODO}.
+  - rule: rule_ice_strength_value
+    text: Ice are among the card types that have strength. An ice's strength determines which icebreakers are allowed to interface with it. See {ref:TODO}.
+  - subsection: rule_ice_trash_cost
+    text: Some ice have trash costs. If the Runner accesses an ice with a trash cost, they may pay the trash cost to trash that ice. See {ref:TODO}.
+    rules:
+    - rule: rule_ice_access
+      text: Unlike assets, upgrades, and agendas, ice are not normally accessed while installed. Encountering a piece of ice does not entail accessing that ice and does not give the Runner an opportunity to pay its trash cost.
+  - rule: rule_ice_install_cost
+    text: Ice are the only Corp cards with install costs. The install cost of a piece of ice is not a printed value but instead a calculated value based on the number of other ice already protecting the relevant server. See {ref:rule_install_cost_ice}.
+  - rule: rule_ice_subroutine
+    text: Ice are the only cards with subroutines. See {ref:TODO}.
+
+- section: sec_operations
+  text: Operations
+  rules:
+  - subsection: rule_operation_play
+    text: Operations are the only Corp cards that are played. Operations are never installed. Playing an operation causes its abilities to become active, and once those abilities are fully resolved the operation is trashed. See {ref:TODO}.
+    rules:
+    - rule: rule_operation_condition
+      text: Some operations have the subtype {subtype:condition}. As part of their abilities, {subtype:condition} operations convert themselves into {subtype:condition} counters and install themselves. A {subtype:condition} operation cannot be installed by an install effect; it can only be installed through its own conversion ability. See {ref:TODO}.
+    - rule: rule_operation_current
+      text: Some operations have the subtype {subtype:current}. As part of their abilities, {subtype:current} operations prevent themselves from being trashed until another {subtype:current} operation or event is played or the Runner steals an agenda. When one of these occurs, the active {subtype:current} is trashed during the next checkpoint. See {ref:sec_checkpoints}.
+    - rule: rule_operation_lockdown
+      text: Some operations have the subtype {subtype:lockdown}. As part of their abilities, {subtype:lockdown} operations prevent themselves from being trashed until the start of the Corp's next turn after the operation is played. Once the Corp's turn begins, this effect expires and the operation is trashed during the next checkpoint, before any conditional abilities marked pending at that time can be triggered. See {ref:sec_checkpoints}.
+  - rule: rule_operation_play_cost
+    text: Operations are the only Corp cards with play costs. An operation's play cost is the number of credits the Corp must spend to play the operation. See {ref:TODO}.
+  - rule: rule_operation_play_cost
+    text: Some operations have trash costs. If the Runner accesses an operation with a trash cost, they may pay the trash cost to trash that operation. See {ref:TODO}.

@@ -101,5 +101,5 @@ sections:
       text: Some operations have the subtype {subtype:lockdown}. As part of their abilities, {subtype:lockdown} operations prevent themselves from being trashed until the start of the Corp's next turn after the operation is played. Once the Corp's turn begins, this effect expires and the operation is trashed during the next checkpoint, before any conditional abilities marked pending at that time can be triggered. See {ref:sec_checkpoints}.
   - rule: rule_operation_play_cost
     text: Operations are the only Corp cards with play costs. An operation's play cost is the number of credits the Corp must spend to play the operation. See {ref:TODO}.
-  - rule: rule_operation_play_cost
+  - rule: rule_operation_trash_cost
     text: Some operations have trash costs. If the Runner accesses an operation with a trash cost, they may pay the trash cost to trash that operation. See {ref:TODO}.

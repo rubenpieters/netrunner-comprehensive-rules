@@ -143,7 +143,6 @@ sections:
   - rule: rule_event_play_cost
     text: Events are the only Runner cards with play costs. An event's play cost is the number of credits the Runner must spend to play the event. See {ref:TODO}.
 
-
 - section: sec_hardware
   text: Hardware
   snippet: |-
@@ -156,7 +155,7 @@ sections:
     text: The Runner installs hardware into the play area.
   - rule: rule_hardware_install_cost
     text: Hardware are among the types of cards with install costs. The Runner installs a hardware faceup and active by paying its install cost. See {ref:TODO}.
-  - rule: rule_hardware_limit
+  - rule: rule_hardware_no_limit
     text: There is no limit to the number of hardware the Runner can have installed.
   - subsection: subsec_consoles
     text: Consoles
@@ -170,3 +169,63 @@ sections:
       text: This limitation applies only to hardware with the subtype {subtype:console}.
     - rule: rule_console_limitation_active
       text: This limitation applies only to active {subtype:console}. A player can have multiple copies of a {subtype:console}, and even different {subtype:consoles}, in their deck.
+
+- section: sec_programs
+  text: Programs
+  snippet: Programs are digital tools at the Runner's disposal, primarily used as a means of intrusion.
+  rules:
+  - rule: rule_program_install
+    text: The Runner installs programs into the play area.
+  - rule: rule_program_install_cost
+    text: Programs are among the types of cards with install costs. The Runner installs a program faceup and active by paying its install cost. See {ref:TODO}.
+  - subsection:
+    text: Programs are the only card type that have a memory cost. A program's memory cost is the number of memory units that program requires while it is installed.
+    rules:
+    - rule: rule_program_memory
+      text: Installing a program does not permanently consume memory. The program claims its designated quantity of memory units until it becomes uninstalled, at which point those memory units become available for use by other programs.
+    - rule: rule_program_install_exceed_memory_limit
+      text: When the Runner installs a program that would increase the total memory cost of installed programs over their memory limit, they must trash one or more installed programs such that the total memory cost of installed programs including the new program will not exceed their memory limit. See section 8.5.
+    - rule: rule_program_other_exceed_memory_limit
+      text: If the Runner's memory limit decreases below the total memory cost of installed programs, or if the total memory cost of installed programs increases above the memory limit for any reason other than installing another program, the Runner must trash one or more installed programs such that the total memory cost of the remaining programs does not exceed their memory limit. This occurs during the next checkpoint after the memory limit is exceeded. See {ref:sec_checkpoints}.
+    - rule: rule_program_memory_not_a_cost
+      text: A program's memory cost is not a cost. It cannot be increased, lowered, ignored, or otherwise modified by abilities that affect costs to install programs.
+  - subsection: rule_program_strength_value
+    text: Programs are among the card types that have strength.
+    rules:
+    - rule: rule_icebreakers_strength_value
+      text: Programs with the subtype {subtype:icebreaker} have a printed numerical strength value. An {subtype:icebreaker}'s strength determines which ice it is allowed to interface with. See {ref:subsec_icebreakers}.
+    - rule: rule_programs_without_strength_value
+      text: Programs without the subtype {subtype:icebreaker} do not have a strength value. A dash (–) is printed on non-{subtype:icebreaker} program cards in the place where strength is printed on {subtype:icebreaker} program cards.
+  - subsection: subsec_icebreakers
+    text: Icebreakers
+    toc:
+    rules:
+    - rule: rule_program_icebreaker
+      text: Some programs have the subtype {subtype:icebreaker}. {subtype:Icebreaker} programs have strength and abilities that interface with ice.
+    - rule: rule_icebreaker_strength_increase_implicit
+      text: Paid abilities on an {subtype:icebreaker} that modify that {subtype:icebreaker}'s strength implicitly have a duration of "for the remainder of the current encounter".
+    - rule: rule_icebreaker_strength_increase_specified
+      text: If an {subtype:icebreaker}'s paid ability specifies another duration for modifying its strength, that modification lasts until both the stated duration and the implicit encounter duration have expired.
+    - rule: rule_icebreaker_strength_increase_outside_of_encounter.
+      text: If an {subtype:icebreaker}'s paid ability modifies its strength outside of an encounter and does not specify another applicable duration, the modification expires during the next checkpoint.
+    - rule: rule_icebreaker_interface
+      text: All {subtype:icebreakers} have abilities that {term:interface} with ice, sometimes referred to as "interface abilities". These abilities are indicated by the "interface" flag preceding the ability's text.
+    - rule: rule_icebreaker_interface_during_encounter
+      text: The Runner can only use an interface ability during {ref:TODO} of an encounter, and can only choose the encountered piece of ice and its subroutines as targets for the ability's effects. See {ref:sec_targets} for more information about targeting.
+    - rule: rule_icebreaker_interface_strength
+      text: The Runner can only use an interface ability on an {subtype:icebreaker} if the {subtype:icebreaker} has strength greater than or equal to the strength of the encountered ice.
+    - rule: rule_icebreaker_interface_subtype
+      text: If an interface ability specifies that it affects a particular subtype of ice, then that ability can only be used on a piece of ice that has the specified subtype. If an ability on an {subtype:icebreaker} does not specify a subtype of ice that it affects, that ability can be used on any piece of ice.
+
+- section: sec_resources
+  text: Resources
+  snippet: Resources are a wide variety of connections and skills that aid the Runner.
+  rules:
+  - rule: rule_resource_install
+    text: The Runner installs resources into the play area.
+  - rule: rule_resource_install_cost
+    text: Resources are among the types of cards with install costs. The Runner installs a resource faceup and active by paying its install cost. See {ref:TODO}.
+  - rule: rule_resource_no_limit
+    text: There is no limit to the number of resources the Runner can have installed.
+  - rule: rule_resource_trash_action
+    text: While the Runner is tagged, the Corp may spend [click] and 2[c] to trash an installed resource as a basic action. See {ref:sec_tags}.

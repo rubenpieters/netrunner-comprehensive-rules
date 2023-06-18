@@ -63,7 +63,7 @@ sections:
   - rule: rule_ice_piece_of_ice
     text: |-
       "Ice" and "piece of ice" are synonymous.
-  - subsection: rule_ice_protect_server
+  - subsection: rule_ice_install
     text: Ice are the only type of card installed protecting servers. Ice are not installed in the roots of servers. See {ref:TODO}.
     rules:
     - rule: rule_ice_layout
@@ -103,3 +103,70 @@ sections:
     text: Operations are the only Corp cards with play costs. An operation's play cost is the number of credits the Corp must spend to play the operation. See {ref:TODO}.
   - rule: rule_operation_trash_cost
     text: Some operations have trash costs. If the Runner accesses an operation with a trash cost, they may pay the trash cost to trash that operation. See {ref:TODO}.
+
+- section: sec_upgrades
+  text: Upgrades
+  rules:
+  - rule: rule_upgrade_install
+    text: The Corp may install upgrades in the root of any server. Upgrades are the only card type that can be installed in the root of a central server.
+  - rule: rule_upgrade_no_limit
+    text: There is no limit to the number of upgrades that can be installed in the root of a single server.
+  - rule: rule_upgrade_rez_cost
+    text: Upgrades are among the card types that have rez costs. They are installed unrezzed and remain inactive until the Corp rezzes them by paying their rez costs during a paid ability window. See {ref:TODO}.
+  - rule: rule_upgrade_trash_cost
+    text: Upgrades are among the card types that have trash costs. If the Runner accesses an upgrade, they may pay the trash cost to trash that upgrade. See {ref:TODO}.
+  - subsection: subsec_regions
+    text: Regions
+    toc:
+    rules:
+    - rule: rule_upgrade_region
+      text: Some upgrades have the subtype {subtype:region}. All {subtype:regions} have the text "Limit 1 {subtype:region} per server."
+    - rule: rule_region_one_root
+      text: The {subtype:region} limitation applies only to cards with the subtype {subtype:region} that are installed or in the process of being installed in the root of a server. It does not apply to cards in central servers, and it does not apply to ice.
+    - rule: rule_region_active_inactive
+      text: The {subtype:region} limitation applies to all cards as specified in {ref:rule_region_one_root}, regardless of the active or inactive state of those cards.
+    - rule: rule_region_install
+      text: When the Corp installs a card with the subtype {subtype:region} into the root of a server that already has a {subtype:region}, they must trash the already-installed {subtype:region}. See {ref:TODO}.
+    - rule: rule_region_swap
+      text: The Corp cannot swap a {subtype:region} card with a non-{subtype:region} card in another location if there is another {subtype:region} card already installed in the destination location.
+
+- section: sec_events
+  text: Events
+  rules:
+  - subsection: rule_event_play
+    text: Events are the only Runner cards that are played. Events are never installed. Playing an event causes its abilities to become active, and once those abilities are fully resolved the event is trashed. See {ref:TODO}.
+    rules:
+    - rule: rule_event_condition
+      text: One event, {card:On the Lam}, has the subtype {subtype:condition}. As part of its abilities, it converts itself into a condition counter and installs itself. This event cannot be installed by an install effect; it can only be installed through its own conversion ability. See {ref:TODO}.
+    - rule: rule_event_current
+      text: Some events have the subtype {subtype:current}. As part of their abilities, {subtype:current} events prevent themselves from being trashed until another {subtype:current} operation or event is played or the Corp scores an agenda. When one of these occurs, the active {subtype:current} is trashed during the next checkpoint. See {ref:sec_checkpoints}.
+  - rule: rule_event_play_cost
+    text: Events are the only Runner cards with play costs. An event's play cost is the number of credits the Runner must spend to play the event. See {ref:TODO}.
+
+
+- section: sec_hardware
+  text: Hardware
+  snippet: |-
+    The Runner's hardware are the physical tools at their disposal: the computers, chips, and other machinery that make up their rig.
+  rules:
+  - rule: rule_hardware_piece_of_hardware
+    text: |-
+      "Hardware" and "piece of hardware" are synonymous.
+  - rule: rule_hardware_install
+    text: The Runner installs hardware into the play area.
+  - rule: rule_hardware_install_cost
+    text: Hardware are among the types of cards with install costs. The Runner installs a hardware faceup and active by paying its install cost. See {ref:TODO}.
+  - rule: rule_hardware_limit
+    text: There is no limit to the number of hardware the Runner can have installed.
+  - subsection: subsec_consoles
+    text: Consoles
+    toc:
+    rules:
+    - rule: rule_hardware_console
+      text: Some hardware have the subtype {subtype:console}. All {subtype:console} have the text "Limit 1 {subtype:console} per player."
+    - rule: rule_install_console
+      text: If a player ever controls more than one installed {subtype:console}, all but the most recently active {subtype:console} are trashed. Trashing cards this way cannot be prevented.
+    - rule: rule_console_limitation
+      text: This limitation applies only to hardware with the subtype {subtype:console}.
+    - rule: rule_console_limitation_active
+      text: This limitation applies only to active {subtype:console}. A player can have multiple copies of a {subtype:console}, and even different {subtype:consoles}, in their deck.

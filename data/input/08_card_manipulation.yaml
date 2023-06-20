@@ -1,6 +1,12 @@
 chapter: chpt_card_manipulation
 text: Card Manipulation
 sections:
+- section: sec_faceup_facedown_status
+  text: Faceup and Facedown Status
+
+- section: sec_card_movements
+  text: Card Movements
+
 - section: sec_install_uninstall
   text: Installing and Uninstalling Cards
   rules:
@@ -13,5 +19,6 @@ sections:
       text: Place the card into the play area with the same faceup or facedown status it will have when the installation is complete. It is not yet installed or active.
     - rule: rule_steps_installing_destination
       text: Choose and declare the install destination appropriate to the card that will be installed, including any host relationships, if applicable.
+
 - section: sec_searching_cards
   text: Searching for Cards

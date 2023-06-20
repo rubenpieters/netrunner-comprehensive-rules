@@ -3,3 +3,43 @@ text: Game Zones
 sections:
 - section: sec_game_zones_general
   text: General
+  rules:
+  - subsection: rule_zone
+    text: A {term:zone} is a place in which cards and counters can exist during the game.
+    rules:
+    - rule: rule_zone_types
+      text: |-
+        There are 8 zone types: deck, hand, discard pile, score area, play area, bank, set aside, and removed from the game.
+    - rule: rule_player_zones
+      text: Each player has their own deck, hand, discard pile, and score area. All players share the play area, the bank, the set-aside zone, and the removed-from-game zone.
+    - rule: rule_card_in_one_zone
+      text: Each card in the game exists in exactly 1 zone at a time.
+  - subsection: rule_move_between_zones
+    text: Game rules and card effects can move cards and counters between zones. See {ref:sec_card_movements} for rules on card movements.
+    rules:
+    - rule: rule_reveal_from_hidden
+      text: If a facedown card or a card in a hidden zone would ever move to another zone as part of an effect that requires that card to have a specific attribute, that card must be revealed before being moved to the new zone. If the card is being installed, this rule only applies as indicated by {ref:TODO}.
+      examples:
+      - text: When resolving {card:Clone Suffrage Movement}, the Corp chooses a facedown {card:Fast Break} in Archives. The Corp must reveal the {card:Fast Break} before adding it to HQ, to demonstrate that it is indeed an operation, meeting {card:Clone Suffrage Movement}'s requirement.
+    - rule: rule_move_instantaneous
+      text: When a card is moved from one zone to another, the move is instantaneous. The card is never in both zones at once, and it is never not in any zone at all.
+  - rule: rule_outside_game
+    text: A card that is not in any zone is outside the game. Cards outside of the game are distinct from cards in the removed-from-game zone, and cannot affect the game. They can only be affected by abilities that explicitly bring in extra cards from outside the game. See {ref:sec_extra_cards}.
+  - rule: rule_public_zone
+    text: A {term:public} zone is one where cards are freely visible to both players unless they are facedown. The play area, the bank, the set-aside zone, the removed-from-game zone, and both players' score areas and discard piles are public zones. See {ref:sec_card_visibility} for rules on card visibility and {ref:sec_faceup_facedown_status} for rules on the faceup and facedown status of a card.
+  - rule: rule_hidden_zone
+    text: A {term:hidden} zone is one where cards are not visible to either player. Each player's deck is a hidden zone.
+  - rule: rule_secret_zone
+    text: A {term:secret} zone is one where cards are visible only to their controller. Each player's hand is a secret zone.
+  - subsection: rule_location
+    text: A {term:location} is a specific position within a zone that an object can occupy. A DESTINATION is a location to which an object is to be moved.
+    rules:
+    - rule: rule_deck_location
+      text: A card in a player's deck has a location identified by how many cards it is from the top of that deck.
+    - rule: rule_play_area_location
+      text: Some objects in the play area are in specific locations. See {ref:TODO}.
+    - rule: rule_hosted_object_location
+      text: The location of a hosted object is its host card.
+    - rule: rule_default_location
+      text: All other objects are simply located in their zone and do not have a more specific location.
+

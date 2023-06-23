@@ -43,3 +43,35 @@ sections:
     - rule: rule_default_location
       text: All other objects are simply located in their zone and do not have a more specific location.
 
+- section: sec_deck
+  text: Deck
+  rules:
+  - rule: rule_draw_deck
+    text: When the game begins, each player's deck presented during setup becomes their in-game draw deck.
+  - rule: rule_deck_hidden
+    text: Decks must be kept facedown with their cards hidden from both players. Neither player may look at the cards in any deck without being explicitly directed to do so by a rule or card ability.
+  - subsection: rule_deck_ordered
+    text: Decks are ordered. The location of each card in a deck must be maintained except when a player is explicitly directed to manipulate the cards in a deck by a rule or card ability. See {ref:rule_deck_location}.
+    rules:
+      - rule: rule_deck_order_while_searching
+        text: While searching a deck, a player is not required to maintain the order of the searched cards or indicate the previous location of any card found by the search. Note that the deck is always shuffled upon completion of the search, as required by {ref:TODO}.
+  - rule: rule_deck_size_open_information
+    text: The number of cards in a deck is open information. Any player may count the number of cards in a deck at any time.
+  - rule: rule_deck_inactive
+    text: Cards in a deck are inactive.
+  - rule: rule_deck_name
+    text: Each player's deck has its own name as a means of differentiating between the two.
+  - subsection: subsec_rnd
+    text: R&D
+    toc:
+    rules:
+    - rule: rule_rnd_name
+      text: R&D is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:TODO}.
+    - rule: rule_rnd_empty_rnd
+      text: If the Corp must ever draw from R&D while it is empty, the Runner wins the game. See {ref:sec_ending_the_game}.
+  - subsection: subsec_stack
+    text: Stack
+    toc:
+    rules:
+    - rule: rule_stack_name
+      text: The {term:stack} is the name for the Runner's deck.

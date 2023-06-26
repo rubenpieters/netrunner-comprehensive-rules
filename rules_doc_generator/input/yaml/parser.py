@@ -71,9 +71,10 @@ def parse_subsection(yaml_rule: Any) -> SubSection:
   toc = parse_boolean(yaml_rule, 'toc')
   steps = parse_boolean(yaml_rule, 'steps')
   text = parse_format_text_field(yaml_rule, 'text')
+  snippet = parse_with_default(yaml_rule, 'snippet', None, parse_format_text_field)
   examples = parse_subelements(yaml_rule, 'examples', parse_example)
   rules = parse_subelements(yaml_rule, 'rules', parse_subrule)
-  return SubSection(id, text, toc, steps, examples, rules)
+  return SubSection(id, text, toc, steps, snippet, examples, rules)
 
 def parse_section_element(yaml_section_element: Any) -> SectionElement:
   funcs: list[Callable[[Any], SectionElement]] = [parse_rule, parse_timing_structure, parse_subsection]

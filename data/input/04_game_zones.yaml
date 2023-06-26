@@ -55,7 +55,7 @@ sections:
     rules:
       - rule: rule_deck_order_while_searching
         text: While searching a deck, a player is not required to maintain the order of the searched cards or indicate the previous location of any card found by the search. Note that the deck is always shuffled upon completion of the search, as required by {ref:TODO}.
-  - rule: rule_deck_size_open_information
+  - rule: rule_deck_size_open_info
     text: The number of cards in a deck is open information. Any player may count the number of cards in a deck at any time.
   - rule: rule_deck_inactive
     text: Cards in a deck are inactive.
@@ -64,14 +64,56 @@ sections:
   - subsection: subsec_rnd
     text: R&D
     toc:
+    snippet: R&D stands for Research and Development. It represents upcoming projects and acquisitions the Corp will soon have at their disposal.
     rules:
     - rule: rule_rnd_name
-      text: R&D is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:TODO}.
+      text: |-
+        {term:r&d} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:TODO}.
     - rule: rule_rnd_empty_rnd
       text: If the Corp must ever draw from R&D while it is empty, the Runner wins the game. See {ref:sec_ending_the_game}.
   - subsection: subsec_stack
     text: Stack
     toc:
+    snippet: |-
+      The stack represents the Runner's untapped potential: future plans, connections, and opportunities they have yet to discover.
     rules:
     - rule: rule_stack_name
       text: The {term:stack} is the name for the Runner's deck.
+
+- section: sec_hand
+  text: Hand
+  rules:
+  - rule: rule_hand
+    text: A player's {term:hand} is the zone in which they hold the cards they have drawn from their deck. Cards can be added to a player's hand by other rules and card abilities as well. During setup, each player draws a starting hand. See {ref:sec_starting_the_game}.
+  - rule: rule_hand_secret
+    text: A player's hand is kept secret from their opponent. A player may look at the cards in their own hand, but not at any of the cards in their opponent's hands.
+  - rule: rule_hand_unordered
+    text: Hands are not ordered. A player may freely arrange the cards in their hand in any order at any time.
+  - rule: rule_hand_size_open_info
+    text: The number of cards in a hand is open information to all players. Any player may count the number of cards in a hand at any time.
+  - rule: rule_hand_inactive
+    text: Cards in a hand are inactive.
+  - rule: rule_maximum_hand_size
+    text: Each player has a maximum hand size, usually five. A player may have any number of cards in their hand at any given time, but during the discard phase of a player's turn they must discard cards from their hand until there are no more cards in their hand than their maximum hand size allows. See {ref:TODO}.
+  - rule: rule_hand_name
+    text: Each player's hand has its own name as a means of differentiating between the two.
+  - subsection: subsec_hq
+    text: HQ
+    toc:
+    snippet: HQ stands for Headquarters. It represents the projects, staff, technology, and other assets the Corp is authorized to deploy.
+    rules:
+    - rule: rule_hq_name
+      text: |-
+        {term:hq} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:TODO}.
+    - rule: rule_hq_identity
+      text: The Corp's identity card represents their HQ server for the purposes of gameplay. Ice protecting HQ is installed in front of the Corp's identity card and upgrades installed in the root of HQ are installed behind the Corp's identity card.
+  - subsection: subsec_grip
+    text: Grip
+    toc:
+    snippet: The grip represents the Runner's currently accessible thoughts, plans, knowledge, potential social connections, and other intangible information that can be leveraged.
+    rules:
+    - rule: rule_grip_name
+      text: The {term:grip} is the name for the Runner's hand.
+    - rule: rule_grip_damage
+      text: Suffering damage forces the Runner to discard cards from their grip at random, and suffering core damage also reduces the Runner's maximum hand size. The Runner flatlines and loses the game if they suffer more damage than they have cards in grip or must discard down to a hand size lower than zero. See {ref:TODO}.
+  

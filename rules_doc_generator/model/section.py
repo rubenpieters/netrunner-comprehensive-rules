@@ -110,6 +110,7 @@ class SubSection:
   format_text: FormatText
   toc: bool
   steps: bool
+  snippet: Optional[FormatText]
   examples: list[Example]
   rules: list[SubRule]
 
@@ -117,6 +118,8 @@ class SubSection:
     result = self.format_text.to_html(id_map)
     if self.rules:
       result += '<ol class="SubRules">'
+      if self.snippet:
+        result += f'<p>{self.snippet.to_html(id_map)}</p>'
       for example in self.examples:
         result += example.to_html(id_map)
       for rule in self.rules:
@@ -132,6 +135,10 @@ class SubSection:
       result += '\\addtocounter{subsubsection}{1} '
       result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    if self.snippet:
+      snippet_lines = self.snippet.to_latex(id_map).split('\n')
+      for snippet_text in snippet_lines:
+        result += f'\n\\noindent\emph{{{snippet_text}}}\n\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'

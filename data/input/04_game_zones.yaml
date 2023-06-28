@@ -68,7 +68,7 @@ sections:
     rules:
     - rule: rule_rnd_name
       text: |-
-        {term:r&d} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:TODO}.
+        {term:R&d} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:TODO}.
     - rule: rule_rnd_empty_rnd
       text: If the Corp must ever draw from R&D while it is empty, the Runner wins the game. See {ref:sec_ending_the_game}.
   - subsection: subsec_stack
@@ -104,7 +104,7 @@ sections:
     rules:
     - rule: rule_hq_name
       text: |-
-        {term:hq} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:TODO}.
+        {term:Hq} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:TODO}.
     - rule: rule_hq_identity
       text: The Corp's identity card represents their HQ server for the purposes of gameplay. Ice protecting HQ is installed in front of the Corp's identity card and upgrades installed in the root of HQ are installed behind the Corp's identity card.
   - subsection: subsec_grip
@@ -116,4 +116,39 @@ sections:
       text: The {term:grip} is the name for the Runner's hand.
     - rule: rule_grip_damage
       text: Suffering damage forces the Runner to discard cards from their grip at random, and suffering core damage also reduces the Runner's maximum hand size. The Runner flatlines and loses the game if they suffer more damage than they have cards in grip or must discard down to a hand size lower than zero. See {ref:TODO}.
-  
+
+- section: sec_discard_pile
+  text: Discard Pile
+  rules:
+  - rule: rule_discard_pile
+    text: A player's DISCARD PILE is the zone in which they place cards that have been trashed or discarded. Discard piles start the game empty.
+  - rule: rule_discard_pile_unordered
+    text: Discard piles are not ordered. A player may freely arrange the cards in their discard pile in any order at any time.
+  - rule: rule_discard_pile_open_info
+    text: The number of cards in a discard pile is open information. Any player may count the number of cards in a discard pile at any time.
+  - rule: rule_discard_pile_inactive
+    text: Cards in a discard pile are inactive.
+  - rule: rule_discard_pile_inactive_name
+    text: Each player's discard pile has its own name as a means of differentiating between the two.
+  - subsection: subsec_archives
+    text: Archives
+    toc:
+    snippet: Archives represents the Corp's internal record database of all scrapped, abandoned, or discontinued projects, contracts, assignments, and other endeavors.
+    rules:
+    - rule: rule_archives_name
+      text: |-
+        {term:Archives} is the name for the Corp's discard pile. It is also one of the Corp's central servers. See {ref:TODO}.
+    - rule: rule_archives_faceup_facedown
+      text: Cards in Archives can be either faceup or facedown. If a Corp card is visible to the Runner when it is trashed or discarded, it is put in Archives faceup. If a Corp card is not visible to the Runner when it is trashed or discarded, then it is put in Archives facedown. Facedown cards in Archives should be oriented horizontally so that the Runner can easily see they are present.
+    - rule: rule_archives_faceup_open_info
+      text: The faceup cards in Archives are open information. Any player may look through the faceup cards in Archives at any time. The facedown cards in Archives are visible only to the Corp. The Corp may look through the facedown cards in Archives at any time, but the Runner cannot look at them.
+  - subsection: subsec_heap
+    text: Heap
+    toc:
+    snippet: |-
+      The heap represents what the Runner has lost: their old jobs, favours burned, friends long gone, gear wrecked, and code erased.
+    rules:
+    - rule: rule_heap_name
+      text: The {term:heap} is the name for the Runner's discard pile.
+    - rule: rule_heap_open_info
+      text: The cards in the heap are open information. Any player may look through the cards in the heap at any time.

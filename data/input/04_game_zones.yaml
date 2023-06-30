@@ -152,3 +152,74 @@ sections:
       text: The {term:heap} is the name for the Runner's discard pile.
     - rule: rule_heap_open_info
       text: The cards in the heap are open information. Any player may look through the cards in the heap at any time.
+
+- section: sec_score_area
+  text: Score Area
+  snippet: The score areas represent major accomplishments for each player in service of their long-term ambitions. The Corp's score area contains all large-scale projects they have seen to completion. The Runner's score area is a memorial to all such initiatives they have successfully disrupted, exposed, or sold details of to the highest bidder.
+  rules:
+  - rule: rule_score_area
+    text: A player's {term:score area} is the zone in which they place agendas they have scored or stolen. {ref:Sec_score_scoring_steal} details scoring and stealing agendas. Score areas start the game empty.
+  - rule: rule_score_area_open_info
+    text: The agendas in a score area are open information. A player may look through or count the agendas in a score area at any time.
+  - rule: rule_score_area_unordered
+    text: Score areas are not ordered. A player may freely arrange the agendas in their score area in any order at any time.
+  - rule: rule_score_area_active_inactive
+    text: Agendas in the Corp's score area are active. Agendas in the Runner's score area are inactive unless stated otherwise.
+
+- section: sec_play_area
+  text: Play Area
+  rules:
+  - subsection: rule_play_area
+    text: The {term:play area} is the shared active zone into which cards are played or installed. The play area normally starts the game empty except for each of the player's identities.
+    rules:
+    - rule: rule_play_area_start_game
+      text: |-
+        {ref:sec_extra_cards} details cases where an ability may cause cards to start the game in the play area.
+  - rule: rule_play_area_number_location_open_info
+    text: The number of cards in the play area and the location of each card in the play area is always open information.
+  - rule: rule_play_area_card_open_info
+    text: Whether or not a card itself and its attributes are open information while in the play area is determined by the card's status. Cards that are faceup are open information and can be examined by any player at any time. Cards that are facedown are secret information and can only be examined by the player who controls the card. See {ref:TODO}.
+  - subsection: rule_play_area_active_inactive
+    text: Whether or not a card is active while in the play area is determined by the card's status.
+    rules:
+    - rule: rule_play_area_identity
+      text: Identities start the game in the play area and are always active.
+    - rule: rule_play_area_corp_cards
+      text: Generally, Corp agendas, assets, ice, and upgrades are installed into the play area unrezzed and thus inactive. They are active while rezzed. See {ref:sec_install_uninstall}.
+    - rule: rule_play_area_runner_cards
+      text: Generally, Runner hardware, programs, and resources are installed into the play area faceup and active. See {ref:sec_install_uninstall}.
+    - rule: rule_play_area_faceup_facedown
+      text: Some Runner cards are installed facedown or turned facedown through card abilities. This is distinct from the status of rezzed/unrezzed that Corp cards can have. Facedown Runner cards are not active. See {ref:TODO}.
+    - rule: rule_play_area_operations_events
+      text: Operations and events are played into the play area faceup and are active for the duration of their resolution before being trashed. See {ref:sec_play_events_operations}.
+  - subsection: rule_play_area_organization
+    text: Some objects in the play area are organized into specific orientations and/or locations.
+    rules:
+    - rule: rule_play_area_corp_cards_distinct_server
+      text: Corp cards are arranged into distinct servers. Agendas and assets are installed in the roots of remote servers, upgrades are installed in the roots of any servers, and pieces of ice are installed horizontally protecting servers. See {ref:sec_servers} and {ref:sec_protecting_a_server}.
+    - rule: rule_play_area_corp_identity
+      text: The Corp's identity is used to indicate where in the play area HQ exists for the purposes of installing upgrades in the root of HQ and ice protecting HQ. See {ref:sec_central_servers}.
+    - rule: rule_play_area_runner_identity
+      text: The Runner's identity, hardware, programs, and resources do not have specific locations in the play area.
+    - rule: rule_play_area_operation_events
+      text: There is no specific location in the play area for operations or events. They are simply played into the play area, where they resolve before being trashed. See {ref:sec_play_events_operations}.
+    - rule: rule_play_area_credit_pool
+      text: Each player has a credit pool, which is a location in the play area where credits they control are kept.
+    - rule: rule_play_area_counters
+      text: Counters other than credits have no specific location in the play area. Tag counters are always controlled by the Runner, and bad publicity counters are always controlled by the Corp. Other types of counters are either nonfunctional gameplay aids or appear only in host relationships. See also {ref:sec_counters_and_tokens}.
+    - rule: rule_play_area_installed_hosted
+      text: Some cards can act as install locations for other cards while in the play area, such that cards of a specific type can be hosted directly onto them during the installation process. In this type of host relationship, both the host card and the hosted card are in the play area, but the host relationship can affect certain aspects of either the card or the installation process. See {ref:sec_host}.
+    - rule: rule_play_area_not_installed_hosted
+      text: Some cards can host other cards without installing them. In this type of host relationship, both the host card and the hosted card are in the play area, but the hosted card is not installed and thus not active. See {ref:sec_host}.
+
+  - subsection: sec_servers
+    text: Servers
+
+  - subsection: sec_central_servers
+    text: Central Servers
+
+  - subsection: sec_remote_servers
+    text: Remote Servers
+
+  - subsection: sec_protecting_a_server
+    text: Protection a Server

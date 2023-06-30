@@ -20,5 +20,8 @@ sections:
     - rule: rule_steps_installing_destination
       text: Choose and declare the install destination appropriate to the card that will be installed, including any host relationships, if applicable.
 
+- section: sec_play_events_operations
+  text: Playing Events and Operations
+
 - section: sec_searching_cards
   text: Searching for Cards

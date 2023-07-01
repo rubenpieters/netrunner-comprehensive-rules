@@ -104,8 +104,8 @@ sections:
     rules:
     - rule: rule_hq_name
       text: |-
-        {term:Hq} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:TODO}.
-    - rule: rule_hq_identity
+        {term:Hq} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:subsec_central_servers}.
+    - rule: rule_identity_represents_hq
       text: The Corp's identity card represents their HQ server for the purposes of gameplay. Ice protecting HQ is installed in front of the Corp's identity card and upgrades installed in the root of HQ are installed behind the Corp's identity card.
   - subsection: subsec_grip
     text: Grip
@@ -196,9 +196,9 @@ sections:
     text: Some objects in the play area are organized into specific orientations and/or locations.
     rules:
     - rule: rule_play_area_corp_cards_distinct_server
-      text: Corp cards are arranged into distinct servers. Agendas and assets are installed in the roots of remote servers, upgrades are installed in the roots of any servers, and pieces of ice are installed horizontally protecting servers. See {ref:sec_servers} and {ref:sec_protecting_a_server}.
+      text: Corp cards are arranged into distinct servers. Agendas and assets are installed in the roots of remote servers, upgrades are installed in the roots of any servers, and pieces of ice are installed horizontally protecting servers. See {ref:subsec_servers} and {ref:subsec_protecting_a_server}.
     - rule: rule_play_area_corp_identity
-      text: The Corp's identity is used to indicate where in the play area HQ exists for the purposes of installing upgrades in the root of HQ and ice protecting HQ. See {ref:sec_central_servers}.
+      text: The Corp's identity is used to indicate where in the play area HQ exists for the purposes of installing upgrades in the root of HQ and ice protecting HQ. See {ref:subsec_central_servers}.
     - rule: rule_play_area_runner_identity
       text: The Runner's identity, hardware, programs, and resources do not have specific locations in the play area.
     - rule: rule_play_area_operation_events
@@ -212,14 +212,128 @@ sections:
     - rule: rule_play_area_not_installed_hosted
       text: Some cards can host other cards without installing them. In this type of host relationship, both the host card and the hosted card are in the play area, but the hosted card is not installed and thus not active. See {ref:sec_host}.
 
-  - subsection: sec_servers
+  - subsection: subsec_servers
     text: Servers
+    toc:
+    rules:
+    - rule: rule_server
+      text: A {term:server} is a set of locations where the Corp installs their cards into the play area and against which the Runner can initiate runs. Whenever a Corp installs an agenda, asset, ice, or upgrade, they must choose a destination server for that card. See {ref:sec_install_uninstall}.
+    - rule: rule_corp_cards_cannot_be_moved
+      text: Once a Corp card is installed, it cannot be moved from its server without explicit direction from a game rule or card effect.
+    - rule: rule_server_types
+      text: The two types of servers are central servers and remote servers. See {ref:subsec_central_servers,subsec_remote_servers}, respectively.
+    - rule: rule_server_ice
+      text: All servers can have ice installed protecting them. See {ref:subsec_protecting_a_server}.
+    - rule: rule_server_root
+      text: All servers have a {term:root} where cards can be installed. A central server's root can contain any number of upgrades, while a remote server's root can contain 1 asset or agenda and any number of upgrades. Assets and agendas cannot be installed in the root of a central server.
+    - rule: rule_server_root_order
+      text: All cards installed in the root of a server are kept in the same orientation and location together. The order in which the cards are installed is open information, but the type of cards installed in the root of a remote server should not be derivable from their orientation or location.
+    - rule: rule_region_unique
+      text: Only 1 {subtype:region} upgrade can be installed in the root of a server at a time. See {ref:subsec_regions}.
+    - rule: rule_upgrade_server_restriction
+      text: Some upgrades have restrictions limiting them to specific servers. See {ref:TODO}.
+    - rule: rule_this_server
+      text: Some cards refer to the server where they are located (or the central server corresponding to the zone where they are located) using the phrase "this server". If an ability is initiated by a trigger condition or cost involving the ability's source card moving from a server, its root, or protecting it to another server or to a location not associated with any server, treat "this server" as referring to the server associated with the previous location of the card throughout resolution of that ability. If an ability moves its source card while it is resolving, continue to interpret "this server" based on the card's previous location.
+      examples:
+      - text: The Runner trashes a rezzed {card:Warroid Tracker}. This meets the trigger condition of {card:Warroid Tracker}'s ability, but by the time a checkpoint is resolved and an instance of the ability would become pending, {card:Warroid Tracker} itself is no longer installed. The use of "this server" in the trigger condition still refers to the server from which {card:Warroid Tracker} was trashed, not to the server of {card:Warroid Tracker}'s new location in Archives.
+      - text: The Corp uses the ability granted by {card:ZATO City Grid} to trash {card:Border Control} and resolve its first subroutine. The phrase "this server" in that subroutine refers to the server from which the {card:Border Control} was trashed. However, {card:Border Control} is no longer protecting that server, so it is not included in the number of ice counted.
+      - text: The Corp uses {card:Nanisivik Grid} to turn a facedown {card:Border Control} in Archives faceup and resolve its first subroutine. {card:Border Control} was not moved between servers, so "this server" in that subroutine refers to Archives.
+    - rule: rule_another_server
+      text: If an ability on a card currently or previously located in a server, its root, or protecting it  refers to "another server", this means any server except "this server" as interpreted by {ref:rule_this_server}. If a card's abilities involve choosing a server, "another server" in a linked ability means any server except the chosen server. If neither of the previous cases apply and a run is in progress, "another server" means any server except the attacked server.
 
-  - subsection: sec_central_servers
+  - subsection: subsec_central_servers
     text: Central Servers
+    toc:
+    rules:
+    - rule: rule_three_central_servers
+      text: |-
+        The Corp has three {term:central servers} at all times. Each central server corresponds to one of the Corp's zones: HQ corresponds to the Corp's hand, R&D corresponds to the Corp's deck, and Archives corresponds to the Corp's discard pile.
+    - rule: rule_hq_identity
+      text: The Corp's identity is in the play area to indicate the location of HQ relative to other servers, but it is not in HQ, in the root of HQ, or protecting HQ. The cards in HQ are held in the Corp's hand. The upgrades installed in the root of HQ are placed in a vertical orientation near the Corp's identity. The ice installed protecting HQ are placed in a horizontal orientation in front of the Corp's identity outwards towards the Runner.
+    - rule: rule_rnd_deck
+      text: The Corp's deck is placed in the play area to indicate the location of R&D relative to other servers, but the cards in the deck are not installed. The cards in R&D are the cards in the deck. The upgrades installed in the root of R&D are placed in a vertical orientation near the deck. The ice installed protecting R&D are placed in a horizontal orientation in front of the deck outwards towards the Runner.
+    - rule: rule_archives_discard_pile
+      text: The Corp's discard pile is placed in the play area to indicate the location of Archives relative to other servers, but the cards in the discard pile are not installed. The cards in Archives are the cards in the discard pile. The upgrades installed in the root of Archives are placed in a vertical orientation near the discard pile. The ice installed protecting Archives are placed in a horizontal orientation in front of the discard pile outwards towards the Runner.
 
-  - subsection: sec_remote_servers
+  - subsection: subsec_remote_servers
     text: Remote Servers
+    toc:
+    rules:
+    - rule: rule_remote_server
+      text: A {term:remote server} is the only type of server that can contain an asset or agenda in its root.
+    - rule: rule_creating_remote_servers
+      text: The Corp starts the game with no remote servers. The Corp creates a new remote server by declaring it as the destination server for a card they are about to install. There is no limit to the number of remote servers the Corp can have at any given time.
+    - rule: rule_separate_remote_servers
+      text: Cards installed in the roots of separate remote servers are placed in a vertical orientation in a row extending away from the central servers to indicate the locations of the remote servers relative to other servers. The ice installed protecting each remote server are placed in a horizontal orientation in front of any cards in the root of that server, outwards towards the Runner.
+    - rule: rule_remote_server_existence
+      text: A remote server exists as long as there is at least one card in the root of or protecting it. A remote server can be made up of only ice protecting it, only cards installed in it, or a combination of both.
+    - rule: rule_remote_server_cease_to_exist
+      text: During checkpoints, a remote server ceases to exist if there are no cards installed in its root and no cards installed protecting it. If a server ceases to exist during a run against it, then the run ends after any currently open paid ability window closes. Unless the run has already been declared either successful or unsuccessful, it is neither. See {ref:TODO}.
+    - rule: rule_limit_remote_servers
+      text: |-
+        The Corp card {card:Earth Station: SEA Headquarters} and its reverse, {card:Earth Station: Ascending to Orbit}, both have the ability, "Limit 1 remote server." While this ability is active, as long as a remote server exists, the Corp cannot create a new remote server. If at any time more than 1 remote server exists while this ability is active, the next checkpoint will force the Corp player to choose 1 of those servers. The checkpoint will then trash all cards in the root of and protecting each other remote server. See {ref:TODO}.
 
-  - subsection: sec_protecting_a_server
+  - subsection: subsec_protecting_a_server
     text: Protection a Server
+    toc:
+    rules:
+    - rule: rule_ice_ordered
+      text: An installed piece of ice is arranged in a horizontal position in front of the server it is protecting. Ice are ordered within the play area. The location of a piece of ice is defined by the server it is protecting and the number of other pieces of ice between it and the server.
+    - rule: rule_innermost_ice
+      text: If there is no other ice between the server and a piece of ice, that ice is the innermost piece of ice. If there is no ice farther from the server than a piece of ice, that ice is the outermost piece of ice. If there is only one piece of ice protecting a server, that ice is both the innermost and the outermost piece of ice.
+    - rule: rule_ice_same_position
+      text: If two pieces of ice protecting two different servers share the same number of ice between them and their respective servers, those pieces of ice are considered to be in the same position.
+    - rule: rule_ice_install_outermost
+      text: When the Corp installs a piece of ice protecting a server, they must place it in the outermost position protecting that server. See {ref:sec_install_uninstall}.
+    - rule: rule_ice_move
+      text: If the number of other ice between a piece of ice and the server changes, its position will change accordingly, moving either closer or farther from the server. If this occurs while that ice is being approached, encountered, or passed during a run, the Runner's position attacking the server changes in the same way.
+
+- section: sec_bank
+  text: Bank
+  rules:
+  - rule: rule_bank_counter_supply
+    text: The {term:bank} is an inactive zone shared by both players. It holds an unlimited supply of counters for use during gameplay.
+  - rule: rule_counters_default_from_bank
+    text: Counters placed or loaded onto a card are taken from the bank unless otherwise specified. Counters gained by players are taken from the bank unless otherwise specified.
+  - rule: rule_spent_counters_returned_to_bank
+    text: Credits and other counters that are spent to pay costs return to the bank.
+  - rule: rule_illegal_location_counters_returned_to_bank
+    text: Counters that are not in a legal location return to the bank during checkpoints. See {ref:sec_checkpoints}.
+  - rule: rule_cards_never_in_bank
+    text: Cards are never located in the bank.
+
+- section: sec_set_aside
+  text: Set Aside
+  rules:
+  - rule: rule_set_aside_zone
+    text: The {term:set-aside zone} is an inactive zone shared by both players. It is used as a temporary holding space for objects being affected by abilities.
+  - rule: rule_set_aside_zone_passthrough
+    text: An ability cannot see the set-aside zone unless it specifically sets objects aside or refers to set-aside objects. Outside of these cases, cards moved into another zone from the set-aside zone are treated as though they entered that zone directly from their location prior to being set aside.
+    examples:
+    - text: The Runner is playing as {card:Exile} and plays Test Run, searching their heap for a program. Although the program is set aside before being installed, {card:Exile}'s ability treats it as though it were installed directly from the heap, and so {card:Exile} will draw a card.
+  - rule: rule_searched_cards_set_aside
+    text: Cards found during a search are set aside facedown while the search completes (in particular, while any deck that was searched is shuffled). See {ref:sec_searching_cards}.
+  - rule: rule_set_aside_hosted_counters_trash_ability
+    text: Some paid abilities with a trigger cost that uninstalls or forfeits the ability's source card need to refer to or act on that card's hosted cards or counters. These abilities set aside the hosted cards or counters as the trigger cost is paid. See {ref:TODO}.
+  - rule: rule_set_aside_default_faceup
+    text: Cards set aside by a card ability are faceup unless the ability specifically instructs that they be set aside facedown.
+  - rule: rule_facedown_set_aside_distinct_groups
+    text: Facedown cards in the set-aside zone must be kept in distinct groups according to the effect that sets them aside. Cards within such a group are not ordered and can be freely arranged by their controller.
+    examples:
+    - text: The Runner accesses the top card of R&D and does not steal or trash it. On the next turn, the Corp uses {card:Daily Business Show} to draw that card and 1 other card simultaneously, but must put 1 of the drawn cards on the bottom of R&D. While resolving the draw, the cards are set aside facedown, so the Corp can shuffle them. They do not have to tell the Runner whether the previously-accessed card ends up in HQ or on the bottom of R&D.
+
+- section: sec_removed_from_game
+  text: Remove from the Game
+  rules:
+  - rule: rule_removed_from_game_zone
+    text: The {term:removed-from-game zone} is an inactive zone shared by both players. It is used to take cards out of any player's control until the end of the game.
+  - rule: rule_rfg_move
+    text: If a card is removed from the game, it is moved from its current zone to the removed-from-game zone.
+  - rule: rule_forfeit_rfg
+    text: Forfeiting an agenda removes it from the game. See {ref:TODO}.
+  - rule: rule_rfg_inactive
+    text: Cards that have been removed from the game are inactive.
+  - rule: rule_rfg_no_interaction
+    text: A card that has been removed from the game cannot move out of the removed-from-game zone or otherwise be interacted with.
+  - rule: rule_rfg_open_information
+    text: Cards that have been removed from the game are open information. Any player may look through or count the cards that have been removed from the game at any time.

@@ -55,6 +55,68 @@ sections:
 
 - section: sec_card_movements
   text: Card Movements
+  rules:
+  - subsection: sec_movement
+    text: |-
+      A {term:movement} is a way that cards change their zone or location following special rules. The movements are: arrange, draw, forfeit, install, play, search, score, steal, swap, and trash.
+    rules:
+    - rule: rule_non_movements
+      text: |-
+        Other terms that change the locations of cards are not movements. If an ability directs a player to "add" or "move" cards to 1 or more locations, simply put those cards in the indicated locations. If an ability or game rule directs a player to "discard", "set aside", or "remove from the game" 1 or more cards, simply put those cards in their owner's discard pile, the set-aside zone, or the removed-from-game zone, respectively.
+
+  - subsection: sec_replacing_movements
+    text: |-
+      If a replacement effect modifies the effects of a movement, but does not replace the entire movement by name, the modified effect is still an occurrence of that movement and can still meet trigger conditions relating to that type of movement.
+    examples:
+    - text: |-
+        {card:Harbinger}'s ability modifies the effects of trashing it by replacing adding {card:Harbinger} to the heap with turning it facedown. {card:Harbinger} is still trashed when the modified effect resolves. If this is the first time this turn that the Runner trashed one of their installed cards, they will be able to resolve {card:Wasteland}'s ability.
+    rules:
+    - rule: rule_cancelled_movement
+      text: |-
+        If a movement is replaced or prevented entirely or otherwise cannot be carried out, that movement does not take place and conditions related to that type of movement are not met.
+      examples:
+      - text: |-
+          The Corp is resolving the first subroutine on {card:Rototurret} to trash an installed program. The Runner uses {card:Sacrificial Construct} to prevent the program from being trashed. Since trashing did not occur, the Runner does not place a power counter on {card:District 99}, and {card:District 99} can still meet its trigger condition if a program or piece of hardware is successfully trashed later in the turn.
+
+  - rule: movement_arrange
+    text: |-
+      To {term:arrange} a set of cards is to reposition them among their current locations. The ful rules for arranging are detailed in {ref:sec_arrange}.
+      
+  - rule: movement_draw
+    text: |-
+      To {term:draw} a given number of cards is to move that many cards from the top of a player's deck to their hand. The full rules for drawing cards are detailed in {ref:sec_draw}.
+
+  - rule: movement_forfeit
+    text: |-
+      To {term:forfeit} an agenda is to move it from a player's score area to the removed-from-game zone. When a player forfeits an agenda, its agenda points no longer contribute to that player's score, and any objects hosted on it are trashed.
+
+  - rule: movement_install
+    text: |-
+      To {term:install} a card is to move it from its current zone to the play area. The full rules for installing cards are detailed in {ref:sec_install_uninstall}.
+
+  - rule: movement_play
+    text: |-
+      To {term:play} an event or operation is to move it from its current zone to the play area, resolve its play abilities, and then trash it. The full rules for playing events and operations are detailed in {ref:sec_play}.
+
+  - rule: movement_search
+    text: |-
+      To {term:search} is to look at a specified zone and potentially set aside cards from that zone. The full rules for searching are detailed in {ref:sec_search}.
+
+  - rule: movement_score
+    text: |-
+      To {term:score} an agenda is to move it from its current zone to the Corp's score area. The full rules for scoring are detailed in {ref:sec_score_scoring_steal}.
+
+  - rule: movement_steal
+    text: |-
+      To {term:steal} an agenda is to move it from its current zone to the Runner's score area. The full rules for stealing are detailed in {ref:sec_score_scoring_steal}.
+
+  - rule: movement_swap
+    text: |-
+      To {term:swap} a pair of cards is to move each card to the other's location simultaneously. The full rules for swapping are detailed in {ref:sec_swap}.
+
+  - rule: movement_trash
+    text: |-
+      To {term:trash} a card is to move it from its current zone to its owner’s discard pile. The full rules for trashing are detailed in {ref:sec_trashing}.
 
 - section: sec_install_uninstall
   text: Installing and Uninstalling Cards

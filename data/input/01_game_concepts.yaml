@@ -523,7 +523,7 @@ sections:
     - rule: rule_controller_credits
       text: Each player controls the credits in their credit pool.
     - rule: rule_controller_bad_publicity_tag
-      text: The Corp controls each bad publicity counter. The Runner controls each tag counter. However, see rule {ref:rule_cost_tag} and {ref:rule_cost_bad_publicity} regarding paying costs that involve tags and bad publicity, respectively.
+      text: The Corp controls each bad publicity counter. The Runner controls each tag counter. However, see {ref:rule_cost_tag} and {ref:rule_cost_bad_publicity} regarding paying costs that involve tags and bad publicity, respectively.
     - rule: rule_controller_hosted_counter
       text: The controller of a counter hosted on a card is the player who controls the host card.
     - rule: rule_controller_click_core_damage

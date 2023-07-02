@@ -5,7 +5,8 @@ sections:
   text: Accessing Cards
   rules: 
   - rule: rule_accessing
-    text: {term:accessing} is the process of the Corp showing one of their cards to the Runner for potential interaction.
+    text: |-
+      {term:Accessing} is the process of the Corp showing one of their cards to the Runner for potential interaction.
   - rule: rule_accessing_who_can_look
     text: While the Runner is accessing a card, the Runner is allowed to look at that card, even if it would normally not be visible to them. While the Runner is accessing a card, the Corp is allowed to look at it as well, except when the card is being accessed from R&D.
   - rule: rule_accessing_trigger_condition
@@ -13,7 +14,8 @@ sections:
   - rule: rule_mid_access_ability
     text: During each access, the Runner has 1 opportunity to use a mid-access ability. This occurs after the reaction window at the beginning of the access, and before the Runner steals an accessed agenda.
   - subsection: rule_basic_trash_ability
-    text: The Runner always has the ability "Access → Pay the trash cost of the accessed card: Trash it." This is the {term:basic trash ability}.
+    text: |-
+      The Runner always has the ability "Access → Pay the trash cost of the accessed card: Trash it." This is the {term:basic trash ability}.
     rules:
     - rule: rule_paying_trash_costs
       text: All assets and upgrades have trash costs, as do some ice and operations. If a card does not have a trash cost, the Runner cannot pay its trash cost, and therefore the Runner cannot use the basic trash ability during that access.

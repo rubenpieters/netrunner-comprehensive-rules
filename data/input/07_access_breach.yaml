@@ -27,7 +27,7 @@ sections:
     text: If, after resolving mid-access abilities, the Runner is still accessing an agenda, they must steal it.
     rules:
     - rule: rule_agenda_additional_cost
-    text: Some abilities can create additional costs to steal an agenda. The Runner can decline to pay such costs and not steal the agenda. See {ref:rule_additional_cost}.
+      text: Some abilities can create additional costs to steal an agenda. The Runner can decline to pay such costs and not steal the agenda. See {ref:rule_additional_cost}.
   - rule: rule_moved_while_accessing
     text: If a card moves to another location while it is being accessed, the access ends immediately.
   

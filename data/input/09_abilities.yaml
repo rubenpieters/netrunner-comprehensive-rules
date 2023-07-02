@@ -14,6 +14,9 @@ sections:
 
 - section: sec_paid_abilities
   text: Paid Abilities
+  rules:
+  - rule: rule_paid_ability
+    text: A {term:paid ability} is an ability players trigger at-will, during appropriate priority windows. In order to use a paid ability, the controller of that ability must pay its {term:trigger cost}. Paid abilities are always written with the trigger cost first, followed by a colon (:), followed by the remainder of the ability's text.
 
 - section: sec_subroutines
   text: Subroutines

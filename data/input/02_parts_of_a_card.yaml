@@ -20,7 +20,7 @@ sections:
   rules:
   - rule: rule_unique_symbol
     text: |-
-      Some cards are {term:unique}, and have a unique symbol ([uniqsym]) before their name to designate this. See rule {ref:rule_uniqueness}.
+      Some cards are {term:unique}, and have a unique symbol ([uniqsym]) before their name to designate this. See {ref:rule_uniqueness}.
 
 - section: sec_printed_cost
   text: Play Cost, Install Cost, or Rez Cost

@@ -156,14 +156,32 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 def read_changelog_from_file() -> list[FormatText]:
   print(f"Parsing changelog")
   with open(f'data/input/00_changelog.yaml', "r") as stream:
-    yaml_input = yaml.safe_load(stream)
+    yaml_input = load_yaml(stream)
     return parse_changelog(yaml_input)
 
 def read_chapter_from_file(section_file: str) -> Chapter:
   print(f"Parsing {section_file}")
   with open(f'data/input/{section_file}.yaml', "r") as stream:
-    yaml_input = yaml.safe_load(stream)
+    yaml_input = load_yaml(stream)
     return parse_chapter(yaml_input)
+
+def load_yaml(stream):
+  try:
+    return yaml.load(stream, yaml.SafeLoader)
+
+  except yaml.YAMLError as exc:
+      print ("Error while parsing YAML file:")
+      if hasattr(exc, 'problem_mark'):
+          if exc.context != None:
+              print ('  parser says\n' + str(exc.problem_mark) + '\n  ' +
+                  str(exc.problem) + ' ' + str(exc.context) +
+                  '\nPlease correct data and retry.')
+          else:
+              print ('  parser says\n' + str(exc.problem_mark) + '\n  ' +
+                  str(exc.problem) + '\nPlease correct data and retry.')
+      else:
+          print ("Something went wrong while parsing yaml file")
+      exit()
 
 def yaml_to_document() -> Document:
   changelog = read_changelog_from_file()

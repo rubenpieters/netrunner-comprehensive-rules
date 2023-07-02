@@ -1,2 +1,48 @@
 chapter: chpt_access_breach
 text: Accessing Cards and Breaching Servers
+sections: 
+- section: sec_accessing_cards
+  text: Accessing Cards
+  rules: 
+  - rule: rule_accessing
+    text: {term:accessing} is the process of the Corp showing one of their cards to the Runner for potential interaction.
+  - rule: rule_accessing_who_can_look
+    text: While the Runner is accessing a card, the Runner is allowed to look at that card, even if it would normally not be visible to them. While the Runner is accessing a card, the Corp is allowed to look at it as well, except when the card is being accessed from R&D.
+  - rule: rule_accessing_trigger_condition
+    text: An ability that meets its trigger condition when its source card is accessed is active even if the source card is inactive. See {ref:TODO}.
+  - rule: rule_mid_access_ability
+    text: During each access, the Runner has 1 opportunity to use a mid-access ability. This occurs after the reaction window at the beginning of the access, and before the Runner steals an accessed agenda.
+  - subsection: rule_basic_trash_ability
+    text: The Runner always has the ability "Access → Pay the trash cost of the accessed card: Trash it." This is the {term:basic trash ability}.
+    rules:
+    - rule: rule_paying_trash_costs
+      text: All assets and upgrades have trash costs, as do some ice and operations. If a card does not have a trash cost, the Runner cannot pay its trash cost, and therefore the Runner cannot use the basic trash ability during that access.
+    - rule: rule_trash_in_archives
+      text: The Runner cannot trash or pay the trash cost of a card in the Corp's discard pile, either with the basic trash ability or with other mid-access abilities.
+    - rule: rule_access_installed_must_trash_if_able
+      text: One card, {card:Mumbad Virtual Tour}, has the ability "If the Runner accesses this upgrade while it is installed, they must trash it, if able." When this ability applies, the Runner can use any mid-access ability they have available that trashes the card, but they cannot decline to use a mid-access ability or use one that would not trash the accessed card unless they are unable to pay the cost of any ability that would trash it.
+    - rule: rule_access_reveal_trash_if_able
+      text: One card, {card:Neutralize All Threats}, has the ability "The first time each turn you access a card with a trash cost, reveal it. You must trash that card by paying its trash cost, if able." When this ability applies, the Runner can only use the basic trash ability. They cannot decline to use a mid-access ability or use a mid-access ability available from a card unless they cannot pay the cost of the basic trash ability.
+  - subsection: rule_after_mid_access_agenda
+    text: If, after resolving mid-access abilities, the Runner is still accessing an agenda, they must steal it.
+    rules:
+    - rule: rule_agenda_additional_cost
+    text: Some abilities can create additional costs to steal an agenda. The Runner can decline to pay such costs and not steal the agenda. See {ref:rule_additional_cost}.
+  - rule: rule_moved_while_accessing
+    text: If a card moves to another location while it is being accessed, the access ends immediately.
+  
+
+
+      
+- section: sec_accessing_steps
+  text: Steps of Accessing a Card
+
+- section: sec_breaching_servers
+  text: Breaching Servers
+
+- section: sec_determining_candidates
+  text: Determining Candidates
+
+- section: sec_breaching_steps
+  text: Steps of Breaching a Server
+  

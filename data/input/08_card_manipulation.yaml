@@ -3,6 +3,55 @@ text: Card Manipulation
 sections:
 - section: sec_faceup_facedown_status
   text: Faceup and Facedown Status
+  rules:
+  - rule: rule_rezzed_unrezzed
+    text: |-
+      An agenda, asset, upgrade, or piece of ice is {term:unrezzed} if it is installed and facedown. An asset, upgrade, or piece of ice is {term:rezzed} if it is installed and faceup. Runner cards, faceup agendas, operations, events, and counters are neither rezzed nor unrezzed.
+      
+  - subsection: sec_rez
+    text: To {term:rez} an unrezzed card is to turn it faceup.
+    rules:
+    - rule: rule_rez_in_paw
+      text: |-
+        Some paid ability windows allow the Corp to rez assets and upgrades. See {ref:sec_paid_ability_windows}. The paid ability window at {ref:step_approach_paw} of a run allows the Corp to rez ice.
+    - rule: rule_rez_by_ability
+      text: Card abilities can direct or allow the Corp to rez cards at other times.
+    - rule: rule_cannot_rez_agendas
+      text: Agendas cannot be rezzed.
+    - rule: rule_inherent_rez_cost
+      text: |-
+        Before rezzing a card, the Corp must pay that card's rez cost. This includes both rezzing in a paid ability window and rezzing through a card ability. Card abilities can modify or ignore rez costs, but must state this explicitly.
+    - rule: rule_rez_procedure
+      text: |-
+        To resolve rezzing a card, the Corp pays its rez cost (accounting for any modifiers or additional costs), a checkpoint occurs (as required by {ref:rule_cost_paid_checkpoint}), then the Corp turns the card faceup. For purposes of meeting trigger conditions, the card is considered to be rezzed at the conclusion of this process.
+
+  - subsection: sec_derez
+    text: To {term:derez} a rezzed card is to turn it facedown.
+    rules:
+    - rule: rule_derez_by_ability
+      text: Cards are only derezzed by card effects.
+    - rule: rule_derez_cost
+      text: There is no inherent cost associated with derezzing a card.
+    - rule: rule_derez_procedure
+      text: Derezzing a card is instantaneous and has no component steps.
+
+  - subsection: sec_facedown_runner_cards
+    text: Some abilities can install Runner cards facedown or turn already-installed Runner cards facedown.
+    rules:
+    - rule: rule_facedown_runner_cards_are_blank
+      text: Installed Runner cards that are facedown do not have a name, type, or subtypes, and their abilities are not active.
+    - rule: rule_facedown_runner_cards_are_distinct
+      text: |-
+        Facedown installed Runner cards are distinct. The origin of each such card (when and how it was installed facedown, or what faceup installed card was turned facedown) is open information.
+    - rule: rule_facedown_runner_cards_flip_in_heap
+      text: After a facedown Runner card enters the heap, it is turned faceup.
+    - rule: rule_flip_is_not_uninstall
+      text: A Runner card turned facedown is not considered to be uninstalled and simply remains in the play area.
+    - rule: rule_unflipping_runner_cards
+      text: |-
+        If an installed facedown Runner card is turned faceup, the card gains its name, type, and subtypes, and it becomes active. Turning an installed facedown Runner card faceup does not meet the trigger conditions of "when installed" abilities.
+    - rule: rule_runner_cards_neither_rezzed_nor_unrezzed
+      text: Runner cards are never considered rezzed or unrezzed.
 
 - section: sec_card_movements
   text: Card Movements

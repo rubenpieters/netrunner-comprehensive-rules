@@ -7,6 +7,46 @@ sections:
   - rule: rule_run
     text: |-
       A {term:run} is a Runner's attack on a server. There are 6 phases used in the procedure of carrying out a run, described in {ref/through:sec_run_initiation,sec_run_ends_phase}. A run always begins with the Initiation Phase. {ref:Sec_steps_of_a_run} contains the full set of steps carried out during each phase, and should be referred to in conjunction with the sections discussing the phases.
+  - subsection: rule_attacked_server
+    text: The {term:attacked server} is the server the Runner is attempting to reach, usually to breach that server.
+    rules:
+    - rule: rule_announce_attacked_server
+      text: The Runner announces the attacked server in the initiation phase of the run.
+    - rule: rule_change_attacked_server
+      text: Card abilities can sometimes change the attacked server during the run. This does not end the run, but it can affect whether or not certain card abilities or effects apply.
+    - rule: rule_change_runner_position
+      text: If an ability changes the Runner's position, the attacked server and the current timing step of the run could also change. See {ref:TODO}.
+    - rule: rule_change_attacked_server_directly
+      text: A few abilities change the attacked server directly, without referring to the Runner's position. These abilities do not change the current timing step of the run.
+      examples:
+      - text: |-
+          {card:Sneakdoor Beta}'s ability changes the attacked server from Archives to HQ. The Runner does not need to encounter ice protecting HQ after resolving this ability.
+  - subsection: rule_modify_run_steps
+    text: Many abilities modify the sequence of steps taken to resolve a run. Such abilities can direct players to skip steps or phases, replace steps with other effects, move directly from the current timing point to a new phase, or make other changes to the procedures explained in this section. Heed the Golden Rules in {ref:sec_golden_rules}.
+    rules:
+    - rule: rule_directly_approach_encounter
+      text: Some abilities direct the Runner to approach or encounter a piece of ice as part of moving them to that ice's position. See {ref:TODO}.
+    - rule: rule_approach_directly
+      text: One card, {card:Code Replicator}, directs the Runner to approach the piece of ice in their position without first moving them to a new position. This effect changes the current timing step of the run to {ref:TODO}, the Approach Ice Phase.
+    - rule: rule_forced_encounter
+      text: An ability that directs the Runner to encounter a piece of ice without first moving the Runner's position does not change the current timing point of the run, the attacked server, or the Runner's position. The effect of such an ability is to resolve an Encounter Ice Phase independent of the current state of the run. See {ref:TODO}.
+    - rule: rule_move_new_run_phase
+      text: Any time the current timing step of the run is moved to a different phase of the run, except for an instruction to end the run (See {ref:rule_end_the_run}, below), no more steps in the previously-active phase are carried out. If a paid ability window is open, players complete that window normally. Then the active phase is complete and a checkpoint occurs. Finally, the game proceeds to the new phase.
+    - rule: rule_run_phase_after
+      text: If a condition refers to encountering a piece of ice "after" an approach or passing a piece of ice "after" an encounter, then that condition is only met by the indicated phases or steps occurring in direct sequence according to the standard progression of the run.
+      examples:
+      - text: The Runner uses {card:Inversificator} to break the subroutine on a {card:Miraju} that is protecting Archives. When the encounter ends, {card:Miraju}'s ability creates a replacement effect so that the Runner moves to the outermost position of Archives instead of passing {card:Miraju}. Because the ice is not passed, {card:Inversificator}'s ability does not meet its trigger condition. Later, the Runner encounters the same {card:Miraju} again and does not break its subroutine. When this encounter ends, the Runner passes {card:Miraju}. Even though the Runner has used {card:Inversificator} to fully break {card:Miraju} during an encounter earlier in the run, {card:Inversificator}'s trigger condition is not met when the Runner passes {card:Miraju} because the Runner is not passing it after the relevant encounter.
+  - rule: rule_end_the_run
+    text: To {term:end the run} is to halt the Runner's progress toward the server. When an effect ends the run, the current phase of the run ends without following any of its remaining steps, and before completing open priority windows. The game immediately moves from the current timing point to {ref:TODO}, the Run Ends Phase.
+  - subsection: rule_jacking_out
+    text: |-
+      {term:Jacking out} is the process by which a Runner voluntarily ends a run. Jacking out follows the usual process for ending the run as described in {ref:rule_end_the_run}, but some card abilities function differently depending on whether or not the Runner chose to end the run by jacking out.
+    rules:
+    - rule: rule_jack_out_after_passing_ice
+      text: The Runner has the opportunity to jack out after passing a piece of ice.
+    - rule: rule_jack_out_before_approach
+      text: If there is no ice protecting the server, the Runner has the opportunity to jack out before approaching the server.
+
 - section: sec_run_initiation
   text: Initiation
   rules:

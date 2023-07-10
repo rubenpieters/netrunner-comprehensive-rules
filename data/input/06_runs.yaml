@@ -47,6 +47,65 @@ sections:
     - rule: rule_jack_out_before_approach
       text: If there is no ice protecting the server, the Runner has the opportunity to jack out before approaching the server.
 
+- section: sec_position
+  text: Position
+  rules:
+  - subsection: rule_position
+    text: The Runner's {term:position} during a run is a measure of their distance from the server. The Runner's possible positions correspond to the positions of ice protecting the attacked server.
+    rules:
+    - rule: rule_position_caveats
+      text: The Runner does not have a position while they are not engaged in a run, nor do they maintain their position from one run to the next. After a run initiates, the Runner moves to the outermost position of the attacked server, if it has any.
+  - subsection: rule_position_progression
+    text: The Runner progresses through the positions protecting a server (and corresponding ice) in order. They approach, encounter (if the ice is rezzed), and pass each piece of ice, then proceed to the next piece of ice moving inward, until they pass the innermost piece of ice or the run is ended.
+    rules:
+    - rule: rule_no_position_after_innermost_ice
+      text: Once the Runner leaves the position of the innermost piece of ice protecting a server, they no longer have a position. This occurs at {ref:TODO} of the Movement Phase. However, abilities can still move the Runner to a position later in that phase.
+    - rule: rule_no_position_after_approach_server
+      text: During the Success Phase and the Run Ends Phase, the Runner has no position and can no longer move to a position.
+      examples:
+      - text: The Corp uses {card:Ganked!} to force the Runner to encounter {card:Cell Portal} in the middle of breaching a server. Since the run is already successful, resolving {card:Cell Portal}'s subroutine will have no meaningful effect except to derez {card:Cell Portal}.
+  - subsection: rule_ice_change_can_affect_position
+    text: Ice entering or leaving a position protecting the attacked server can affect the Runner's position.
+    rules:
+    - rule: rule_ice_change_outward
+      text: If a piece of ice is added to or removed from the attacked server in a position outward from the Runner's current position, nothing happens. The Runner will normally not need to approach or encounter the new piece of ice to reach the server.
+      examples:
+      - text: During a run on R&D, {card:Architect}'s subroutines resolve and the Corp installs a new piece of ice in the outermost position protecting this server. The Runner does not approach that new piece of ice during this run because they have already passed that position.
+    - rule: rule_ice_added_inward
+      text: If a piece of ice is added to the attacked server in a position inward from the Runner's current position, the Runner and each piece of ice outside of the new ice's position shift one space outward.
+      examples:
+      - text: During a run on a remote server, {card:Howler}'s subroutine resolves, and the Corp installs a new piece of ice in the next inward position protecting the server. The Runner will have to approach that new piece of ice later in this run because they have not passed that position.
+    - rule: rule_ice_removed_inward
+      text: If a piece of ice inward from the Runner's position is uninstalled or moved to another server, the Runner and each piece of ice outside of the departed ice's position shift one space inward. The Runner does not re-approach ice they have already passed.
+  - subsection: rule_ice_change_current_position
+    text: Changes to the piece of ice in the Runner's current position can affect the progression of the run, but they do so differently during the Approach Ice Phase than during the Encounter Ice Phase.
+    rules:
+    - rule: rule_ice_change_approach_uninstall_move
+      text: If a piece of ice is uninstalled or moved to another position (protecting this or another server) while it is being approached, the run moves to the Movement Phase, all outward ice moves one position inward, and the run continues. The Runner does not re-approach ice they have already passed.
+      examples:
+      - text: The Runner has passed 1 piece of ice and is approaching the innermost piece of ice, which is a rezzed {card:Himitsu-Bako}. During the paid ability window of the approach, the Corp uses the ability on {card:Himitsu-Bako} to add it to HQ. The Runner passes this position and will approach the server next, while the other piece of ice protecting the server moves to the innermost position.
+    - rule: rule_ice_change_encounter_uninstall_derez
+      text: If a piece of ice is uninstalled or derezzed while it is being encountered, the run moves to the Movement Phase. All outward ice moves one position inward if the ice was uninstalled, and the run continues. The Runner does not re-approach ice they have already passed.
+    - rule: rule_ice_change_encounter_move_swap
+      text: If a piece of ice currently being encountered moves to another position or is swapped with installed ice in another position, the Runner remains with the encountered ice and continues the run from that ice's new position.
+      examples:
+      - text: The Runner encounters {card:Bullfrog} as the innermost piece of ice protecting a remote server. {card:Bullfrog}'s subroutine resolves and it is moved to be the outermost piece of ice protecting Archives. The Runner is now running on Archives and continues the run from {card:Bullfrog}'s new position.
+    - rule: rule_ice_change_approach_swap
+      text: If a piece of ice currently being approached is swapped with ice in another position, the Runner remains in their current position and is now approaching the new piece of ice occupying that position.
+    - rule: rule_ice_change_after_pass
+      text: If a piece of ice is uninstalled, derezzed, moved, or swapped after it is passed, the Runner is not moved.
+  - subsection: rule_move_runner_to_position
+    text: During a run, abilities can move the Runner directly to a position.
+    rules:
+    - rule: rule_move_to_piece_of_ice
+      text: If an ability instructs the Runner to move to a piece of ice in a different position, the Runner's position becomes the position corresponding to that ice, and the server that ice protects becomes the attacked server. The current timing step becomes {ref:TODO}, the Approach Ice Phase, or {ref:TODO}, the Encounter Ice Phase, according to whether the Runner was directed to approach or encounter the ice.
+    - rule: rule_move_to_specific_position
+      text: If an ability instructs the Runner to move to "the outermost position" of a server, that server becomes the attacked server. If there is any ice protecting that server, the Runner's position becomes the position of the outermost such piece of ice, and the current timing step becomes {ref:TODO}, the Approach Ice Phase. If there is no ice, the Runner ceases to have a position, and the current timing step becomes {ref:TODO}, the Movement Phase.
+    - rule: rule_ineffective_move
+      text: If an ability instructs the Runner to move to a position during the Success Phase, during the Run Ends Phase, or while there is no run in progress, instead the Runner does nothing. See {ref:TODO}.
+    - rule: rule_move_to_current_ice
+      text: If an ability instructs the Runner to move to and approach a position they are already approaching, instead the Runner does nothing.
+
 - section: sec_run_initiation
   text: Initiation
   rules:

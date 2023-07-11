@@ -27,7 +27,7 @@ sections:
     - rule: rule_directly_approach_encounter
       text: Some abilities direct the Runner to approach or encounter a piece of ice as part of moving them to that ice's position. See {ref:TODO}.
     - rule: rule_approach_directly
-      text: One card, {card:Code Replicator}, directs the Runner to approach the piece of ice in their position without first moving them to a new position. This effect changes the current timing step of the run to {ref:TODO}, the Approach Ice Phase.
+      text: One card, {card:Code Replicator}, directs the Runner to approach the piece of ice in their position without first moving them to a new position. This effect changes the current timing step of the run to {ref:rule_sec_run_approach_ice_phase}, the Approach Ice Phase.
     - rule: rule_forced_encounter
       text: An ability that directs the Runner to encounter a piece of ice without first moving the Runner's position does not change the current timing point of the run, the attacked server, or the Runner's position. The effect of such an ability is to resolve an Encounter Ice Phase independent of the current state of the run. See {ref:TODO}.
     - rule: rule_move_new_run_phase
@@ -37,7 +37,7 @@ sections:
       examples:
       - text: The Runner uses {card:Inversificator} to break the subroutine on a {card:Miraju} that is protecting Archives. When the encounter ends, {card:Miraju}'s ability creates a replacement effect so that the Runner moves to the outermost position of Archives instead of passing {card:Miraju}. Because the ice is not passed, {card:Inversificator}'s ability does not meet its trigger condition. Later, the Runner encounters the same {card:Miraju} again and does not break its subroutine. When this encounter ends, the Runner passes {card:Miraju}. Even though the Runner has used {card:Inversificator} to fully break {card:Miraju} during an encounter earlier in the run, {card:Inversificator}'s trigger condition is not met when the Runner passes {card:Miraju} because the Runner is not passing it after the relevant encounter.
   - rule: rule_end_the_run
-    text: To {term:end the run} is to halt the Runner's progress toward the server. When an effect ends the run, the current phase of the run ends without following any of its remaining steps, and before completing open priority windows. The game immediately moves from the current timing point to {ref:TODO}, the Run Ends Phase.
+    text: To {term:end the run} is to halt the Runner's progress toward the server. When an effect ends the run, the current phase of the run ends without following any of its remaining steps, and before completing open priority windows. The game immediately moves from the current timing point to {ref:rule_sec_run_run_ends_phase}, the Run Ends Phase.
   - subsection: rule_jacking_out
     text: |-
       {term:Jacking out} is the process by which a Runner voluntarily ends a run. Jacking out follows the usual process for ending the run as described in {ref:rule_end_the_run}, but some card abilities function differently depending on whether or not the Runner chose to end the run by jacking out.
@@ -59,7 +59,7 @@ sections:
     text: The Runner progresses through the positions protecting a server (and corresponding ice) in order. They approach, encounter (if the ice is rezzed), and pass each piece of ice, then proceed to the next piece of ice moving inward, until they pass the innermost piece of ice or the run is ended.
     rules:
     - rule: rule_no_position_after_innermost_ice
-      text: Once the Runner leaves the position of the innermost piece of ice protecting a server, they no longer have a position. This occurs at {ref:TODO} of the Movement Phase. However, abilities can still move the Runner to a position later in that phase.
+      text: Once the Runner leaves the position of the innermost piece of ice protecting a server, they no longer have a position. This occurs at {ref:step_move_position} of the Movement Phase. However, abilities can still move the Runner to a position later in that phase.
     - rule: rule_no_position_after_approach_server
       text: During the Success Phase and the Run Ends Phase, the Runner has no position and can no longer move to a position.
       examples:
@@ -98,11 +98,11 @@ sections:
     text: During a run, abilities can move the Runner directly to a position.
     rules:
     - rule: rule_move_to_piece_of_ice
-      text: If an ability instructs the Runner to move to a piece of ice in a different position, the Runner's position becomes the position corresponding to that ice, and the server that ice protects becomes the attacked server. The current timing step becomes {ref:TODO}, the Approach Ice Phase, or {ref:TODO}, the Encounter Ice Phase, according to whether the Runner was directed to approach or encounter the ice.
+      text: If an ability instructs the Runner to move to a piece of ice in a different position, the Runner's position becomes the position corresponding to that ice, and the server that ice protects becomes the attacked server. The current timing step becomes {ref:rule_sec_run_approach_ice_phase}, the Approach Ice Phase, or {ref:rule_sec_run_encounter_ice_phase}, the Encounter Ice Phase, according to whether the Runner was directed to approach or encounter the ice.
     - rule: rule_move_to_specific_position
-      text: If an ability instructs the Runner to move to "the outermost position" of a server, that server becomes the attacked server. If there is any ice protecting that server, the Runner's position becomes the position of the outermost such piece of ice, and the current timing step becomes {ref:TODO}, the Approach Ice Phase. If there is no ice, the Runner ceases to have a position, and the current timing step becomes {ref:TODO}, the Movement Phase.
+      text: If an ability instructs the Runner to move to "the outermost position" of a server, that server becomes the attacked server. If there is any ice protecting that server, the Runner's position becomes the position of the outermost such piece of ice, and the current timing step becomes {ref:rule_sec_run_approach_ice_phase}, the Approach Ice Phase. If there is no ice, the Runner ceases to have a position, and the current timing step becomes {ref:rule_sec_run_movement_phase}, the Movement Phase.
     - rule: rule_ineffective_move
-      text: If an ability instructs the Runner to move to a position during the Success Phase, during the Run Ends Phase, or while there is no run in progress, instead the Runner does nothing. See {ref:TODO}.
+      text: If an ability instructs the Runner to move to a position during the Success Phase, during the Run Ends Phase, or while there is no run in progress, instead the Runner does nothing. See {ref:rule_no_position_after_approach_server}.
     - rule: rule_move_to_current_ice
       text: If an ability instructs the Runner to move to and approach a position they are already approaching, instead the Runner does nothing.
 
@@ -111,6 +111,41 @@ sections:
   rules:
   - rule: rule_run_initiation_phase
     text: The {term:initiation phase} sets the parameters for the run and begins the run.
+
+- section: sec_approach_ice_phase
+  text: Approach Ice
+  rules:
+  - rule: rule_approach_ice_phase
+    text: The {term:approach ice phase} gives the Corp the opportunity to rez the ice in the Runner's current position.
+  - rule: rule_approach_condition
+    text: For purposes of meeting trigger conditions, the Runner approaching a piece of ice is equivalent to the Approach Ice Phase beginning at that ice's position. Abilities with this trigger condition are subject to {ref:TODO}.
+  - rule: rule_rez_ice_restriction
+    text: The paid ability window in {ref:step_approach_paw} of the Approach Ice Phase is the only time the Corp can normally rez ice. In this window, the Corp only gains the ability to rez the piece of ice being approached, not any other ice.
+  - rule: rule_approach_ice_next_phase
+    text: When the Approach Ice Phase completes, the run moves either to the Encounter Ice Phase ({ref:sec_movement_phase}) or the Movement Phase ({ref:sec_encounter_ice_phase}). If the approached piece of ice is rezzed, the Runner encounters it next. If the approached piece of ice is unrezzed or if there is no longer ice installed in that position, then the run moves directly to the Movement Phase.
+
+- section: sec_encounter_ice_phase
+  text: Encounter Ice
+
+- section: sec_movement_phase
+  text: Movement
+  rules:
+  - rule: rule_movement_phase
+    text: The {term:movement phase} handles the progression of the run between pieces of ice and after the innermost piece of ice, up to the point when the Runner approaches the attacked server.
+  - rule: rule_pass_ice
+    text: If the Movement Phase was reached from the Approach Ice Phase or the Encounter Ice Phase, the Runner passes the ice in their position.
+  - rule: rule_jack_out_movement_phase
+    text: During each Movement Phase, the Runner has the opportunity to jack out. See {ref:rule_jacking_out}.
+  - rule: rule_runner_continues
+    text: If the Runner declines to jack out, their position moves to the next inward position if there is one.
+  - rule: rule_runner_approach_new_position
+    text: If the Runner moves to a new position, the run continues from the Movement Phase to the Approach Ice Phase, {ref:sec_approach_ice_phase}. The Runner will approach the piece of ice in their new position.
+  - rule: rule_approach_server
+    text: If the Runner does not jack out or return to the Approach Ice Phase, they approach the server. This has no inherent effects, but is referred to by some card abilities. After the Runner approaches the server, the run continues to the Success Phase, {ref:sec_success_phase}.
+
+- section: sec_success_phase
+  text: Success
+
 - section: sec_run_ends_phase
   text: Run Ends Phase
   rules:

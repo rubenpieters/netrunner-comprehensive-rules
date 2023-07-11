@@ -116,6 +116,7 @@ sections:
   rules:
   - rule: rule_run_ends_phase
     text: The {term:run ends phase} formalizes the end of the run and prepares the game to return to the timing structure from which the run was initiated.
+
 - section: sec_steps_of_a_run
   text: Steps of a Run
   rules:
@@ -132,12 +133,69 @@ sections:
     - rule: step_initiation_complete
       text: |-
         The Initiation Phase is complete. If the attacked server has at least one piece of ice protecting it, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the outermost piece of ice protecting the attacked server. If the attacked server is not protected by ice, proceed to {ref:rule_sec_run_movement_phase}, Movement Phase.
-  - rule: rule_sec_run_approach_ice_phase
+  - subsection: rule_sec_run_approach_ice_phase
     steps:
     text: Approach Ice Phase
-  - rule: rule_sec_run_encounter_ice_phase
+    rules:
+    - rule: step_approach_begins
+      text: The approach begins. Conditions related to the Runner approaching this ice are met.
+    - rule: step_approach_paw
+      text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. Additionally, the Corp can rez the approached piece of ice. (P) (R)
+    - rule: step_approach_complete
+      text: The Approach Ice Phase is complete. If the approached piece of ice is rezzed, continue to {ref:rule_sec_run_encounter_ice_phase}, Encounter Ice Phase. Otherwise, proceed to {ref:rule_sec_run_movement_phase}, Movement Phase.
+  - subsection: rule_sec_run_encounter_ice_phase
     steps:
     text: Encounter Ice Phase
-  - rule: rule_sec_run_movement_phase
+    rules:
+    - rule: step_encounter_begins
+      text: The encounter begins. Conditions related to the Runner encountering this ice are met.
+    - rule: step_encounter_paw
+      text: A paid ability window occurs, in which players may only use paid abilities. Subroutines on the encountered ice can be broken during this window. (P)
+    - rule: step_check_finised_resolving_subroutines
+      text: If there are unbroken subroutines that have not yet resolved this encounter, the Corp resolves the next such subroutine in order. Otherwise, skip to (e).
+    - rule: step_resolve_next_subroutine
+      text: Return to (c).
+    - rule: step_encounter_complete
+      text: The Encounter Ice Phase is complete. Continue to {ref:rule_sec_run_movement_phase}, Movement Phase.
+  - subsection: rule_sec_run_movement_phase
     steps:
     text: Movement Phase
+    rules:
+    - rule: step_pass_ice
+      text: If the Runner's position corresponds to a piece of ice, the Runner passes that ice. Conditions related to passing ice are met. If there are no positions more inward than the ice just passed, conditions related to passing all of the ice protecting a server are also met.
+    - rule: step_before_jack_out_paw
+      text: A paid ability window occurs, in which players may only use paid abilities. (P)
+    - rule: step_jack_out_choice
+      text: The Runner may choose to jack out, proceeding to {ref:rule_sec_run_run_ends_phase}, Run Ends Phase. If the Runner does not, continue to (d).
+    - rule: step_move_position
+      text: The Runner's position moves to the next position inward, if any.
+    - rule: step_after_jack_out_paw
+      text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
+    - rule: step_approach_new_ice
+      text: If the Runner moved to a new position, return to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the piece of ice in their new position. If not, continue to (g).
+    - rule: step_approach_server
+      text: The Runner approaches the attacked server. Conditions related to the Runner approaching a server are met.
+    - rule: step_movement_complete
+      text: The Movement Phase is complete. Continue to {ref:rule_sec_run_success_phase}, Success Phase. 
+  - subsection: rule_sec_run_success_phase
+    steps:
+    text: Success Phase
+    rules:
+    - rule: step_run_declared_successful
+      text: The run is declared successful. Conditions related to a successful run are met.
+    - rule: step_breach
+      text: The Runner breaches the attacked server.
+    - rule: step_success_complete
+      text: The Success Phase is complete. Continue to step 6.9.6, Run Ends Phase.
+  - subsection: rule_sec_run_run_ends_phase
+    steps:
+    text: Run Ends Phase
+    rules:
+    - rule: step_open_priority_windows_closed
+      text: Any priority windows that were open when the run moved to this phase are completed or closed as described in {ref:TODO}.
+    - rule: step_run_ends_bad_buplicity
+      text: The Runner loses any unspent bad publicity credits.
+    - rule: step_run_declared_unsuccessful
+      text: If the Success Phase was not reached during this run and the attacked server still exists, the run becomes unsuccessful.
+    - rule: step_run_complete
+      text: The Run Ends Phase and the run as a whole are both complete.

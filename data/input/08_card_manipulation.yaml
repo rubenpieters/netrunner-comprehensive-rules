@@ -80,7 +80,7 @@ sections:
 
   - rule: movement_arrange
     text: |-
-      To {term:arrange} a set of cards is to reposition them among their current locations. The ful rules for arranging are detailed in {ref:sec_arrange}.
+      To {term:arrange} a set of cards is to reposition them among their current locations. The ful rules for arranging are detailed in {ref:sec_arranging_rearranging}.
       
   - rule: movement_draw
     text: |-
@@ -116,7 +116,65 @@ sections:
 
   - rule: movement_trash
     text: |-
-      To {term:trash} a card is to move it from its current zone to its owner’s discard pile. The full rules for trashing are detailed in {ref:sec_trashing}.
+      To {term:trash} a card is to move it from its current zone to its owner's discard pile. The full rules for trashing are detailed in {ref:sec_trashing}.
+
+- section: sec_arranging_rearranging
+  text: Arranging and Rearranging Cards
+  rules:
+  - subsection: rule_arrange_rearrange
+    text: To {term:arrange} or {term:rearrange} an ordered set of 2 or more cards is to reposition them among their current locations. The words "arrange" and "rearrange" are synonymous.
+    rules:
+    - rule: rule_arrange_1_or_fewer
+      text: If a player is instructed to arrange 1 or fewer cards, instead that player does nothing.
+
+  - subsection: rule_arrange_ice
+    text: When a player arranges a set of installed ice, that player carries out the arrangement by repeatedly choosing and swapping 2 pieces of ice. Each swap follows all the usual rules for swapping cards in {ref:sec_swapping_cards}.
+    rules:
+    - rule: rule_no_checkpoints_during_swaps
+      text: No checkpoints occur during the sequence of swaps. An ability that meets its condition while ice is being arranged will become pending at the end of resolving the instruction in which arranging ice is taking place.
+  
+  - rule: rule_arrange_secretly
+    text: When a player arranges cards from the top of their deck or their opponent's deck, that player sets those cards aside facedown, secretly puts them in the order of their choice, and returns them to the top of that deck. They do not declare which cards moved to which positions. All of the arranged cards become new objects after they are arranged, even cards that remain in the same location in the deck.
+
+- section: sec_drawing_cards
+  text: Drawing Cards
+  rules:
+  - rule: rule_drawing
+    text: |-
+      {term:drawing} cards is a process that moves cards from a player's deck to their hand.
+
+  - subsection: rule_draw_procedure
+    text: To draw 1 or more cards, a player sets aside that many cards from the top of their deck facedown. The cards are then considered drawn, and abilities with trigger conditions related to cards being drawn can act on them. When resolving any such abilities is complete, the set-aside cards are added to their owner's hand.
+    rules:
+    - rule: rule_draw_relevant_abilities_see_set_aside
+      text: Abilities with a trigger condition that refers to cards being drawn can see the drawn cards in the set-aside zone. This is an exception to {ref:rule_set_aside_zone_passthrough}.
+    - rule: rule_draw_irrelevant_abilities_dont_see_set_aside
+      text: Abilities that do not refer specifically to cards a player has drawn are subject to {ref:rule_set_aside_zone_passthrough}, and only see the drawn cards move directly from the player's deck to their hand.
+
+  - subsection: rule_modify_drawn_cards
+    text: Abilities that resolve while drawn cards are set aside can move those cards or add new cards to that set.
+    rules:
+    - rule: rule_card_leaves_drawn_set
+      text: If a drawn card leaves the set-aside zone, it is no longer considered "drawn" and remains in its new location when the drawn cards are added to the hand.
+    - rule: rule_drawn_card_swapped
+      text: If a drawn card is swapped with another card, the card swapped into the set-aside zone is now considered "drawn", can be manipulated by other abilities, and will be added to the hand with the other drawn cards.
+      examples:
+      - text: The Corp takes their mandatory draw while they have {card:Daily Business Show} and {card:Raman Rai} rezzed. They set aside {card:Wraparound} and {card:Enigma} from the top of R&D. After looking at those cards and the cards in Archives, the Corp uses {card:Raman Rai} to reveal the {card:Enigma} and a {card:Tollbooth} from Archives and swap them. Then, the corp uses {card:Daily Business Show} to add {card:Tollbooth} to the bottom of the deck. Finally, the Corp adds {card:Wraparound} to HQ.
+
+  - rule: rule_drawing_simultaneously
+    text: If an ability directs multiple players to draw cards at the same time, those players follow the procedure for drawing cards together. Abilities relating to all of those draws will become pending in the same reaction window.
+
+  - subsection: sec_steps_of_drawing_n_cards
+    text: Steps of Drawing N Cards
+    toc:
+    steps:
+    rules:
+    - rule: step_draw_set_aside
+      text: Set aside N cards from the top of the drawing player's deck. The cards are now considered drawn and can be looked at by their controller.
+    - rule: step_draw_checkpoint
+      text: A checkpoint occurs.
+    - rule: step_draw_add_to_hand
+      text: Add the set-aside cards to the player's hand.
 
 - section: sec_install_uninstall
   text: Installing and Uninstalling Cards
@@ -136,3 +194,6 @@ sections:
 
 - section: sec_searching_cards
   text: Searching for Cards
+
+- section: sec_swapping_cards
+  text: Swapping Cards

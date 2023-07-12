@@ -28,7 +28,7 @@ sections:
       text: Some abilities direct the Runner to approach or encounter a piece of ice as part of moving them to that ice's position. See {ref:TODO}.
     - rule: rule_approach_directly
       text: One card, {card:Code Replicator}, directs the Runner to approach the piece of ice in their position without first moving them to a new position. This effect changes the current timing step of the run to {ref:rule_sec_run_approach_ice_phase}, the Approach Ice Phase.
-    - rule: rule_forced_encounter
+    - rule: rule_forced_encounter_link
       text: An ability that directs the Runner to encounter a piece of ice without first moving the Runner's position does not change the current timing point of the run, the attacked server, or the Runner's position. The effect of such an ability is to resolve an Encounter Ice Phase independent of the current state of the run. See {ref:TODO}.
     - rule: rule_move_new_run_phase
       text: Any time the current timing step of the run is moved to a different phase of the run, except for an instruction to end the run (See {ref:rule_end_the_run}, below), no more steps in the previously-active phase are carried out. If a paid ability window is open, players complete that window normally. Then the active phase is complete and a checkpoint occurs. Finally, the game proceeds to the new phase.
@@ -111,6 +111,31 @@ sections:
   rules:
   - rule: rule_run_initiation_phase
     text: The {term:initiation phase} sets the parameters for the run and begins the run.
+  - subsection: rule_start_initiation_phase
+    text: At the start of the Initiation Phase, the Runner announces a server to be the attacked server.
+    rules:
+    - rule: rule_cannot_run_abilities
+      text: Some abilities state that the Runner "cannot run on" or "cannot initiate a run on" certain servers under certain conditions. These effects refer to the announcement of the attacked server in the Initiation Phase.
+      examples:
+      - text: |-
+          {card:Off the Grid} states in part, "The Runner cannot initiate a run on this server." This only prohibits the Runner from announcing this particular remote server as the attacked server at the beginning of the run. If an ability changes the attacked server while a run is in progress, {card:Off the Grid} does not interfere with that ability.
+    - rule: rule_additional_cost_to_run
+      text: Some abilities impose an additional cost to run, either generally or on a particular server. Any costs to run a server must be paid at the time that server is announced as the attacked server.
+  - subsection: rule_initiation_bad_publicity
+    text: After the attacked server is announced, the Runner receives credits equal to the number of bad publicity the Corp has. See {ref:sec_bad_publicity} for an explanation of bad publicity.
+    rules:
+    - rule: rule_bad_publicity_cost_to_run
+      text: Credits from bad publicity cannot be spent to pay costs to make the run, as they are received after the attacked server is announced.
+    - rule: rule_bad_publicity_in_credit_pool
+      text: Once they are received, credits from bad publicity are in the Runner's credit pool and behave just as any other credits. They can be spent, lost, placed on cards, and so on as normally allowed.
+    - rule: rule_bad_publicity_gone_in_run_ends_phase
+      text: During the Run Ends Phase, any credits from bad publicity remaining in the Runner's credit pool are lost.
+  - rule: rule_abilities_during_a_run
+    text: Some abilities look for particular conditions occurring "during a run" or are restricted to being used "during a run." For purposes of abilities, the run formally begins only after the attacked server is announced and any costs are paid.
+    examples:
+    - text: The Runner initiates a run against a server with a rezzed {card:Heinlein Grid} while the Corp has {card:Enhanced Login Protocol} in play. They do not lose any credits to {card:Heinlein Grid}'s ability, as the additional click {card:Enhanced Login Protocol} requires them to spend is spent to initiate the run, and is not spent during the run.
+  - rule: rule_run_initiation_phase_next_phase
+    text: When the Initiation Phase completes, the run moves either to the Approach Ice Phase ({ref:sec_approach_ice_phase}) or the Movement Phase ({ref:sec_movement_phase}). If there is ice protecting the attacked server, the Runner's position becomes the outermost piece of ice, and the run proceeds to the Approach Ice Phase. If there is no ice protecting the server, then the run moves directly to the Movement Phase.
 
 - section: sec_approach_ice_phase
   text: Approach Ice
@@ -126,6 +151,59 @@ sections:
 
 - section: sec_encounter_ice_phase
   text: Encounter Ice
+  rules:
+  - rule: rule_encounter_ice_phase
+    text: The {term:encounter ice phase} gives the Runner the opportunity to interact with the ice in their current position, then requires the Corp to resolve unbroken subroutines on that ice.
+  - rule: rule_encounter_condition
+    text: For purposes of meeting trigger conditions, the Runner encountering a piece of ice is equivalent to the Encounter Ice Phase beginning at that ice's position. Abilities with this trigger condition are subject to {ref:TODO}.
+  - rule: rule_encounter_unbroken_sub_status
+    text: As each encounter begins, each subroutine on the encountered ice gains an "unbroken" status associated with that encounter. See {ref:sec_subroutines} for details.
+  - rule: rule_encounter_break_paw
+    text: During the paid ability window in the Encounter Ice Phase ({ref:step_encounter_paw}), the Runner can break subroutines on the ice. See {ref:TODO}.
+  - rule: rule_encounter_sub_resolve
+    text: After the paid ability window in the Encounter Ice Phase closes, unbroken subroutines on the encountered ice resolve. See {ref:TODO}.
+  - rule: rule_encounter_ice_next_phase
+    text: At the end of the Encounter Ice Phase, the run continues to the Movement Phase, {ref:sec_movement_phase}.
+  - subsection: subsec_fully_break
+    text: Fully Break
+    toc:
+    rules:
+    - rule: rule_fully_break
+      text: During each encounter, the Runner {term:fully breaks} the encountered ice the first time all subroutines on that ice are broken.
+    - rule: rule_object_fully_break
+      text: Whenever the Runner fully breaks a piece of ice, if all its subroutines were broken using abilities on a single object, that object also {term:fully breaks} the ice.
+    - rule: rule_fully_break_no_subroutines
+      text: If an encountered piece of ice has no subroutines, the Runner fully breaks it when step 6.9.3b of the encounter begins. No objects fully break the ice in this case.
+    - rule: rule_fully_broken_not_retracted
+      text: If the encountered piece of ice gains subroutines after the Runner fully breaks it, the Runner's status of having fully broken the ice remains in place. Conditions that check whether the Runner fully broke the ice will still be met as normal. Breaking the new subroutines will not fully break the ice or meet related conditions again.
+  - subsection: subsec_bypass
+    text: Bypass
+    toc:
+    rules:
+    - rule: rule_bypass
+      text: When an effect allows the Runner to {term:bypass} a piece of ice, the Encounter Ice Phase is aborted and the Runner immediately proceeds to pass that ice.
+    - rule: rule_bypass_start_of_encounter
+      text: Most bypass effects occur at the beginning of an encounter and result in {ref:step_encounter_paw,step_check_finised_resolving_subroutines} never occurring, meaning that subroutines on the encountered ice are neither broken nor resolved.
+    - rule: rule_bypass_during_encounter
+      text: A few bypass effects can be triggered later. If ice is bypassed in {ref:step_encounter_paw}, subroutines may or may not have been broken, but {ref:step_check_finised_resolving_subroutines} never occurs so no subroutines resolve. Note that for ice with zero subroutines, the Runner has "broken all subroutines" if and only if {ref:step_encounter_paw} was reached. See {ref:TODO}.
+      examples:
+      - text: The Runner plays {card:Forked} and encounters a {card:Troll} that they can bypass with {card:Femme Fatale}. The Runner pays 0[c] to bypass the {card:Troll} with {card:Femme Fatale}. {card:Forked} does not meet its trigger condition, and {card:Troll} is not trashed, because the opportunity to break subroutines was never reached.
+  - subsection: subsec_forced_encounters
+    text: Forced Encounters
+    toc:
+    rules:
+    - rule: rule_forced_encounter
+      text: If an ability directs the Runner to encounter a piece of ice without first changing their position, resolve an Encounter Ice Phase but do not change the Runner's position, if any. After the encounter, return to the effect that caused the encounter and proceed from there. This type of encounter outside the normal progression of a run is referred to as a {term:forced encounter}.
+      examples:
+      - text: If {card:Shiro} causes {card:Chrysalis} to be accessed, resolve the encounter with {card:Chrysalis} and then return to resolving subroutines on {card:Shiro}.
+    - rule: rule_forced_encounter_during_run
+      text: If a forced encounter occurs during a run, an instruction to end the run during that encounter is applied to both the Encounter Ice Phase being resolved and the phase from which the additional encounter was initiated. If a forced encounter occurs outside of a run, an instruction to end the run simply closes the Encounter Ice Phase and returns the game to the effect that called for the encounter.
+      examples:
+      - text: The Corp uses {card:The Twins} to force the Runner to encounter a piece of ice again when they pass it. If a subroutine directs the Corp to end the run during the extra encounter, both that encounter and the original Movement Phase are aborted, and the game proceeds to the Run Ends phase. 
+    - rule: rule_forced_encounter_end
+      text: An instruction that creates a forced encounter is not finished resolving until the encounter is complete.
+    - rule: rule_move_during_forced
+      text: During a forced encounter, if an ability moves the Runner or directs the Runner to approach a piece of ice, that movement resolves and changes the parameters of the underlying run normally, but does not end or interfere with the forced encounter.
 
 - section: sec_movement_phase
   text: Movement
@@ -145,12 +223,65 @@ sections:
 
 - section: sec_success_phase
   text: Success
+  rules:
+  - rule: rule_success_phase
+    text: The {term:success phase} declares the run successful and allows the Runner to breach the attacked server.
+  - rule: rule_successful_run
+    text: A run during which the runner breaks through the Corp's defenses and reaches the server itself is declared a {term:successful run}. This label is frequently referred to by card abilities.
+  - rule: rule_declaring_successful_run
+    text: Declaring a run to be successful is not the same as the Success Phase beginning. Accordingly, abilities that have trigger conditions related to a successful run are not subject to {ref:TODO}.
+  - subsection: rule_if_successful
+    text: Many abilities that initiate a run contain a conditional ability with the trigger condition "If successful". This means, "After the run created this way becomes successful".
+    rules:
+    - rule: rule_if_successful_tied_to_server
+      text: If an effect that initiates a run specifies that that run must be made against a specific server or servers, any "If successful" abilities associated with that effect are tied to that server or servers. If the attacked server has changed since the run was initiated, and no longer is a server that could have been chosen for this run, the "If successful" abilities do not meet their trigger conditions.
+      examples:
+      - text: The Runner plays {card:Because I Can}, which directs them to make a run on a remote server. If an effect moves the run to a central server, the "If successful" effect on {card:Because I Can} will not apply. However, if the run is moved instead to another remote server, the "If successful" effect is still applied, since {card:Because I Can} would have allowed a run on the second remote server to begin with.
+    - rule: rule_if_successful_lingering_effect
+      text: |-
+        "If successful" abilities frequently create lingering effects (see {ref:TODO}) that modify the procedure for accessing cards or replace breaching the attacked server with another effect entirely. These effects apply to the breach permitted by the rules for this run (see {ref:rule_breach_link}), and they expire when the run is complete.
+    - rule: rule_if_successful_ability_optional
+      text: If an "If successful" effect gives the Runner an effect they can optionally carry out instead of breaching, that decision is made at the time the breach would begin, in {ref:step_breach}.
+  - rule: rule_breach_link
+    text: When the Runner breaches the server, they follow the procedures detailed in {ref:chpt_access_breach}.
 
 - section: sec_run_ends_phase
   text: Run Ends Phase
   rules:
   - rule: rule_run_ends_phase
     text: The {term:run ends phase} formalizes the end of the run and prepares the game to return to the timing structure from which the run was initiated.
+  - subsection: rule_run_ends_process_priority_windows
+    text: |-
+      At the beginning of the Run Ends Phase, the game processes each priority window that was open when the run was ended. This is done according to the following procedure:
+    rules:
+    - rule: rule_run_ends_close_paws
+      text: If a paid ability window was open when the run was ended, the window closes. No player can trigger further paid abilities or resolve other options the window would normally allow (such as rezzing cards).
+      examples:
+      - text: The Corp spends a counter from a scored {card:Nisei Mk II} to end the run. Once this happens, the Runner does not have an opportunity to use their bad publicity credits from this run to pay for using {card:Self-Modifying Code}.
+    - rule: rule_run_ends_close_reaction_window
+      text: If the run was ended during a reaction window opened due to a phase beginning, the reaction window closes, as per {ref:TODO}. No other pending abilities are resolved.
+      examples:
+      - text: The Runner uses the ability on {card:Security Nexus} during a reaction window at the beginning of the Encounter Ice Phase. The trace is successful, so the ability ends the run. If {card:Tollbooth}'s ability is also pending in this reaction window, it will not be resolved, since the encounter has ended. 
+    - rule: rule_run_ends_other_priority_windows
+      text: Any other open priority window is completed normally. If more than one priority window needs to be completed this way, they are resolved in the usual order described in {ref:TODO}.
+  - rule: rule_run_ends_lose_bad_pub_credits
+    text: During the Run Ends Phase, if the Runner has any credits from bad publicity remaining in their credit pool, the Runner loses those credits.
+  - subsection: rule_unsuccessful_run
+    text: |-
+      As part of the Run Ends Phase, the game determines whether the run should be declared an {term:unsuccessful run}. This is a label applied to runs in which the Runner failed to reach the server they attacked, and is referred to by card abilities. The run is declared unsuccessful if neither of the following conditions have been met:
+    rules:
+    - rule: rule_not_unsuccessful_when_reached_success_phase
+      text: If the run reached {ref:rule_sec_run_success_phase}, the Success Phase, it is not declared unsuccessful. This is the case regardless of whether the run was actually declared successful.
+      examples:
+      - text: The Runner reaches a server with {card:Crisium Grid} rezzed. {card:Crisium Grid}'s ability stops the run from being declared successful, but the run is not declared unsuccessful either.
+    - rule: rule_server_cease_to_exist_unsuccesful_exception
+      text: If the attacked server has ceased to exist, the run is not declared unsuccessful. See {ref:TODO}.
+  - rule: rule_run_ends_condition
+    text: Conditions related to a run ending are not met as soon as an "end the run" effect resolves or at the beginning of the Run Ends Phase. Instead, these conditions are met at {ref:step_run_complete}, when the entire run timing structure is complete. Similarly, static abilities that apply during a run and durations that apply until the end of a run expire at {ref:step_run_complete}.
+    examples:
+    - text: The Runner plays {card:The Noble Path} to make a run in which they prevent all damage. During the run, the subroutine on Chum resolves, and then the Runner encounters {card:Wall of Static} and does not break its subroutine. When the "end the run" ability resolves, the encounter also ends, so the trigger condition on {card:Chum}'s delayed conditional ability is met. The ability will resolve and fail to damage the Runner during the Run Ends Phase, because {card:The Noble Path}'s effect still applies. Similarly, {card:Georgia Emelyov}'s first ability meets its trigger condition at {ref:step_run_declared_unsuccessful}, which is still before the run is over, so the damage will be prevented.
+    - text: The Runner plays {card:The Noble Path} to make a run in which they prevent all damage. The run is successful but the Runner takes a tag during the run. When the run ends, {card:Dedicated Response Team}'s ability meets its trigger condition at the same time that {card:The Noble Path}'s effect expires, so the Runner will suffer 2 meat damage.
+
 
 - section: sec_steps_of_a_run
   text: Steps of a Run

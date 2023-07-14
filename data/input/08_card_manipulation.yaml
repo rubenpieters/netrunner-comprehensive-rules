@@ -179,6 +179,79 @@ sections:
 - section: sec_install_uninstall
   text: Installing and Uninstalling Cards
   rules:
+  - subsection: rule_installing
+    text: |-
+      {term:Installing} an agenda, asset, ice, upgrade, hardware, program, or resource card is the act of placing that card into the play area. Events, operations, and identities are never installed.
+    rules:
+    - rule: rule_installed_onto_cards
+      text: Cards and counters can also be installed onto other cards if either the card being installed onto or the card or counter being installed has an ability allowing this. The relationship created this way is called {term:hosting} and is discussed in {ref:sec_host}. Some abilities also host cards without installing them.
+    - rule: rule_uninstalled
+      text: A card or counter is {term:uninstalled} when it stops being installed for any reason.
+
+  - subsection: rule_corp_cards_default_install
+    text: Corp cards are installed facedown, unrezzed, and remain inactive until rezzed. Corp cards are installed into specific locations. See {ref:subsec_servers} for more information on servers and the locations of installed Corp cards.
+    rules:
+    - rule: rule_corp_install_choose_destination_server
+      text: As part of installing a card, the Corp chooses which server will be the destination for that card. The Corp can either choose an already existing server as the destination or announces that the card will create a new remote server.
+    - rule: rule_agenda_asset_root_remote_server
+      text: The Corp always installs an agenda or asset into the root of a remote server.
+    - rule: rule_upgrade_root_central_remote_server
+      text: The Corp always installs an upgrade into the root of a central or remote server.
+    - rule: rule_ice_outermost_position
+      text: Unless otherwise indicated, the Corp always installs ice into the outermost position protecting the destination server.
+
+  - subsection: rule_cards_in_server_cannot_be_rearranged
+    text: |-
+      Cards in servers cannot be rearranged unless instructed by a card ability. To organize this hidden information for both players, it is important that the Corp observes the following rules for card orientation:
+    rules:
+    - rule: rule_cards_in_root_vertical
+      text: Agendas, assets, and upgrades are always installed in a vertical orientation. An upgrade in the root of a remote server is installed in the same position as an agenda or asset. The Runner should not be able to tell what type of card is installed in the root of a remote server by its position.
+    - rule: rule_ice_horizontal
+      text: Ice is always installed in a horizontal orientation.
+
+  - rule: rule_runner_cards_default_install
+    text: Runner cards are normally installed faceup, active. Runner cards are generally installed without designated locations.
+
+  - rule: rule_install_one_at_a_time
+    text: Installing cards is an exception to {ref:TODO}. If an effect would install more than one card, then those cards are chosen and installed one at a time, following all of the steps of the installation process ({ref:TODO}) for each card before choosing and installing the next. Each such installation is performed as a separate instruction. See {ref:TODO}.
+    examples:
+    - text: The Runner uses {card:Mass Install} to install three programs. The Runner can install {card:Dhegdheer} first, and then host one of the other two programs on {card:Dhegdheer} in order to reduce the install cost.
+
+  - subsection: rule_install_trash_like_cards
+    text: As part of the installation process, a player installing an agenda, asset, upgrade, ice, or program has the opportunity to trash like cards.
+    rules:
+    - rule: rule_must_trash_cases_in_root_of_server
+      text: When installing an agenda or asset in the root of a remote server, or an upgrade in the root of any server, the Corp may first trash any number of other cards already installed in the root of that server. If the card to be installed is an asset or agenda, the Corp must trash any other asset or agenda from that server. If the card to be installed is a region, the Corp must trash any other region from that server.
+    - rule: rule_install_trash_ice
+      text: When installing ice protecting a server, the Corp may first trash any number of other ice already installed protecting that server. Ice trashed in this way will not be counted when determining the install cost of the new ice.
+    - rule: rule_install_trash_programs
+      text: When installing a program, the Runner may first trash any number of programs already installed. They must do so if installing the new program would exceed their memory limit.
+
+  - rule: rule_install_corp_cards_trashed_facedown_archives
+    text: If the Corp trashes any cards during the installation process, the trashed cards are placed in Archives with the same faceup or facedown status they had while installed.
+
+  - rule: rule_server_ceases_to_exist
+    text: If the last card protecting a remote server or in the root of that server is uninstalled outside of the process of installing another card, then the server ceases to exist during the next checkpoint. See {ref:sec_checkpoints}.
+
+  - rule: rule_install_cannot_destroy_server
+    text: The Corp cannot destroy a server by installing cards. While the Corp is installing a card with a remote server as its destination, that server does not cease to exist during any checkpoints that occur before the install effect is complete. Even if the last card installed in the root of or protecting a remote server is trashed during the installation process, it is still considered the same server after the new card has been installed.
+
+  - rule: rule_uninstall_ice_during_run
+    text: If a piece of ice is uninstalled while being approached or encountered, any open paid ability window is completed. Then the approach or encounter ends without completing any further steps of that timing structure. The Runner passes the position the uninstalled ice had occupied, and the run continues. See {ref:sec_position} for rules about positions during a run.
+
+  - subsection: sec_install_cost
+    text: Some types of cards have an install cost, which must be paid before the card can become installed, unless an ability indicates that this cost should be ignored.
+    rules:
+    - rule: rule_install_cost_link
+      text: The install cost of a piece of ice is 1 credit for each piece of ice already installed protecting the destination server at the time the cost is to be paid. The install cost of a piece of hardware, program, or resource is indicated on the card. Assets, agendas, upgrades, and facedown Runner cards have no install cost. See also {rule_install_cost_ice}.
+    - rule: rule_install_cost_x
+      text: If a card has an install cost of X, the value for X is chosen by the player at the time the cost would normally be paid, according to any stipulations indicated in the card's text box. This value of X is maintained until the install effect is complete.
+    - rule: rule_install_cost_checkpoint
+      text: After the install cost is paid, a checkpoint occurs, as required by {ref:TODO}.
+
+  - rule: rule_x_server_only
+    text: Some upgrades have an ability that specifies 1 or more central servers or "remote server" followed by the word "only". This is a restriction on the locations an upgrade can occupy that applies at all times, even if the upgrade is inactive. The Corp cannot choose the root of a non-specified server as the installation destination for such an upgrade, and such an upgrade cannot be swapped into the root of a non-specified server.
+
   - subsection: rule_sec_steps_installing
     steps:
     toc:

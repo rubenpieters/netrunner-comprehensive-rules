@@ -32,7 +32,7 @@ sections:
   - rule: rule_secret_zone
     text: A {term:secret} zone is one where cards are visible only to their controller. Each player's hand is a secret zone.
   - subsection: rule_location
-    text: A {term:location} is a specific position within a zone that an object can occupy. A DESTINATION is a location to which an object is to be moved.
+    text: A {term:location} is a specific position within a zone that an object can occupy. A {term:destination} is a location to which an object is to be moved.
     rules:
     - rule: rule_deck_location
       text: A card in a player's deck has a location identified by how many cards it is from the top of that deck.

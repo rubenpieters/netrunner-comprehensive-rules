@@ -243,7 +243,7 @@ sections:
     text: Some types of cards have an install cost, which must be paid before the card can become installed, unless an ability indicates that this cost should be ignored.
     rules:
     - rule: rule_install_cost_link
-      text: The install cost of a piece of ice is 1 credit for each piece of ice already installed protecting the destination server at the time the cost is to be paid. The install cost of a piece of hardware, program, or resource is indicated on the card. Assets, agendas, upgrades, and facedown Runner cards have no install cost. See also {rule_install_cost_ice}.
+      text: The install cost of a piece of ice is 1 credit for each piece of ice already installed protecting the destination server at the time the cost is to be paid. The install cost of a piece of hardware, program, or resource is indicated on the card. Assets, agendas, upgrades, and facedown Runner cards have no install cost. See also {ref:rule_install_cost_ice}.
     - rule: rule_install_cost_x
       text: If a card has an install cost of X, the value for X is chosen by the player at the time the cost would normally be paid, according to any stipulations indicated in the card's text box. This value of X is maintained until the install effect is complete.
     - rule: rule_install_cost_checkpoint
@@ -251,6 +251,33 @@ sections:
 
   - rule: rule_x_server_only
     text: Some upgrades have an ability that specifies 1 or more central servers or "remote server" followed by the word "only". This is a restriction on the locations an upgrade can occupy that applies at all times, even if the upgrade is inactive. The Corp cannot choose the root of a non-specified server as the installation destination for such an upgrade, and such an upgrade cannot be swapped into the root of a non-specified server.
+
+  - subsection: rule_install_from_hidden_or_secret_zone
+    text: If a player attempts to install a facedown card or a card from a hidden or secret zone, they are required in certain cases to reveal that card in order to verify that the installation is valid.
+    rules:
+    - rule: rule_no_reveal_for_default_install
+      text: Players are not required to and should not reveal an installed card simply to verify that it has an appropriate card type.
+      examples:
+      - text: The Corp controls a remote server with a facedown card in its root, and uses a basic action to install another card into that root. To satisfy the rules, the new card must be an asset, upgrade, or agenda, since those are the only card types that can normally be installed in the root of a remote server. Additionally, at least one of the two cards must be an upgrade, since there can only be at most 1 asset or agenda in the root of a server. However, the Corp does not reveal cards to verify either of these properties.
+      - text: The Corp resolves the first subroutine on {card:Brân 1.0}. They do not reveal the card they install to verify that it is a piece of ice as stipulated in the text of the subroutine, nor do they reveal the card to verify that it is a piece of ice as necessitated from installing it protecting a server.
+    - rule: rule_no_reveal_for_server_limitation
+      text: Players are not required to and should not reveal an installed card to verify that it meets server limitations.
+      examples:
+      - text: The Corp installs a card in the root of a server with a rezzed {subtype:region} upgrade. The new card cannot also be a {subtype:region} upgrade (unless the old one is trashed as part of the installation), as per {ref:subsec_regions}. They do not reveal the installed card to verify this.
+    - rule: rule_reveal_for_ability_limitations
+      text: Players are required to reveal an installed card to verify any other requirements imposed by the ability that installs the card.
+      examples:
+      - text: The Corp triggers the ability on {card:Ob Superheavy Logistics} by trashing a card with printed rez cost 5. They search R&D for {card:Archer} and install it, but decline to pay the additional cost to rez {card:Archer}. Since the ability requires the installed card to have printed rez cost 4, and the card is not otherwise visible to the Runner at any point in this process, the Corp must reveal {card:Archer} to verify that the installation is legal.
+    - rule: rule_reveal_for_install_and_rez
+      text: Some abilities "install and rez" 1 or more cards. If the player resolving an "install and rez" effect is allowed to choose a card that they are unable to rez, or if the installed card has an additional cost to rez that the player declines to pay (see rule {ref:rule_inherent_and_additional_cost}), the player must reveal the installed card, regardless of whether other restrictions apply.
+      examples:
+      - text: The Corp plays {card:Trust Operation} and installs an agenda from Archives with its "install and rez" effect. Since agendas cannot be rezzed, the Corp must reveal the installed agenda.
+      - text: The Corp plays {card:Ad Blitz}. Since the "install and rez" effect on this card stipulates "if able", the Corp cannot choose to install cards they are unable to rez, nor can they decline additional costs if any apply.
+
+  - rule: rule_install_to_invalid_destination
+    text: Some abilities install cards to a specific location. If an ability specifies a destination that is invalid or cannot be identified, no installation can take place.
+    examples:
+    - text: The Corp uses {card:Nanisivik Grid} to resolve the first subroutine on a copy of {card:Brân 1.0} in Archives. This subroutine attempts to install ice "directly inward" from {card:Brân 1.0}, but this copy of {card:Brân 1.0} is not protecting a server and therefore does not have a position from which "directly inward" can be evaluated. There is no legal way to install a card as directed, so the subroutine will have no effect.
 
   - subsection: rule_sec_steps_installing
     steps:
@@ -261,6 +288,14 @@ sections:
       text: Place the card into the play area with the same faceup or facedown status it will have when the installation is complete. It is not yet installed or active.
     - rule: rule_steps_installing_destination
       text: Choose and declare the install destination appropriate to the card that will be installed, including any host relationships, if applicable.
+    - rule: rule_steps_installing_trash_like_cards
+      text: Trash like cards as described in {ref:rule_install_trash_like_cards}.
+    - rule: rule_steps_installing_pay_install_cost
+      text: Pay the appropriate install cost. (The cost-paid checkpoint then occurs.)
+    - rule: rule_steps_installing_become_installed
+      text: If the card is to be the first card in the root of or protecting a new remote server, that server is created. Move the card to the chosen install location. It becomes installed. If the card is faceup, it becomes active.
+    - rule: rule_steps_installing_installed_condition
+      text: Any "When installed..." abilities that apply to the installation meet their trigger conditions, including those on the installed card, and the install effect is complete.
 
 - section: sec_play_events_operations
   text: Playing Events and Operations

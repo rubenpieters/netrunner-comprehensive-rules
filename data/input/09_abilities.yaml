@@ -4,19 +4,244 @@ sections:
 - section: sec_abilities_general
   text: General
   rules:
+  - subsection: rule_ability
+    text: An {term:ability} is an independent unit of text on a card or counter, a basic action, or the basic trash ability.
+    rules:
+    - rule: rule_all_text_is_an_ability
+      text: All rules text on a card or counter is part of an ability.
+    - rule: rule_basic_action_link
+      text: The basic actions are defined in {ref:TODO} and {ref:TODO}.
+    - rule: rule_trash_ability_link
+      text: The basic trash ability is defined in {ref:TODO}.
+    - rule: rule_lingering_effects_link
+      text: An ability's text can include other abilities that it could grant to cards or counters or introduce directly to the game state. See also {sec_lingering_effects}.
+    - rule: rule_ability_categories
+      text: Each ability is categorized as either a static ability ({ref:sec_static_abilities}), a paid ability ({ref:sec_paid_abilities}), a conditional ability ({ref:sec_conditional_abilities}), a play ability ({ref:sec_play_abilities}), or a subroutine ({ref:sec_subroutines}).
+    - rule: rule_interrupt_link
+      text: Abilities marked with [interrupt] or that include the words "prevent" or "avoid" in their instructions have special timing rules that differ from other abilities. See {ref:sec_interrupts_replacements}.
+
   - subsection: rule_resolve_ability
-    text: |-
-      To {term:resolve an ability} means to resolve each of that ability's instructions in the order they appear. If an ability contains more than one instruction, a checkpoint occurs between each consecutive instruction. To {term:resolve an instruction} means to carry out that instruction.
+    text: To {term:resolve an ability} means to resolve each of that ability's instructions in the order they appear. If an ability contains more than one instruction, a checkpoint occurs between each consecutive instruction. To {term:resolve an instruction} means to carry out that instruction.
     rules:
     - rule: rule_chain_reaction
-      text: |-
-        While resolving an ability, other abilities can meet their conditions. When this happens, a "chain reaction" is created. The current instruction finishes resolving, then more recent abilities fully resolve before the next instruction of the original ability. If any other abilities meet their conditions while resolving the "chained" abilities, then another "chain" is created before continuing to resolve the previous chained abilities. Resolve each set of chained abilities one at a time, from the most recently met condition to the oldest, before continuing with the original ability that started the chain reaction.
+      text: While resolving an ability, other abilities can meet their conditions. When this happens, a "chain reaction" is created. The current instruction finishes resolving, then more recent abilities fully resolve before the next instruction of the original ability. If any other abilities meet their conditions while resolving the "chained" abilities, then another "chain" is created before continuing to resolve the previous chained abilities. Resolve each set of chained abilities one at a time, from the most recently met condition to the oldest, before continuing with the original ability that started the chain reaction.
+      examples:
+      - text: The Runner's identity is {card:Armand "Geist" Walker}. They access a {card:Snare!} from R&D with only 2 cards in their grip. Before taking a tag or suffering any net damage, the Runner triggers {card:Decoy}'s ability in order to avoid the tag. Using the {card:Decoy} meets the trigger condition of {card:Geist}'s ability. As this is the most recent ability to meet its trigger condition, {card:Geist}'s ability must resolve first, before {card:Decoy} avoids the tag and before {card:Snare!} finishes resolving. The Runner draws a card from {card:Geist}, avoids the tag from {card:Snare!} with {card:Decoy}, and then finally suffers (and survives) the 3 net damage from {card:Snare!}.
+
+  - subsection: rule_source
+    text: The {term:source} of an ability is the card, counter, or game rule that originated it.
+    rules:
+    - rule: rule_source_printed_abilities
+      text: Each card is the source of its own printed abilities.
+    - rule: rule_source_granted_abilities
+      text: If something grants an ability to an object (see {ref:rule_gaining_losing_abilities}), the source of the granted ability is that object, not whatever granted the ability.
+    - rule: rule_source_lingering_effect
+      text: The source of an ability that is being maintained by a lingering effect is the object that created that lingering effect. See {ref:sec_lingering_effects}.
+
+  - rule: rule_abilities_resolution_independent
+    text: Each paid ability, conditional ability, and subroutine becomes independent of its source at a certain point before it resolves, as described in {ref:TODO}, {ref:TODO}, and {ref:TODO}, respectively. If the source changes zones after that point, the ability cannot act on the source.
+    examples:
+    - text: The runner plays {card:Compile}, uses it to install {card:Mayfly} during the resulting run, and breaks subroutines with {card:Mayfly} during that run. When the run ends, delayed conditional abilities from both {card:Mayfly} and {card:Compile} become pending. The Runner decides to resolve {card:Compile} first, adding {card:Mayfly} to the bottom of their stack. The Runner then resolves the ability from {card:Mayfly}, which instructs them to trash its source program. Because {card:Mayfly} has changed zones, the copy of it on the bottom of the stack is a new object. With nothing to trash, the ability from {card:Mayfly} does nothing.
+
+  - subsection: rule_effect
+    text: Whereas an ability, instruction, or declaration is made up of text, an {term:effect} is what happens in the game because of that text.
+    rules:
+    - rule: rule_effect_beyond_resolution
+      text: Any of a non-static ability's effects that apply beyond the duration of that ability's resolution become independent of that ability and its source. The game engine takes responsibility for managing these {term:lingering effects} directly, and deletes them from the game state as their durations expire. See {ref:sec_lingering_effects}.
+    - rule: rule_determining_potential_to_change_game_state
+      text: When determining whether a certain ability has the potential to change the game state, look only at the expected effects of the ability. Do not consider its costs or restrictions, and do not consider other abilities that could become pending or relevant because of triggering or resolving the ability. See {ref:rule_ncigs} of the Golden Rules.
+
+  - subsection: rule_using
+    text: Any time a player chooses to resolve an optional ability or an optional part of an ability, the player is considered to be {term:using} that ability and the source card of that ability. Players do not "use" abilities that are entirely mandatory.
+    rules:
+    - rule: rule_paid_ability_used_condition
+      text: A paid ability is considered used once the trigger cost has been paid. See {ref:TODO} for the steps of using a paid ability.
+    - rule: rule_conditional_ability_used_condition
+      text: A conditional ability is considered used once the relevant optional effects of the ability have been resolved by the controller of the ability. See {ref:TODO} for the steps of triggering and resolving conditional abilities.
+    - rule: rule_hosted_counter_used_condition
+      text: If an ability allows a player to spend or move counters, that ability's source card is considered used at the time the player pays a cost by spending or moving those counters, even if the counters are spent or moved from cards other than the card that is the source of that ability.
+      examples:
+      - text: The Runner spends the credit hosted on {card:Cyberfeeder} to pay the trigger cost of {card:Mimic}'s ability. Because the Runner triggered {card:Mimic}'s paid ability and {card:Cyberfeeder}'s ability allowed the credit to be spent, both {card:Mimic} and {card:Cyberfeeder} have been used.
+    - rule: rule_use_ncigs_link
+      text: A player can only use an ability if its effect has the potential to change the game state. See {ref:rule_ncigs}.
+
+  - rule: rule_ability_active
+    text: Abilities are {term:active} if they are eligible to be resolved or apply to the current game state, and {term:inactive} otherwise. By default, a card's abilities are active if and only if that card is active (see {ref:rule_active_cards}). Abilities of counters are active for as long as the counter exists.
+
+  - subsection: rule_ability_active_inactive_source_card
+    text: Some types of abilities are active even while their source card is inactive.
+    rules:
+    - rule: rule_active_exception_access
+      text: Conditional abilities that meet their conditions when their source card is accessed are active even while that card is inactive.
+    - rule: rule_active_exception_catchall
+      text: Abilities stating that they are active in a particular zone are active in that zone. Abilities that can only ever meet their conditions in a particular zone are active in that zone. Abilities that can only affect the game state from a particular zone are active in that zone. When determining whether these stipulations apply, refer only to the game rules, not to any other effects that may be changing how cards move between zones.
+      examples:
+      - text: |-
+          {card:I've Had Worse} has an ability that meets its trigger condition when it is trashed due to damage. Normally, this can only occur by moving {card:I've Had Worse} from the grip to the heap. Therefore, this ability is active in the heap. However, if {card:I've Had Worse} is trashed, but the Corp uses {card:Skorpios Defense Systems} to remove it from the game instead of adding it to the heap, the ability is not active.
+    - rule: rule_active_exception_modify_play_install_rez
+      text: Abilities that modify when or if their source card can be played, installed, or rezzed are active even while that card is inactive.
+    - rule: rule_active_exception_modify_cost
+      text: Abilities that modify the cost to install, rez, or play their source card are active even while that card is inactive.
+    - rule: rule_active_exception_advancement_requirement
+      text: Abilities that define or modify the advancement requirement of their source card or create an additional cost to steal their source card are active even while that card is inactive.
+    - rule: rule_active_exception_can_be_advanced
+      text: Abilities allowing a card to be advanced are active even while that card is unrezzed.
+    - rule: rule_active_exception_conditional_move_to_inactive_zone
+      text: If an active card moves to a zone where it is inactive, an ability of that card with a trigger condition that is met by this zone change remains active in the card's new location until any corresponding instances of the ability resolve. See {ref:TODO} for information about instances of conditional abilities.
+      examples:
+      - text: The Runner uses {card:Singularity} to simultaneously trash a rezzed {card:Hostile Infrastructure} and 2 upgrades. Those cards are moved to Archives and become inactive, but {card:Hostile Infrastructure}'s ability remains active, and 3 instances will become pending, each doing 1 net damage when it resolves. Once all those instances are resolved, {card:Hostile Infrastructure}'s ability stops being active.
+      - text: The Runner plays {card:Test Run} to install {card:Nanuq}. When their turn ends, {card:Test Run}'s delayed conditional ability adds {card:Nanuq} to the top of the Runner's stack. This meets the trigger condition of {card:Nanuq}'s first ability, which remains active until it resolves even though {card:Nanuq} itself is inactive in the stack. The ability will move {card:Nanuq} from the top of the stack to the removed-from-game zone.
+    - rule: rule_active_exception_encounter_not_installed
+      text: If a piece of ice is encountered while it is not installed, its subroutines are active during that encounter.
+      examples:
+      - text: The Runner accesses {card:Archangel} from HQ, and the Corp uses its ability to force the Runner to encounter it. {card:Archangel}'s subroutine is active and can resolve during that encounter.
+    - rule: rule_active_exception_persistent
+      text: Persistent abilities can sometimes remain active after their source card is trashed. See {ref:TODO}.
+
+  - subsection: rule_gaining_losing_abilities
+    text: Static abilities and lingering effects can make objects gain or lose abilities.
+    rules:
+    - rule: rule_lose_ability
+      text: If an object loses an ability, that ability is completely ignored. If the lost ability is a subroutine, it is not considered by any effect that counts subroutines on that object.
+    - rule: rule_determine_actual_abilities
+      text: To determine the actual abilities present on an object (as well as its other characteristics), follow the procedure described in {ref:TODO}.
+    - rule: rule_abilities_no_inherent_order
+      text: Abilities on an object have no particular order, except for play abilities and subroutines. Play abilities cannot be added to or removed from an event or operation, and their order is the order they appear on their source card. To determine the order of subroutines on an object, refer to {ref:TODO}.
+
+- section: sec_timing_and_priority
+  text: Timing and Priority
+  rules:
+  - rule: rule_active_player
+    text: The {term:active player} is the player whose turn it is. The other player is the {term:inactive_player}.
+
+  - subsection: rule_timing_structure
+    text: A {term:timing structure} is a unit of the game in which a prescribed sequence of steps progress the game forward.
+    rules:
+    - rule: rule_turn_timing_structure
+      text: The Corp's turn and the Runner'ss turn are timing structures, as are each of the 3 phases of the turns. See {ref:chpt_turns}.
+    - rule: rule_run_timing_structure
+      text: A run is a timing structure, as are each of the 6 phases of a run. See {ref:chpt_runs}.
+    - rule: rule_breaching_timing_structure
+      text: Breaching a server is a timing structure. See {ref:TODO}.
+    - rule: rule_accessing_timing_structure
+      text: Accessing a card is a timing structure. See {ref:TODO}.
+    - rule: rule_not_timing_structures
+      text: Other procedures with prescribed steps, such as installing a card or resolving a trace attempt, are not timing structures.
+
+  - rule: rule_priority
+    text: |-
+      {term:Priority} is a player's opportunity to act and make certain game choices. No more than one player can have priority at any given time.
+
+  - subsection: rule_priority_window
+    text: A {term:priority window} is a general term for a timing step in which one or both players receive priority. Priority windows {term:open} for different purposes throughout the game. When a priority window {term:closes}, the game continues to the next timing step.
+    rules:
+    - rule: rule_triggering
+      text: All priority windows give the player with priority the option to choose a relevant ability they control (if there are any) as the next ability for the game to resolve. This is often referred to as {term:triggering} the chosen ability. Some priority windows also give players other options.
+    - rule: rule_pass
+      text: Except during action windows, the player with priority has the option to {term:pass} in addition to the available options defined by that priority window. When a player passes, the game progresses to the next step, either by giving priority to the other player or by closing the priority window. Each type of priority window defines the method and resolution of passing.
+    - rule: rule_keep_priority_until_pass
+      text: Unless otherwise noted, the player with priority receives priority again after resolving one of their available options. That player will continue to receive priority until they pass.
+    - rule: rule_nested_priority_window
+      text: While a priority window is open, another nested priority window can open as well. This nesting allows the game to resolve "chain reactions," as discussed in {ref:rule_chain_reaction}. The most recently opened priority window is always resolved before returning to an earlier priority window.
+    - rule: rule_checkpoint_before_receiving_priority
+      text: Whenever a player receives priority during a priority window, a checkpoint occurs immediately before that player may act. See {ref:sec_checkpoints}.
+
+  - rule: rule_priority_window_types
+    text: The types of priority windows are action windows, paid ability windows, reaction windows, interrupt windows, and mid-access ability windows.
+
+  - subsection: rule_action_window
+    text: An {term:action window} is a priority window that opens during a player's action phase if they have unspent clicks.
+    rules:
+    - rule: rule_action_window_priority
+      text: An action window gives only the active player priority.
+    - rule: rule_action_window_options
+      text: During an action window, the active player must take an action. {ref:Sec_actions} discusses actions. This type of window does not give the option to pass.
+    - rule: rule_action_window_closes_after_action
+      text: After the active player takes an action, the action window closes and the game moves to the next timing step. The player does not receive priority again.
+    - rule: rule_action_window_occurrence
+      text: There are two timing steps during which an action window may open. The Corp has an action window in {ref:TODO} of their action phase. The Runner has an action window in {ref:TODO} of their action phase.
+
+  - subsection: rule_paid_ability_window
+    text: A {term:paid ability window} is a priority window that opens throughout the game's timing structures to allow players to trigger paid abilities, rez cards, or score agendas.
+    rules:
+    - rule: rule_ability_window_priority
+      text: Paid ability windows give both players priority, starting with the active player. When a player passes, the other player receives priority. Players continue to exchange priority until a player who receives priority from their opponent passes without resolving any other option available to them. Once this happens, the paid ability window closes.
+    - rule: rule_paid_ability_window_options
+      text: During every paid ability window, the player with priority has the option to trigger an active paid ability they control. Players cannot trigger actions, interrupts, or mid-access abilities in a paid ability window. See {ref:sec_paid_abilities}. Within this document, paid ability windows are marked with the symbol (P) to denote the option to trigger a regular paid ability.
+    - rule: rule_paid_ability_window_corp_rez
+      text: During some paid ability windows, the Corp has the option to rez an asset or upgrade while they have priority. Within this document, the symbol (R) denotes a paid ability window in which cards can be rezzed. See {ref:sec_faceup_facedown_status}.
+    - rule: rule_paid_ability_window_corp_score
+      text: During some paid ability windows, the Corp has the option to score an agenda while they have priority. Within this document, the symbol (S) denotes a paid ability window in which agendas can be scored. See {ref:sec_score_scoring_steal}.
+    - rule: rule_paid_ability_window_corp_rez_ice
+      text: During the paid ability window at {ref:step_approach_paw} of the Approach Ice Phase of a run, the Corp has the option to rez the piece of ice the Runner is approaching while they have priority.
+    - rule: rule_paid_ability_window_multiple_options
+      text: The player with priority during a paid ability window may use any of the options available to them any number of times in any combination and order until they decide to pass, so long as they are allowed and the player pays any and all costs to use each option. Each option must be fully resolved before another is chosen. A player is not obligated to resolve any of the options available to them, except they must pass.
+    - rule: rule_paid_ability_window_occurrence
+      text: Paid ability windows occur throughout the timing steps of turns and runs. {ref:TODO} detail those steps and indicate which options are available in which windows. {ref:Chpt_appendix_timing_structures} also contains a summarized version of these steps.
+
+  - subsection: rule_reaction_window
+    text: A {term:reaction window} is a priority window that opens whenever one or more active conditional abilities become pending by meeting their conditions. {ref:Sec_conditional_abilities} discusses conditional abilities.
+    rules:
+    - rule: rule_reaction_window_linked_to_pending_conditional_abilities
+      text: Each reaction window is associated with the fixed set of conditional abilities that met their conditions just before the window opened. If other abilities become pending during a reaction window, a separate reaction window opens to handle the new abilities. See {ref:rule_chain_reaction}.
+    - rule: rule_reaction_window_priority
+      text: Reaction windows give both players priority, starting with the active player. When the active player passes, the inactive player receives priority. When the inactive player passes, the reaction window closes.
+    - rule: rule_reaction_window_options
+      text: During a reaction window, the player with priority has the option to trigger a pending conditional ability they control that is associated with that window.
+    - rule: rule_reaction_window_pending_abilities_unordered
+      text: The player with priority during a reaction window may trigger their pending abilities in any order until they decide to pass; they do not need to trigger mandatory abilities before optional ones. Each ability they trigger must be fully resolved before another is chosen.
+    - rule: rule_reaction_window_must_resolve_mandatory_abilities
+      text: The player with priority cannot pass if they control any pending mandatory abilities. They may pass with optional conditional abilities still pending, in which case those abilities lose their pending status without being triggered. Section 9.6.9 describes the differences between mandatory and optional conditional abilities.
+    - rule: rule_reaction_window_closing_timing_structure
+      text: If a reaction window opens due to a timing structure beginning, and during that reaction window the timing structure ends (e.g. by an effect moving the game to another timing point past the end of the structure), then the reaction window immediately closes. All remaining abilities associated with the window lose their pending status without being triggered, even if they are mandatory abilities.
+      examples:
+      - text: The Runner has a {card:Femme Fatale} installed and chose a {card:Tollbooth} with its "when installed" ability. When the Runner encounters the {card:Tollbooth}, they pay 1[c] to bypass the {card:Tollbooth} with {card:Femme Fatale}. Because the resolution of {card:Femme Fatale}'s ability causes the encounter to end, the pending ability from {card:Tollbooth} cannot be triggered. The Runner does not pay 3[c], and the run does not end.
+
+  - subsection: rule_interrupt_window
+    text: An {term:interrupt window} is a priority window that opens just before an instruction would resolve when one or more players have abilities that could modify that imminent instruction. See {ref:sec_interrupts_replacements} for rules about interrupt abilities.
+    rules:
+    - rule: rule_interrupt_window_linked_to_imminent_instruction
+      text: Each interrupt window is associated with the single imminent instruction being modified by the abilities triggered during the window, and with a fixed set of conditional ability interrupts determined as the window opens.
+    - rule: rule_interrupt_window_opening
+      text: As an interrupt window opens, before players receive priority, the expected effects of the imminent instruction are determined, any applicable replacement effects are applied, and then relevant conditional abilities become pending. See {ref:TODO}.
+    - rule: rule_interrupt_window_priority
+      text: Interrupt windows give both players priority, starting with the active player. When a player passes, the other player receives priority. Players continue to exchange priority until a player who receives priority from their opponent passes without resolving any other option available to them. Once this happens, the interrupt window closes.
+    - rule: rule_interrupt_window_options
+      text: During an interrupt window, the player with priority has the option to trigger an interrupt ability they control that is relevant to the imminent effect. See {ref:TODO}.
+    - rule: rule_interrupt_window_abilities_unordered
+      text: The player with priority during an interrupt window may trigger their abilities in any order until they decide to pass. They do not need to trigger mandatory abilities before optional abilities or trigger conditional abilities before paid abilities. Each ability they trigger must be fully resolved before another is chosen.
+    - rule: rule_interrupt_window_must_resolve_mandatory_abilities
+      text: The player with priority cannot pass if they control any pending mandatory abilities that are still relevant to the imminent effect. They may pass with optional conditional abilities still pending. ({ref:TODO} describes the differences between mandatory and optional conditional abilities.) Once a player has passed, if they receive priority again, they may continue to trigger paid abilities and pending conditional abilities that are relevant. As the interrupt window closes, any remaining pending conditional abilities lose their pending status.
+
+  - subsection: rule_mid_access_window
+    text: A {term:mid-access ability window} is a priority window that opens while the Runner is accessing a card.
+    rules:
+    - rule: rule_mid_access_window_priority
+      text: A mid-access ability window gives only the Runner priority.
+    - rule: rule_mid_access_window_options
+      text: During a mid-access ability window, the Runner may use a mid-access ability or may pass. In addition to any mid-access abilities available from cards, the Runner may use the basic trash ability (see {ref:TODO}).
+    - rule: rule_mid_access_window_one_ability
+      text: After the Runner uses a mid-access ability or passes, the mid-access ability window closes and the game moves to the next timing step. The Runner does not receive priority again.
+    - rule: rule_mid_access_window_occurrence
+      text: The only point at which a mid-access ability window occurs is at {ref:TODO} of accessing a card.
+
+- section: sec_interpreting_card_text
+  text: Interpreting Card Text
+
+- section: sec_static_abilities
+  text: Static Abilities
 
 - section: sec_paid_abilities
   text: Paid Abilities
   rules:
   - rule: rule_paid_ability
     text: A {term:paid ability} is an ability players trigger at-will, during appropriate priority windows. In order to use a paid ability, the controller of that ability must pay its {term:trigger cost}. Paid abilities are always written with the trigger cost first, followed by a colon (:), followed by the remainder of the ability's text.
+
+- section: sec_conditional_abilities
+  text: Conditional Abilities
+
+- section: sec_play_abilities
+  text: Play Abilities
 
 - section: sec_subroutines
   text: Subroutines

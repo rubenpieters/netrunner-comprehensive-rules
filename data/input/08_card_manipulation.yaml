@@ -279,7 +279,7 @@ sections:
     examples:
     - text: The Corp uses {card:Nanisivik Grid} to resolve the first subroutine on a copy of {card:Brân 1.0} in Archives. This subroutine attempts to install ice "directly inward" from {card:Brân 1.0}, but this copy of {card:Brân 1.0} is not protecting a server and therefore does not have a position from which "directly inward" can be evaluated. There is no legal way to install a card as directed, so the subroutine will have no effect.
 
-  - subsection: rule_sec_steps_installing
+  - subsection: sec_steps_installing
     steps:
     toc:
     text: Steps of Installing a Card
@@ -297,11 +297,111 @@ sections:
     - rule: rule_steps_installing_installed_condition
       text: Any "When installed..." abilities that apply to the installation meet their trigger conditions, including those on the installed card, and the install effect is complete.
 
-- section: sec_play_events_operations
+- section: sec_playing_events_and_operations
   text: Playing Events and Operations
+  rules:
+  - rule: rule_playing
+    text: |-
+      {term:Playing} an event or operation is the act of placing that card into the play area. Agendas, assets, ice, upgrades, hardware, programs, and resources, and identities are never played.
+
+  - subsection: rule_playing_play_cost
+    text: Normally, playing an operation or event requires paying its play cost. Abilities that initiate playing a card may ignore the play cost or require it to be paid.
+    rules:
+    - rule: rule_play_cost_x
+      text: If a card has a play cost of X, the value for X is chosen by the player at the time the play cost is paid, according to any stipulations written on the card. This value of X is maintained while resolving the event or operation.
+    - rule: rule_play_cost_checkpoint
+      text: After the play cost is paid, a checkpoint occurs, as required by {ref:TODO}.
+
+  - rule: rule_playing_one_at_a_time
+    text: Playing cards is an exception to {ref:TODO}. If an effect would play more than one card, then those cards are chosen and played one at a time, following all of the steps of the play process ({ref:sec_steps_playing}) for each card before choosing and playing the next. Each such card is played as a separate instruction. See {ref:TODO}.
+    examples:
+    - text: The Corp uses {card:Subcontract} to play {card:Hedge Fund} and another operation. The Corp can use the credits gained from {card:Hedge Fund} to pay for the second operation.
+  - rule: rule_playing_lingering_effects
+    text: Operations and events can create lingering effects. Once those effects exist, they become independent of the source operation or event and the card is considered fully resolved and ready to be trashed. See {ref:sec_lingering_effects}.
+    examples:
+    - text: |-
+        {card:Test Run} creates a delayed conditional ability that will resolve at the end of the turn, but {card:Test Run} itself is considered fully resolved and is trashed once it finishes installing a program.
+  - rule: rule_playing_timing_structure
+    text: An operation or event that initiates a timing structure remains active in the play area for the duration of that timing structure. It is not considered fully resolved until the timing structure is completed and any abilities on the card that meet their trigger conditions when the timing structure ends are resolved.
+
+  - subsection: sec_steps_playing
+    steps:
+    toc:
+    text: Steps of Playing an Event or Operation
+    rules:
+    - rule: rule_steps_playing_place
+      text: Place the card faceup into the play area. It is not installed and not yet active.
+    - rule: rule_steps_playing_play_cost
+      text: Pay the play cost. (The cost-paid checkpoint then occurs.)
+    - rule: rule_steps_playing_active
+      text: The card becomes active.
+    - rule: rule_steps_playing_played_condition
+      text: Any "When played..." abilities that apply meet their trigger conditions.
+    - rule: rule_steps_playing_played_checkpoint
+      text: A checkpoint occurs.
+    - rule: rule_steps_playing_resolve_play_abilities
+      text: Resolve the play abilities of the card.
+    - rule: rule_steps_playing_trash_played_card
+      text: Trash the card if it is still in the play area.
+    - rule: rule_steps_playing_after_resolve_condition
+      text: Any "After you resolve..." abilities that apply meet their trigger conditions.
+    - rule: rule_steps_playing_complete
+      text: The play effect is complete.
 
 - section: sec_searching_cards
   text: Searching for Cards
+  rules:
+  - subsection: rule_search
+    text: If a player is instructed to {term:search} a zone for one or more cards, they look at all the cards in that zone for cards matching the criteria of the search.
+    rules:
+    - rule: rule_search_hidden_secret_zone
+      text: If a player is instructed to search a hidden or secret zone, they are temporarily allowed to look at those cards until the search is complete, so long as they maintain that zone as hidden or secret as necessary to the other player.
+
+  - subsection: rule_find
+    text: While a player is searching, they may {term:find} an appropriate number of cards matching any criteria of the search by taking them from the zone being searched and setting them aside facedown.
+    rules:
+    - rule: rule_valid_search_target
+      text: A card cannot be found for a search unless it both matches the specified criteria of the search and can be acted upon by any other effects referencing the found card in the ability that initiated the search.
+      examples:
+      - text: The Runner uses {card:Artist Colony} to search for a card and install it. They cannot find an event with the search because events can never be installed. They also cannot find a program, hardware, or resource that they cannot afford to install.
+    - rule: rule_reveal_for_search
+      text: The searching player is not required to reveal any found cards unless instructed to do so by the ability that initiated the search. Found cards are not revealed until resolution of the ability that initiated the search resumes, pending any necessary shuffling. 
+    - rule: rule_search_multiple_cards
+      text: If a player is searching for a set number of cards without any specified criteria, they must find that many cards from that zone or all the cards in that zone if there are not enough.
+    - rule: rule_fail_to_find
+      text: If a player is searching a deck for one or more cards with specified criteria, they may choose to fail to find anything, even if one or more cards matching the criteria exist in that deck.
+    - rule: rule_search_different_names
+      text: If a player is directed to search a zone for cards "with different names," each card that player finds must have a different English name from every other card found for that search.
+
+  - rule: rule_shuffle_deck_after_search
+    text: Once a search through a deck is complete, whether or not any cards are found, the deck must be immediately reshuffled before continuing to resolve any remaining effects from the ability that initiated the search. The shuffling takes precedence over anything that would be done with the found card(s), as well as any chain reactions that occur as a result of the search, finding, or remaining abilities.
+    examples:
+    - text: The Corp is playing {card:Near-Earth Hub} and uses the ability on {card:Tech Startup} to search their deck for an asset and install it. After finding the asset, R&D must be immediately shuffled before the Corp installs the asset or triggers {card:Near-Earth Hub}'s ability.
+  - rule: rule_continue_after_search
+    text: Once the search is complete, and any shuffling necessary has occurred, resolution of the ability that initiated the search resumes. If no cards were found during the search, any effects referencing found cards fail to resolve, but as much of the remaining effects resolve as possible.
+  - rule: rule_search_condition
+    text: If the trigger condition of a conditional ability involves a search, that ability becomes pending after the search is completed and any shuffling is performed, but before the found cards are acted on. 
 
 - section: sec_swapping_cards
   text: Swapping Cards
+  rules:
+  - rule: rule_swap
+    text: To {term:swap} two cards is to exchange their locations.
+  - rule: rule_swap_only_to_valid_location
+    text: A card can only ever be swapped into a location it is normally allowed to occupy. When a player resolves a swap effect, they must observe any applicable game rules or card abilities that would affect that card in its final destination. If a swap effect would resolve while there are no legal exchanges possible, then that effect does nothing.
+    examples:
+    - text: When the subroutine on {card:Metamorph} resolves, the Corp cannot choose to swap an agenda and an upgrade such that the agenda would end up in the same remote server as an asset.
+  - rule: rule_swap_installed_cards
+    text: If two installed cards are swapped, each card moves to the other's location simultaneously. The two cards remain installed throughout the process of swapping, and do not otherwise affect any other part of the game state.
+
+  - subsection: rule_swap_simultaneous
+    text: If two cards are swapped between zones, each card moves to the zone the other is in simultaneously.
+    rules:
+    - rule: 
+      text: Each of the swapped cards enters its destination zone in the same state that a card would normally enter that zone. A card swapped into Archives enters Archives facedown unless it was visible to the Runner at the time of the swap, a Corp card swapped into the play area enters unrezzed, etc.
+    - rule: 
+      text: If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host).
+    - rule: 
+      text: If two agendas are swapped between the players' score areas, any hosted cards or counters remain hosted on their respective host agendas.
+    - rule: 
+      text: If a card is swapped with a set-aside card, the card moving into the set-aside zone becomes part of the group of cards being acted on by the ability that had set the other card aside, and the card moving out of the set-aside zone ceases to be acted on by that ability. See {ref:rule_drawn_card_swapped} for a specific case where this can happen, and see also {ref:rule_set_aside_zone_passthrough} regarding effects acting on cards in the set-aside zone.

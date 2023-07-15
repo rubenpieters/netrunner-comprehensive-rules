@@ -24,6 +24,9 @@ sections:
 - section: sec_interrupts_replacements
   text: Interrupts and Replacement Effects
 
+- section: sec_lingering_effects
+  text: Lingering Effects
+
 - section: sec_identifying_instructions
   text: Identifying Instructions
   snippet: |-

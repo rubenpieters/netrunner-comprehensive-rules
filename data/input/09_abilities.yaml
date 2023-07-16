@@ -112,7 +112,7 @@ sections:
   text: Timing and Priority
   rules:
   - rule: rule_active_player
-    text: The {term:active player} is the player whose turn it is. The other player is the {term:inactive_player}.
+    text: The {term:active player} is the player whose turn it is. The other player is the {term:inactive player}.
 
   - subsection: rule_timing_structure
     text: A {term:timing structure} is a unit of the game in which a prescribed sequence of steps progress the game forward.
@@ -519,9 +519,47 @@ sections:
 
 - section: sec_play_abilities
   text: Play Abilities
+  rules:
+  - rule: rule_play_ability
+    text: Any ability on an event or operation that is not a paid, conditional, or static ability is a {term:play ability}. Play abilities are the abilities that resolve as part of playing that event or operation during step {ref:rule_steps_playing_resolve_play_abilities}.
+    examples:
+    - text: The operation card {card:Hyoubu Precog Manifold} has several abilities of different types. The first sentence reads "Play only if there is no active lockdown." This is a static ability that contains a restriction and no declarations. The second sentence ("This operation is not trashed until your next turn begins.") is a play ability that has no immediate impact on the game state but creates a lingering effect that alters how the operation will leave the play area after resolving. The second paragraph reads simply, "Choose a server." This play ability instruction is the main part of the card that actively affects the game state while the operation resolves. Finally, the third paragraph is a single conditional ability with multiple instructions that is active as long as the operation remains in the play area.
+
+  - subsection: sec_steps_of_resolving_a_play_ability
+    text: Steps of Resolving a Play Ability
+    toc:
+    steps:
+    rules:
+    - rule: step_play_ability_target_first_instruction
+      text: Announce any targets for the ability's first instruction. That instruction then becomes imminent.
+    - rule: step_play_ability_interrupt_window
+      text: An interrupt window occurs, during which abilities can modify, prevent, or avoid the imminent effects.
+    - rule: step_play_ability_interrupt_resolution
+      text: Resolve the instruction, applying any changes to its effects from interrupts that were resolved.
+    - rule: step_play_ability_checkpoint
+      text: A checkpoint occurs.
+    - rule: step_play_ability_loop
+      text: If there are more instructions to resolve, announce any targets for the next instruction. That instruction then becomes imminent. Return to (b).
+    - rule: step_play_ability_complete
+      text: Resolution of the play ability is complete.
 
 - section: sec_subroutines
   text: Subroutines
+  rules:
+  - rule: rule_subroutine
+    text: A {term:subroutine} is an ability beginning with the [sub] symbol. Only ice can have subroutines.
+
+  - subsection: rule_subroutines_ordered
+    text: Subroutines always have a specified order.
+    rules:
+    - rule: rule_printed_subroutines_order
+      text: The order of the subroutines printed on a piece of ice is the order in which they appear on that ice.
+    - rule: rule_subroutines_added_to_end_default
+      text: Unless otherwise specified, subroutines a piece of ice gains from an ability are added after all other subroutines the ice has at the time that ability begins to apply to that ice.
+      examples:
+      - text: The Runner encounters {card:Marker}, and its subroutine resolves. The next ice the Runner encounters is {card:Brainstorm}. When the encounter begins, the lingering effect from {card:Marker} gives {card:Brainstorm} an "[sub] End the run." subroutine. Then, {card:Brainstorm}'s conditional ability resolves, giving it the appropriate number of "[sub] Do 1 core damage." subroutines. The "[sub] Do 1 core damage." subroutines are all ordered after the "[sub] End the run." subroutine.
+    - rule: rule_corp_decides_unspecified_order
+      text: If multiple subroutines are added to a piece of ice at the same time in an unspecified order, the Corp declares the relative order of those subroutines at the time the ice gains them.
 
 - section: sec_interrupts_replacements
   text: Interrupts and Replacement Effects

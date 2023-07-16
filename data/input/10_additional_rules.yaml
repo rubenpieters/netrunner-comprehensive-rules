@@ -42,3 +42,6 @@ sections:
   text: Link
   snippet: |-
     The Runner's link is the number of points their path through the Net traverses between their rig and the Corp's server. The more proxies, redirects, and other intermediary connecting points between the Corp and the Runner, the harder it is for sysops to track down the Runner's virtual location.
+
+- section: sec_traces
+  text: Traces

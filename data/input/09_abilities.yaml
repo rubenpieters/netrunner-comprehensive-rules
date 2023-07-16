@@ -646,7 +646,165 @@ sections:
 
 - section: sec_interrupts_replacements
   text: Interrupts and Replacement Effects
+  rules:
+  - subsection: rule_interrupt_definition
+    text: |-
+      An {term:interrupt} is an ability that modifies either the effects of another instruction or the context in which that instruction will be resolved. Interrupts can be written in the form of a paid ability or a conditional ability.
+    rules:
+    - rule: rule_interrupt_symbol
+      text: |-
+        Interrupt abilities are denoted by the [interrupt] symbol appearing at the beginning of the ability, or by certain keywords in the ability's text.
+    - rule: rule_interrupt_keywords
+      text: |-
+        Any paid or conditional ability that uses the word "prevent", "avoid", or "would" is an interrupt ability.
 
+  - subsection: rule_expected_effects
+    text: |-
+      The {term:expected effects} of an imminent instruction are the effects described by the instruction's text, modified by any static abilities that affect it and any replacement effects or interrupt effects that have been applied. The expected effects of an instruction are continually updated throughout the interrupt window.
+    examples:
+    - text: The Runner plays {card:Process Automation} and the instruction "Gain 2[c] and draw 1 card." becomes imminent. The expected effects of this instruction are that the Runner will gain 2[c] and draw 1 card.
+    - text: The Runner plays {card:Process Automation} after {card:Lockdown}'s subroutine resolves. The instruction "Gain 2[c] and draw 1 card." becomes imminent, but the Runner cannot draw cards. The expected effect of this instruction is that the Runner will gain 2[c].
+    rules:
+    - rule: rule_expected_effects_resolve
+      text: |-
+        When an instruction resolves, its expected effects correspond to the effects that occur, except for situations where {ref:TODO} applies.
+
+  - subsection: sec_relevant_interrupts
+    text: |-
+      In order to trigger an interrupt, it must be {term:relevant} to an imminent instruction. An interrupt is relevant to an instruction if at least one of the following is true:
+    rules:
+    - rule: rule_prevent_relevant
+      text: Its effects could prevent or avoid part or all of the imminent instruction's expected effects. See {ref:sec_prevent_avoid}.
+    - rule: rule_modify_value_relevant
+      text: Its effects could modify a value associated with the imminent instruction's expected effects. See {ref:sec_modifiable_values} and {ref:sec_calculating_expected_effect_values}.
+    - rule: rule_replacement_effect_relevant
+      text: Its effects could create a replacement effect that applies to the imminent instruction’s expected effects. See {ref:rule_replace_imminent_effects}.
+    - rule: rule_would_relevant
+      text: It has a trigger condition using the word "would" that is met by the imminent instruction's expected effects.
+      examples:
+      - text: The trigger condition on {card:The Class Act}'s second ability is "The first time each turn you would draw any number of cards". Even though this ability's effects do not directly modify the imminent instruction's effects, the ability is relevant to an instruction that is expected to draw cards.
+
+  - subsection: sec_interrupt_window_for_imminent_instruction
+    text: |-
+      Whenever an instruction becomes imminent, an interrupt window opens to allow players to modify the effects of that instruction. {ref:Rule_interrupt_window} contains the rules for handling priority during interrupt windows.
+    rules:
+    - rule: rule_apply_replacement_effects_on_opening_interrupt_window
+      text: |-
+        As the window opens, the initial expected effects of the instruction are determined, then any active replacement effects that replace all or part of the expected effects are applied. If multiple replacement effects could apply, the order in which they are applied follows the rules in {ref:rule_order_of_replacement_effects}.
+    - rule: rule_pending_status_for_interrupt_windows
+      text: |-
+        After replacement effects have been applied, but before players receive priority, active conditional ability interrupts that are relevant to the imminent instruction are marked pending and are associated with the window. If a conditional ability interrupt becomes active after the interrupt window opens, it does not become pending.
+    - rule: rule_trigger_conditional_ability_interrupt
+      text: |-
+        While a player has priority in an interrupt window, they can trigger a conditional ability interrupt they control only if it is pending in that window and still relevant to the imminent instruction.
+      examples:
+      - text: An instruction is imminent that would trash an installed copy of {card:Harbinger}. The Runner uses {card:Sacrificial Construct} to prevent {card:Harbinger} from being trashed. The Runner can no longer trigger {card:Harbinger}'s interrupt ability, even though it is still pending, because the expected effects of the instruction no longer include {card:Harbinger} being trashed and therefore the ability is no longer relevant.
+      - text: An instruction is imminent that would give the Runner 2 tags. The Runner trashes {card:Decoy} to use its ability to avoid 1 of the tags, which meets the trigger condition for {card:Thunder Art Gallery}'s ability. The latter resolves as a chain reaction (see {ref:rule_chain_reaction}) while the interrupt window is still open, allowing the Runner to install {card:No One Home}, which has a conditional ability interrupt that is relevant since the instruction is still expected to give the Runner 1 tag. However, {card:No One Home} was not active when the interrupt window opened, so its ability is not pending and cannot be triggered.
+    - rule: rule_trigger_paid_ability_interrupt
+      text: |-
+        While a player has priority in an interrupt window, they can use a paid ability interrupt that is relevant to the imminent instruction. The ability does not have to have been active when the interrupt window opened, nor does a paid ability window need to be open at this time.
+      examples:
+      - text: An instruction is imminent that would give the Runner 2 tags. The Runner trashes {card:Decoy} to use its ability to avoid 1 of the tags, which meets the trigger condition for {card:Thunder Art Gallery}'s ability. The latter resolves as a chain reaction (see {ref:rule_chain_reaction}) while the interrupt window is still open, allowing the Runner to install another copy of {card:Decoy}. The Runner receives priority again in the original interrupt window and uses the second {card:Decoy}'s ability to avoid the other imminent tag.
+
+  - subsection: sec_prevent_avoid
+    text: To {term:prevent} or {term:avoid} an effect is to stop that effect from happening. The terms "prevent" and "avoid" are synonymous.
+    rules:
+    - rule: rule_ordinal_would
+      text: |-
+        Some abilities look for an ordinal instance of an effect that "would" take place within a specified time period. These abilities look for the appropriate number of times that effect becomes imminent, not whether the effect actually resolves. Preventing or replacing an effect does not allow these abilities to meet their trigger conditions again in the same time period.
+      examples:
+      - text: |-
+          {card:Tori Hanzō}'s interrupt can only be used "the first time you would do net damage" during a run. If the first net damage that becomes imminent is prevented by the Runner using {card:Feedback Filter}, {card:Tori Hanzō} cannot be used on any other instances of net damage for the remainder of the run, as the next imminent net damage is the second time the Corp "would" deal net damage, not the first time.
+    - rule: rule_ordinal_prevented
+      text: Abilities that do not use "would" do not see effects that are prevented, as those effects did not occur.
+    - rule: rule_static_ability_prevent
+      text: A static ability can stipulate that a particular effect is always prevented. This kind of prevention effect does not require a player to explicitly trigger it.
+      examples:
+      - text: |-
+          {card:Paparazzi} reads in part, "Prevent all meat damage." This is a static ability that applies automatically to any instruction that would deal meat damage.
+
+  - subsection: sec_modifiable_values
+    text: Some instructions make use of an associated value. These values can be changed by interrupts and replacement effects.
+    rules:
+    - rule: rule_modifiable_value_tags
+      text: A number of tags the Runner would take from an effect is a value. Avoiding a number of those tags decreases that value. The value for a number of tags the Runner takes must be greater than 0 for the effect giving tags to occur.
+    - rule: rule_modifiable_value_damage
+      text: An amount of damage the Runner would take from an effect is a value. Preventing an amount of that damage decreases that value. The value for an amount of damage the Runner takes must be greater than 0 for the damage effect to occur.
+    - rule: rule_modifiable_value_cost
+      text: A cost that would be paid while resolving an effect is a value. {ref:Rule_cost_calculation} applies to the final value at the time the cost is paid. See also {ref:rule_cost_zero}.
+      examples:
+      - text: |-
+          {card:Patchwork}'s interrupt modifies a play cost or install cost, so it is relevant to any instruction where a card will be played or installed and the corresponding cost paid.
+    - rule: rule_modifiable_value_base_trace_strength
+      text: The base trace strength of a trace attempt is a value. See {ref:sec_traces} for rules about trace attempts. A base trace strength value does not need to be greater than 0 for the trace attempt to occur.
+
+  - subsection: sec_calculating_expected_effect_values
+    text: Values associated with an imminent instruction are calculated continuously as part of the instruction's expected effects.
+    rules:
+    - rule: rule_negative_values_imminent
+      text: While an instruction is imminent, values associated with that instruction can be reduced below 0. Values 0 or lower can still be modified by other interrupt abilities while the instruction remains imminent.
+      examples:
+      - text: |-
+          The Runner takes a tag on their turn, allowing the Corp to trigger {card:Mr. Stone}. While the 1 meat damage from {card:Mr. Stone}'s ability is imminent, both players can trigger interrupts to modify the damage effect. Since it is the Runner's turn, they receive priority first and use {card:Biometric Spoofing} to prevent 2 damage. The imminent effect is now expected to do -1 damage. When the Corp receives priority, they trigger two copies of {card:The Cleaners} that each add 1 to the expected damage, increasing the total to 0 and then to 1. The ability will resolve with 1 damage even though the amount of damage was temporarily 0 or less while the effect was imminent.
+    - rule: rule_prevent_all
+      text: If an effect prevents "all damage" or "any amount of damage" while an instruction is imminent, the damage is removed from the expected effects entirely, and there is no longer a value to be modified. If an effect avoids "all tags" or "any number of tags" while an instruction is imminent, taking tags is removed from the expected effects entirely, and there is no longer a value to be modified.
+    - rule: rule_prevent_all_but_one
+      text: One card, {card:Bio-Modeled Network}, has an instruction that prevents "all but 1 net damage." This ability is relevant when the imminent instruction's expected effects include doing net damage and the amount of the damage is 2 or more. The effect of this ability is to set the value for the amount of damage to 1. Previously-applied modifiers to the value are ignored. The value can still be modified by other interrupts after being set to 1 this way.
+    - rule: rule_negative_values_resolution
+      text: |-
+        Some types of values must be greater than 0 for the associated effect to occur. See {ref:sec_modifiable_values}. At the time an instruction resolves, if any value of one of those types is 0 or less, as much of that ability resolves as possible without applying the part of the effect making use of that value, following {ref:rule_if_able,rule_do_as_much_as_you_can} of the Golden Rules.
+      examples:
+      - text: The Runner accesses {card:Breached Dome}. While the instruction from its "when accessed" ability is imminent, the Runner uses {card:Biometric Spoofing} to prevent 2 damage. When the ability resolves, the value for the amount of damage is -1, which is less than or equal to 0, so the damage effect cannot occur and the Corp only trashes the top card of the stack.
+    - rule: rule_modified_values_retain_properties
+      text: Any effects making use of modified values maintain their restrictions and specifications with the new values.
+      examples:
+      - text: While the result of a successful trace from {card:Flare} is imminent, the Corp triggers {card:The Cleaners} to increase the imminent meat damage by 1. Even though the damage from {card:Flare} has been increased from 2 to 3, none of that meat damage can be prevented.
+
+  - subsection: sec_replacement_effects
+    text: |-
+      A {term:replacement effect} modifies another effect by replacing some or all of the original effect's behavior with different behavior. Replacement effects are indicated by the word "instead" in their text. Once created, replacement effects apply automatically and do not require players to explicitly trigger them.
+    rules:
+    - rule: rule_replacement_effect_from_interrupt
+      text: Interrupts can introduce replacement effects that apply to the currently imminent instruction. See {ref:rule_replace_imminent_effects}.
+    - rule: rule_replacement_effect_from_static_ability
+      text: Static abilities can stipulate replacement effects that apply whenever appropriate while the static ability is active.
+    - rule: rule_replacement_effect_from_lingering_effect
+      text: Other abilities can create replacement effects ahead of time, which apply to effects that could happen later. This is a type of lingering effect (see {ref:sec_lingering_effects}).
+
+  - subsection: rule_applying_replacement_effects
+    text: Replacement effects most commonly apply to the effects of an instruction, but some apply to static abilities or alter the durations of lingering effects.
+    rules:
+    - rule: rule_replacement_on_static_ability_must_remain_active
+      text: |-
+        If a replacement effect modifies the effects of a static ability or the duration of a lingering effect, this modification applies continuously for as long as the replacement effect itself is active, and no longer applies once the replacement effect or the original effect being modified becomes inactive.
+      examples:
+      - text: |-
+          {card:Gebrselassie}'s static ability replaces the durations of certain lingering effects affecting its host with a duration of "for the remainder of the turn." If {card:Gebrselassie} is uninstalled or moved to a different host, its replacement effect no longer applies to those lingering effects, so they revert to their normal durations. If any of those durations have already expired, the corresponding effects will end at the next checkpoint.
+    - rule: rule_replacement_effects_apply_as_interrupt_window_opens
+      text: |-
+        If an active replacement effect can apply to the expected effects of an imminent instruction, it is applied as the interrupt window opens, and the expected effects of the instruction are updated accordingly. This happens before the expected effects are checked for relevant active abilities that could become pending. Replacement effects created by interrupts will not yet be active at this time and are applied according to {ref:rule_replace_imminent_effects} instead.
+    - rule: rule_replacement_effect_only_applies_once_per_effect
+      text: |-
+        Each replacement effect can only apply once to any single effect. Once a replacement effect has been applied, even if the new effect it creates (or a new effect created by a later replacement effect) still includes an occurrence of the effect that gets replaced, the same replacement effect cannot be applied to that effect again.
+      examples:
+      - text: The Runner accesses {card:Project Vacheron} and its interrupt ability resolves. The interrupt creates a replacement effect that will override adding the agenda to the Runner's score area. The Runner will still steal {card:Project Vacheron}, but they will do so by adding it to their score area with hosted agenda counters. Even though the modified effect still includes adding {card:Project Vacheron} to the Runner's score area, there is no way for the replacement effect to apply again to its own results.
+
+  - rule: rule_replace_imminent_effects
+    text: Some interrupts create replacement effects to modify an instruction that is already imminent. When the interrupt resolves, if the replacement effect can apply to the expected effects of the imminent instruction, it is applied immediately.
+    examples:
+    - text: An instruction is imminent with an expected effect of the Corp doing net damage to the Runner. The Corp uses {card:Tori Hanzō}'s ability, creating a replacement effect replacing net damage with core damage. The replacement effect applies immediately, so after {card:Tori Hanzō}'s ability resolves, the expected effect is now to do 1 core damage. When players get priority again, their interrupts are relevant or not based on the new expected effects.
+
+  - subsection: rule_order_of_replacement_effects
+    text: If multiple replacement effects would apply to an effect acting on a targeted card, that card's controller chooses the order in which the replacement effects apply. If multiple replacement effects would apply to any other effect, the controller of the base effect chooses the order in which the replacement effects apply.
+    rules:
+    - rule: rule_replacement_effect_must_have_something_to_replace
+      text: After applying one replacement effect, a subsequent replacement effect can only be applied if the effect it was to replace is still expected. A replacement effect cannot apply without something to replace.
+      examples:
+      - text: |-
+          The Runner chooses HQ with {card:Security Testing} when their turn begins, then plays {card:Account Siphon}. When the run becomes successful, both {card:Security Testing} and {card:Account Siphon} create replacement effects. When {ref:step_breach} of the run becomes imminent, the Runner must choose to apply either the replacement effect from {card:Security Testing} or the one from {card:Account Siphon}. Since neither effect creates a new instance of accessing cards, the effect not chosen to apply first has nothing to replace and does not apply.
+      - text: |-
+          The Runner chooses R&D with {card:Security Testing} when their turn begins, then plays {card:Showing Off}. When a run on R&D becomes successful, both {card:Security Testing} and {card:Showing Off} create replacement effects. When {ref:step_breach} of the run becomes imminent, the Runner must choose to apply either the replacement effect from {card:Security Testing} or the one from {card:Showing Off}. If they choose to apply {card:Security Testing} first, {card:Showing Off}'s effect has nothing to replace and does not apply. If they choose to apply {card:Showing Off} first, the expected effects still include accessing cards from R&D, albeit not in the usual way. {card:Security Testing} can still replace this access, so it applies next. Either way, the Runner will gain 2[c] and will not access any cards.
+    
 - section: sec_lingering_effects
   text: Lingering Effects
   rules:

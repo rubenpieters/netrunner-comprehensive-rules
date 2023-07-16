@@ -667,7 +667,7 @@ sections:
     rules:
     - rule: rule_expected_effects_resolve
       text: |-
-        When an instruction resolves, its expected effects correspond to the effects that occur, except for situations where {ref:TODO} applies.
+        When an instruction resolves, its expected effects correspond to the effects that occur, except for situations where {ref:rule_negative_values_resolution} applies.
 
   - subsection: sec_relevant_interrupts
     text: |-

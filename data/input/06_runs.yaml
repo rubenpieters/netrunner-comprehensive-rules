@@ -316,9 +316,9 @@ sections:
       text: The encounter begins. Conditions related to the Runner encountering this ice are met.
     - rule: step_encounter_paw
       text: A paid ability window occurs, in which players may only use paid abilities. Subroutines on the encountered ice can be broken during this window. (P)
-    - rule: step_check_finised_resolving_subroutines
+    - rule: step_resolve_subroutine
       text: If there are unbroken subroutines that have not yet resolved this encounter, the Corp resolves the next such subroutine in order. Otherwise, skip to (e).
-    - rule: step_resolve_next_subroutine
+    - rule: step_resolve_subroutine_loop
       text: Return to (c).
     - rule: step_encounter_complete
       text: The Encounter Ice Phase is complete. Continue to {ref:rule_sec_run_movement_phase}, Movement Phase.

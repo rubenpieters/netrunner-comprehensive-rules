@@ -118,7 +118,7 @@ sections:
     text: A {term:timing structure} is a unit of the game in which a prescribed sequence of steps progress the game forward.
     rules:
     - rule: rule_turn_timing_structure
-      text: The Corp's turn and the Runner'ss turn are timing structures, as are each of the 3 phases of the turns. See {ref:chpt_turns}.
+      text: The Corp's turn and the Runner's turn are timing structures, as are each of the 3 phases of the turns. See {ref:chpt_turns}.
     - rule: rule_run_timing_structure
       text: A run is a timing structure, as are each of the 6 phases of a run. See {ref:chpt_runs}.
     - rule: rule_breaching_timing_structure
@@ -561,11 +561,128 @@ sections:
     - rule: rule_corp_decides_unspecified_order
       text: If multiple subroutines are added to a piece of ice at the same time in an unspecified order, the Corp declares the relative order of those subroutines at the time the ice gains them.
 
+  - subsection: rule_subroutines_static_ability
+    text: Some ice have static abilities that grant that piece of ice a variable number of subroutines. Subroutines from such an ability are always ordered before any other subroutines on that ice.
+    rules:
+    - rule: rule_subroutines_static_ability_increase
+      text: If the number of subroutines granted to a piece of ice by its own static ability increases, the additional subroutines are added immediately after the previously-existing subroutines from the same ability.
+      examples:
+      - text: The Corp has no bad publicity and controls a rezzed copy of Ireress hosting a condition counter from {card:Sub Boost}. If the Corp takes bad publicity, the corresponding subroutines from {card:Ireress}'s ability are added before the "[sub] End the run." from the condition counter.
+      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:Ashigaru}. After the Runner breaks {card:Ashigaru}'s 3 subroutines, the Corp uses {card:Panic Button} to draw another card. The new subroutine is added after the previous 3, so the Runner can use {card:Gbahali} to break it.
+    - rule: rule_subroutines_static_ability_decrease
+      text: If the number of subroutines granted to a piece of ice by its own static ability decreases, subroutines are lost beginning with the last subroutine the ice previously had from the same ability and working backwards.
+      examples:
+      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:{card:Ashigaru}}. The Runner breaks the first subroutine, then uses {card:Utopia Shard} to force the Corp to discard 2 cards. {card:Ashigaru} correspondingly loses its last 2 subroutines, leaving behind the subroutine that was already broken.
+
+  - rule: rule_subroutines_static_ability_remove_subroutines
+    text: One card, {card:Hive}, has a static ability that removes its own printed subroutines. Subroutines are lost to this ability beginning with the last printed subroutine and working backwards.
+
+  - subsection: rule_subroutines_status
+    text: For each encounter, the subroutines on the encountered ice have a status of {term:broken} or {term:unbroken} with respect to that encounter.
+    rules:
+    - rule: rule_subroutines_initial_status_in_encounter
+      text: When an encounter begins, each of the encountered ice's subroutines becomes unbroken with respect to that encounter.
+    - rule: rule_new_subroutines_during_encounter
+      text: When a piece of ice gains 1 or more new subroutines during an encounter with it, those subroutines come into existence unbroken with respect to that encounter.
+    - rule: rule_subroutine_status_lifetime
+      text: When an encounter ends, card abilities can still check whether subroutines were broken or unbroken during that encounter.
+
+  - rule: rule_break_subroutine
+    text: To {term:break} a subroutine is to change its status with respect to the active encounter from unbroken to broken. Many cards that can allow a player to break subroutines are icebreakers (see {ref:subsec_icebreakers}). If the Runner breaks all the subroutines on the encountered ice, they fully break that ice (see {ref:subsec_fully_break}).
+
+  - subsection: rule_unbroken_subroutines_target_for_break_abilities
+    text: Only unbroken subroutines can be chosen as targets for abilities that would break them.
+    rules:
+    - rule: rule_break_all_subroutines_no_targets
+      text: An ability that breaks "all subroutines" does not target any subroutines, and can be used as long as the encountered ice has at least 1 unbroken subroutine.
+    - rule: rule_break_all_but_x_subroutines_targets
+      text: One card, {card:Grappling Hook}, has the ability to break "all but 1 subroutine" on the encountered ice. To trigger this ability, its controller chooses as its target the 1 subroutine that will not be broken. When the ability resolves, it breaks all unbroken subroutines except the chosen subroutine.
+      examples:
+      - text: The Runner uses two copies of {card:Grappling Hook} to break all of the subroutines on {card:Heimdall 1.0}. For the first {card:Grappling Hook}, the Runner chooses the unbroken "[sub] Do 1 core damage." subroutine as the target, and {card:Grappling Hook} breaks both "[sub] End the run." subroutines. For the second {card:Grappling Hook}, the Runner chooses one of the already-broken "[sub] End the run." subroutines as the target. They can choose the broken subroutine as {card:Grappling Hook}'s target because {card:Grappling Hook} will not attempt to break the chosen subroutine. When the ability resolves, {card:Grappling Hook} breaks the "[sub] Do 1 core damage." subroutine, but does nothing to the other "[sub] End the run." subroutine, because it is already broken.
+
+  - subsection: rule_resolve_unbroken_subroutines
+    text: At {ref:step_resolve_subroutine} of an encounter, the Corp resolves subroutines that are unbroken with respect to that encounter.
+    rules:
+    - rule: rule_resolve_subroutines_mandatory
+      text: Resolving subroutines is mandatory and does not open a priority window.
+    - rule: rule_resolve_subroutines_in_order
+      text: The Corp resolves the unbroken subroutines 1 at a time in order. The order of subroutines is discussed in {ref:rule_subroutines_ordered}.
+    - rule: rule_resolve_subroutines_run_ends
+      text: If the encounter ends during this process, no more subroutines are resolved.
+      examples:
+      - text: The Runner encounters {card:Little Engine} and does not break any subroutines. {card:Little Engine}'s first subroutine resolves and ends the run. Since the run and therefore the encounter have ended, no more subroutines resolve. The Runner will not gain 5[c].
+    - rule: rule_resolve_subroutines_runner_choice
+      text: One card, {card:Street Magic}, allows the Runner to set the order in which subroutines are resolved. If this ability is active when {ref:step_resolve_subroutine} is reached for the first time in an encounter, the Runner declares an order for the unbroken subroutines, and the Corp must resolve them in this order instead of their normal order. The new order is determined before any subroutines are resolved.
+
+  - rule: rule_subroutine_independent
+    text: Once a subroutine's first instruction becomes imminent, the subroutine becomes independent of its source and {ref:rule_abilities_resolution_independent} applies to it.
+
+  - rule: rule_replace_subroutine_resolution
+    text: One card, {card:Tsakhia "Bankhar" Gantulga}, can apply a replacement effect while a subroutine is imminent in order to resolve a different subroutine instead. The replaced subroutine is treated as having the same source as the original imminent subroutine.
+    examples:
+    - text: The Runner encounters {card:Bloop} while {card:Tsakhia "Bankhar" Gantulga}'s replacement effect applies. All 3 of {card:Bloop}'s subroutines would resolve, but are replaced by "sub] Do 1 net damage." by the replacement effect. These subroutines count as resolving from {card:Bloop}, so when the Runner passes {card:Bloop} after the encounter, the Runner can use {card:Persephone} to trash the top card of their stack and the top 3 cards of R&D.
+
+  - subsection: sec_steps_of_resolving_a_subroutine
+    text: Steps of Resolving a Subroutine
+    toc:
+    steps:
+    rules:
+    - rule: step_subroutine_becomes_imminent
+      text: The subroutine itself becomes imminent.
+    - rule: step_subroutine_interrupt_subroutine_resolution
+      text: An interrupt window occurs, during which abilities can prevent the subroutine from resolving. If this happens, the remaining steps are not carried out.
+    - rule: step_subroutine_target_first_instruction
+      text: Announce any targets for the subroutine's first instruction. That instruction then becomes imminent.
+    - rule: step_subroutine_interrupt_subroutine_effect
+      text: An interrupt window occurs, during which abilities can modify, prevent, or avoid the imminent effects.
+    - rule: step_subroutine_resolution
+      text: Resolve the instruction, applying any changes to its effects from interrupts that were resolved.
+    - rule: step_subroutine_checkpoint
+      text: A checkpoint occurs.
+    - rule: step_subroutine_loop
+      text: If there are more instructions to resolve, announce any targets for the next instruction. That instruction then becomes imminent. Return to (d).
+    - rule: step_subroutine_complete
+      text: Resolution of the subroutine is complete.
+
 - section: sec_interrupts_replacements
   text: Interrupts and Replacement Effects
 
 - section: sec_lingering_effects
   text: Lingering Effects
+  rules:
+  - rule: rule_lingering_effect
+    text: Instructions can create {term:lingering effects} that exist beyond their resolution. Once a lingering effect is created, it exists independently of its source even if the source becomes inactive. Lingering effects remain active only for the duration specified in the instruction that created them. Lingering effects with durations that have expired are removed from the game state at {ref:TODO} of each checkpoint.
+  - rule: rule_lingering_effect_maintain_existence_ability
+    text: Some lingering effects exist only to maintain the existence of another ability. Delayed conditional abilities are maintained this way and may have an implicit duration. See {ref:rule_delayed_conditional_ability}.
+
+  - subsection: rule_lingering_effect_maintain_choice
+    text: Some lingering effects maintain a choice that a player made while resolving an ability in order for another ability or effect with the same source object to make use of that choice.
+    rules:
+    - rule: rule_lingering_effect_maintaining_choice_default_duration
+      text: If the choice is only referred to by another lingering effect, the lingering effect maintaining the choice has the same duration as the other lingering effect.
+      examples:
+      - text: The Runner resolves {card:Pelangi}'s paid ability and chooses an ice subtype. The ability then creates a lingering effect adding the chosen subtype to the encountered ice. Both the choice of subtype and the effect adding it to the ice expire at the end of the encounter.
+    - rule: rule_lingering_effect_maintaining_choice_turn_begins_duration
+      text: If a conditional ability has a "when your turn begins" trigger condition and no effects other than making a choice, the duration of the lingering effect maintaining the choice expires when that turn ends or the source object becomes inactive.
+      examples:
+      - text: |-
+          {card:Security Testing}'s first ability reads, "When your turn begins, you may choose a server." The choice made when resolving this ability on a particular turn should be maintained only until that turn ends. The trigger condition of {card:Security Testing}'s second ability refers to the chosen server, and it will always look for the server chosen this turn. A successful run on a server that was not chosen this turn will never meet that trigger condition, even if no server was chosen this turn.
+    - rule: rule_lingering_effect_maintaining_choice_duration_other_cases
+      text: If the previous cases do not apply, the duration of the lingering effect expires only when the source object becomes inactive.
+      examples:
+      - text: |-
+          {card:Femme Fatale}'s first conditional ability directs the Runner to choose an installed piece of ice. Which ice was chosen is maintained as a lingering effect for as long as {card:Femme Fatale} remains active, and its last ability refers to the object that is being remembered by that lingering effect.
+
+  - subsection: rule_lingering_effect_inapplicable_timing_structure
+    text: If a lingering effect is created with a duration based on a timing structure that is not in progress at the time the lingering effect is created, the duration expires immediately, and the lingering effect persists only until the next checkpoint after it is created.
+    rules:
+    - rule: rule_icebreaker_strength_increase_implicit_link
+      text: Abilities on an {subtype:icebreaker} that modify their source's strength have an implicit duration of "for the remainder of the current encounter". See {ref:rule_icebreaker_strength_increase_implicit}.
+
+  - rule: rule_modify_duration_of_lingering_effect
+    text: Only lingering effects have durations. An ability that modifies the durations of other abilities functions by keeping their corresponding lingering effects active until an additional duration expires. This type of ability does not interact with effects from static abilities.
+    examples:
+    - text: The Runner controls {card:Gebrselassie} hosted on {card:Na'Not'K}. They run a server protected by 3 pieces of ice, and use {card:Na'Not'K}'s last ability to raise its strength to a total of 6. When the run ends, {card:Na'Not'K}'s static ability will no longer provide +3 strength, but the lingering effect of +2 strength from its paid ability will be maintained by {card:Gebrselassie} until the turn ends or {card:Gebrselassie} stops being hosted on {card:Na'Not'K}. If the Runner makes another run on a server protected by only 1 piece of ice, {card:Na'Not'K} will have 4 strength when that run begins.
 
 - section: sec_identifying_instructions
   text: Identifying Instructions

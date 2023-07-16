@@ -282,7 +282,6 @@ sections:
     - text: The Runner plays {card:The Noble Path} to make a run in which they prevent all damage. During the run, the subroutine on Chum resolves, and then the Runner encounters {card:Wall of Static} and does not break its subroutine. When the "end the run" ability resolves, the encounter also ends, so the trigger condition on {card:Chum}'s delayed conditional ability is met. The ability will resolve and fail to damage the Runner during the Run Ends Phase, because {card:The Noble Path}'s effect still applies. Similarly, {card:Georgia Emelyov}'s first ability meets its trigger condition at {ref:step_run_declared_unsuccessful}, which is still before the run is over, so the damage will be prevented.
     - text: The Runner plays {card:The Noble Path} to make a run in which they prevent all damage. The run is successful but the Runner takes a tag during the run. When the run ends, {card:Dedicated Response Team}'s ability meets its trigger condition at the same time that {card:The Noble Path}'s effect expires, so the Runner will suffer 2 meat damage.
 
-
 - section: sec_steps_of_a_run
   text: Steps of a Run
   rules:

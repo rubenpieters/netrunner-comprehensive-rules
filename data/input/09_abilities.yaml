@@ -391,6 +391,131 @@ sections:
 
 - section: sec_conditional_abilities
   text: Conditional Abilities
+  rules:
+  - subsection: rule_conditional_ability
+    text: A {term:conditional ability} is an ability that a player can or must trigger at a specific point in the game. Conditional abilities always include a primary condition and one or more instructions, but they have no special syntax requirements.
+    rules:
+    - rule: rule_primary_condition
+      text: The primary condition of a conditional ability is usually a trigger condition, but can also be a static condition.
+    - rule: rule_primary_condition_front
+      text: The primary condition of a conditional ability is often, but not always, written at the front of the ability. See {ref:rule_conditional_abilities_link} for details about conditional ability syntax.
+
+  - rule: rule_pending_instances
+    text: When a conditional ability has met its condition, one or more {term:instances} of that conditional ability is created {term:pending} in the next reaction window that opens. Each instance of a conditional ability is a separate copy of that ability that resolves independently of the others. An instance of an ability with the pending status is waiting for its controller to trigger it.
+  - rule: rule_static_condition_one_instance
+    text: A conditional ability with a static condition can only have one instance at a time.
+
+  - subsection: rule_trigger_condition_multiple_instances
+    text: A conditional ability with a trigger condition can have multiple instances.
+    rules:
+    - rule: rule_condition_met_with_pending_instances
+      text: If a trigger condition is met again while an instance of the corresponding ability is already pending, imminent, or resolving, a new instance can still become pending in the next reaction window.
+    - rule: rule_condition_met_multiple_times
+      text: If the trigger condition of an ability is met more than once between consecutive checkpoints, multiple instances of that ability become pending in the next reaction window.
+      examples:
+      - text: The Runner plays {Card:Singularity}, trashing 3 Corp cards simultaneously. Since {card:Hostile Infrastructure}'s trigger condition is met separately for each card trashed, the next checkpoint handles all of those occurrences, and 3 instances of the ability become pending in the same reaction window.
+      - text: The Runner controls {card:Blackguard} and plays {card:Satellite Uplink}, exposing 2 cards in a single instruction. In the next checkpoint, two instances of {card:Blackguard}'s ability become pending, one corresponding to each card that was exposed.
+
+  - subsection: rule_trigger_description
+    text: The trigger condition of most conditional abilities describes an occurrence that allows it to become pending. These rules about trigger conditions also apply to conditional abilities with static conditions, except as described in {ref:rule_conditional_ability_with_static_condition}.
+    rules:
+    - rule: rule_condition_checked_in_checkpoints
+      text: During each checkpoint, the game checks whether any conditional abilities have met their trigger conditions. If any have, a reaction window opens to resolve those abilities (See {ref:sec_checkpoints}). This reaction window is fully resolved and closed before the game proceeds to the next instruction of the original effect or game rule.
+    - rule: rule_condition_only_met_while_active
+      text: A conditional ability can only recognize its trigger condition occurring if the ability is active at the time the trigger condition resolves. If a conditional ability becomes active after the point when its trigger condition was met, that ability does not become pending, even if other abilities sharing that trigger condition are still pending.
+    - rule: rule_condition_requirements_part_of_condition
+      text: A conditional ability can only recognize its trigger condition occurring if all the stipulations and requirements listed in the trigger condition are met at the moment that the trigger condition would occur.
+      examples:
+      - text: The entire trigger condition on {card:Quantum Predictive Model} is "If the Runner is tagged when {card:Quantum Predictive Model} is accessed". {card:Quantum Predictive Model} can only meet its trigger condition if the Runner is tagged at the time the access occurs. Even if {card:Casting Call} is hosted on {card:Quantum Predictive Model}, the tag will be given after the access begins, and no ordering of the abilities will allow {card:Quantum Predictive Model} to meet its trigger condition.
+    - rule: rule_condition_requirements_part_of_effect
+      text: Additional stipulations and requirements listed in the instructions of a conditional ability are checked as part of the ability's effects and are not part of the ability's trigger condition. For the effects under the scope of this kind of condition to resolve, the condition only needs to be met when the relevant instructions resolve. This can occur even if some or all of those conditions were not met at the time the ability met its trigger condition.
+      examples:
+      - text: If a Runner with 1 link has both {card:Underworld Contact} installed and {card:The Supplier} installed hosting a {card:Dyson Mem Chip}, both {card:Underworld Contact} and {card:The Supplier} meet their trigger conditions at the same time. The Runner can trigger {card:The Supplier} first, installing the Dyson Mem Chip, thus allowing {card:Underworld Contact} to recognize that the Runner has 2 link and give them 1 credit, even though the Runner did not have 2 link at the time the {card:Underworld Contact} became pending.
+    - rule: rule_condition_if_successful
+      text: The phrase "If successful" in reference to a run is a trigger condition with specific rules. See {ref:rule_if_successful}. The phrases "If successful" and "If unsuccessful" are also frequently used as trigger conditions relating to the results of a trace. See {ref:TODO}.
+
+  - rule: rule_trigger_condition_checked
+    text: Trigger conditions look for an instantaneous change in the game state. The next checkpoint after that change takes place marks an instance of the ability as pending for each occurrence of the change that was looked for.
+
+  - subsection: rule_conditional_ability_with_static_condition
+    text: Conditional abilities with a static condition instead of a trigger condition describe an effect that must be performed repeatedly, if possible, while the condition is true. Such abilities usually attempt to end their own repetition by uninstalling their source.
+    rules:
+    - rule: rule_conditional_ability_check_to_become_pending
+      text: During each checkpoint, the game checks whether any conditional abilities with static conditions should become pending, alongside conditional abilities with trigger conditions. However, there are further requirements for this kind of ability to be marked pending.
+    - rule: rule_conditional_ability_check_start_of_checkpoint
+      text: A conditional ability with a static condition can only be marked pending during a checkpoint if the condition is true at the beginning of that checkpoint.
+    - rule: rule_conditional_ability_static_one_instance
+      text: A conditional ability with a static condition can only be marked pending if no other instance of the same ability from the same source is already pending, imminent, or resolving.
+    - rule: rule_conditional_ability_static_condition_ncigs
+      text: A conditional ability with a static condition can only be marked pending if the instructions in the ability have the potential to change the game state.
+      examples:
+      - text: |-
+          {card:Parasite} is hosted on a piece of ice with 0 strength. {card:Parasite}'s ability tries to trash that ice. If the effect of an interrupt ability prevents the ice from being trashed without increasing its strength, the condition is still true, so the ability will become pending again. But this does not occur while the previous instance of the ability is still pending or resolving. Conversely, if a static ability (such as the one on Architect) prohibits {card:Parasite} from trashing the ice, {card:Parasite}'s ability does not have the potential to change the game state, and therefore it does not become pending.
+
+  - subsection: rule_trigger_conditional_ability
+    text: A player can trigger a conditional ability while they have priority in a reaction window in which the ability is pending.
+    rules:
+    - rule: rule_triggered_ability_loses_pending
+      text: Once a player triggers a conditional ability, that instance of the ability loses its pending status. Other pending instances of the ability are unaffected and can still be triggered later, regardless of whether those instances are associated with the same reaction window.
+    - rule: rule_conditional_ability_interrupt
+      text: If the [interrupt] symbol appears before a conditional ability's text, that ability is an interrupt. These abilities will become pending in interrupt windows rather than reaction windows, but are otherwise resolved in the same way as non-interrupt conditional abilities. See {ref:sec_interrupts_replacements}.
+
+  - subsection: rule_optional_conditional_ability
+    text: If a conditional ability gives its controller a choice of whether to apply its effects, such that the ability could potentially have no effects at all, it is considered an {card:optional conditional ability}. These abilities can usually be recognized by the presence of permissive words such as "may" or "allows", or by a restriction such as "Use this ability only once per turn." If the ability is not optional, then it is a {card:mandatory conditional ability}.
+    rules:
+    - rule: rule_pass_with_optional_conditional_abilities_pending
+      text: Instances of optional conditional abilities can still be pending when their controller passes in the corresponding priority window. Players are not required to trigger optional conditional abilities.
+    - rule: rule_cannot_pass_with_mandatory_conditional_abilities_pending
+      text: Players must trigger all instances of pending mandatory conditional abilities they control in a given priority window before they can pass in that window. See {ref:rule_reaction_window}.
+    - rule: rule_mandatory_conditional_ability_with_optional_effects
+      text: Both optional and mandatory conditional abilities may have optional parts to their effects. Even if triggering the ability is mandatory, its controller may still decline any optional constituent effects that arise during its resolution.
+    - rule: rule_optional_conditional_ability_use
+      text: A conditional ability and its source are considered used when any optional component of the ability's effects is carried out.
+
+  - rule: rule_conditional_ability_lose_pending_when_ability_becomes_inactive
+    text: If any instances of a conditional ability are pending and the conditional ability itself becomes inactive, those instances lose their pending status and will not resolve.
+    examples:
+    - text: The Runner has both {card:Aesop's Pawnshop} and {card:Drug Dealer} installed. Both cards have abilities that meet their trigger conditions when the Runner's turn begins. If the Runner chooses to trigger {card:Aesop's Pawnshop} first, and then uses it to trash {card:Drug Dealer}, {card:Drug Dealer}'s pending ability can never be triggered, so the Runner does not lose a credit.
+  - rule: rule_conditional_ability_lose_pending_when_priority_window_closes
+    text: If a priority window closes while any abilities still have pending instances associated with that window, the remaining instances lose their pending status and cannot be triggered or resolved. See {ref:rule_reaction_window_closing_timing_structure}.
+  - rule: rule_conditional_ability_independent
+    text: Once a player triggers a conditional ability and its instructions become imminent, the ability becomes independent of its source and {ref:rule_abilities_resolution_independent} applies to it.
+
+  - subsection: rule_delayed_conditional_ability
+    text: A {term:delayed conditional ability} is a conditional ability maintained by a lingering effect (see {ref:sec_lingering_effects}). Unlike other lingering effects, some delayed conditional abilities are created without an explicitly stated duration.
+    rules:
+    - rule: rule_delayed_conditional_ability_if_successful_duration
+      text: If an "if successful" ability contains a nested delayed conditional ability referring to breaching the attacked server, that ability applies to the breach at {ref:step_breach} of the run the "if successful" ability is associated with. Its duration expires at the end of the run. See {ref:rule_if_successful}.
+    - rule: rule_delayed_conditional_ability_specified_duration
+      text: If an instruction creates a delayed conditional ability and specifies a duration, the delayed conditional ability is active until that duration expires.
+      examples:
+      - text: |-
+          {card:In the Groove} creates a delayed conditional ability that specifies a duration of "this turn". Since a duration is specified, it is not limited to only being triggered once. The ability becomes pending and can resolve every time its trigger condition is met, and its existence only expires at the end of the turn.
+    - rule: rule_delayed_conditional_ability_relevant_once
+      text: Any other delayed conditional ability exists until the next time it resolves, after which it expires.
+      examples:
+      - text: |-
+          {card:Joshua B}'s ability allows the Runner to gain [click]. If they do, it creates a delayed conditional ability that is independent of {card:Joshua B} itself, which will meet its trigger condition only once, when that turn ends. After that ability resolves, the game no longer maintains the lingering effect creating the ability.
+
+  - subsection: sec_steps_of_triggering_and_resolving_a_conditional_ability
+    text: Steps of Triggering and Resolving a Conditional Ability
+    toc:
+    steps:
+    rules:
+    - rule: step_conditional_ability_announce
+      text: Announce that you will trigger one of the pending abilities associated with the reaction window that gave you priority.
+    - rule: step_conditional_ability_target_first_instruction
+      text: Announce any targets for the ability's first instruction. That instruction then becomes imminent.
+    - rule: step_conditional_ability_interrupt_window
+      text: An interrupt window occurs, during which abilities can modify, prevent, or avoid the imminent effects.
+    - rule: step_conditional_ability_resolution
+      text: Resolve the instruction, applying any changes to its effects from interrupts that were resolved. If the controller of the ability chooses to resolve an optional effect contained in this instruction, and this is the first instruction for which that player has done so, "when used" conditionals meet their trigger conditions.
+    - rule: step_conditional_ability_checkpoint
+      text: A checkpoint occurs.
+    - rule: step_conditional_ability_loop
+      text: If there are more instructions to resolve, announce any targets for the next instruction. That instruction then becomes imminent. Return to (c).
+    - rule: step_conditional_ability_complete
+      text: Resolution of the conditional ability is complete.
 
 - section: sec_play_abilities
   text: Play Abilities

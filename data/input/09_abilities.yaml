@@ -14,7 +14,7 @@ sections:
     - rule: rule_trash_ability_link
       text: The basic trash ability is defined in {ref:TODO}.
     - rule: rule_lingering_effects_link
-      text: An ability's text can include other abilities that it could grant to cards or counters or introduce directly to the game state. See also {sec_lingering_effects}.
+      text: An ability's text can include other abilities that it could grant to cards or counters or introduce directly to the game state. See also {ref:sec_lingering_effects}.
     - rule: rule_ability_categories
       text: Each ability is categorized as either a static ability ({ref:sec_static_abilities}), a paid ability ({ref:sec_paid_abilities}), a conditional ability ({ref:sec_conditional_abilities}), a play ability ({ref:sec_play_abilities}), or a subroutine ({ref:sec_subroutines}).
     - rule: rule_interrupt_link

@@ -32,19 +32,144 @@ sections:
       text: Some abilities can create additional costs to steal an agenda. The Runner can decline to pay such costs and not steal the agenda. See {ref:rule_additional_cost}.
   - rule: rule_moved_while_accessing
     text: If a card moves to another location while it is being accessed, the access ends immediately.
-  
-
-
-      
-- section: sec_accessing_steps
+  - rule: rule_end_run_ends_access
+    text: If a run is in progress, an instruction to end the run ends any access taking place. If an access is occurring outside of a run, an instruction to end the run has no effect on that access.
+  - rule: rule_access_set_of_cards
+    text: One card, {card:Information Sifting}, uses a method other than a breach to establish a set of cards for the Runner to access. The Runner accesses those cards one at a time in the order of their choice. Each access is performed as a separate instruction. See {ref:TODO}. Accessing cards in this way is an exception to {ref:TODO}.
+  - rule: rule_access_cards_without_breach
+    text: |-
+      One card, {card:Counter Surveillance}, instructs the Runner to access a certain number of cards from a server without mentioning a breach. The procedure for these accesses follows the normal rules for breaching that server except: there is no random access limit if the server is HQ or R&D; and the procedure ends once the designated number of cards have been chosen for access.
+- section: sec_steps_accessing_card
+  steps:
   text: Steps of Accessing a Card
-
+  rules: 
+  - rule: step_card_accessed
+    text: The card is accessed. Conditions related to accessing this card are met.
+  - rule: step_mid_access_ability
+    text: The Runner may use a single mid-access ability, such as the basic trash ability.
+  - rule: step_access_agenda
+    text: If the accessed card is an agenda, the Runner must steal it.
+  - rule: step_access_complete
+    text: The access is complete. Conditions related to an access ending are met. 
 - section: sec_breaching_servers
   text: Breaching Servers
-
+  rules: 
+  - rule: rule_breaching_servers
+    text: |-
+      {term:Breaching} a server is the process of the Runner accessing a particular set of cards associated with that server. Most accesses occur during a breach. {ref:Step_breach} of a run calls for the Runner to breach the attacked server, but card abilities can also directly instruct the Runner to breach a server.
+  - subsection: rule_breaching_archives
+    text: When the Runner breaches Archives, all the facedown cards in the Corp's discard pile are turned faceup before the Runner accesses any cards.
+    rules:
+    - rule: rule_archives_facedowns_after_breach
+      text: If a card is added to Archives facedown after this step, that card remains facedown for the remainder of the breach, even after it is accessed. The Runner can only look at a facedown card in Archives while accessing it.
+  - rule: rule_candidates
+    text: |-
+      The cards associated with a breached server that the Runner could potentially access are called {term:Candidates}. The set of candidates is compiled from the cards in the root of the breached server and, for central servers, the cards in the zone that corresponds to that server (see {ref:rule_three_central_servers}). {ref:Sec_determining_candidates} defines which of these cards are candidates.
+  - subsection: rule_candidates_presented
+    text:  During a breach, the Runner is presented with the current candidates. They choose 1 of those cards and access it. This process repeats until there are no longer any candidates.
+    rules:
+    - rule: rule_candidates_breaching_hq
+      text: When presented with candidates during a breach of HQ, the Runner chooses either a specific candidate that is not in the Corp's hand or to access a random candidate from among the ones in the Corp's hand. A card randomly chosen this way is treated as though the Runner had chosen it.
+    - rule: rule_corp_choosing_candidates_breaching_hq
+      text: One card, {card:Dedicated Neural Net}, instructs the Corp to choose which cards the Runner accesses from HQ. While this effect applies, the Runner still chooses candidates that are not in the Corp's hand as normal. Whenever the Runner chooses to access a candidate from the Corp's hand, instead of a candidate being chosen at random, the Corp chooses 1 of those candidates for the Runner to access. The chosen card is still treated as though the Runner had chosen it.
+  - subsection: rule_random_access_limit
+    text: |-
+      The Runner can only choose candidates from the Corp's hand or deck a limited number of times during a breach of HQ or R&D, respectively. This number is called the {term:Random Access Limit}. Before the Runner begins accessing cards during a breach of HQ or R&D, the random access limit for that breach is determined, after which it will not change for the remainder of that breach.
+    rules:
+    - rule: rule_default_random_access_limit
+      text: By default, the random access limit is 1.
+    - rule: rule_increasing_random_access_limit
+      text: If an ability allows the Runner to "access additional cards" during a breach of HQ or R&D, the effect of that ability is to increase the random access limit. Such an ability can only be applied at the beginning of the breach, before the value of the random access limit is set.
+    - rule: rule_counting_random_access_limit
+      text: Cards are counted against the random access limit in the manner described in {ref:rule_counting_candidates_during_breach}.
+  - subsection: rule_number_of_accesses
+    text: Some rules and abilities refer to the number of cards the Runner accesses or the number of times the Runner accesses a card.
+    rules:
+    - rule: rule_counting_candidates_during_breach
+      text: If such a reference applies while a breach is in progress, it counts the number of times a candidate has been chosen so far during that breach, regardless of how many of those candidates have actually been accessed.
+      examples:
+      - text: The Runner plays {card:Immolation Script}, and the subroutine on {card:Hudson 1.0} resolves before Archives is breached. The Runner will only be able to choose 1 candidate during the breach, regardless of whether they choose to access that card or apply {card:Immolation Script}'s replacement effect.
+    - rule: rule_counting_candidates_after_breach
+      text: If such a reference applies after a breach is complete, it counts only the number of times the Runner actually resolved an access during that breach.
+      examples:
+      - text: The Runner plays {card:Rip Deal} while they have {card:Obelus} installed. If they use {card:Rip Deal}'s ability to replace accesses of cards in HQ with adding cards from the heap to the grip, the cards those replacement effects applied to were not accessed. When {card:Obelus}'s ability resolves after the breach ends, it will only cause the Runner to draw cards for upgrades they accessed in the root of HQ.
+  - rule: rule_end_run_ends_breach
+    text: If a run is in progress, an instruction to end the run ends any breach taking place. If there is no run in progress, an instruction to end the run has no effect on a breach.
+  - rule: rule_consecutive_breaches
+    text: If a server would be breached while a breach is already in progress, instead the new breach takes place when the current breach ends. The effect creating the delayed breach is treated as a conditional ability controlled by the Runner.
+    examples:
+    - text: The Runner steals {card:Clone Retirement} during a breach of HQ, causing the Corp to take bad publicity. The Runner must complete the current breach before beginning the breach granted from {card:Raymond Flint}'s first ability.
 - section: sec_determining_candidates
   text: Determining Candidates
-
+  rules:
+  - subsection: rule_candidates_beginning_breach
+    text: |-
+      The candidates at the beginning of a breach are as follows:
+    rules:
+     - rule: rule_candidates_in_server_root
+       text: Each card in the root of the breached server is a candidate
+     - rule: rule_candidates_in_hq
+       text: If the breached server is HQ, each card in the Corp's hand is a candidate
+     - rule: rule_candidates_in_rnd
+       text: If the breached server is R&D, the top card of the Corp's deck is a candidate.
+     - rule: rule_candidates_in_archives
+       text: If the breached server is Archives, each card in the Corp's discard pile is a candidate.
+  - subsection: rule_prohibiting_access
+    text: If at any time the Runner is prohibited from accessing an object, that object ceases to be a candidate and cannot become a candidate.
+    examples:
+    - text: The Corp performs a successful trace with the ability on {card:Ash 2X3ZB9CY}, prohibiting the Runner from accessing any card other than Ash for the remainder of the current run. When the server is breached, Ash will be the only candidate for the Runner's first selection, and then there will be no candidates remaining, so the breach will end.
+    rules:
+    - rule: rule_prohibiting_access_to_1
+      text: One card, {card:Hudson 1.0}, creates an effect that prohibits the Runner from accessing more than 1 card during a run. This effect always considers whether the Runner has actually accessed a card during that run, even when {ref:rule_counting_candidates_during_breach} would normally apply. If the Runner has accessed any cards, this effect prohibits all accesses, and therefore there will be no candidates.
+  - rule: rule_candidates_already_accessed
+    text: Once the Runner chooses a candidate for access, it ceases to be a candidate for the remainder of that breach. It does not matter whether the chosen candidate is actually accessed. As long as the card is chosen, it ceases to be a candidate.
+    examples:
+    - text: The Runner is breaching Archives during a run made with {card:Immolation Script}. They choose a piece of ice from the set of candidates, and apply {card:Immolation Script}'s replacement effect to trash another card instead of accessing the chosen ice. After resolving this, the chosen ice is no longer a candidate and cannot be accessed again this breach. (The newly-trashed card, however, could be a candidate.)
+    - text: |-
+      The Corp is playing {card:Gagarin Deep Space: Expanding the Horizon}, and the Runner breaches a remote server. When the Runner chooses a candidate from the root of that server, an additional cost to access is imposed. The Runner declines to pay the cost and therefore does not perform the access. That card still ceases to be a candidate.
+  - rule: rule_after_reaching_random_access_limit
+    text: When the random access limit is reached during a breach of HQ or R&D, all candidates in the zone corresponding to the breached server cease to be candidates, and no cards in that zone can become candidates for the remainder of that breach. See {ref:rule_random_access_limit}.
+  - rule: rule_candidates_leaving_server
+    text: If a candidate leaves the breached server, it ceases to be a candidate. Note that the moved card could be a new object, which could be eligible to become a new candidate if appropriate.
+    examples:
+    - text: The Runner trashes an installed upgrade during a breach of Archives. That card moves to the Corp's discard pile. The new object for the upgrade's existence in the Corp's discard pile becomes a candidate, so the Runner will access the same physical card twice during this breach.
+  - subsection: rule_candidates_entering_server
+    text: Cards entering a server while a breach is in progress can become candidates.
+    rules:
+    - rule: rule_candidates_entering_root
+      text: If a card enters the root of a server during a breach of that server, it becomes a candidate.
+    - rule: rule_candidates_entering_hq
+      text: If a card enters the Corp's hand during a breach of HQ while the random access limit has not yet been reached, that card becomes a candidate.
+    - rule: rule_candidates_entering_rnd
+      text: If a card enters the Corp's deck during a breach of R&D, that card could become a candidate (either at that time or later in the breach), depending on the random access limit and its position within the deck. See section 7.4.7.
+    - rule: rule_candidates_entering_archives
+      text: If a card enters the Corp's discard pile during a breach of Archives, that card becomes a candidate. See also {ref:rule_archives_facedowns_after_breach}.
+  - subsection: rule_rnd_candidates_1_at_a_time
+    text: During a breach of R&D, the Runner is presented with 1 candidate from the Corp's deck at a time in turn, working down from the top of the deck. Cards are made candidates 1 at a time until the access limit is reached.
+    rules:
+    - rule: rule_rnd_topmost_eligibile_candidate
+      text: After the Runner chooses a candidate from the Corp's deck and whenever any cards enter, leave, or are reordered within the Corp’s deck, all cards in the Corp's deck cease to be candidates. Then, if the random access limit has not been reached, the topmost eligible card in the deck becomes a candidate. A card is eligible for this purpose if the Runner has not already chosen to access that object and is not prohibited from accessing that object in this breach.
+      examples: 
+      - text: The Runner plays {card:The Maker's Eye} and breaches R&D, accessing 2 additional cards. They access {card:Celebrity Gift} and then access and steal {card:Bacterial Programming}. The Corp uses {card:Bacterial Programming}'s ability to rearrange cards in R&D, but they leave {card:Celebrity Gift} as the top card of R&D. The cards returned to the top of R&D are new objects, so the Runner must continue the breach from the top of R&D and will access {card:Celebrity Gift} again.
+      - text: The Corp is playing {card:Seidr Laboratories} and has {card:Strongbox} rezzed in the root of R&D. The Runner breaches R&D with a random access limit of 4. They first access the top card of the Corp's deck and leave it in place. The 2nd card from the top now becomes a candidate, and turns out to be an agenda, which the Runner steals by spending [click] to pay the additional cost imposed by {card:Strongbox}. The Corp then uses {card:Seidr Laboratories} to add 1 card from Archives to the top of R&D. The 3rd candidate presented to the Runner is the card newly added to the top of R&D. After accessing that card, the next card down is still the object that was accessed first, so the card below that (currently 3rd from the top) becomes the 4th and final candidate.
+    - rule: rule_rnd_access_from_bottom
+      text: |-
+        One card, {card:Showing Off}, allows the Runner to access cards from the bottom of R&D. While this effect applies, candidates in the Corp's deck are presented working up from the bottom: treat {ref:rule_candidates_in_rnd} as if it said "bottom" instead of "top" and rule {ref:rule_rnd_topmost_eligibile_candidate} as if it said "bottommost" instead of "topmost".
 - section: sec_breaching_steps
+  steps:
   text: Steps of Breaching a Server
-  
+  rules:
+  - rule: step_breaching_begins
+    text: Breaching the server formally begins. Conditions related to breaching this server are met.
+  - rule: step_flip_archives
+    text: If the breached server is Archives, turn all cards in the Corp's discard pile faceup.
+  - rule: step_determine_candidates_limit
+    text: If the breached server is HQ or R&D, determine the limit to how many times the Runner can choose a candidate from the Corp's hand or deck.
+  - rule: step_choose_candidate
+    text: The Runner chooses a candidate. If they cannot, skip to {ref:step_breach_complete}.
+  - rule: step_access_candidate
+    text: The Runner accesses the chosen card.
+  - rule: step_repeat_candidate_selection
+    text: Return to {ref:step_choose_candidate}.
+  - rule: step_breach_complete
+    text: The breach is complete. Conditions related to the breach ending are met.

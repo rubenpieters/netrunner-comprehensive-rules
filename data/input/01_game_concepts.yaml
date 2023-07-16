@@ -447,7 +447,7 @@ sections:
   - subsection: rule_placed_loaded
     text: Whenever an object is "placed" or "loaded" onto a card, a host relationship is created between those two objects. The object placed on top of a card is {term:hosted} on that card. The card onto which the other object is placed is the {term:host}.
     rules:
-    - rule: rule_host_restriction
+    - rule: rule_valid_hosts
       text: Only cards in score areas and the play area can host objects.
   - rule: rule_hosted_installed_state
     text: The state of being hosted is distinct, but not exclusive from, the state of being installed. If an ability instructs a player to host a card from an inactive state without reference to installing it, the hosted card remains inactive.

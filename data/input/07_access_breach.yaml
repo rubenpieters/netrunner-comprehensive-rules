@@ -11,7 +11,7 @@ sections:
     text: While the Runner is accessing a card, the Runner is allowed to look at that card, even if it would normally not be visible to them. While the Runner is accessing a card, the Corp is allowed to look at it as well, except when the card is being accessed from R&D.
   - rule: rule_accessing_trigger_condition
     text: An ability that meets its trigger condition when its source card is accessed is active even if the source card is inactive. See {ref:TODO}.
-  - rule: rule_mid_access_ability
+  - rule: rule_mid_access_ability_opportunity
     text: During each access, the Runner has 1 opportunity to use a mid-access ability. This occurs after the reaction window at the beginning of the access, and before the Runner steals an accessed agenda.
   - subsection: rule_basic_trash_ability
     text: |-

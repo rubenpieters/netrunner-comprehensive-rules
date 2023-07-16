@@ -227,15 +227,167 @@ sections:
 
 - section: sec_interpreting_card_text
   text: Interpreting Card Text
+  rules:
+  - rule: rule_text_classification
+    text: Text is classified into conditions, restrictions, instructions, declarations, and ability flags. The rules text of an ability can contain text in any combination of these classes, except that no ability contains both instructions and declarations.
+
+  - subsection: rule_condition
+    text: A {term:condition} is a unit of text that stipulates a requirement for when an ability's effects are allowed to apply.
+    rules:
+    - rule: rule_cost_condition
+      text: A {term:cost condition} describes a cost (either a nested cost or a trigger cost) that a player must pay to apply an effect. Costs are discussed in detail in {ref:sec_costs}.
+    - rule: rule_trigger_condition
+      text: A {term:trigger condition} describes a change in game state that must occur for an effect to apply. Trigger conditions often begin with words such as "if", "when", "whenever", or "after", or with ordinal phrases such as "the first time".
+    - rule: rule_static_condition
+      text: A {term:static condition} describes a property of the game state that must be true for an effect to apply. Static conditions often begin with words such as "if", "during", or "while".
+
+  - subsection: rule_restriction
+    text: A {term:restriction} is a unit of text that applies one of a specific set of constraints for a card to be played or an ability to be used. If a restriction appears in an ability, it applies to the entire ability regardless of whether it is written before, after, or in the middle of the ability's other text. Many restrictions fall under {ref:rule_ability_active_inactive_source_card}, meaning they are active even while their source is inactive.
+    rules:
+    - rule: rule_modify_cost_restriction
+      text: Text modifying the cost to play, install, rez, or steal the card it appears on is a restriction, including text that adds an additional cost.
+    - rule: rule_act_restriction
+      text: Constraints on when or where a card can be installed, rezzed, played, or scored are restrictions.
+    - rule: rule_use_restriction
+      text: Limits on when, where, or how often an ability can be used are restrictions.
+    - rule: rule_pay_cost_restriction
+      text: Constraints on how a cost can be paid are restrictions.
+    - rule: rule_host_restriction
+      text: If a card's text limits what cards it can host, the text describing that limit is a restriction. See also {ref:rule_host_via_ability}.
+    - rule: rule_variable_restriction
+      text: Definitions for or constraints on a variable are restrictions.
+      examples:
+      - text: Some abilities dictate a value for X, such as "X is the number of rezzed NEXT ice." Some abilities with X in their cost constrain the value that can be chosen for X, such as "X must be equal to or less than the number of tags the Runner has." These statements are restrictions.
+    - rule: rule_cannot_be_prevented_restriction
+      text: Stipulations that an effect or part of an effect cannot be prevented are restrictions.
+    - rule: rule_no_restriction
+      text: Any text not falling under one of the above categories is not a restriction.
+
+  - subsection: rule_instruction
+    text: An {term:instruction} is a statement or command that is resolved at a specific time and applies immediate effects to the game state. (This can include creating new lingering abilities or effects that will continue to apply over time; see {ref:sec_lingering_effects}.)
+    rules:
+    - rule: rule_instruction_source
+      text: Instructions can originate from a game rule or from the text of an ability. An instruction in an ability resolves when that ability resolves (see {ref:rule_resolve_ability}). An instruction in the game rules resolves during the timing step(s) when it appears. {ref:Sec_identifying_instructions} explains how to determine the boundaries between consecutive instructions.
+    - rule: rule_instruction_target
+      text: If an instruction requires any targets, players announce those targets before that instruction becomes imminent. See {ref:sec_targets}.
+    - rule: rule_instruction_atomic
+      text: Each instruction is carried out as an atomic unit and cannot be interrupted once it begins to resolve. The procedure for carrying out an instruction can be altered by other effects such as interrupts, but only before the instruction begins to resolve. See {ref:sec_interrupts_replacements}.
+    - rule: rule_resolve_instruction_in_order
+      text: Other than choosing targets, carry out the steps of a single instruction in the order they are written.
+    - rule: rule_instruction_lingering_effect
+      text: Instructions in an ability can create effects that last beyond the resolution of the ability. See {ref:sec_lingering_effects}.
+
+  - rule: rule_declaration
+    text: A {term:declaration} is a statement describing an effect on components or game rules that is applied continuously. A declaration applies its effects as long as it is active.
+
+  - subsection: rule_ability_flag
+    text: An {term:ability flag} is a keyword or symbol that appears at the beginning of an ability. Ability flags are separated from the main text of the ability by an arrow (→). Each ability flag changes the rules for how the flagged ability functions.
+    rules:
+    - rule: rule_ability_flag_types
+      text: |-
+        There are four ability flags: access, interface, [interrupt], and persistent.
+    - rule: rule_access_flag
+      text: The "access" flag appears on Runner card paid abilities and affects the timing for triggering those abilities. The Runner can use abilities with this flag only during the mid-access ability window at {ref:TODO} of accessing a card. See {ref:rule_mid_access_window}.
+    - rule: rule_interface_flag
+      text: The "interface" flag appears on icebreaker paid abilities and affects the timing for triggering those abilities. The Runner can use abilities with this flag only during an encounter, and only if the ability's source is an icebreaker with strength that equals or exceeds the strength of the encountered ice. See {ref:subsec_icebreakers}.
+    - rule: rule_interrupt_flag
+      text: The interrupt flag ([interrupt]) appears on paid and conditional abilities and affects the timing for triggering those abilities. Players can use abilities with this flag only during interrupt windows, and only if the ability is relevant to the imminent instruction. See {ref:sec_interrupts_replacements}.
+    - rule: rule_persistent_flag
+      text: The "persistent" flag appears on Corp card abilities and changes the rules about when those abilities are active. An ability with this flag can persist until the end of the run after its source card is trashed. See {ref:TODO}.
+
+  - subsection: rule_ability_classification
+    text: The five types of abilities can be identified by the types of text they are made of.
+    rules:
+    - rule: rule_static_abilities_link
+      text: Static abilities ({ref:sec_static_abilities}) can contain declarations, restrictions, and conditions, but never instructions. Static abilities are the only ability type that can contain declarations.
+    - rule: rule_paid_abilities_link
+      text: |-
+        Paid abilities ({ref:sec_paid_abilities}) can always be identified by their formatting: a cost condition in bold text, a colon (:), then the remainder of the ability. The text after the colon can contain conditions, restrictions, and/or instructions.
+    - rule: rule_conditional_abilities_link
+      text: Conditional abilities ({ref:sec_conditional_abilities}) always contain a trigger condition or static condition and at least one instruction. They can also contain restrictions, other instructions, or nested conditions. The primary condition is often written with a timing-related word or phrase like "when", "after", "the first time", and so on, and is usually the first part of the ability's text. Some older cards write the condition at the end of the ability or use "if" to indicate the condition.
+    - rule: rule_play_abilities_link
+      text: Play abilities ({ref:sec_play_abilities}) are the abilities on events and operations that are not paid, conditional, or static abilities. They can contain conditions, restrictions, and/or instructions.
+    - rule: rule_subroutines_link
+      text: Subroutines ({ref:sec_subroutines}) always begin with the [sub] symbol, and can contain conditions, restrictions, and/or instructions.
 
 - section: sec_static_abilities
   text: Static Abilities
+  rules:
+  - rule: rule_static_ability
+    text: A {term:static ability} is an ability that continuously affects the game as long as it is active. Static abilities are the only type of ability that can contain declarations, and they do not resolve or have associated priority windows.
+  - rule: rule_static_ability_with_condition
+    text: If a static ability contains a static condition, then the constrained parts of the ability apply to the game state only if that condition is met.
+  - rule: rule_static_ability_with_restriction
+    text: Static abilities can include restrictions that apply to their source card. These restrictions are often active even while the card is inactive. See {ref:rule_ability_active_inactive_source_card}.
+  - rule: rule_static_no_lingering_effects
+    text: The effects of static abilities do not have durations and cannot directly create lingering effects (see {ref:sec_lingering_effects}).
+    examples:
+    - text: The runner controls {card:Puffer} with a hosted {card:Gebrselassie}. {card:Gebrselassie} changes the durations of abilities affecting its host's strength, so if the Runner uses {card:Puffer}'s paid ability to give it +1 strength, that increase will last for the remainder of the turn. {card:Gebrselassie} does not affect {card:Puffer}'s static ability that increases its strength for each hosted power counter, so if the Runner spends [click] to remove a power counter, then the increase in strength from {card:Puffer}'s static ability will immediately be lost.
+  - rule: rule_static_modification_keep_restrictions
+    text: Static abilities that modify a value maintain the same restrictions and specifications that were present on the original value.
+    examples:
+    - text: |-
+        {card:The Cleaners} has a static ability that gives every instance of meat damage done by the Corp +1 to the amount of the damage. Part of {card:Flare}'s effect does 2 meat damage that can't be prevented. If this effect resolves while {card:The Cleaners} is active, then all 3 points of meat damage are unpreventable.
 
 - section: sec_paid_abilities
   text: Paid Abilities
   rules:
   - rule: rule_paid_ability
     text: A {term:paid ability} is an ability players trigger at-will, during appropriate priority windows. In order to use a paid ability, the controller of that ability must pay its {term:trigger cost}. Paid abilities are always written with the trigger cost first, followed by a colon (:), followed by the remainder of the ability's text.
+
+  - subsection: rule_trigger_paid_abilities
+    text: A player can trigger paid abilities they control while they have priority in an appropriate priority window.
+    rules:
+    - rule: rule_action
+      text: If the trigger cost of a paid ability begins with a [click] symbol, the ability is an {term:action}. A player can use one action paid ability during each action window on their turn. See {ref:rule_action_window} and {ref:TODO}.
+    - rule: rule_interrupt
+      text: If the [interrupt] flag appears before a paid ability's trigger cost, that ability is an interrupt. A player can use interrupt paid abilities during appropriate interrupt windows. Each such ability can be used as many times as its effects could apply to the imminent instruction. See {ref:sec_interrupts_replacements}.
+    - rule: rule_mid_access_ability
+      text: If the "access" flag appears before a paid ability's trigger cost, that ability is a mid-access ability. The Runner can use up to 1 mid-access ability during the mid-access ability window at {ref:TODO} of accessing a card.
+    - rule: rule_interface_ability
+      text: If the "interface" flag appears before a paid ability's trigger cost, that ability is an Interface ability and is subject to the restrictions of icebreakers discussed in {ref:subsec_icebreakers}. Interface abilities do not have a special priority window type.
+    - rule: rule_other_paid_abilities
+      text: A paid ability that is not an action, interrupt, or mid-access ability can be used during a paid ability window. Each such ability can be used an unlimited number of times as long as its cost is paid each time and any restrictions specified by its effect are observed.
+
+  - subsection: rule_paid_ability_optional
+    text: Paid abilities are always optional. A paid ability and its source are considered used when the ability's trigger cost is paid.
+    rules:
+    - rule: rule_forced_mid_access_ability_optional
+      text: Mid-access abilities the Runner is forced to trigger still count as optional abilities. See also {ref:TODO}.
+      examples:
+      - text: The Corp resolves the subroutine on {card:Wendigo}, prohibiting the Runner from using their installed {card:Imp} for the remainder of the run. Later, the Runner accesses an installed {card:Mumbad Virtual Tour}. Even though {card:Mumbad Virtual Tour} forces the Runner to trash it if able, {card:Imp}'s ability is still optional for purposes of {card:Wendigo}'s prohibition. Since {card:Imp}'s ability cannot be used at all this run, {card:Mumbad Virtual Tour} cannot compel the Runner to spend one of its hosted virus counters. If the Runner can pay the cost of another mid-access ability, such as the basic trash ability, the Runner must use that ability. If not, the Runner will not be able to trash {card:Mumbad Virtual Tour} at all.
+
+  - rule: rule_paid_ability_independent
+    text: Once a player pays the trigger cost of a paid ability, that ability becomes independent of its source and {ref:rule_abilities_resolution_independent} applies to it.
+  - rule: rule_trash_ability_keeps_track_of_hosted_objects
+    text: If the trigger cost of a paid ability uninstalls or forfeits the source of that paid ability, and the effects of that paid ability refer to or act on cards or counters hosted on that source, set aside any hosted cards and counters as the trigger cost is paid. The set-aside cards or counters are still considered "hosted" for purposes of this ability, but they are not trashed due to not having a host for as long as the ability is resolving. When the ability finishes resolving, if any of those cards or counters are still set aside, they are trashed during {ref:TODO} or {ref:TODO} of the next checkpoint, as appropriate. Other abilities cannot interact with these cards or counters while they are set aside (see {ref:rule_set_aside_zone_passthrough}).
+    examples:
+    - text: The Runner has {card:Fermenter} installed with 4 hosted virus counters. They use its paid ability, which has a cost that includes trashing {card:Fermenter}. As the Runner pays this cost, they set aside the 4 counters. When the ability resolves and refers to the number of hosted virus counters, it includes the counters that were set aside, so the Runner gains 8 credits. When the ability is finished resolving, the counters are returned to the bank.
+    - text: |-
+        The Runner uses the [trash] ability on {card:Street Peddler}. They pay the trigger cost and set the 3 hosted cards aside. When the ability resolves, the Runner installs one of the set-aside cards. Since the other two cards are still set aside, the next checkpoint trashes them just as in any other case of cards that were hosted on a card that is no longer installed. No other abilities are able to tell that the cards were set aside: they are treated as having been installed or trashed from their previous location in the play area.
+    - text: This example describes a situation similar to the previous examples, but covers the sequence of steps the game carries out in a higher level of detail. The Corp has priority in a paid ability window, and chooses to trigger the [trash] ability on {card:Reconstruction Contract}. As they pay the trigger cost, moving {card:Reconstruction Contract} to Archives, they set aside the advancement counters hosted on {card:Reconstruction Contract}. Next, a checkpoint occurs following the cost having been paid. After that checkpoint and any corresponding reaction window, the [trash] ability's instruction is ready to become imminent. The Corp chooses a card they can advance to be the instruction's target, and an interrupt window opens. After the interrupt window (assuming the effects of the instruction are not prevented), the Corp moves the set-aside counters to the target card.
+
+  - subsection: sec_steps_of_using_a_paid_ability
+    text: Steps of Using a Paid Ability
+    toc:
+    steps:
+    rules:
+    - rule: step_paid_ability_announce
+      text: Announce the intent to trigger the paid ability.
+    - rule: step_paid_ability_condition
+      text: Pay the trigger cost. The ability and its source are considered used. "When used" abilities meet their trigger conditions. (The cost-paid checkpoint then occurs.)
+    - rule: step_paid_ability_target_first_instruction
+      text: Announce any targets for the ability's first instruction. That instruction then becomes imminent.
+    - rule: step_paid_ability_interrupt_window
+      text: An interrupt window occurs, during which abilities can modify, prevent, or avoid the imminent effects.
+    - rule: step_paid_ability_resolution
+      text: Resolve the instruction, applying any changes to its effects from interrupts that were resolved.
+    - rule: step_paid_ability_checkpoint
+      text: A checkpoint occurs.
+    - rule: step_paid_ability_loop
+      text: If there are more instructions to resolve, announce any targets for the next instruction. That instruction then becomes imminent. Return to (d).
+    - rule: step_paid_ability_complete
+      text: Resolution of the paid ability is complete.
 
 - section: sec_conditional_abilities
   text: Conditional Abilities

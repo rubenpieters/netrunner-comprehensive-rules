@@ -23,7 +23,7 @@ pip install -r requirements.txt
 After that you can generate the output documents via the python module.
 
 ```
-python -m rules_doc_generator
+python -X utf8 -m rules_doc_generator
 ```
 
 This will generate an output folder corresponding to each of the output formats (currently: `html` and `latex`). When making changes and pushing them to the repository, you should verify that the output can be generated and looks like you expect.

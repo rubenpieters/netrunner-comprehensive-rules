@@ -27,3 +27,5 @@ python -X utf8 -m rules_doc_generator
 ```
 
 This will generate an output folder corresponding to each of the output formats (currently: `html` and `latex`). When making changes and pushing them to the repository, you should verify that the output can be generated and looks like you expect.
+
+NOTE: The `-X utf8` flag is needed on windows to properly read the input files as UTF8.

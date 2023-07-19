@@ -175,3 +175,18 @@ The use of the [literal scalar style](https://yaml.org/spec/1.2.2/#literal-style
 text: |-
   My text goes here.
 ```
+
+## Highlighting new parts of releases
+
+Highlight a rule as new.
+
+```
+- rule:
+  new:
+```
+
+Highlight a piece of text as new.
+
+```
+text: This is old text. {n}This is new text.{\n}
+```

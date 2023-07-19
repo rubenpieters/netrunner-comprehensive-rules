@@ -131,7 +131,23 @@ class Link:
   def to_latex(self, id_map: RefDict) -> str:
     return f'\\hreful{{{self.link}}}{{{self.text}}}'
 
-TextElement = Union[Text, Ref, Term, Image, SubType, Product, Card, Link]
+@dataclass
+class NewStart:
+  def to_html(self, id_map: RefDict) -> str:
+    return ''
+
+  def to_latex(self, id_map: RefDict) -> str:
+    return '{\\color{orange}'
+
+@dataclass
+class NewEnd:
+  def to_html(self, id_map: RefDict) -> str:
+    return ''
+
+  def to_latex(self, id_map: RefDict) -> str:
+    return '}'
+
+TextElement = Union[Text, Ref, Term, Image, SubType, Product, Card, Link, NewStart, NewEnd]
 
 @dataclass
 class FormatText:

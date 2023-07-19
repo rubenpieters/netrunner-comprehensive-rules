@@ -2,7 +2,7 @@ import re
 from typing import Any, Callable, TypeVar
 import yaml
 
-from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link)
+from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link, NewStart, NewEnd)
 from rules_doc_generator.model.section import (Rule, SubRule, SubSection, Section, Chapter, Document, SectionElement, TimingStructureElement)
 
 # Parsing model elements.
@@ -36,6 +36,10 @@ def parseTextElement(str: str) -> TextElement:
     text = text_and_link[0]
     link = text_and_link[1]
     return Link(text, link)
+  elif str.startswith('\\n'):
+    return NewEnd()
+  elif str.startswith('n'):
+    return NewStart()
   else:
     return Text(str)
 
@@ -61,10 +65,10 @@ def parse_subrule(yaml_sub_rule: Any = False) -> SubRule:
 
 def parse_rule(yaml_rule: Any) -> Rule:
   id = parse_id(yaml_rule, 'rule')
-  toc = parse_boolean(yaml_rule, 'toc')
+  new = parse_boolean(yaml_rule, 'new')
   text = parse_format_text_field(yaml_rule, 'text')
   examples = parse_subelements(yaml_rule, 'examples', parse_example)
-  return Rule(id, text, toc, examples)
+  return Rule(id, new, text, examples)
 
 def parse_subsection(yaml_rule: Any) -> SubSection:
   id = parse_id(yaml_rule, 'subsection')
@@ -155,13 +159,13 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 
 def read_changelog_from_file() -> list[FormatText]:
   print(f"Parsing changelog")
-  with open(f'data/input/00_changelog.yaml', "r") as stream:
+  with open(f'data/input/00_changelog.yaml', "r", encoding="utf8") as stream:
     yaml_input = load_yaml(stream)
     return parse_changelog(yaml_input)
 
 def read_chapter_from_file(section_file: str) -> Chapter:
   print(f"Parsing {section_file}")
-  with open(f'data/input/{section_file}.yaml', "r") as stream:
+  with open(f'data/input/{section_file}.yaml', "r", encoding="utf8") as stream:
     yaml_input = load_yaml(stream)
     return parse_chapter(yaml_input)
 

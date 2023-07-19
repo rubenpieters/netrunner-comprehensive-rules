@@ -81,8 +81,8 @@ class SubRule:
 @dataclass
 class Rule:
   id: Union[str, None]
+  new: bool
   format_text: FormatText
-  toc: bool
   examples: list[Example]
 
   def to_html(self, id_map: RefDict) -> str:
@@ -93,12 +93,16 @@ class Rule:
 
   def to_latex(self, id_map: RefDict) -> str:
     result = f'% Rule {self.id}\n'
+    if self.new:
+      result += '\\color{orange}'
     result += '\\1 '
-    if self.toc:
-      result += '\\phantomsection '
-      result += '\\addtocounter{subsubsection}{1} '
-      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
-    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
+    if self.new:
+      result += '\\textbf{'
+    result += f'{self.format_text.to_latex(id_map)}'
+    if self.new:
+      result += '} \\color{black}'
+    result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'

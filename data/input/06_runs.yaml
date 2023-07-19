@@ -358,7 +358,7 @@ sections:
     rules:
     - rule: step_open_priority_windows_closed
       text: Any priority windows that were open when the run moved to this phase are completed or closed as described in {ref:TODO}.
-    - rule: step_run_ends_bad_buplicity
+    - rule: step_run_ends_bad_publicity
       text: The Runner loses any unspent bad publicity credits.
     - rule: step_run_declared_unsuccessful
       text: If the Success Phase was not reached during this run and the attacked server still exists, the run becomes unsuccessful.

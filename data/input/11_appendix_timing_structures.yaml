@@ -18,18 +18,142 @@ sections:
   - timing_structure:
     elements:
     - text: Draw Phase
+      elements:
+      - text: The Corp gains allotted clicks.
+      - text: |-
+          Paid ability window: (P) (R) (S).
+      - text: The Corp's recurring credits refill.
+      - text: The Corp's turn begins.
+      - text: The Corp draws 1 card.
     - text: Action Phase
       elements:
+      - text: |-
+          Paid ability window: (P) (R) (S).
       - text: Does the Corp have unspent clicks?
         elements:
         - text: If yes, the Corp takes an action.
+        - text: If no, go to (3).
+      - text: Return to (a).
     - text: Discard Phase
+      elements:
+      - text: The Corp discards cards.
+      - text: |-
+          Paid ability window: (P) (R).
+      - text: The Corp loses unspent [click].
+      - text: The Corp's turn ends.
+      - text: The Corp's turn is complete, and the game moves to the Runner's turn.
 - section: sec_appendix_timing_structure_runners_turn
   text: Timing Structure of The Runner's Turn ()
   toc_entry: Timing Structure of The Runner's Turn
   rules:
   - timing_structure:
     elements:
-    - text: Draw Phase
     - text: Action Phase
+      elements:
+      - text: The Runner gains allotted clicks.
+      - text: |-
+          Paid ability window: (P) (R).
+      - text: The Runner's recurring credits refill.
+      - text: The Runner's turn begins.
+      - text: |-
+          Paid ability window: (P) (R).
+      - text: Does the Runner have unspent clicks?
+        elements:
+        - text: If yes, the Runner takes an action.
+        - text: If no, go to (2).
+      - text: Return to (e).
     - text: Discard Phase
+      elements:
+      - text: The Runner discards cards.
+      - text: |-
+          Paid ability window: (P) (R).
+      - text: The Runner loses unspent [click].
+      - text: The Runner's turn ends.
+      - text: The Runner's turn is complete, and the game moves to the Corp's turn.
+- section: sec_appendix_timing_structure_of_a_run
+  text: Timing Structure of a Run ({ref:sec_steps_of_a_run})
+  toc_entry: Timing Structure of a Run
+  rules:
+  - timing_structure:
+    elements:
+    - text: Initiation Phase
+      elements:
+      - text: The Runner announces the attacked server.
+      - text: The Runner gains bad publicity credits.
+      - text: The run begins.
+      - text: Is there ice protecting server?
+        elements:
+        - text: If yes, go to (2).
+        - text: If no, go to (4).
+    - text: Approach Ice Phase
+      elements:
+      - text: The Runner approaches ice.
+      - text: |-
+          Paid ability window: (P) (R) and ice can be rezzed.
+      - text: Is the approached ice rezzed?
+        elements:
+        - text: If yes, go to (3).
+        - text: If no, go to (4).
+    - text: Encounter Ice Phase
+      elements:
+      - text: The Runner encounters ice.
+      - text: |-
+          Paid ability window: (P) and subroutines can be broken.
+      - text: Are there unbroken subroutines to resolve?
+        elements:
+        - text: If yes, the Corp resolves the next one.
+        - text: If no, go to (e).
+      - text: Return to (c).
+      - text: Go to (4).
+    - text: Movement Phase
+      elements:
+      - text: The Runner encounters ice.
+      - text: |-
+          Paid ability window: (P).
+      - text: The Runner may jack out.
+      - text: The Runner moves 1 position inward, if possible.
+      - text: |-
+          Paid ability window: (P) (R).
+      - text: Did the Runner move to a new position?
+        elements:
+        - text: If yes, go to (2).
+        - text: If no, go to (g).
+      - text: The Runner approaches the server.
+      - text: Go to (5).
+    - text: Success Phase
+      elements:
+      - text: The run is declared successful.
+      - text: The Runner breaches the attacked server.
+      - text: Go to (6).
+    - text: Run Ends Phase
+      elements:
+      - text: Close or resolve priority windows from before "end the run".
+      - text: The Runner loses unspent bad publicity credits.
+      - text: If applicable, the run is declared unsuccessful.
+      - text: The run is complete.
+- section: sec_appendix_timing_structure_of_breaching_a_server
+  text: Timing Structure of Breaching a Server ({ref:sec_breaching_steps})
+  toc_entry: Timing Structure of Breaching a Server
+  rules:
+  - timing_structure:
+    elements:
+    - text: The breach begins.
+    - text: If breaching Archives, facedown cards in Archives are turned faceup.
+    - text: If breaching HQ or R&D, determine how many accesses from Corp's hand or deck.
+    - text: Are there candidate cards remaining to access?
+      elements:
+      - text: If yes, the Runner chooses a candidate.
+      - text: If no, go to (7).
+    - text: The Runner accesses the chosen card.
+    - text: Return to (4).
+    - text: Breaching the server is complete.
+- section: sec_appendix_timing_structure_of_accessing_a_card
+  text: Timing Structure of Accessing a Card ({ref:sec_steps_accessing_card})
+  toc_entry: Timing Structure of Accessing a Card
+  rules:
+  - timing_structure:
+    elements:
+    - text: The card is accessed.
+    - text: The Runner may trash the card or use another mid-access ability.
+    - text: If the card is an agenda, the Runner steals it.
+    - text: Access is complete.

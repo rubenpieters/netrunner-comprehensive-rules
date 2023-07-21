@@ -23,7 +23,7 @@ sections:
         Before rezzing a card, the Corp must pay that card's rez cost. This includes both rezzing in a paid ability window and rezzing through a card ability. Card abilities can modify or ignore rez costs, but must state this explicitly.
     - rule: rule_rez_procedure
       text: |-
-        To resolve rezzing a card, the Corp pays its rez cost (accounting for any modifiers or additional costs), a checkpoint occurs (as required by {ref:rule_cost_paid_checkpoint}), then the Corp turns the card faceup. For purposes of meeting trigger conditions, the card is considered to be rezzed at the conclusion of this process.
+        To resolve rezzing a card, the Corp pays its rez cost (accounting for any modifiers or additional costs), a checkpoint occurs (as required by {ref:rule_checkpoint_after_paying_cost}), then the Corp turns the card faceup. For purposes of meeting trigger conditions, the card is considered to be rezzed at the conclusion of this process.
 
   - subsection: sec_derez
     text: To {term:derez} a rezzed card is to turn it facedown.

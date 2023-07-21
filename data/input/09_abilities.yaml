@@ -89,7 +89,7 @@ sections:
     - rule: rule_active_exception_conditional_move_to_inactive_zone
       text: If an active card moves to a zone where it is inactive, an ability of that card with a trigger condition that is met by this zone change remains active in the card's new location until any corresponding instances of the ability resolve. See {ref:TODO} for information about instances of conditional abilities.
       examples:
-      - text: The Runner uses {card:Singularity} to simultaneously trash a rezzed {card:Hostile Infrastructure} and 2 upgrades. Those cards are moved to Archives and become inactive, but {card:Hostile Infrastructure}'s ability remains active, and 3 instances will become pending, each doing 1 net damage when it resolves. Once all those instances are resolved, {card:Hostile Infrastructure}'s ability stops being active.
+      - text: The Runner uses {card:{card:}} to simultaneously trash a rezzed {card:Hostile Infrastructure} and 2 upgrades. Those cards are moved to Archives and become inactive, but {card:Hostile Infrastructure}'s ability remains active, and 3 instances will become pending, each doing 1 net damage when it resolves. Once all those instances are resolved, {card:Hostile Infrastructure}'s ability stops being active.
       - text: The Runner plays {card:Test Run} to install {card:Nanuq}. When their turn ends, {card:Test Run}'s delayed conditional ability adds {card:Nanuq} to the top of the Runner's stack. This meets the trigger condition of {card:Nanuq}'s first ability, which remains active until it resolves even though {card:Nanuq} itself is inactive in the stack. The ability will move {card:Nanuq} from the top of the stack to the removed-from-game zone.
     - rule: rule_active_exception_encounter_not_installed
       text: If a piece of ice is encountered while it is not installed, its subroutines are active during that encounter.
@@ -678,7 +678,7 @@ sections:
     - rule: rule_modify_value_relevant
       text: Its effects could modify a value associated with the imminent instruction's expected effects. See {ref:sec_modifiable_values} and {ref:sec_calculating_expected_effect_values}.
     - rule: rule_replacement_effect_relevant
-      text: Its effects could create a replacement effect that applies to the imminent instruction’s expected effects. See {ref:rule_replace_imminent_effects}.
+      text: Its effects could create a replacement effect that applies to the imminent instruction's expected effects. See {ref:rule_replace_imminent_effects}.
     - rule: rule_would_relevant
       text: It has a trigger condition using the word "would" that is met by the imminent instruction's expected effects.
       examples:
@@ -846,3 +846,171 @@ sections:
   text: Identifying Instructions
   snippet: |-
     To correctly resolve conditional abilities and interrupts that could meet their trigger conditions during the resolution of another ability (see {ref:rule_chain_reaction}), players need to determine where checkpoints occur during the resolution of each ability. This section aids players in making this determination. For clarifications on particular cards, refer to the Rulings section of that card's page on {link:netrunnerdb.com|https://www.netrunnerdb.com}.
+  rules:
+  - subsection: rule_instruction_pause
+    text: |-
+      An instruction normally cannot be paused once it begins to resolve. An instruction can only be paused if a checkpoint opens in the middle of its resolution, which only occurs in the following cases:
+    rules:
+    - rule: rule_cost_paid_checkpoint
+      text: Any time a cost is paid, a checkpoint must occur immediately afterward.
+    - rule: rule_checkpoint_timing_structure
+      text: When a timing structure is opened, the checkpoints in that timing structure are carried out. See {ref:rule_timing_structure} for a list of timing structures.
+    - rule: rule_draw_checkpoint
+      text: When a player draws cards, a checkpoint occurs at {ref:step_draw_checkpoint} of that procedure.
+    - rule: rule_
+      text: When an event or operation is played, a checkpoint occurs at {ref:rule_steps_playing_played_checkpoint} of that procedure.
+    - rule:
+      text: When a trace is initiated, a checkpoint occurs at {ref:step_trace_checkpoint} of that procedure.
+
+  - subsection: rule_step_in_timing_structure_is_instruction
+    text: Each step in a timing structure forms a single instruction, and is accordingly preceded by an interrupt window and followed by a checkpoint.
+    rules:
+    - rule: rule_step_sequences
+      text: Some game procedures that are not timing structures are presented as a sequence of steps. These steps do not indicate instruction boundaries, and checkpoints only occur in these procedures when explicitly called for.
+      examples:
+      - text: The steps of installing a card are not separate instructions. Installing a card usually happens in its entirety as part of a single instruction. The only checkpoint that occurs during the procedure of installing a card is at {ref:rule_steps_installing_pay_install_cost}, immediately after the install cost is paid.
+      - text: The steps of a checkpoint are not instructions. No checkpoints take place in the middle of another checkpoint.
+
+  - rule: rule_instructions_in_ability_text
+    text: Usually, each sentence in the text of an ability forms a single instruction. After each instruction, an ability pauses its resolution to allow priority windows to open and other abilities to resolve. First, a checkpoint occurs, allowing any appropriate conditional abilities to be marked as pending in a reaction window, then targets are announced for the next instruction. Finally, the next instruction becomes imminent, allowing interrupts relevant to that instruction to resolve in an interrupt window.
+
+  - subsection: rule_instruction_sentence_exceptions
+    text: |-
+      Some sentences are not instructions, some sentences encompass multiple instructions, and some instructions encompass multiple sentences. These are the cases in which sentences do not correspond one-to-one with instructions:
+    rules:
+    - rule: rule_use_restrictions
+      text: A sentence is not part of any instruction if it only provides clarification, restrictions or conditions on when or how the ability it appears in can be triggered, or otherwise does not give directions to the players or the game state that would be carried out as the ability resolves.
+      examples:
+      - text: A sentence reading "Use this ability only by spending credits from a stealth card." is not an instruction or part of any instruction. It is a restriction that applies to the entire ability.
+    - rule: rule_split_up_instruction
+      text: If a sentence directs a player to play, install, or access more than one card, each such card is handled as a separate instruction. The instruction ends and a new one begins immediately before each play, install, or access after the first.
+      examples:
+      - text: The Corp plays {card:Shipment from MirrorMorph}, which has a single sentence directing them to install up to 3 cards from HQ. This is treated as though it said, "You may install a card from HQ. You may install a card from HQ. You may install a card from HQ.", or equivalently, "You may install a card from HQ. Repeat this process 2 more times."
+    - rule: rule_choose_instruction
+      text: If a sentence directs a player to choose 1 or more targets, but does not act on that choice or describe any other effects, that sentence and the following sentence form a single instruction.
+      examples:
+      - text: |-
+          {card:Tinkering}'s play ability reads, "Choose a piece of ice. That ice gains {subtype:sentry}, {subtype:code gate}, and {subtype:barrier} until the end of the turn." The first sentence does nothing except direct the Runner to select a target, so it forms a single instruction with the second sentence. The target is chosen as the instruction becomes imminent, and the card gains the subtypes when the instruction resolves.
+    - rule: rule_search_instruction
+      text: Some older cards have search effects written in the same sentence as the effects that will be performed upon any found cards. Treat these sentences as if ending the search and performing any necessary shuffling is the end of an instruction. A checkpoint occurs while cards found by the search are in the set-aside zone, then the remainder of the sentence is treated as the next instruction. 
+      examples:
+      - text: The Runner uses {card:Djinn} to search for a program while the Corp has {card:Personality Profiles} in their score area. The Runner finds and sets aside a copy of {card:Datasucker} and shuffles the stack. This ends an instruction, and since the search has occurred, {card:Personality Profiles}'s ability meets its trigger condition. The Corp resolves the ability during a reaction window before the next instruction becomes imminent, forcing the Runner to trash a random card from their grip. Finally, the second instruction resolves and the Runner adds the set-aside {card:Datasucker} to their grip.
+    - rule: rule_look_reveal_instruction
+      text: Some older cards direct a player to look at or reveal a set of cards in the same sentence as the effects that will be performed upon those cards. Treat these sentences as if making the cards visible to the relevant player(s) is the end of an instruction. A checkpoint occurs once the cards are visible to the relevant player(s), then the remainder of the sentence is treated as the next instruction.
+      examples:
+      - text: The Corp is resolving the first subroutine on {card:Architect}, which, in one sentence, allows the Corp to look at cards in R&D and install one of them. Looking at the top 5 cards of R&D ends the ability's first instruction. Once the Corp is able to see those cards, they can choose a target for the second instruction, which will install it. Since the install is optional, the Corp can also decline to choose a target, and the second instruction will have no effect. After the second instruction resolves, the ability is complete, and the Corp's permission to look at cards in R&D ends.
+    - rule: rule_nested_cost_instruction
+      text: If an ability contains a nested cost, the choice of whether or not to pay that cost ends an instruction. If the cost is paid (or not paid) such that the corresponding effect will be carried out, that part of the ability becomes the next instruction. See also {ref:rule_nested_cost}.
+    - rule: rule_choice_instruction
+      text: If an effect directs a player to choose between a set of options that would create different effects, that choice ends an instruction. Each option begins its own instruction or set of instructions, and the one chosen will resolve next.
+      examples:
+      - text: The Runner encounters {card:Data Raven} and is forced by its first ability to resolve either "take 1 tag" or "end the run." Making this choice ends the first instruction, and the option the Runner chooses will become imminent after a checkpoint.
+
+  - rule: rule_linked_abilities_during_timing_structure
+    text: If an ability initiates a timing structure, its source may have linked abilities that apply during that timing structure. These are frequently written directly after the instruction that creates the timing structure, but they are not instructions in the same ability.
+
+- section: sec_other_rules_and_terminology
+  text: Other Rules and Terminology
+  rules:
+  - subsection: subsec_simultaneous_effects
+    toc:
+    text: Simultaneous Effects
+    rules:
+    - rule: rule_modify_value
+      text: If more than one effect attempts to modify the same value, determine its final value from its default value by first applying any effect that sets it to a specific value, then applying each effect that increases the value, and finally applying each effect that lowers the value.
+    - rule: rule_modify_subtypes
+      text: If more than one effect attempts to add or remove the same subtype from a card, count the number of times the subtype is added (including from the card's printed text) and the number of times the subtype is removed. As long as the number of times added is greater, the card has that subtype. As long as the number of times removed is greater or the numbers are equal, the card does not have that subtype.
+    - rule: rule_modify_ability_with_choice
+      text: If more than one effect gives a player a choice of how to resolve an ability or game rule such that both players are instructed to make a choice that can only be made once, the active player makes that choice. The effects that granted the players the choice otherwise resolve as normal.
+      examples:
+      - text: If {card:Chronos Protocol} and {card:Titanium Ribs} are both active, both players are instructed to choose the card trashed by the first net damage each turn. Since this is impossible, only the active player chooses that card. Since {card:Chronos Protocol} also instructs the Corp to look at the Runner's grip and this is not prevented or contradicted by any other ability, this part of the effect happens on either player's turn.
+    - rule: rule_dependent_effects
+      text: |-
+        If a static or lingering effect changes whether a second effect is active, what objects it applies to, or what it does to those objects, the second effect {term: depends on} the first effect. To determine the characteristics of each object in a game state where dependencies exist, use the following process: begin with each object's printed characteristics. Then, apply effects that modify objects to the game state in the order specified by {ref:rule_independent_effects}. Do not apply an effect if it originates from a static ability that is no longer present or no longer active due to a previously-applied effect. When all active effects are applied, this process is complete and each object has its correct characteristics.
+    - rule: rule_independent_effects
+      text: When applying effects as indicated by {ref:rule_dependent_effects}, an effect that is waiting to be applied is {term:independent} if it does not depend on any other effects waiting to be applied. Always choose an independent effect as the next effect to apply, if possible. If there are multiple independent effects at once, those effects can be applied in any order relative to each other. (The order chosen should have no impact on the ultimate result.) If there are no independent effects (because each remaining effect depends on another, forming a "loop"), check the source of each of those effects, and treat effects from hosted objects as if they did not depend on effects from the objects they are hosted on.
+      examples:
+      - text: |-
+          {card:Mother Goddess}, {card:Ansel 1.0}, and {card:Warden Fatuma} are rezzed, and {card:Hush} is hosted on {card:Mother Goddess}. {card:Mother Goddess}, {card:Warden Fatuma}, and {card:Hush} all produce effects that could modify the characteristics of {card:Mother Goddess}, so in order to determine {card:Mother Goddess}'s true characteristics, we must examine how those effects depend on each other. {card:Mother Goddess}'s effect grants it the subtypes of {card:Ansel 1.0}, including the {subtype:bioroid} subtype, which affects whether {card:Warden Fatuma}'s ability applies to {card:Mother Goddess}, so {card:Warden Fatuma}'s effect depends on {card:Mother Goddess}'s effect. {card:Hush}'s effect removes {card:Mother Goddess}'s ability, so {card:Mother Goddess}'s effect depends on {card:Hush}'s effect. No other effects change how {card:Hush}'s effect behaves. Since {card:Hush}'s effect is independent, it must be applied first. When it is applied, {card:Mother Goddess}'s ability no longer exists, so {card:Warden Fatuma}'s effect is now independent. It is applied next and grants a subroutine to {card:Ansel 1.0}, but not to {card:Mother Goddess}, which does not have the {subtype:bioroid} subtype.
+      - text: |-
+          {card:Hush} is hosted on {card:Magnet}. {card:Hush}'s ability creates an effect that removes abilities from {card:Magnet}, and {card:Magnet}'s ability creates an effect that removes an ability from {card:Hush}. The dependencies of these effects form a loop, so the hosting relationship of their source objects is considered, and the effect from {card:Hush}'s ability ignores its dependence on the effect from {card:Magnet}'s ability. {card:Hush}'s effect is therefore treated as independent and applied first. {card:Magnet}'s ability and the resulting effect no longer exist, so they are never applied.
+
+  - subsection: subsec_quantities_and_sets
+    toc:
+    text: Quantities and Sets
+    rules:
+    - rule: rule_act_on_multiple_cards
+      text: If an effect acts on a set of cards for a single purpose, then the effect acts on all of those cards together simultaneously rather than one at a time.
+      examples:
+      - text: The Runner uses {card:Singularity} to simultaneously trash a rezzed {card:Warroid Tracker} and a rezzed {card:Hostile Infrastructure}. {card:Hostile Infrastructure} has a trigger condition of "Whenever the Runner trashes a Corp card", so it sees both trashed cards and becomes pending twice. By contrast, {card:Warroid Tracker} has a trigger condition of "Whenever the Runner trashes at least 1 card…", so it sees only a single event that trashed multiple cards. {card:Warroid Tracker}'s ability becomes pending only once.
+    - rule: rule_calculated_quantity
+      text: Some abilities calculate a quantity using phrases like "for each", "for every", or "plus". When a quantity is calculated this way for any of the purposes listed in {ref:rule_aggregated_instructions}, the resulting effect is aggregated to the value that was calculated. Only a single instance of that effect takes place. If the calculated value is less than or equal to 0, the effect does not take place at all.
+    - rule: rule_aggregated_instructions
+      text: |-
+        The following effects are aggregated when performed in a single instruction, as described in {ref:rule_calculated_quantity}: gaining, losing, or spending a number of credits; gaining, losing, or spending a number of clicks; taking, removing, or preventing a number of tags; taking, removing, or preventing a number of bad publicity; looking at or revealing a number of cards from a specified location; drawing a number of cards; trashing a number of cards from specified locations (including by damage); and shuffling a number of cards from a player's discard pile into their deck.
+      examples:
+      - text: The Runner encounters a {card:Cortex Lock} and does not break the subroutine. If the Runner has 2 unused MU, both of the net damage can be prevented with {card:Biometric Spoofing} because {card:Cortex Lock} does a single instance of 2 net damage, not 2 instances of 1 net damage each. If the Runner has no unused MU, then no net damage is dealt because there is no MU to count.
+      - text: The Runner controls {card:Obelus} and {card:The Class Act}, and they play {card:Legwork} to run HQ and access 3 cards. When the run ends, the ability on {card:Obelus} becomes pending. The expected effect of its instruction is 1 instance of the Runner drawing cards, where the number of cards they will draw is 3. When the Runner resolves {card:The Class Act}'s interrupt ability, they will look at the top 4 cards of their stack and add 1 to the bottom.
+    - rule: rule_vacuous_truth
+      text: If a condition refers to "all" items in a set and that set contains zero items, the condition is automatically satisfied as soon as it could be satisfied for 1 or more of that item.
+      examples:
+      - text: The Runner plays {card:Forked}, initiating a run on a server. The first piece of ice that the Runner encounters is {card:Troll}. If {card:Troll}'s "when encountered" ability does not end the run, the Runner is automatically considered to have broken all of the zero subroutines on {card:Troll} as soon as {ref:step_encounter_paw} of the encounter begins, and {card:Troll} is trashed by Forked.
+    - rule: rule_values_defined_by_x
+      text: Some values are defined with a variable "X". If the ability defining X is inactive or if the value of X cannot be evaluated, treat X as equal to 0.
+      examples:
+      - text: The Corp uses the ability granted by {card:ZATO City Grid} to trash {card:Surveyor} and resolve one of its subroutines. Since {card:Surveyor} is in Archives when the trace on the subroutine initiates, the ability defining X is inactive, so the base trace strength is 0.
+      - text: |-
+          {card:Hush} is hosted on {card:Surveyor}. The ability defining X is lost, so {card:Surveyor}'s strength is 0.
+
+  - subsection: subsec_must
+    toc:
+    text: "Must"
+    rules:
+    - rule: rule_must_with_choice
+      text: If a card ability states that a player "must" do something without stipulating how that player must do so, then that player is forced to make any decisions necessary to satisfy the requirement, even if it requires the use of other card abilities.
+      examples:
+      - text: The Runner has an {card:Imp} and a {card:Scrubber} installed and accesses {card:Mumbad Virtual Tour}. If the Runner only has 4[c], they must still choose to either spend a counter from {card:Imp} to trash {card:Mumbad Virtual Tour} if they are able to do so or spend recurring credits on {card:Scrubber} to help pay the trash cost of the {card:Mumbad Virtual Tour}.
+    - rule: rule_must_without_choice
+      text: If a card ability states that a player "must" do something and specifies the means by which that player must do so, then that player is not required to carry out the effect except by the means specified, even if it would be possible through the use of other card abilities.
+      examples:
+      - text: The Runner has {card:Imp} and {card:Neutralize All Threats} installed when they access a card with a trash cost greater than the number of credits they have available to spend. Because they are unable to trash the card by paying its trash cost, they are not required to spend a counter from {card:Imp} in order to trash it.
+    - rule: rule_mandatory_choice
+      text: If the "must" ability presents a player with a choice between two or more effects, that player must choose an effect that can be fully resolved. If none of the choices can be fully resolved, then the "must" ability does nothing.
+      examples:
+      - text: If the first subroutine on {card:Fairchild 2.0} resolves while the Runner has no installed cards but 3[c], then the Runner must choose to pay 2[c]. When the second subroutine on {card:Fairchild 2.0} resolves, the Runner can neither pay 2[c] nor trash an installed card, so nothing happens.
+    - rule: rule_mandatory_choice_effects_can_be_modified
+      text: Making a choice between effects is always a separate instruction from resolving the chosen effect (see {ref:rule_choice_instruction}). The previous rule only requires the player to choose an effect that is possible to resolve; it does not require the chosen effect to actually resolve as expected. Once an effect has been chosen, the player can apply interrupts to modify, prevent, or replace that effect as normal.
+      examples:
+      - text: If the Runner encounters {card:Data Raven}, they must choose to either take a tag or end the run. The Runner can choose to take the tag, then avoid the tag with {card:Decoy}. This does not cause the run to end, as the decision to take the tag has already been made.
+    - rule: rule_must_cannot_force_additional_cost
+      text: A singular "must" ability cannot force a player to pay an additional cost they wish to decline, but a player cannot avoid choosing a fully resolvable effect from among multiple options in a "must" ability by declining to pay the additional cost for one of those choices.
+      examples:
+      - text: If {card:Service Outage} is active and the Runner has {card:Always Be Running} installed, the Runner can decline to pay the additional 1[c] to make a run with their first [click], thus satisfying the "must" of {card:Always Be Running} and allowing them to spend their first click on a different action. However, if a Runner plays a {card:Forged Activation Orders} on an unrezzed Archer, the Corporation cannot choose to rez the Archer but decline to forfeit an agenda; the Corp must either pay 4[c] and forfeit an agenda to rez the Archer or trash the Archer.
+
+  - subsection: subsec_repeat_this_process
+    toc:
+    text: "Repeat this process"
+    rules:
+    - rule: rule_repeat_this_process
+      text: If an ability instructs a player to "repeat this process" without specifying how many times to do so, then that player resolves the ability again, including the instruction to "repeat this process" if it is still applicable.
+    - rule: rule_repeat_this_process_x_times
+      text: If an ability instructs a player to "repeat this process" a specified number of times, then that player resolves the entire ability, except for the repetition instruction, that many times in a row. The number of repetitions is determined after the first full resolution but before the first repetition, and once the number of repetitions is determined it cannot be changed.
+    - rule: rule_checkpoint_after_repetition
+      text: Regardless of the number of times an ability is repeated, a checkpoint occurs after each full resolution of the ability's instructions, before another repetition begins.
+    - rule: rule_repetition_resolve_independently
+      text: Each repetition of the ability is resolved independently of the others. If the ability provides the player with any choices, they may choose differently each time.
+
+  - subsection: subsec_persistent
+    toc:
+    text: "Persistent"
+    rules:
+    - rule: rule_persistent
+      text: A {term:persistent} ability is an ability on a Corp card marked with the "persistent" ability flag before its other text. When the Runner trashes a rezzed card they are accessing, its persistent abilities {term:persist} through a lingering effect that is created as the source card is trashed. See also {ref:sec_lingering_effects}.
+    - rule: rule_persistent_continuous
+      text: A persistent ability begins to persist simultaneously with the trashing of its source card. The ability never becomes inactive, nor is it considered a new ability.
+    - rule: rule_persistent_expiration
+      text: An ability only persists until just after the end of the run during which it began to persist. When the reaction window immediately following {ref:step_run_complete} of that run closes, the lingering effect allowing the ability to persist expires, and the ability ceases to persist.
+    - rule: rule_persistent_applicability
+      text: A persisting ability is only applicable to the run during which it began to persist. After the checkpoint following {ref:step_run_complete} of the run, no more instances of the ability can be created. Even if another run initiates during the reaction window following that checkpoint, new instances of any abilities persisting from the first run cannot become pending during the second run, even if their trigger conditions would normally be met during that second run.
+      examples:
+      - text: The Runner trashes {card:AMAZE Amusements}, causing its "Whenever a run on this server ends" ability to persist. When the run ends, the Runner uses {card:Doppelgänger} to make another run while the persisting ability is still pending. The ability remains active so that its existing pending instance can resolve, but another instance cannot be created even if the Runner steals an agenda during the second run.

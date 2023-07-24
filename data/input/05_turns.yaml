@@ -5,19 +5,140 @@ sections:
   text: General
   rules:
   - rule: rule_turn
-    text: |-
-      A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
-
+    text: A {term:turn} is a duration of time during which a player may take actions and is the first to receive priority to act during priority windows.
+  - rule: rule_corp_turn_phases
+    text: The Corp’s turn consists of three phases. During the {term: draw phase}, the Corp draws the top card of R&D into HQ; during the {term: action phase}, the Corp spends [click]s to perform actions; during the {term: discard phase}, the Corp discards until the number of cards in HQ does not exceed their maximum hand size. Once the Corp’s turn ends, the Runner’s turn begins.
+  - rule: rule_runner_turn_phases
+    text: The Runner’s turn consists of two phases. During the {term: action phase}, the Runner spends [click]s to perform actions; during the {term: discard phase}, the Runner discards until the number of cards in their grip does not exceed their maximum hand size. Once the Runner’s turn ends, the Corp’s turn begins.
+  - subsection: rule_begin_end_turn_step
+    text: The beginning and end of each player’s turn are formalized as particular steps of the turn timing structures.
+    - rule: rule_turn_begin_trigger_conditions
+      text: Trigger conditions related to a turn beginning are not met as the turn timing structure opens. They are met at the timing step that indicates the formal beginning of the turn.
+    - rule: rule_turn_end_trigger_conditions
+      text: Trigger conditions related to a turn or discard phase ending are met at the timing step that indicates the formal end of the turn. They are not met when the turn timing structure later closes. The end of the turn and the end of the discard phase are the same.
+    - rule: rule_before_turn_begins
+      text: Some effects can occur before the “turn begins” step or after the “turn ends” step of a turn. The player whose turn timing structure is in progress is still the active player, and effects that apply during their turn are still applicable, even though their turn has not yet formally begun or has already formally ended.
+    - rule: rule_never_between_turns
+      text: Once the game begins, it is always one or the other player’s turn. There is no time “between turns”.
+      
 - section: sec_actions
   text: Actions
-
-- section: sec_steps_corps_turn
+  rules: 
+  - subsection: rule_action_definition
+    text: An {term: action} is any paid ability where the cost begins with a [click] symbol.
+    rules: 
+    - rule: rule_costs_with_click
+      text: Other costs can contain [click] symbols without denoting an action.
+    snippet: Example: The ability “[click]: Gain 1[c] and draw 1 card.” on {card:Professional Contacts} is an action. The ability “Lose [click]: Break 1 subroutine on this ice. Only the Runner can use this ability.” on {card:Eli 1.0} is not an action and is used during a paid ability window.
+  - subsection: rule_initiate_action
+    text: A player initiates an action by paying its cost in [click], as well as any other costs associated with that action, during their action window.
+    rules: 
+    - rule: rule_action_completion
+      text: Once an action is initiated, it must be completed before the game can advance to the next step or open another action window. If the effects of an action initiate a timing structure, such as a run, players may use paid abilities, rez cards, and score agendas as dictated by the priority windows of that nested timing structure, but otherwise players cannot perform any of those voluntary effects while the action is resolving. See Section 9.2 for more details about priority.
+    - rule: rule_action_timing_structure_completion
+      text: If a timing structure is initiated during the resolution of an action, that action is not complete until the new timing structure is complete and any further effects of the initiated action following the completion of the new timing structure are resolved.
+      snippet: Example: The Runner takes the action “play an event”, playing {card:Stimhack}. The action is not complete until the run initiated by {card:Stimhack} ends, the Runner suffers core damage, and {card:Stimhack} is trashed following its resolution.
+    - rule: rule_action_conditional_ability_trigger
+    text: A conditional ability that meets its trigger condition due to a player taking an action resolves after the action’s trigger cost is paid, before the effects of the action itself. See rule 9.1.2a.
+  - rule: rule_basic_actions
+    text: Each player has several basic actions they can always perform. The Corp’s basic actions are listed in section 5.2.7, and the Runner’s basic actions are listed in section 5.2.8.
+  - rule: rule_action_NCIGS
+    text: A player can only take an action if its effect has the potential to change the game state. See rule 1.2.5.
+  - rule: rule_actions_outside_action_phase
+    text: A player can only take actions during the action phase of their turn. If an effect directs a player to take an action outside of that player’s action phase, instead that player does nothing.
+  - subsection: rule_same_different_actions
+    text: Some cards refer to players taking “the same action” or “different actions”.
+    rules: 
+    - rule: rule_same_actions
+      text: Actions a player performs are the same if they are all the same basic action or if all of those actions were initiated by the same ability from the same card.
+    - rule: rule_defferent_actions
+      text: Actions a player performs are different if each of them is initiated from a different basic action or card ability. Instances of equivalent abilities on different cards are still different actions.
+    snippet: Example: The Corp, playing {card: MirrorMorph: Endless Iteration}, plays {card: Hedge Fund} as the first action of their turn, then plays {card: Lateral Growth}. Even though two different cards were played, both times the Corp used the basic action to “Play 1 operation from HQ”. Since their first two actions were the same, the Corp will not be able to trigger the ability on MirrorMorph this turn.
+  - subsection: rule_corp_actions
+    text: Corp Actions
+    rules: 
+    - rule: rule_corp_basic_actions
+      text: The following {term: basic actions} are always available to the Corp during their action phase, in addition to any actions provided by card abilities.
+    - rule: rule_corp_basic_action_credit
+      text: "[click]: Gain 1[c]."
+    - rule: rule_corp_basic_action_card
+      text: "[click]: Draw 1 card."
+    - rule: rule_corp_basic_action_install
+      text: “[click]: Install 1 agenda, asset, upgrade, or piece of ice from HQ.” See section 8.5.
+    - rule: rule_corp_basic_action_operation
+      text: “[click]: Play 1 operation from HQ.” See section 8.6.
+    - rule: corp_basic_action_advance
+      text: “[click], 1[c]: Advance 1 installed card.” See section 1.18.
+    - rule: corp_basic_action_trash_resource
+      text: “[click], 2[c]: Trash 1 resource. Take this action only if the Runner is tagged.” See section 10.5.
+    - rule: corp_basic_action_purge_virus_counters
+      text: “[click][click][click]: Purge virus counters.” See section 10.1.2.
+  - subsection: rule_runner_actions
+    text: Runner Actions
+    rules: 
+    - rule: rule_runner_basic_actions
+      text: The following {term: basic actions} are always available to the Runner during their action phase, in addition to any actions provided by card abilities.
+    - rule: runner_basic_action_credit
+      text: “[click]: Gain 1[c].”
+    - rule: runner_basic_action_card
+      text: “[click]: Draw 1 card.”
+    - rule: runner_basic_action_install
+      text: “[click]: Install 1 program, resource, or piece of hardware from the grip.” See section 8.5.
+    - rule: runner_basic_action_event
+      text: “[click]: Play 1 event from the grip.” See section 8.6.
+    - rule: runner_basic_action_run
+      text: “[click]: Run any server.” See section 6.
+    - rule: runner_basic_action_remove_tag
+      text: “[click], 2[c]: Remove 1 tag.” See section 10.5.
+- section: sec_draw_phase
+  text: Draw Phase
+  rules: 
+  - rule: rule_draw_phase_definition
+    text: 5.3.1. The draw phase is the first phase of the Corp’s turn. It includes the formal beginning of the Corp’s turn and the Corp’s mandatory draw.
+  - rule: rule_mandatory_draw
+    text: The {term: mandatory draw} is a card draw performed by the Corp. It is not an action and does not cost [click].
+  - rule: rule_no_runner_draw_phase
+    text: The Runner’s turn does not have a draw phase.
+- section: sec_action_phase
+  text: Action Phase
+  rules: 
+  - rule: rule_action_phase_definition
+    text: The action phase is the first phase of the Runner’s turn and the second phase of the Corp’s turn. It is the only timing structure in which players can take actions, as discussed in section 5.2.
+  - rule: rule_action_phase_duration
+    text: During a player’s action phase, they must continue to take actions until they have no more clicks or the phase is ended directly by a card ability. The player may take actions in any combination and order as long as they pay the appropriate costs. Once they have no remaining clicks, the action phase ends.
+  - subsection: rule_forced_action_phase_end
+    text: A player’s action phase can be forced to end by certain card abilities (e.g. via the ability on a {term: terminal} operation or event). When a player’s action phase is forced to end, the following occurs:
+    rules: 
+    - rule: rule_terminal_step_ends
+      text: The current step of the action phase ends, and all remaining steps are skipped.
+    - rule: rule_terminal_priority_windows_close
+      text: Any currently open priority windows close, their associated abilities lose their pending status, and the player with priority loses priority.
+    - rule: rule_terminal_completion
+      text: Any currently resolving actions or abilities cease resolving and are considered complete.
+    - rule: rule_terminal_checkpoint
+      text: A checkpoint occurs, following which the game proceeds to the active player’s discard phase.
+- section: sec_discard_phase
+  text: Discard Phase
+  rules: 
+  - rule: rule_discard_phase_definition
+    text: The discard phase is the last phase of each player’s turn. It requires the active player to discard cards until their maximum hand size is satisfied and includes the formal end of that player’s turn.
+  - subsection: rule_discard_phase_discarding
+    text: {term: discarding} is the act by which a player moves a card to their discard pile during their discard phase if they have exceeded their maximum hand size.
+    rules: 
+    - rule: rule_discarding_facedown_status
+      text: Cards discarded from HQ are always sent to Archives facedown, regardless of whether they have been previously accessed by the Runner.
+    - rule: rule_discarding_trashed
+      text: A discarded card is not considered to have been trashed, and vice versa.
+  - subsection: rule_max_hand_size
+    text: A player’s {term: maximum hand size} is the maximum number of cards that player can keep in their hand during their discard phase.
+    rules: 
+    - rule: rule_max_hand_size_default
+      text: Players begin the game with a maximum hand size of five cards.
+    - rule: rule_max_hand_size_core_damage
+      text: Each point of core damage the Runner suffers permanently reduces their maximum hand size by 1 card. See section 10.4. Other abilities can modify a player’s maximum hand size directly.
+  - rule: rule_skip_discard_step
+    text: If an effect instructs a player to “skip your discard step”, that player does not resolve the appropriate step of their turn (step 5.6.3a for the Corp, and step 5.7.2a for the Runner). They will not check their hand size or discard cards.
+- section: sec_steps_corp_turn
   text: Steps of the Corp's Turn
-  rules:
-  - subsection: rule_sec_corp_draw_phase
-    steps:
-    text: |-
-      During the draw phase, the following steps occur in order:
-    rules:
-    - rule: step_corp_allotted_clicks
-      text: The Corp gains their allotted clicks (default [click][click][click]).
+  rules: 
+  - subsection: 

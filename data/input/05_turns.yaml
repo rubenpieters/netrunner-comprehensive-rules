@@ -72,7 +72,7 @@ sections:
     - rule: rule_corp_basic_action_credit
       text: |-
         "[click]: Gain 1[c]."
-    - rule: rule_corp_basic_action_card
+    - rule: rule_corp_basic_action_draw
       text: |-
         "[click]: Draw 1 card."
     - rule: rule_corp_basic_action_install

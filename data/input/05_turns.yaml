@@ -26,11 +26,11 @@ sections:
       
 - section: sec_actions
   text: Actions
-  rules: 
+  rules:
   - subsection: rule_action_definition
     text: |-
       An {term:action} is any paid ability where the cost begins with a [click] symbol.
-    rules: 
+    rules:
     - rule: rule_costs_with_click
       text: Other costs can contain [click] symbols without denoting an action.
     examples: 
@@ -38,7 +38,7 @@ sections:
         The ability "[click]: Gain 1[c] and draw 1 card." on {card:Professional Contacts} is an action. The ability "Lose [click]: Break 1 subroutine on this ice. Only the Runner can use this ability." on {card:Eli 1.0} is not an action and is used during a paid ability window.
   - subsection: rule_initiate_action
     text: A player initiates an action by paying its cost in [click], as well as any other costs associated with that action, during their action window.
-    rules: 
+    rules:
     - rule: rule_action_completion
       text: Once an action is initiated, it must be completed before the game can advance to the next step or open another action window. If the effects of an action initiate a timing structure, such as a run, players may use paid abilities, rez cards, and score agendas as dictated by the priority windows of that nested timing structure, but otherwise players cannot perform any of those voluntary effects while the action is resolving. See Section 9.2 for more details about priority.
     - rule: rule_action_timing_structure_completion
@@ -55,7 +55,7 @@ sections:
     text: A player can only take actions during the action phase of their turn. If an effect directs a player to take an action outside of that player's action phase, instead that player does nothing.
   - subsection: rule_same_different_actions
     text: Some cards refer to players taking "the same action" or "different actions".
-    rules: 
+    rules:
     - rule: rule_same_actions
       text: Actions a player performs are the same if they are all the same basic action or if all of those actions were initiated by the same ability from the same card.
     - rule: rule_defferent_actions
@@ -65,7 +65,7 @@ sections:
         The Corp, playing {card:MirrorMorph: Endless Iteration}, plays {card: Hedge Fund} as the first action of their turn, then plays {card:Lateral Growth}. Even though two different cards were played, both times the Corp used the basic action to "Play 1 operation from HQ". Since their first two actions were the same, the Corp will not be able to trigger the ability on MirrorMorph this turn.
   - subsection: rule_corp_actions
     text: Corp Actions
-    rules: 
+    rules:
     - rule: rule_corp_basic_actions
       text: |-
         The following {term:basic actions} are always available to the Corp during their action phase, in addition to any actions provided by card abilities.
@@ -92,7 +92,7 @@ sections:
         "[click][click][click]: Purge virus counters." See section 10.1.2.
   - subsection: rule_runner_actions
     text: Runner Actions
-    rules: 
+    rules:
     - rule: rule_runner_basic_actions
       text: |-
         The following {term: basic actions} are always available to the Runner during their action phase, in addition to any actions provided by card abilities.
@@ -116,7 +116,7 @@ sections:
         "[click], 2[c]: Remove 1 tag." See section 10.5.
 - section: sec_draw_phase
   text: Draw Phase
-  rules: 
+  rules:
   - rule: rule_draw_phase_definition
     text: 5.3.1. The draw phase is the first phase of the Corp's turn. It includes the formal beginning of the Corp's turn and the Corp's mandatory draw.
   - rule: rule_mandatory_draw
@@ -126,7 +126,7 @@ sections:
     text: The Runner's turn does not have a draw phase.
 - section: sec_action_phase
   text: Action Phase
-  rules: 
+  rules:
   - rule: rule_action_phase_definition
     text: The action phase is the first phase of the Runner's turn and the second phase of the Corp's turn. It is the only timing structure in which players can take actions, as discussed in section 5.2.
   - rule: rule_action_phase_duration
@@ -134,7 +134,7 @@ sections:
   - subsection: rule_forced_action_phase_end
     text: |-
       A player's action phase can be forced to end by certain card abilities (e.g. via the ability on a {term: terminal} operation or event). When a player's action phase is forced to end, the following occurs:
-    rules: 
+    rules:
     - rule: rule_terminal_step_ends
       text: The current step of the action phase ends, and all remaining steps are skipped.
     - rule: rule_terminal_priority_windows_close
@@ -145,13 +145,13 @@ sections:
       text: A checkpoint occurs, following which the game proceeds to the active player's discard phase.
 - section: sec_discard_phase
   text: Discard Phase
-  rules: 
+  rules:
   - rule: rule_discard_phase_definition
     text: The discard phase is the last phase of each player's turn. It requires the active player to discard cards until their maximum hand size is satisfied and includes the formal end of that player's turn.
   - subsection: rule_discard_phase_discarding
     text: |-
       {term: discarding} is the act by which a player moves a card to their discard pile during their discard phase if they have exceeded their maximum hand size.
-    rules: 
+    rules:
     - rule: rule_discarding_facedown_status
       text: Cards discarded from HQ are always sent to Archives facedown, regardless of whether they have been previously accessed by the Runner.
     - rule: rule_discarding_trashed
@@ -159,16 +159,17 @@ sections:
   - subsection: rule_max_hand_size
     text: |-
         A player's {term:maximum hand size} is the maximum number of cards that player can keep in their hand during their discard phase.
-    rules: 
+    rules:
     - rule: rule_max_hand_size_default
       text: Players begin the game with a maximum hand size of five cards.
     - rule: rule_max_hand_size_core_damage
       text: Each point of core damage the Runner suffers permanently reduces their maximum hand size by 1 card. See section 10.4. Other abilities can modify a player's maximum hand size directly.
   - rule: rule_skip_discard_step
     text: If an effect instructs a player to "skip your discard step", that player does not resolve the appropriate step of their turn (step 5.6.3a for the Corp, and step 5.7.2a for the Runner). They will not check their hand size or discard cards.
+
 - section: sec_steps_corp_turn
   text: Steps of the Corp's Turn
-  rules: 
+  rules:
   - subsection: subsec_corp_draw_phase
     steps:
     text: |-
@@ -186,3 +187,71 @@ sections:
       text: The Corp performs their mandatory draw.
     - rule: step_corp_turn_draw_phase_complete
       text: The Corp's draw phase is complete. Play proceeds to the Corp's action phase.
+  - subsection: subsec_corp_action_phase
+    steps:
+    text: |-
+      During the draw phase, the following steps occur in order:
+    rules:
+    - rule: step_corp_turn_action_phase_paw
+      text: A paid ability window occurs, in which players may use paid abilities, the Corp may rez non-ice cards, and the Corp may score agendas. (P) (R) (S)
+    - rule: step_corp_turn_action_phase_loop
+      text: If the Corp has any unspent [click], the Corp takes an action. Otherwise, skip to (d).
+    - rule: step_corp_turn_action_phase_loop
+      text: Return to (a).
+    - rule: step_corp_turn_action_phase_loop
+      text: The Corp's action phase is complete. Play proceeds to the Corp's discard phase.
+  - subsection: subsec_corp_discard_phase
+    steps:
+    text: |-
+      During the Corp's discard phase, the following steps occur in order:
+    rules:
+    - rule: step_corp_turn_discard
+      text: The Corp discards one card at a time from HQ until the number of cards in HQ is less than or equal to the Corp's maximum hand size.
+    - rule: step_corp_turn_discard_phase_paw
+      text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
+    - rule: step_corp_turn_lose_unspent_clicks
+      text: If the Corp has any unspent [click], the Corp loses those [click].
+    - rule: step_corp_turn_formal_end
+      text: The Corp's turn formally ends. Conditions related to the turn or discard phase ending are met.
+    - rule: step_corp_turn_complete
+      text: The Corp's discard phase and turn are complete. Play proceeds to the Runner's turn.
+
+- section: sec_steps_runner_turn
+  text: Steps of the Runner's Turn
+  rules:
+  - subsection: subsec_runner_action_phase
+    steps:
+    text: |-
+      During the Runner's action phase, the following steps occur in order:
+    rules:
+    - rule: step_runner_turn_allotted_clicks
+      text: The Runner gains allotted clicks (default [click][click][click][click]).
+    - rule: step_runner_turn_action_phase_paw
+      text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
+    - rule: step_runner_turn_recurring_credits_refill
+      text: The Runner's recurring credits ([recurring]) refill.
+    - rule: step_runner_turn_recurring_formal_begin
+      text: The Runner's turn formally begins. Conditions related to the turn beginning are met.
+    - rule: step_runner_turn_loop_paw
+      text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
+    - rule: step_runner_turn_action
+      text: If the Runner has any unspent [click], the Runner takes an action. Otherwise, skip to (h).
+    - rule: step_runner_turn_action_loop
+      text: Return to (e).
+    - rule: step_runner_turn_action_phase_complete
+      text: The Runner's action phase is complete. Play proceeds to the Runner's discard phase.
+  - subsection: subsec_runner_discard_phase
+    steps:
+    text: |-
+      During the Runner's discard phase, the following steps occur in order:
+    rules:
+    - rule: step_runner_turn_discard
+      text: The Runner discards one card at a time from the grip until the number of cards in the grip is less than or equal to the Runner's maximum hand size.
+    - rule: step_runner_turn_discard_phase_paw
+      text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
+    - rule: step_runner_turn_lose_unspent_clicks
+      text: If the Runner has any unspent [click], the Runner loses those [click].
+    - rule: step_runner_turn_formal_end
+      text: The Runner's turn formally ends. Conditions related to the turn or discard phase ending are met.
+    - rule: step_runner_turn_complete
+      text: The Runner's discard phase and turn are complete. Play proceeds to the Corp's turn.

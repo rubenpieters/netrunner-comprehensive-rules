@@ -194,11 +194,11 @@ sections:
     rules:
     - rule: step_corp_turn_action_phase_paw
       text: A paid ability window occurs, in which players may use paid abilities, the Corp may rez non-ice cards, and the Corp may score agendas. (P) (R) (S)
-    - rule: step_corp_turn_action_phase_loop
+    - rule: step_corp_turn_action
       text: If the Corp has any unspent [click], the Corp takes an action. Otherwise, skip to (d).
     - rule: step_corp_turn_action_phase_loop
       text: Return to (a).
-    - rule: step_corp_turn_action_phase_loop
+    - rule: step_corp_turn_action_phase_complete
       text: The Corp's action phase is complete. Play proceeds to the Corp's discard phase.
   - subsection: subsec_corp_discard_phase
     steps:

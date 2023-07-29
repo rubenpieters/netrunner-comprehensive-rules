@@ -12,7 +12,7 @@ sections:
     text: |-
       These guides are intended to serve as shorthand references only; for comprehensive rules relating to each timing structure, see the accompanying rules sections.
 - section: sec_appendix_timing_structure_corps_turn
-  text: Timing Structure of The Corp's Turn ({ref:sec_steps_corps_turn})
+  text: Timing Structure of The Corp's Turn ({ref:sec_steps_corp_turn})
   toc_entry: Timing Structure of The Corp's Turn
   rules:
   - timing_structure:
@@ -43,7 +43,7 @@ sections:
       - text: The Corp's turn ends.
       - text: The Corp's turn is complete, and the game moves to the Runner's turn.
 - section: sec_appendix_timing_structure_runners_turn
-  text: Timing Structure of The Runner's Turn ()
+  text: Timing Structure of The Runner's Turn ({ref:sec_steps_runner_turn})
   toc_entry: Timing Structure of The Runner's Turn
   rules:
   - timing_structure:

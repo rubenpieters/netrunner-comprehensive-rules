@@ -13,7 +13,7 @@ sections:
     rules:
     - rule: rule_rez_in_paw
       text: |-
-        Some paid ability windows allow the Corp to rez assets and upgrades. See {ref:sec_paid_ability_windows}. The paid ability window at {ref:step_approach_paw} of a run allows the Corp to rez ice.
+        Some paid ability windows allow the Corp to rez assets and upgrades. See {ref:rule_paid_ability_window}. The paid ability window at {ref:step_approach_paw} of a run allows the Corp to rez ice.
     - rule: rule_rez_by_ability
       text: Card abilities can direct or allow the Corp to rez cards at other times.
     - rule: rule_cannot_rez_agendas
@@ -84,7 +84,7 @@ sections:
       
   - rule: movement_draw
     text: |-
-      To {term:draw} a given number of cards is to move that many cards from the top of a player's deck to their hand. The full rules for drawing cards are detailed in {ref:sec_draw}.
+      To {term:draw} a given number of cards is to move that many cards from the top of a player's deck to their hand. The full rules for drawing cards are detailed in {ref:sec_drawing_cards}.
 
   - rule: movement_forfeit
     text: |-
@@ -96,11 +96,11 @@ sections:
 
   - rule: movement_play
     text: |-
-      To {term:play} an event or operation is to move it from its current zone to the play area, resolve its play abilities, and then trash it. The full rules for playing events and operations are detailed in {ref:sec_play}.
+      To {term:play} an event or operation is to move it from its current zone to the play area, resolve its play abilities, and then trash it. The full rules for playing events and operations are detailed in {ref:sec_playing_events_and_operations}.
 
   - rule: movement_search
     text: |-
-      To {term:search} is to look at a specified zone and potentially set aside cards from that zone. The full rules for searching are detailed in {ref:sec_search}.
+      To {term:search} is to look at a specified zone and potentially set aside cards from that zone. The full rules for searching are detailed in {ref:sec_searching_cards}.
 
   - rule: movement_score
     text: |-
@@ -112,7 +112,7 @@ sections:
 
   - rule: movement_swap
     text: |-
-      To {term:swap} a pair of cards is to move each card to the other's location simultaneously. The full rules for swapping are detailed in {ref:sec_swap}.
+      To {term:swap} a pair of cards is to move each card to the other's location simultaneously. The full rules for swapping are detailed in {ref:sec_swapping_cards}.
 
   - rule: movement_trash
     text: |-
@@ -213,7 +213,7 @@ sections:
     text: Runner cards are normally installed faceup, active. Runner cards are generally installed without designated locations.
 
   - rule: rule_install_one_at_a_time
-    text: Installing cards is an exception to {ref:TODO}. If an effect would install more than one card, then those cards are chosen and installed one at a time, following all of the steps of the installation process ({ref:TODO}) for each card before choosing and installing the next. Each such installation is performed as a separate instruction. See {ref:TODO}.
+    text: Installing cards is an exception to {ref:rule_act_on_multiple_cards}. If an effect would install more than one card, then those cards are chosen and installed one at a time, following all of the steps of the installation process ({ref:sec_steps_installing}) for each card before choosing and installing the next. Each such installation is performed as a separate instruction. See {ref:rule_split_up_instruction}.
     examples:
     - text: The Runner uses {card:Mass Install} to install three programs. The Runner can install {card:Dhegdheer} first, and then host one of the other two programs on {card:Dhegdheer} in order to reduce the install cost.
 
@@ -247,7 +247,7 @@ sections:
     - rule: rule_install_cost_x
       text: If a card has an install cost of X, the value for X is chosen by the player at the time the cost would normally be paid, according to any stipulations indicated in the card's text box. This value of X is maintained until the install effect is complete.
     - rule: rule_install_cost_checkpoint
-      text: After the install cost is paid, a checkpoint occurs, as required by {ref:TODO}.
+      text: After the install cost is paid, a checkpoint occurs, as required by {ref:rule_checkpoint_after_paying_cost}.
 
   - rule: rule_x_server_only
     text: Some upgrades have an ability that specifies 1 or more central servers or "remote server" followed by the word "only". This is a restriction on the locations an upgrade can occupy that applies at all times, even if the upgrade is inactive. The Corp cannot choose the root of a non-specified server as the installation destination for such an upgrade, and such an upgrade cannot be swapped into the root of a non-specified server.
@@ -269,7 +269,7 @@ sections:
       examples:
       - text: The Corp triggers the ability on {card:Ob Superheavy Logistics} by trashing a card with printed rez cost 5. They search R&D for {card:Archer} and install it, but decline to pay the additional cost to rez {card:Archer}. Since the ability requires the installed card to have printed rez cost 4, and the card is not otherwise visible to the Runner at any point in this process, the Corp must reveal {card:Archer} to verify that the installation is legal.
     - rule: rule_reveal_for_install_and_rez
-      text: Some abilities "install and rez" 1 or more cards. If the player resolving an "install and rez" effect is allowed to choose a card that they are unable to rez, or if the installed card has an additional cost to rez that the player declines to pay (see rule {ref:rule_inherent_and_additional_cost}), the player must reveal the installed card, regardless of whether other restrictions apply.
+      text: Some abilities "install and rez" 1 or more cards. If the player resolving an "install and rez" effect is allowed to choose a card that they are unable to rez, or if the installed card has an additional cost to rez that the player declines to pay (see {ref:rule_inherent_and_additional_cost}), the player must reveal the installed card, regardless of whether other restrictions apply.
       examples:
       - text: The Corp plays {card:Trust Operation} and installs an agenda from Archives with its "install and rez" effect. Since agendas cannot be rezzed, the Corp must reveal the installed agenda.
       - text: The Corp plays {card:Ad Blitz}. Since the "install and rez" effect on this card stipulates "if able", the Corp cannot choose to install cards they are unable to rez, nor can they decline additional costs if any apply.
@@ -310,10 +310,10 @@ sections:
     - rule: rule_play_cost_x
       text: If a card has a play cost of X, the value for X is chosen by the player at the time the play cost is paid, according to any stipulations written on the card. This value of X is maintained while resolving the event or operation.
     - rule: rule_play_cost_checkpoint
-      text: After the play cost is paid, a checkpoint occurs, as required by {ref:TODO}.
+      text: After the play cost is paid, a checkpoint occurs, as required by {ref:rule_checkpoint_after_paying_cost}.
 
   - rule: rule_playing_one_at_a_time
-    text: Playing cards is an exception to {ref:TODO}. If an effect would play more than one card, then those cards are chosen and played one at a time, following all of the steps of the play process ({ref:sec_steps_playing}) for each card before choosing and playing the next. Each such card is played as a separate instruction. See {ref:TODO}.
+    text: Playing cards is an exception to {ref:rule_act_on_multiple_cards}. If an effect would play more than one card, then those cards are chosen and played one at a time, following all of the steps of the play process ({ref:sec_steps_playing}) for each card before choosing and playing the next. Each such card is played as a separate instruction. See {ref:rule_split_up_instruction}.
     examples:
     - text: The Corp uses {card:Subcontract} to play {card:Hedge Fund} and another operation. The Corp can use the credits gained from {card:Hedge Fund} to pay for the second operation.
   - rule: rule_playing_lingering_effects

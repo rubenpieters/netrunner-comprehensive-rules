@@ -35,7 +35,7 @@ sections:
   - rule: rule_end_run_ends_access
     text: If a run is in progress, an instruction to end the run ends any access taking place. If an access is occurring outside of a run, an instruction to end the run has no effect on that access.
   - rule: rule_access_set_of_cards
-    text: One card, {card:Information Sifting}, uses a method other than a breach to establish a set of cards for the Runner to access. The Runner accesses those cards one at a time in the order of their choice. Each access is performed as a separate instruction. See {ref:TODO}. Accessing cards in this way is an exception to {ref:TODO}.
+    text: One card, {card:Information Sifting}, uses a method other than a breach to establish a set of cards for the Runner to access. The Runner accesses those cards one at a time in the order of their choice. Each access is performed as a separate instruction. See {ref:rule_split_up_instruction}. Accessing cards in this way is an exception to {ref:rule_act_on_multiple_cards}.
   - rule: rule_access_cards_without_breach
     text: |-
       One card, {card:Counter Surveillance}, instructs the Runner to access a certain number of cards from a server without mentioning a breach. The procedure for these accesses follows the normal rules for breaching that server except: there is no random access limit if the server is HQ or R&D; and the procedure ends once the designated number of cards have been chosen for access.
@@ -141,20 +141,20 @@ sections:
     - rule: rule_candidates_entering_hq
       text: If a card enters the Corp's hand during a breach of HQ while the random access limit has not yet been reached, that card becomes a candidate.
     - rule: rule_candidates_entering_rnd
-      text: If a card enters the Corp's deck during a breach of R&D, that card could become a candidate (either at that time or later in the breach), depending on the random access limit and its position within the deck. See section 7.4.7.
+      text: If a card enters the Corp's deck during a breach of R&D, that card could become a candidate (either at that time or later in the breach), depending on the random access limit and its position within the deck. See {ref:rule_rnd_candidates_1_at_a_time}.
     - rule: rule_candidates_entering_archives
       text: If a card enters the Corp's discard pile during a breach of Archives, that card becomes a candidate. See also {ref:rule_archives_facedowns_after_breach}.
   - subsection: rule_rnd_candidates_1_at_a_time
     text: During a breach of R&D, the Runner is presented with 1 candidate from the Corp's deck at a time in turn, working down from the top of the deck. Cards are made candidates 1 at a time until the access limit is reached.
     rules:
     - rule: rule_rnd_topmost_eligibile_candidate
-      text: After the Runner chooses a candidate from the Corp's deck and whenever any cards enter, leave, or are reordered within the Corp’s deck, all cards in the Corp's deck cease to be candidates. Then, if the random access limit has not been reached, the topmost eligible card in the deck becomes a candidate. A card is eligible for this purpose if the Runner has not already chosen to access that object and is not prohibited from accessing that object in this breach.
+      text: After the Runner chooses a candidate from the Corp's deck and whenever any cards enter, leave, or are reordered within the Corp's deck, all cards in the Corp's deck cease to be candidates. Then, if the random access limit has not been reached, the topmost eligible card in the deck becomes a candidate. A card is eligible for this purpose if the Runner has not already chosen to access that object and is not prohibited from accessing that object in this breach.
       examples: 
       - text: The Runner plays {card:The Maker's Eye} and breaches R&D, accessing 2 additional cards. They access {card:Celebrity Gift} and then access and steal {card:Bacterial Programming}. The Corp uses {card:Bacterial Programming}'s ability to rearrange cards in R&D, but they leave {card:Celebrity Gift} as the top card of R&D. The cards returned to the top of R&D are new objects, so the Runner must continue the breach from the top of R&D and will access {card:Celebrity Gift} again.
       - text: The Corp is playing {card:Seidr Laboratories} and has {card:Strongbox} rezzed in the root of R&D. The Runner breaches R&D with a random access limit of 4. They first access the top card of the Corp's deck and leave it in place. The 2nd card from the top now becomes a candidate, and turns out to be an agenda, which the Runner steals by spending [click] to pay the additional cost imposed by {card:Strongbox}. The Corp then uses {card:Seidr Laboratories} to add 1 card from Archives to the top of R&D. The 3rd candidate presented to the Runner is the card newly added to the top of R&D. After accessing that card, the next card down is still the object that was accessed first, so the card below that (currently 3rd from the top) becomes the 4th and final candidate.
     - rule: rule_rnd_access_from_bottom
       text: |-
-        One card, {card:Showing Off}, allows the Runner to access cards from the bottom of R&D. While this effect applies, candidates in the Corp's deck are presented working up from the bottom: treat {ref:rule_candidates_in_rnd} as if it said "bottom" instead of "top" and rule {ref:rule_rnd_topmost_eligibile_candidate} as if it said "bottommost" instead of "topmost".
+        One card, {card:Showing Off}, allows the Runner to access cards from the bottom of R&D. While this effect applies, candidates in the Corp's deck are presented working up from the bottom: treat {ref:rule_candidates_in_rnd} as if it said "bottom" instead of "top" and {ref:rule_rnd_topmost_eligibile_candidate} as if it said "bottommost" instead of "topmost".
 - section: sec_breaching_steps
   steps:
   text: Steps of Breaching a Server

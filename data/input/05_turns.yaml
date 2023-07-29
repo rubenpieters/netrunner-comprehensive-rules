@@ -40,17 +40,17 @@ sections:
     text: A player initiates an action by paying its cost in [click], as well as any other costs associated with that action, during their action window.
     rules:
     - rule: rule_action_completion
-      text: Once an action is initiated, it must be completed before the game can advance to the next step or open another action window. If the effects of an action initiate a timing structure, such as a run, players may use paid abilities, rez cards, and score agendas as dictated by the priority windows of that nested timing structure, but otherwise players cannot perform any of those voluntary effects while the action is resolving. See Section 9.2 for more details about priority.
+      text: Once an action is initiated, it must be completed before the game can advance to the next step or open another action window. If the effects of an action initiate a timing structure, such as a run, players may use paid abilities, rez cards, and score agendas as dictated by the priority windows of that nested timing structure, but otherwise players cannot perform any of those voluntary effects while the action is resolving. See {ref:sec_timing_and_priority} for more details about priority.
     - rule: rule_action_timing_structure_completion
       text: If a timing structure is initiated during the resolution of an action, that action is not complete until the new timing structure is complete and any further effects of the initiated action following the completion of the new timing structure are resolved.
       examples: 
       - text: The Runner takes the action "play an event", playing {card:Stimhack}. The action is not complete until the run initiated by {card:Stimhack} ends, the Runner suffers core damage, and {card:Stimhack} is trashed following its resolution.
     - rule: rule_action_conditional_ability_trigger
-      text: A conditional ability that meets its trigger condition due to a player taking an action resolves after the action's trigger cost is paid, before the effects of the action itself. See rule 9.1.2a.
+      text: A conditional ability that meets its trigger condition due to a player taking an action resolves after the action's trigger cost is paid, before the effects of the action itself. See {ref:rule_chain_reaction}.
   - rule: rule_basic_actions
-    text: Each player has several basic actions they can always perform. The Corp's basic actions are listed in section 5.2.7, and the Runner's basic actions are listed in section 5.2.8.
-  - rule: rule_action_NCIGS
-    text: A player can only take an action if its effect has the potential to change the game state. See rule 1.2.5.
+    text: Each player has several basic actions they can always perform. The Corp's basic actions are listed in {ref:rule_corp_actions}, and the Runner's basic actions are listed in {ref:rule_runner_actions}.
+  - rule: rule_action_ncigs
+    text: A player can only take an action if its effect has the potential to change the game state. See {ref:rule_ncigs}.
   - rule: rule_actions_outside_action_phase
     text: A player can only take actions during the action phase of their turn. If an effect directs a player to take an action outside of that player's action phase, instead that player does nothing.
   - subsection: rule_same_different_actions
@@ -77,19 +77,19 @@ sections:
         "[click]: Draw 1 card."
     - rule: rule_corp_basic_action_install
       text: |-
-        "[click]: Install 1 agenda, asset, upgrade, or piece of ice from HQ." See section 8.5.
+        "[click]: Install 1 agenda, asset, upgrade, or piece of ice from HQ." See {ref:sec_install_uninstall}.
     - rule: rule_corp_basic_action_operation
       text: |-
-        "[click]: Play 1 operation from HQ." See section 8.6.
+        "[click]: Play 1 operation from HQ." See {ref:sec_playing_events_and_operations}.
     - rule: corp_basic_action_advance
       text: |-
-        "[click], 1[c]: Advance 1 installed card." See section 1.18.
+        "[click], 1[c]: Advance 1 installed card." See {ref:sec_advancing_cards}.
     - rule: corp_basic_action_trash_resource
       text: |-
-        "[click], 2[c]: Trash 1 resource. Take this action only if the Runner is tagged." See section 10.5.
+        "[click], 2[c]: Trash 1 resource. Take this action only if the Runner is tagged." See {ref:sec_tags}.
     - rule: corp_basic_action_purge_virus_counters
       text: |-
-        "[click][click][click]: Purge virus counters." See section 10.1.2.
+        "[click][click][click]: Purge virus counters." See {ref:rule_purge}.
   - subsection: rule_runner_actions
     text: Runner Actions
     rules:
@@ -104,21 +104,21 @@ sections:
         "[click]: Draw 1 card."
     - rule: runner_basic_action_install
       text: |-
-        "[click]: Install 1 program, resource, or piece of hardware from the grip." See section 8.5.
+        "[click]: Install 1 program, resource, or piece of hardware from the grip." See {ref:sec_install_uninstall}.
     - rule: runner_basic_action_event
       text: |-
-        "[click]: Play 1 event from the grip." See section 8.6.
+        "[click]: Play 1 event from the grip." See {ref:sec_playing_events_and_operations}.
     - rule: runner_basic_action_run
       text: |-
-        "[click]: Run any server." See section 6.
+        "[click]: Run any server." See {ref:chpt_runs}.
     - rule: runner_basic_action_remove_tag
       text: |-
-        "[click], 2[c]: Remove 1 tag." See section 10.5.
+        "[click], 2[c]: Remove 1 tag." See {ref:sec_tags}.
 - section: sec_draw_phase
   text: Draw Phase
   rules:
   - rule: rule_draw_phase_definition
-    text: 5.3.1. The draw phase is the first phase of the Corp's turn. It includes the formal beginning of the Corp's turn and the Corp's mandatory draw.
+    text: The draw phase is the first phase of the Corp's turn. It includes the formal beginning of the Corp's turn and the Corp's mandatory draw.
   - rule: rule_mandatory_draw
     text: |-
         The {term:mandatory draw} is a card draw performed by the Corp. It is not an action and does not cost [click].
@@ -128,7 +128,7 @@ sections:
   text: Action Phase
   rules:
   - rule: rule_action_phase_definition
-    text: The action phase is the first phase of the Runner's turn and the second phase of the Corp's turn. It is the only timing structure in which players can take actions, as discussed in section 5.2.
+    text: The action phase is the first phase of the Runner's turn and the second phase of the Corp's turn. It is the only timing structure in which players can take actions, as discussed in {ref:sec_actions}.
   - rule: rule_action_phase_duration
     text: During a player's action phase, they must continue to take actions until they have no more clicks or the phase is ended directly by a card ability. The player may take actions in any combination and order as long as they pay the appropriate costs. Once they have no remaining clicks, the action phase ends.
   - subsection: rule_forced_action_phase_end
@@ -163,9 +163,9 @@ sections:
     - rule: rule_max_hand_size_default
       text: Players begin the game with a maximum hand size of five cards.
     - rule: rule_max_hand_size_core_damage
-      text: Each point of core damage the Runner suffers permanently reduces their maximum hand size by 1 card. See section 10.4. Other abilities can modify a player's maximum hand size directly.
+      text: Each point of core damage the Runner suffers permanently reduces their maximum hand size by 1 card. See {ref:sec_damage}. Other abilities can modify a player's maximum hand size directly.
   - rule: rule_skip_discard_step
-    text: If an effect instructs a player to "skip your discard step", that player does not resolve the appropriate step of their turn (step 5.6.3a for the Corp, and step 5.7.2a for the Runner). They will not check their hand size or discard cards.
+    text: If an effect instructs a player to "skip your discard step", that player does not resolve the appropriate step of their turn ({ref:step_corp_turn_discard} for the Corp, and {ref:step_runner_turn_discard} for the Runner). They will not check their hand size or discard cards.
 
 - section: sec_steps_corp_turn
   text: Steps of the Corp's Turn

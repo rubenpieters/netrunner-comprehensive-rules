@@ -258,7 +258,7 @@ sections:
       For a player to {term:draw} 1 or more cards is to take that many cards from the top of their deck and put them into their hand. {ref:Sec_drawing_cards} provides more details about drawing cards.
   - rule: rule_inactive_ability_exception_link
     text: |-
-      Most abilities are active if and only if the card they appear on is active. {ref:Sec_inactive_ability_exceptions} details the cases where abilities on inactive cards are still active.
+      Most abilities are active if and only if the card they appear on is active. {ref:Rule_ability_active_inactive_source_card} details the cases where abilities on inactive cards are still active.
   - rule: rule_card_conversion
     text: |-
       Abilities can convert cards from one type into another type, or even from a card into a counter. {ref:Rule_add_card_to_score_area,rule_card_to_counter} explain the details of card conversion.
@@ -359,7 +359,7 @@ sections:
     - rule: rule_spend_hosted_credits_during
       text: If an ability specifies a time period during which a player is allowed to spend credits from a card, they can be spent from that card as if they were in the player's credit pool for any purpose (other than losing credits) as long as the specified time period is active or the specified duration has not expired.
     - rule: rule_hosted_credits_use
-      text: Spending credits from a card is considered "using" the card that allowed those credits to be spent. See {ref:rule_using_abilities}.
+      text: Spending credits from a card is considered "using" the card that allowed those credits to be spent. See {ref:rule_using}.
   - subsection: rule_sec_recurring
     toc:
     text: Recurring Credits
@@ -369,10 +369,10 @@ sections:
         {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
     - rule: rule_placing_recurring_credits
       text: |-
-        Recurring credits are first placed on a card as soon as it becomes active. This occurs at {ref:step_installed_card_active} of installing the card if it is installed active, {ref:step_played_card_active} of playing an event or operation, or as soon as the card is turned faceup or scored, as applicable.
+        Recurring credits are first placed on a card as soon as it becomes active. This occurs at {ref:rule_steps_installing_become_installed} of installing the card if it is installed active, {ref:rule_steps_installing_trash_like_cards} of playing an event or operation, or as soon as the card is turned faceup or scored, as applicable.
     - rule: rule_refill_recurring_credits
       text: |-
-        Recurring credits are refilled during {ref:step_corp_refill_recurring_credits} of the Corp's turn and {ref:step_runner_refill_recurring_credits} of the Runner's turn, before other abilities that apply at the start of the turn resolve.
+        Recurring credits are refilled during {ref:step_corp_turn_recurring_credits_refill} of the Corp's turn and {ref:step_runner_turn_recurring_credits_refill} of the Runner's turn, before other abilities that apply at the start of the turn resolve.
     - rule: rule_recurring_credits_do_not_accumulate
       text: |-
         Recurring credits do not accumulate. They are refilled only up to the indicated number.
@@ -523,7 +523,7 @@ sections:
     - rule: rule_controller_credits
       text: Each player controls the credits in their credit pool.
     - rule: rule_controller_bad_publicity_tag
-      text: The Corp controls each bad publicity counter. The Runner controls each tag counter. However, see {ref:rule_cost_tag} and {ref:rule_cost_bad_publicity} regarding paying costs that involve tags and bad publicity, respectively.
+      text: The Corp controls each bad publicity counter. The Runner controls each tag counter. However, see {ref:rule_corp_can_pay_tag_costs} and {ref:rule_runner_can_pay_bad_publicity_costs} regarding paying costs that involve tags and bad publicity, respectively.
     - rule: rule_controller_hosted_counter
       text: The controller of a counter hosted on a card is the player who controls the host card.
     - rule: rule_controller_click_core_damage
@@ -531,7 +531,7 @@ sections:
   - rule: rule_pay_costs_controlled_objects
     text: A player can only pay costs using objects they control.
   - subsection: rule_controller_ability
-    text: The {term:controller of an ability} is the player responsible for that ability. By default, this is the player who controls the ability's source. See also {ref:sec_ability_source}. A player can only use abilities they control.
+    text: The {term:controller of an ability} is the player responsible for that ability. By default, this is the player who controls the ability's source. See also {ref:rule_source}. A player can only use abilities they control.
     rules:
     - rule: rule_controller_agenda_abilities
       text: Unless specifically stated otherwise, abilities on agendas are controlled by the Corp, even for agendas in the Runner's score area.
@@ -582,7 +582,7 @@ sections:
       examples:
       - text: The Corp resolves a subroutine that says "[sub] The Runner trashes 1 program." The Runner must trash 1 of their installed programs and may not trash a program from their grip or stack.
     - rule: rule_multiple_targets
-      text: Some effects allow a player to choose multiple cards as targets for a single announcement. {ref:Sec_quantities_and_sets} contains rules about resolving effects involving sets of cards.
+      text: Some effects allow a player to choose multiple cards as targets for a single announcement. {ref:Subsec_quantities_and_sets} contains rules about resolving effects involving sets of cards.
     - rule: rule_distinct_targets
       text: A player may announce the targets for an instruction in any order, but each object or subroutine can only be chosen as a target once for each announcement. If there are not enough valid targets available, then that player chooses as many distinct targets as possible and the remaining targets are not announced.
       examples:
@@ -631,7 +631,7 @@ sections:
     - rule: rule_cost_calculation
       text: If a quantity in a cost is subject to effects modifying its value, determine the final value of that quantity by taking its default value, applying each effect that increases the cost, and then applying each effect that lowers the cost. Finally, if the value determined by this process is less than 0, set the value to 0.
     - rule: rule_cost_quantities
-      text: Some abilities calculate a quantity using phrases like "for each", "for every", or "plus". Any time such a calculation appears in a cost, the result of that calculation is determined at the time the cost is to be paid. The result is taken as an aggregate, so that paying the cost is a single instance of whatever was paid. Note that additional costs ({ref:rule_nested_cost}) are not aggregated with other costs. See also {ref:sec_quantities_and_sets} for rules about calculated quantities that appear in other contexts.
+      text: Some abilities calculate a quantity using phrases like "for each", "for every", or "plus". Any time such a calculation appears in a cost, the result of that calculation is determined at the time the cost is to be paid. The result is taken as an aggregate, so that paying the cost is a single instance of whatever was paid. Note that additional costs ({ref:rule_nested_cost}) are not aggregated with other costs. See also {ref:Subsec_quantities_and_sets} for rules about calculated quantities that appear in other contexts.
       examples:
       - text: The Runner approaches a server protected by 3 advanced pieces of ice and with a rezzed {card:Cayambe Grid} in its root. They pay the nested cost in {card:Cayambe Grid}'s ability. This cost is 1 payment of 6[c], not 3 payments of 2[c], so this only meets the trigger condition for 1 instance of {card:GameNET}'s ability.
     - rule: rule_cost_x
@@ -648,7 +648,7 @@ sections:
       There are six main types of costs: install costs (found mainly on hardware, programs, and resources, and incurred when installing ice), play costs (found on operations and events), rez costs (found on assets, upgrades, and ice), paid ability trigger costs, additional costs, and nested costs.
     rules:
     - rule: rule_inherent_cost
-      text: Install costs, rez costs, and play costs are all costs that are inherent properties of cards. These costs are automatically applied to any ability that performs the corresponding effects (installing, rezzing, or playing) unless that ability stipulates otherwise. See also {ref:TODO} (for more about these costs as they appear on cards) and {ref:TODO}, {ref:TODO} and {ref:TODO} (for more about paying costs to install, rez, and play cards).
+      text: Install costs, rez costs, and play costs are all costs that are inherent properties of cards. These costs are automatically applied to any ability that performs the corresponding effects (installing, rezzing, or playing) unless that ability stipulates otherwise. See also {ref:sec_printed_cost} (for more about these costs as they appear on cards) and {ref:sec_install_cost}, {ref:rule_inherent_rez_cost} and {ref:rule_playing_play_cost} (for more about paying costs to install, rez, and play cards).
     - rule: rule_inherent_cost_in_ability
       text: The presence of an install cost, rez cost, or play cost does not change the optional or mandatory status of an ability. If an effect directs a player to install, rez, or play a card, they must pay the associated cost if able. If they cannot, the card is not installed, rezzed, or played.
     - rule: rule_inherent_and_additional_cost
@@ -694,7 +694,7 @@ sections:
       examples:
       - text: The Runner accesses {card:Obokata Protocol} while {card:Ben Musashi} and {card:Predictive Algorithm} are both active. The Runner must be able to pay 2 credits and suffer 6 net damage all at once in order to steal the {card:Obokata Protocol}, even though each of the three costs are from different card abilities. After all costs have been paid, abilities that meet their trigger conditions from the paying of any of those costs, such as {card:I've Had Worse} or {card:Order of Sol}, can then resolve as applicable.
     - rule: rule_additional_cost_checkpoint
-      text: If an additional cost is required for an effect that does not normally require paying any cost, the additional cost is paid and a checkpoint is resolved before performing the usual procedure to carry out that effect. See also {ref:TODO}.
+      text: If an additional cost is required for an effect that does not normally require paying any cost, the additional cost is paid and a checkpoint is resolved before performing the usual procedure to carry out that effect. See also {ref:rule_checkpoint_after_paying_cost}.
       examples:
       - text: The Corp is playing {card:Ob Superheavy Logistics} and initiates scoring {card:Azef Protocol}, which has an additional cost to score of "trash one of your other installed cards." If the Corp trashes a rezzed card, meeting the trigger condition for {card:Ob}'s ability, this ability will resolve following the checkpoint associated with paying the cost. This happens before {card:Azef Protocol} is added to the Corp's score area or any trigger conditions related to scoring an agenda are met.
   - subsection: rule_nested_cost
@@ -795,9 +795,9 @@ sections:
     examples:
     - text: The Runner has {card:Astrolabe} installed, which has the ability "+1[MU]". The Runner can therefore have up to 5[MU] worth of programs installed.
   - rule: rule_memory_cost
-    text: Programs have a {term:memory cost} that is continually applied against the memory limit. {ref:TODO} details how the Runner's installed programs are constrained by the memory limit.
+    text: Programs have a {term:memory cost} that is continually applied against the memory limit. {ref:rule_program_memory_cost} details how the Runner's installed programs are constrained by the memory limit.
 
-- section: sec_card_visibilty
+- section: sec_card_visibility
   text: Card Visibility
   rules:
   - subsection: rule_faceup_facedown
@@ -806,7 +806,7 @@ sections:
     - rule: rule_hidden_secret_faceup_facedown
       text: Cards in hidden or secret zones (see {ref:sec_game_zones_general}) are neither faceup nor facedown.
     - rule: 
-      text: Some effects host multiple cards on an object at the same time or set aside multiple cards at the same time. Facedown cards that enter a zone at the same time by the same effect are treated as a group. See {ref:rule_host_faceup_facedown} and {ref:TODO}, respectively.
+      text: Some effects host multiple cards on an object at the same time or set aside multiple cards at the same time. Facedown cards that enter a zone at the same time by the same effect are treated as a group. See {ref:rule_host_faceup_facedown} and {ref:rule_facedown_set_aside_distinct_groups}, respectively.
   - subsection: rule_look
     text: When a player {term:looks} at a card, they are allowed to see the front face of the card even if the front face would not normally be visible to them. A player should look at that card without showing it to the other player if it is not normally visible to that player.
   - rule: rule_reveal

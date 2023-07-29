@@ -18,7 +18,7 @@ sections:
     text: Game rules and card effects can move cards and counters between zones. See {ref:sec_card_movements} for rules on card movements.
     rules:
     - rule: rule_reveal_from_hidden
-      text: If a facedown card or a card in a hidden zone would ever move to another zone as part of an effect that requires that card to have a specific attribute, that card must be revealed before being moved to the new zone. If the card is being installed, this rule only applies as indicated by {ref:TODO}.
+      text: If a facedown card or a card in a hidden zone would ever move to another zone as part of an effect that requires that card to have a specific attribute, that card must be revealed before being moved to the new zone. If the card is being installed, this rule only applies as indicated by {ref:rule_install_from_hidden_or_secret_zone}.
       examples:
       - text: When resolving {card:Clone Suffrage Movement}, the Corp chooses a facedown {card:Fast Break} in Archives. The Corp must reveal the {card:Fast Break} before adding it to HQ, to demonstrate that it is indeed an operation, meeting {card:Clone Suffrage Movement}'s requirement.
     - rule: rule_move_instantaneous
@@ -37,7 +37,7 @@ sections:
     - rule: rule_deck_location
       text: A card in a player's deck has a location identified by how many cards it is from the top of that deck.
     - rule: rule_play_area_location
-      text: Some objects in the play area are in specific locations. See {ref:TODO}.
+      text: Some objects in the play area are in specific locations. See {ref:rule_play_area_organization}.
     - rule: rule_hosted_object_location
       text: The location of a hosted object is its host card.
     - rule: rule_default_location
@@ -54,7 +54,7 @@ sections:
     text: Decks are ordered. The location of each card in a deck must be maintained except when a player is explicitly directed to manipulate the cards in a deck by a rule or card ability. See {ref:rule_deck_location}.
     rules:
       - rule: rule_deck_order_while_searching
-        text: While searching a deck, a player is not required to maintain the order of the searched cards or indicate the previous location of any card found by the search. Note that the deck is always shuffled upon completion of the search, as required by {ref:TODO}.
+        text: While searching a deck, a player is not required to maintain the order of the searched cards or indicate the previous location of any card found by the search. Note that the deck is always shuffled upon completion of the search, as required by {ref:rule_shuffle_deck_after_search}.
   - rule: rule_deck_size_open_info
     text: The number of cards in a deck is open information. Any player may count the number of cards in a deck at any time.
   - rule: rule_deck_inactive
@@ -68,7 +68,7 @@ sections:
     rules:
     - rule: rule_rnd_name
       text: |-
-        {term:R&d} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:TODO}.
+        {term:R&d} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:rule_shuffle_deck_after_search}.
     - rule: rule_rnd_empty_rnd
       text: If the Corp must ever draw from R&D while it is empty, the Runner wins the game. See {ref:sec_ending_the_game}.
   - subsection: subsec_stack
@@ -94,7 +94,7 @@ sections:
   - rule: rule_hand_inactive
     text: Cards in a hand are inactive.
   - rule: rule_maximum_hand_size
-    text: Each player has a maximum hand size, usually five. A player may have any number of cards in their hand at any given time, but during the discard phase of a player's turn they must discard cards from their hand until there are no more cards in their hand than their maximum hand size allows. See {ref:TODO}.
+    text: Each player has a maximum hand size, usually five. A player may have any number of cards in their hand at any given time, but during the discard phase of a player's turn they must discard cards from their hand until there are no more cards in their hand than their maximum hand size allows. See {ref:sec_discard_phase}.
   - rule: rule_hand_name
     text: Each player's hand has its own name as a means of differentiating between the two.
   - subsection: subsec_hq
@@ -115,7 +115,7 @@ sections:
     - rule: rule_grip_name
       text: The {term:grip} is the name for the Runner's hand.
     - rule: rule_grip_damage
-      text: Suffering damage forces the Runner to discard cards from their grip at random, and suffering core damage also reduces the Runner's maximum hand size. The Runner flatlines and loses the game if they suffer more damage than they have cards in grip or must discard down to a hand size lower than zero. See {ref:TODO}.
+      text: Suffering damage forces the Runner to discard cards from their grip at random, and suffering core damage also reduces the Runner's maximum hand size. The Runner flatlines and loses the game if they suffer more damage than they have cards in grip or must discard down to a hand size lower than zero. See {ref:sec_damage}.
 
 - section: sec_discard_pile
   text: Discard Pile
@@ -137,7 +137,7 @@ sections:
     rules:
     - rule: rule_archives_name
       text: |-
-        {term:Archives} is the name for the Corp's discard pile. It is also one of the Corp's central servers. See {ref:TODO}.
+        {term:Archives} is the name for the Corp's discard pile. It is also one of the Corp's central servers. See {ref:subsec_central_servers}.
     - rule: rule_archives_faceup_facedown
       text: Cards in Archives can be either faceup or facedown. If a Corp card is visible to the Runner when it is trashed or discarded, it is put in Archives faceup. If a Corp card is not visible to the Runner when it is trashed or discarded, then it is put in Archives facedown. Facedown cards in Archives should be oriented horizontally so that the Runner can easily see they are present.
     - rule: rule_archives_faceup_open_info
@@ -178,7 +178,7 @@ sections:
   - rule: rule_play_area_number_location_open_info
     text: The number of cards in the play area and the location of each card in the play area is always open information.
   - rule: rule_play_area_card_open_info
-    text: Whether or not a card itself and its attributes are open information while in the play area is determined by the card's status. Cards that are faceup are open information and can be examined by any player at any time. Cards that are facedown are secret information and can only be examined by the player who controls the card. See {ref:TODO}.
+    text: Whether or not a card itself and its attributes are open information while in the play area is determined by the card's status. Cards that are faceup are open information and can be examined by any player at any time. Cards that are facedown are secret information and can only be examined by the player who controls the card. See {ref:sec_information}.
   - subsection: rule_play_area_active_inactive
     text: Whether or not a card is active while in the play area is determined by the card's status.
     rules:
@@ -189,9 +189,9 @@ sections:
     - rule: rule_play_area_runner_cards
       text: Generally, Runner hardware, programs, and resources are installed into the play area faceup and active. See {ref:sec_install_uninstall}.
     - rule: rule_play_area_faceup_facedown
-      text: Some Runner cards are installed facedown or turned facedown through card abilities. This is distinct from the status of rezzed/unrezzed that Corp cards can have. Facedown Runner cards are not active. See {ref:TODO}.
+      text: Some Runner cards are installed facedown or turned facedown through card abilities. This is distinct from the status of rezzed/unrezzed that Corp cards can have. Facedown Runner cards are not active. See {ref:sec_facedown_runner_cards}.
     - rule: rule_play_area_operations_events
-      text: Operations and events are played into the play area faceup and are active for the duration of their resolution before being trashed. See {ref:sec_play_events_operations}.
+      text: Operations and events are played into the play area faceup and are active for the duration of their resolution before being trashed. See {ref:sec_playing_events_and_operations}.
   - subsection: rule_play_area_organization
     text: Some objects in the play area are organized into specific orientations and/or locations.
     rules:
@@ -202,7 +202,7 @@ sections:
     - rule: rule_play_area_runner_identity
       text: The Runner's identity, hardware, programs, and resources do not have specific locations in the play area.
     - rule: rule_play_area_operation_events
-      text: There is no specific location in the play area for operations or events. They are simply played into the play area, where they resolve before being trashed. See {ref:sec_play_events_operations}.
+      text: There is no specific location in the play area for operations or events. They are simply played into the play area, where they resolve before being trashed. See {ref:sec_playing_events_and_operations}.
     - rule: rule_play_area_credit_pool
       text: Each player has a credit pool, which is a location in the play area where credits they control are kept.
     - rule: rule_play_area_counters
@@ -231,7 +231,7 @@ sections:
     - rule: rule_region_unique
       text: Only 1 {subtype:region} upgrade can be installed in the root of a server at a time. See {ref:subsec_regions}.
     - rule: rule_upgrade_server_restriction
-      text: Some upgrades have restrictions limiting them to specific servers. See {ref:TODO}.
+      text: Some upgrades have restrictions limiting them to specific servers. See {ref:rule_x_server_only}.
     - rule: rule_this_server
       text: Some cards refer to the server where they are located (or the central server corresponding to the zone where they are located) using the phrase "this server". If an ability is initiated by a trigger condition or cost involving the ability's source card moving from a server, its root, or protecting it to another server or to a location not associated with any server, treat "this server" as referring to the server associated with the previous location of the card throughout resolution of that ability. If an ability moves its source card while it is resolving, continue to interpret "this server" based on the card's previous location.
       examples:
@@ -268,10 +268,10 @@ sections:
     - rule: rule_remote_server_existence
       text: A remote server exists as long as there is at least one card in the root of or protecting it. A remote server can be made up of only ice protecting it, only cards installed in it, or a combination of both.
     - rule: rule_remote_server_cease_to_exist
-      text: During checkpoints, a remote server ceases to exist if there are no cards installed in its root and no cards installed protecting it. If a server ceases to exist during a run against it, then the run ends after any currently open paid ability window closes. Unless the run has already been declared either successful or unsuccessful, it is neither. See {ref:TODO}.
+      text: During checkpoints, a remote server ceases to exist if there are no cards installed in its root and no cards installed protecting it. If a server ceases to exist during a run against it, then the run ends after any currently open paid ability window closes. Unless the run has already been declared either successful or unsuccessful, it is neither. See {ref:rule_server_ceases_to_exist}.
     - rule: rule_limit_remote_servers
       text: |-
-        The Corp card {card:Earth Station: SEA Headquarters} and its reverse, {card:Earth Station: Ascending to Orbit}, both have the ability, "Limit 1 remote server." While this ability is active, as long as a remote server exists, the Corp cannot create a new remote server. If at any time more than 1 remote server exists while this ability is active, the next checkpoint will force the Corp player to choose 1 of those servers. The checkpoint will then trash all cards in the root of and protecting each other remote server. See {ref:TODO}.
+        The Corp card {card:Earth Station: SEA Headquarters} and its reverse, {card:Earth Station: Ascending to Orbit}, both have the ability, "Limit 1 remote server." While this ability is active, as long as a remote server exists, the Corp cannot create a new remote server. If at any time more than 1 remote server exists while this ability is active, the next checkpoint will force the Corp player to choose 1 of those servers. The checkpoint will then trash all cards in the root of and protecting each other remote server. See {ref:rule_checkpoint_card_restrictions}.
 
   - subsection: subsec_protecting_a_server
     text: Protection a Server
@@ -314,7 +314,7 @@ sections:
   - rule: rule_searched_cards_set_aside
     text: Cards found during a search are set aside facedown while the search completes (in particular, while any deck that was searched is shuffled). See {ref:sec_searching_cards}.
   - rule: rule_set_aside_hosted_counters_trash_ability
-    text: Some paid abilities with a trigger cost that uninstalls or forfeits the ability's source card need to refer to or act on that card's hosted cards or counters. These abilities set aside the hosted cards or counters as the trigger cost is paid. See {ref:TODO}.
+    text: Some paid abilities with a trigger cost that uninstalls or forfeits the ability's source card need to refer to or act on that card's hosted cards or counters. These abilities set aside the hosted cards or counters as the trigger cost is paid. See {ref:rule_trash_ability_keeps_track_of_hosted_objects}.
   - rule: rule_set_aside_default_faceup
     text: Cards set aside by a card ability are faceup unless the ability specifically instructs that they be set aside facedown.
   - rule: rule_facedown_set_aside_distinct_groups
@@ -330,7 +330,7 @@ sections:
   - rule: rule_rfg_move
     text: If a card is removed from the game, it is moved from its current zone to the removed-from-game zone.
   - rule: rule_forfeit_rfg
-    text: Forfeiting an agenda removes it from the game. See {ref:TODO}.
+    text: Forfeiting an agenda removes it from the game. See {ref:movement_forfeit}.
   - rule: rule_rfg_inactive
     text: Cards that have been removed from the game are inactive.
   - rule: rule_rfg_no_interaction

@@ -38,7 +38,7 @@ sections:
     rules:
     - rule: rule_ice_have_install_costs_too
       text: |-
-        Ice also has an install cost, but it does not appear on the card. The install cost of ice is determined by the configuration of other installed ice rather than being intrinsic to the card. See {ref:subsec_install_costs}.
+        Ice also has an install cost, but it does not appear on the card. The install cost of ice is determined by the configuration of other installed ice rather than being intrinsic to the card. See {ref:rule_install_cost}.
   - rule: rule_card_types_with_rez_costs
     text: Assets, ice, and upgrades have a rez cost.
 
@@ -49,7 +49,7 @@ sections:
     text: The advancement requirement appears only on agendas. It is a number in the top-right corner of the card, within a small circle.
   - rule: rule_adv_requirement_citation
     text: |-
-      {ref:sec_score_scoring_stealing} details how agendas are scored and the purpose of the advancement requirement.
+      {ref:Sec_score_scoring_steal} details how agendas are scored and the purpose of the advancement requirement.
 
 - section: sec_agenda_points
   text: Agenda Points
@@ -80,7 +80,7 @@ sections:
       Non-{subtype:icebreaker} programs have a dash ([dash]) in the bottom-left corner instead of a strength value.
   - rule: rule_strength_citation
     text: |-
-      {ref:Sec_icebreakers} discusses the interaction between ice strength and {subtype:icebreaker} strength.
+      {ref:Subsec_icebreakers} discusses the interaction between ice strength and {subtype:icebreaker} strength.
 
 - section: sec_memory_cost
   text: Memory Cost
@@ -147,7 +147,7 @@ sections:
       A card's faction can be identified by the color of its background, as well as a faction logo in one of its four corners. This logo also appears as a watermark behind the text box. If a card has a white background and no logo, it is neutral.
   - rule: rule_faction_citation
     text: |-
-      Each identity is associated with one faction. {ref:deck_construction} details how factions affect deckbuilding.
+      Each identity is associated with one faction. {ref:sec_deck_construction} details how factions affect deckbuilding.
 
 - section: sec_inf_cost
   text: Influence Cost
@@ -175,10 +175,10 @@ sections:
       Each card has one card type, which can be identity, agenda, asset, ice, operation, upgrade, event, hardware, program, or resource. It is written in bold at the beginning of the type line.
   - rule: rule_card_type_while_inactive
     text: |-
-      While inactive, a card is still considered a card of the type printed on it, with the exception of facedown installed Runner cards. See {ref:subsec_facedown_runner_cards}.
+      While inactive, a card is still considered a card of the type printed on it, with the exception of facedown installed Runner cards. See {ref:sec_facedown_runner_cards}.
   - rule: rule_card_type_conversion_citation
     text: |-
-      Abilities can change a card from its printed type to an agenda. See {ref:rule_convert_to_agenda}.
+      Abilities can change a card from its printed type to an agenda. See {ref:rule_add_card_to_score_area}.
   - rule: rule_card_type_counters
     text: Counters never have card types.
 
@@ -189,13 +189,13 @@ sections:
     text: Cards may have one or more subtypes, which are written following the primary type. Subtypes are card descriptors that can be referenced by card abilities. Cards that share a subtype often share a distinct characteristic or ability.
     rules:
     - rule: rule_subtype_special_rules
-      text: The subtypes {subtype:region}, {subtype:console}, and {subtype:icebreaker} have special rules, discussed in {ref:TODO} respectively. Other subtypes have no intrinsic rules meaning.
+      text: The subtypes {subtype:region}, {subtype:console}, and {subtype:icebreaker} have special rules, discussed in {ref:subsec_regions,subsec_consoles,subsec_icebreakers} respectively. Other subtypes have no intrinsic rules meaning.
   - rule: rule_subtype_bold
     text: In card text, subtypes are always referenced in bold text. If a word or phrase that is also a subtype appears in a card's text but is not in bold text, that word or phrase does not reference the subtype.
   - rule: rule_lack_of_subtype
     text: Some abilities reference cards by a lack of subtype, such as "non-{subtype:virus}". These abilities can only affect cards that do not have the specified subtype, regardless of any other subtypes the cards do have.
   - rule: rule_subtypes_active
-    text: A card has all of its subtypes at all times, even while inactive, with the exception of facedown installed Runner cards. See {ref:TODO}.
+    text: A card has all of its subtypes at all times, even while inactive, with the exception of facedown installed Runner cards. See {ref:sec_facedown_runner_cards}.
   - rule: rule_add_remove_subtypes
     text: |-
       Abilities can add or remove subtypes. The number of times a card has, gains, and loses each subtype is tracked as a running total, but the result is binary: if the total number of instances of the subtype exceeds the number of times it is removed, the card has that subtype. Otherwise, it does not.
@@ -232,7 +232,7 @@ sections:
   rules:
   - rule: rule_text_box_definition
     text: |-
-      The {term:text box} is the central area on a card containing any abilities the card has. Abilities usually only apply when the card they appear on is active. {ref:Subsec_active_abilities_on_inactive_cards} details exceptions.
+      The {term:text box} is the central area on a card containing any abilities the card has. Abilities usually only apply when the card they appear on is active. {ref:Rule_ability_active_inactive_source_card} details exceptions.
   - rule: rule_flavor_text
     text: |-
       Many cards have italicised text written after their game text. This is {term:flavor text}, and has no effect on the game or the function of the card, nor can other abilities reference or interact with it.

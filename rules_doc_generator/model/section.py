@@ -138,7 +138,13 @@ class SubSection:
       result += '\\phantomsection '
       result += '\\addtocounter{subsubsection}{1} '
       result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
-    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
+    if self.toc:
+      result += '{\\Large \\color{darkgray}'
+    result += self.format_text.to_latex(id_map)
+    if self.toc:
+      result += '}'
+    result += '\n'
     if self.snippet:
       snippet_lines = self.snippet.to_latex(id_map).split('\n')
       for snippet_text in snippet_lines:

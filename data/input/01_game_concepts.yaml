@@ -329,7 +329,7 @@ sections:
   rules:
   - rule: rule_credit
     text: |-
-      A {term:credit} ({img:credit}) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
+      A {term:credit} ([c]) is the basic unit of currency. Players spend their credits to pay for various costs, card abilities, traces, etc. Credit counters most commonly represent 1[c] each, but can represent larger denominations if clearly marked.
   - rule: rule_credit_pool
     text: |-
       Each player has a {term:credit pool} where they keep a supply of credit counters matching the credits they have available to spend. The number of credits in a player's credit pool is open information.

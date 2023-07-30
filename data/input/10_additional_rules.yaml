@@ -6,7 +6,7 @@ sections:
   rules:
   - rule: rule_uniqueness
     text: |-
-      Some cards are {term:unique}, and have a unique symbol ([uniqsym]) before their name to designate this. There can be only one unique card of the same name active at a time. If a unique card becomes active, any other card that shares its name is trashed during the next checkpoint. Trashing a card this way cannot be prevented. See {ref:sec_checkpoints}.
+      Some cards are {term:unique}, and have a unique symbol (◆) before their name to designate this. There can be only one unique card of the same name active at a time. If a unique card becomes active, any other card that shares its name is trashed during the next checkpoint. Trashing a card this way cannot be prevented. See {ref:sec_checkpoints}.
   - subsection: rule_purge
     text: |-
       To {term:purge virus counters} is to remove all virus counters hosted on cards and return them to the bank. The Corp can purge virus counters as a basic action or with a card ability.
@@ -77,7 +77,7 @@ sections:
       text: If the agendas in either player's score area total 7 or more agenda points, that player wins the game. If both players would win this way simultaneously, the game ends in a draw.
     - rule: rule_checkpoint_uniqueness
       text: |-
-        If 2 or more unique ([uniqsym]) cards with the same name are active, for each such name, all of those cards except the one that became active most recently are trashed. If 2 or more {subtype:console} cards are installed under the control of the same player, for each such player, all of those cards except the one that became active most recently are trashed.
+        If 2 or more unique (◆) cards with the same name are active, for each such name, all of those cards except the one that became active most recently are trashed. If 2 or more {subtype:console} cards are installed under the control of the same player, for each such player, all of those cards except the one that became active most recently are trashed.
     - rule: rule_checkpoint_card_restrictions
       text: If any objects break any restrictions of card abilities or the game rules (such as the Runner's memory limit) or are installed or hosted in an illegal location, an appropriate set of those objects are trashed. A set is appropriate for this purpose if trashing the objects in the set would leave all remaining installed or hosted objects in legal locations and if no object can be removed from the set while maintaining that property. If there are multiple distinct appropriate sets, and one player controls all the objects in each of those sets, that player chooses which set to trash. If the sets contain objects controlled by both players, the active player chooses which set is trashed.
       examples:

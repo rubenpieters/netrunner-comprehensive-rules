@@ -54,8 +54,9 @@ def parse_example(yaml_example: Any) -> Example:
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
   text = parse_with_default(yaml_timing_structure, 'text', None, parse_format_text_field)
+  bold = parse_boolean(yaml_timing_structure, 'bold')
   elements = parse_subelements(yaml_timing_structure, 'elements', parse_timing_structure)
-  return TimingStructureElement(text, elements)
+  return TimingStructureElement(text, bold, elements)
 
 def parse_subrule(yaml_sub_rule: Any = False) -> SubRule:
   id = parse_id(yaml_sub_rule, 'rule')

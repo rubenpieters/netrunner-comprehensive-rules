@@ -7,6 +7,7 @@ from rules_doc_generator.model.text import (RefDict, FormatText, Example)
 @dataclass
 class TimingStructureElement:
   text: FormatText | None
+  bold: bool
   elements: list[TimingStructureElement]
 
   def to_html_l1(self, id_map: RefDict) -> str:
@@ -35,8 +36,14 @@ class TimingStructureElement:
     result += '</ol>'
     return result
 
-  def to_latex_l1(self, id_map: RefDict) -> str:
-    result = f'\\1 \\textbf{{{self.text.to_latex(id_map)}}}\n'
+  def to_latex_l1(self, id_map: RefDict, bold: bool) -> str:
+    result = '\\1 '
+    if bold:
+      result += '\\textbf{'
+    result += self.text.to_latex(id_map)
+    if bold:
+      result += '}'
+    result += '\n'
     for elem in self.elements:
       result += elem.to_latex_l2(id_map)
     return result
@@ -51,11 +58,14 @@ class TimingStructureElement:
     return f'    \\3 {self.text.to_latex(id_map)}\n'
 
   def to_latex(self, id_map: RefDict) -> str:
-    result = '\setlist[enumerate,1]{label=\\textbf{\\arabic*)}}\n'
+    if self.bold:
+      result = '\setlist[enumerate,1]{label=\\textbf{\\arabic*)}}\n'
+    else:
+      result = '\setlist[enumerate,1]{label=\\arabic*)}\n'
     result += '\setlist[enumerate,2]{label=\\alph*)}\n'
     result += '\setlist[enumerate,3]{label=\\roman*)}\n'
     for elem in self.elements:
-      result += elem.to_latex_l1(id_map)
+      result += elem.to_latex_l1(id_map, self.bold)
     return result
 
 @dataclass

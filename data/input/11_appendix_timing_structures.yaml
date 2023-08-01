@@ -12,7 +12,7 @@ sections:
     text: |-
       These guides are intended to serve as shorthand references only; for comprehensive rules relating to each timing structure, see the accompanying rules sections.
 - section: sec_appendix_timing_structure_corps_turn
-  text: Timing Structure of The Corp's Turn ({ref:sec_steps_corp_turn})
+  text: Timing Structure of The Corp's Turn ({ref:Sec_steps_corp_turn})
   toc_entry: Timing Structure of The Corp's Turn
   rules:
   - timing_structure:
@@ -44,7 +44,7 @@ sections:
       - text: The Corp's turn ends.
       - text: The Corp's turn is complete, and the game moves to the Runner's turn.
 - section: sec_appendix_timing_structure_runners_turn
-  text: Timing Structure of The Runner's Turn ({ref:sec_steps_runner_turn})
+  text: Timing Structure of The Runner's Turn ({ref:Sec_steps_runner_turn})
   toc_entry: Timing Structure of The Runner's Turn
   rules:
   - timing_structure:
@@ -73,7 +73,7 @@ sections:
       - text: The Runner's turn ends.
       - text: The Runner's turn is complete, and the game moves to the Corp's turn.
 - section: sec_appendix_timing_structure_of_a_run
-  text: Timing Structure of a Run ({ref:sec_steps_of_a_run})
+  text: Timing Structure of a Run ({ref:Sec_steps_of_a_run})
   toc_entry: Timing Structure of a Run
   rules:
   - timing_structure:
@@ -135,7 +135,7 @@ sections:
       - text: If applicable, the run is declared unsuccessful.
       - text: The run is complete.
 - section: sec_appendix_timing_structure_of_breaching_a_server
-  text: Timing Structure of Breaching a Server ({ref:sec_breaching_steps})
+  text: Timing Structure of Breaching a Server ({ref:Sec_breaching_steps})
   toc_entry: Timing Structure of Breaching a Server
   rules:
   - timing_structure:
@@ -151,7 +151,7 @@ sections:
     - text: Return to (4).
     - text: Breaching the server is complete.
 - section: sec_appendix_timing_structure_of_accessing_a_card
-  text: Timing Structure of Accessing a Card ({ref:sec_steps_accessing_card})
+  text: Timing Structure of Accessing a Card ({ref:Sec_steps_accessing_card})
   toc_entry: Timing Structure of Accessing a Card
   rules:
   - timing_structure:

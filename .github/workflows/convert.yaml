@@ -28,7 +28,7 @@ jobs:
         run: apt-get update
 
       - name: Install tex
-        run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended latexmk
+        run: apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-fonts-extra latexmk
 
       - name: Install requirements
         run: pip install -r requirements.txt

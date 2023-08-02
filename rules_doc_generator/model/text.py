@@ -48,19 +48,19 @@ class Ref:
   combiner: str
 
   def to_html(self, id_map: RefDict) -> str:
-    return self.to_text(id_map, lambda ref_id, ref_text: fr'<a href=#{ref_id}>{ref_text}</a>')
+    return self.to_text(" ", id_map, lambda ref_id, ref_text: fr'<a href=#{ref_id}>{ref_text}</a>')
 
   def to_latex(self, id_map: RefDict) -> str:
-    return self.to_text(id_map, lambda ref_id, ref_text: fr'\reful{{{ref_id}}}{{{ref_text}}}')
+    return self.to_text("~", id_map, lambda ref_id, ref_text: fr'\reful{{{ref_id}}}{{{ref_text}}}')
 
-  def to_text(self, id_map: RefDict, mk_link: Callable[[str, str], str]) -> str:
+  def to_text(self, spacer: str, id_map: RefDict, mk_link: Callable[[str, str], str]) -> str:
     try:
       if len(self.referenced_ids) == 1:
         ref_info = lookup_ref(id_map, self.referenced_ids[0])
         ref_text = ref_info.type
         if self.capitalize:
           ref_text = ref_text.capitalize()
-        return mk_link(ref_info.id, f'{ref_text}~{ref_info.reference}')
+        return mk_link(ref_info.id, f'{ref_text}{spacer}{ref_info.reference}')
       elif len(self.referenced_ids) > 1:
         latex_refs = list(map(lambda ref_id: mk_link(ref_id, lookup_ref(id_map, ref_id).reference), self.referenced_ids))
         joined = f' {self.combiner} '.join([', '.join(latex_refs[:-1]), latex_refs[-1]])

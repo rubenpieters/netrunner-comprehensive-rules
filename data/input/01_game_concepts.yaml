@@ -369,7 +369,7 @@ sections:
         {term:Recurring Credits} ([recurring]) place credits on a card repeatedly. The text "N[recurring]" means "When this card becomes active, place N credits on it. Before abilities meet their trigger conditions for your turn beginning, if there are fewer than N credits on this card, place credits on it until there are N credits on it."
     - rule: rule_placing_recurring_credits
       text: |-
-        Recurring credits are first placed on a card as soon as it becomes active. This occurs at {ref:rule_steps_installing_become_installed} of installing the card if it is installed active, {ref:rule_steps_installing_trash_like_cards} of playing an event or operation, or as soon as the card is turned faceup or scored, as applicable.
+        Recurring credits are first placed on a card as soon as it becomes active. This occurs at {ref:rule_steps_installing_become_installed} of installing the card if it is installed active, {ref:rule_steps_playing_active} of playing an event or operation, or as soon as the card is turned faceup or scored, as applicable.
     - rule: rule_refill_recurring_credits
       text: |-
         Recurring credits are refilled during {ref:step_corp_turn_recurring_credits_refill} of the Corp's turn and {ref:step_runner_turn_recurring_credits_refill} of the Runner's turn, before other abilities that apply at the start of the turn resolve.
@@ -392,7 +392,7 @@ sections:
     - rule: rule_corp_allotted_clicks
       text: The Corp receives 3[click] on each of their turns.
     - rule: rule_runner_allotted_clicks
-      text: The Runner receives 3[click] on each of their turns.
+      text: The Runner receives 4[click] on each of their turns.
   - subsection: rule_gain_spend_lose_clicks
     text: Players can gain, lose, or spend clicks.
     rules:

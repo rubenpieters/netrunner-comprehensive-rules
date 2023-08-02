@@ -147,7 +147,7 @@ sections:
   - rule: rule_rez_ice_restriction
     text: The paid ability window in {ref:step_approach_paw} of the Approach Ice Phase is the only time the Corp can normally rez ice. In this window, the Corp only gains the ability to rez the piece of ice being approached, not any other ice.
   - rule: rule_approach_ice_next_phase
-    text: When the Approach Ice Phase completes, the run moves either to the Encounter Ice Phase ({ref:sec_movement_phase}) or the Movement Phase ({ref:sec_encounter_ice_phase}). If the approached piece of ice is rezzed, the Runner encounters it next. If the approached piece of ice is unrezzed or if there is no longer ice installed in that position, then the run moves directly to the Movement Phase.
+    text: When the Approach Ice Phase completes, the run moves either to the Encounter Ice Phase ({ref:sec_encounter_ice_phase}) or the Movement Phase ({ref:sec_movement_phase}). If the approached piece of ice is rezzed, the Runner encounters it next. If the approached piece of ice is unrezzed or if there is no longer ice installed in that position, then the run moves directly to the Movement Phase.
 
 - section: sec_encounter_ice_phase
   text: Encounter Ice
@@ -242,6 +242,8 @@ sections:
         "If successful" abilities frequently create lingering effects (see {ref:sec_lingering_effects}) that modify the procedure for accessing cards or replace breaching the attacked server with another effect entirely. These effects apply to the breach permitted by the rules for this run (see {ref:rule_breach_link}), and they expire when the run is complete.
     - rule: rule_if_successful_ability_optional
       text: If an "If successful" effect gives the Runner an effect they can optionally carry out instead of breaching, that decision is made at the time the breach would begin, in {ref:step_breach}.
+      examples:
+      - text: The Runner plays {card:Account Siphon} while {card:Ash 2X3ZB9CY} is installed in the root of HQ, and the run is successful. The Runner can wait until after the trace from {card:Ash 2X3ZB9CY} completes before deciding to access cards normally or force the Corp to lose credits.
   - rule: rule_breach_link
     text: When the Runner breaches the server, they follow the procedures detailed in {ref:chpt_access_breach}.
 

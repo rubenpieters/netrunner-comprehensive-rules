@@ -122,9 +122,9 @@ sections:
     - rule: rule_run_timing_structure
       text: A run is a timing structure, as are each of the 6 phases of a run. See {ref:chpt_runs}.
     - rule: rule_breaching_timing_structure
-      text: Breaching a server is a timing structure. See {ref:sec_breaching_servers}.
+      text: Breaching a server is a timing structure. See {ref:sec_breaching_servers,sec_breaching_steps}.
     - rule: rule_accessing_timing_structure
-      text: Accessing a card is a timing structure. See {ref:sec_breaching_steps}.
+      text: Accessing a card is a timing structure. See {ref:sec_accessing_cards,sec_steps_accessing_card}.
     - rule: rule_not_timing_structures
       text: Other procedures with prescribed steps, such as installing a card or resolving a trace attempt, are not timing structures.
 

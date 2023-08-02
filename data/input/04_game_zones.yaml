@@ -68,7 +68,7 @@ sections:
     rules:
     - rule: rule_rnd_name
       text: |-
-        {term:R&d} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:rule_shuffle_deck_after_search}.
+        {term:R&D} is the name for the Corp's deck. It is also one of the Corp's central servers. See {ref:subsec_central_servers}.
     - rule: rule_rnd_empty_rnd
       text: If the Corp must ever draw from R&D while it is empty, the Runner wins the game. See {ref:sec_ending_the_game}.
   - subsection: subsec_stack
@@ -104,7 +104,7 @@ sections:
     rules:
     - rule: rule_hq_name
       text: |-
-        {term:Hq} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:subsec_central_servers}.
+        {term:HQ} is the name for the Corp's hand. It is also one of the Corp's central servers. See {ref:subsec_central_servers}.
     - rule: rule_identity_represents_hq
       text: The Corp's identity card represents their HQ server for the purposes of gameplay. Ice protecting HQ is installed in front of the Corp's identity card and upgrades installed in the root of HQ are installed behind the Corp's identity card.
   - subsection: subsec_grip
@@ -274,7 +274,7 @@ sections:
         The Corp card {card:Earth Station: SEA Headquarters} and its reverse, {card:Earth Station: Ascending to Orbit}, both have the ability, "Limit 1 remote server." While this ability is active, as long as a remote server exists, the Corp cannot create a new remote server. If at any time more than 1 remote server exists while this ability is active, the next checkpoint will force the Corp player to choose 1 of those servers. The checkpoint will then trash all cards in the root of and protecting each other remote server. See {ref:rule_checkpoint_card_restrictions}.
 
   - subsection: subsec_protecting_a_server
-    text: Protection a Server
+    text: Protecting a Server
     toc:
     rules:
     - rule: rule_ice_ordered
@@ -307,6 +307,8 @@ sections:
   rules:
   - rule: rule_set_aside_zone
     text: The {term:set-aside zone} is an inactive zone shared by both players. It is used as a temporary holding space for objects being affected by abilities.
+  - rule: rule_set_aside
+    text: If an object is "set aside", it is moved from its current zone to the set-aside zone.
   - rule: rule_set_aside_zone_passthrough
     text: An ability cannot see the set-aside zone unless it specifically sets objects aside or refers to set-aside objects. Outside of these cases, cards moved into another zone from the set-aside zone are treated as though they entered that zone directly from their location prior to being set aside.
     examples:

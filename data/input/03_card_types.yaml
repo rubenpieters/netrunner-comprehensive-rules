@@ -204,10 +204,18 @@ sections:
       text: Some programs have the subtype {subtype:icebreaker}. {subtype:Icebreaker} programs have strength and abilities that interface with ice.
     - rule: rule_icebreaker_strength_increase_implicit
       text: Paid abilities on an {subtype:icebreaker} that modify that {subtype:icebreaker}'s strength implicitly have a duration of "for the remainder of the current encounter".
+      examples:
+      - text: |-
+          {card:Corroder} has the ability "1[c]: +1 strength."" Since no duration is specified, this strength increase applies until the end of the current encounter.
     - rule: rule_icebreaker_strength_increase_specified
       text: If an {subtype:icebreaker}'s paid ability specifies another duration for modifying its strength, that modification lasts until both the stated duration and the implicit encounter duration have expired.
+      examples:
+      - text: |-
+          {card:Gordian Blade} has the ability "1[c]: +1 strength for the remainder of this run." This ability applies until the end of the current run, whether it is triggered during an encounter or another step of the run. If the ability is triggered during an encounter that takes place outside of a run, the strength increase applies for the duration of that encounter.
     - rule: rule_icebreaker_strength_increase_outside_of_encounter.
       text: If an {subtype:icebreaker}'s paid ability modifies its strength outside of an encounter and does not specify another applicable duration, the modification expires during the next checkpoint.
+      examples:
+      - text: If the Runner uses {card:Corroder}'s ability to increase its strength outside of an encounter, it applies only until the next checkpoint.
     - rule: rule_icebreaker_interface
       text: All {subtype:icebreakers} have abilities that {term:interface} with ice, sometimes referred to as "interface abilities". These abilities are indicated by the "interface" flag preceding the ability's text.
     - rule: rule_icebreaker_interface_during_encounter

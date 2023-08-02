@@ -33,9 +33,9 @@ sections:
     rules:
     - rule: rule_costs_with_click
       text: Other costs can contain [click] symbols without denoting an action.
-    examples: 
-    - text: |-
-        The ability "[click]: Gain 1[c] and draw 1 card." on {card:Professional Contacts} is an action. The ability "Lose [click]: Break 1 subroutine on this ice. Only the Runner can use this ability." on {card:Eli 1.0} is not an action and is used during a paid ability window.
+      examples: 
+      - text: |-
+          The ability "[click]: Gain 1[c] and draw 1 card." on {card:Professional Contacts} is an action. The ability "Lose [click]: Break 1 subroutine on this ice. Only the Runner can use this ability." on {card:Eli 1.0} is not an action and is used during a paid ability window.
   - subsection: rule_initiate_action
     text: A player initiates an action by paying its cost in [click], as well as any other costs associated with that action, during their action window.
     rules:
@@ -60,9 +60,9 @@ sections:
       text: Actions a player performs are the same if they are all the same basic action or if all of those actions were initiated by the same ability from the same card.
     - rule: rule_defferent_actions
       text: Actions a player performs are different if each of them is initiated from a different basic action or card ability. Instances of equivalent abilities on different cards are still different actions.
-    examples: 
-    - text: |-
-        The Corp, playing {card:MirrorMorph: Endless Iteration}, plays {card: Hedge Fund} as the first action of their turn, then plays {card:Lateral Growth}. Even though two different cards were played, both times the Corp used the basic action to "Play 1 operation from HQ". Since their first two actions were the same, the Corp will not be able to trigger the ability on MirrorMorph this turn.
+      examples: 
+      - text: |-
+          The Corp, playing {card:MirrorMorph: Endless Iteration}, plays {card: Hedge Fund} as the first action of their turn, then plays {card:Lateral Growth}. Even though two different cards were played, both times the Corp used the basic action to "Play 1 operation from HQ". Since their first two actions were the same, the Corp will not be able to trigger the ability on MirrorMorph this turn.
   - subsection: rule_corp_actions
     text: Corp Actions
     rules:

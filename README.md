@@ -188,5 +188,5 @@ Highlight a rule as new.
 Highlight a piece of text as new.
 
 ```
-text: This is old text. {n}This is new text.{\n}
+text: This is old text. {n}This is new text.{/n}
 ```

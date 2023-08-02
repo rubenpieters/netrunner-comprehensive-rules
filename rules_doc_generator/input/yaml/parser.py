@@ -36,7 +36,7 @@ def parseTextElement(str: str) -> TextElement:
     text = text_and_link[0]
     link = text_and_link[1]
     return Link(text, link)
-  elif str.startswith('\\n'):
+  elif str.startswith('/n'):
     return NewEnd()
   elif str.startswith('n'):
     return NewStart()

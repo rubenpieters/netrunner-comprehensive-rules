@@ -88,7 +88,7 @@ class Term:
     return f'<span class="Term">{self.text}</span>'
 
   def to_latex(self, id_map: RefDict) -> str:
-    return f'\\gameterm{{{self.text}}}'
+    return f'{{\\gameterm{{{self.text}}}}}'
 
 @dataclass
 class SubType:

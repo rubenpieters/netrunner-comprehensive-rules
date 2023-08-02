@@ -63,6 +63,13 @@ To see this document with a complete list of changes and with new material highl
 
 \newpage
 
+% ToC indentation.
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.8em}{1.4em}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{3.4em}{2.5em}}
+\renewcommand{\l@subsubsection}{\@dottedtocline{3}{6em}{2.5em}}
+\makeatother
+
 \addcontentsline{toc}{section}{Table of Contents}
 
 \begin{multicols}{2}

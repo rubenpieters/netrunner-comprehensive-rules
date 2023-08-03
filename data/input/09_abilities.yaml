@@ -413,7 +413,7 @@ sections:
     - rule: rule_condition_met_multiple_times
       text: If the trigger condition of an ability is met more than once between consecutive checkpoints, multiple instances of that ability become pending in the next reaction window.
       examples:
-      - text: The Runner plays {Card:Singularity}, trashing 3 Corp cards simultaneously. Since {card:Hostile Infrastructure}'s trigger condition is met separately for each card trashed, the next checkpoint handles all of those occurrences, and 3 instances of the ability become pending in the same reaction window.
+      - text: The Runner plays {card:Singularity}, trashing 3 Corp cards simultaneously. Since {card:Hostile Infrastructure}'s trigger condition is met separately for each card trashed, the next checkpoint handles all of those occurrences, and 3 instances of the ability become pending in the same reaction window.
       - text: The Runner controls {card:Blackguard} and plays {card:Satellite Uplink}, exposing 2 cards in a single instruction. In the next checkpoint, two instances of {card:Blackguard}'s ability become pending, one corresponding to each card that was exposed.
 
   - subsection: rule_trigger_description
@@ -485,7 +485,7 @@ sections:
     text: A {term:delayed conditional ability} is a conditional ability maintained by a lingering effect (see {ref:sec_lingering_effects}). Unlike other lingering effects, some delayed conditional abilities are created without an explicitly stated duration.
     rules:
     - rule: rule_delayed_conditional_ability_if_successful_duration
-      text: If an "if successful" ability contains a nested delayed conditional ability referring to breaching the attacked server, that ability applies to the breach at {ref:step_breach} of the run the "if successful" ability is associated with. Its duration expires at the end of the run. See {ref:rule_if_successful}.
+      text: If an "if successful" ability contains a nested delayed conditional ability referring to breaching the attacked server, that ability applies to the breach at {ref:step_breach} of the run the "if successful" ability is associated with. Its duration expires at the end of the run. See {ref:rule_if_successful_lingering_effect}.
     - rule: rule_delayed_conditional_ability_specified_duration
       text: If an instruction creates a delayed conditional ability and specifies a duration, the delayed conditional ability is active until that duration expires.
       examples:
@@ -881,7 +881,7 @@ sections:
     - rule: rule_use_restrictions
       text: A sentence is not part of any instruction if it only provides clarification, restrictions or conditions on when or how the ability it appears in can be triggered, or otherwise does not give directions to the players or the game state that would be carried out as the ability resolves.
       examples:
-      - text: A sentence reading "Use this ability only by spending credits from a stealth card." is not an instruction or part of any instruction. It is a restriction that applies to the entire ability.
+      - text: A sentence reading "Use this ability only by spending credits from a {subtype:stealth} card." is not an instruction or part of any instruction. It is a restriction that applies to the entire ability.
     - rule: rule_split_up_instruction
       text: If a sentence directs a player to play, install, or access more than one card, each such card is handled as a separate instruction. The instruction ends and a new one begins immediately before each play, install, or access after the first.
       examples:

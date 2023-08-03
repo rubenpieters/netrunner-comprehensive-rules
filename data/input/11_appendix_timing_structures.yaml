@@ -110,7 +110,7 @@ sections:
       - text: Go to (4).
     - text: Movement Phase
       elements:
-      - text: The Runner encounters ice.
+      - text: If the run got here from (2) or (3), the Runner passes ice.
       - text: |-
           Paid ability window: (P).
       - text: The Runner may jack out.

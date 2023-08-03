@@ -121,7 +121,7 @@ sections:
   text: Discard Pile
   rules:
   - rule: rule_discard_pile
-    text: A player's DISCARD PILE is the zone in which they place cards that have been trashed or discarded. Discard piles start the game empty.
+    text: A player's {term:discard pile} is the zone in which they place cards that have been trashed or discarded. Discard piles start the game empty.
   - rule: rule_discard_pile_unordered
     text: Discard piles are not ordered. A player may freely arrange the cards in their discard pile in any order at any time.
   - rule: rule_discard_pile_open_info

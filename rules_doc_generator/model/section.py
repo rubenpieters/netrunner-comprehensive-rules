@@ -71,6 +71,7 @@ class TimingStructureElement:
 @dataclass
 class SubRule:
   id: Union[str, None]
+  new: bool
   format_text: FormatText
   examples: list[Example]
 
@@ -82,7 +83,13 @@ class SubRule:
   
   def to_latex(self, id_map: RefDict) -> str:
     result = f'% SubRule {self.id}\n'
-    result += f'  \\2 \\refstepcounter{{manual_refs}}\label{{{self.id}}} {self.format_text.to_latex(id_map)}\n'
+    result += f'  \\2 \\refstepcounter{{manual_refs}}\label{{{self.id}}} '
+    if self.new:
+      result += '\\textbf{'
+    result += self.format_text.to_latex(id_map)
+    if self.new:
+      result += '} \\color{black}'
+    result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
@@ -109,7 +116,7 @@ class Rule:
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new:
       result += '\\textbf{'
-    result += f'{self.format_text.to_latex(id_map)}'
+    result += self.format_text.to_latex(id_map)
     if self.new:
       result += '} \\color{black}'
     result += '\n'
@@ -121,6 +128,7 @@ class Rule:
 @dataclass
 class SubSection:
   id: Union[str, None]
+  new: bool
   format_text: FormatText
   toc: bool
   steps: bool
@@ -149,10 +157,15 @@ class SubSection:
       result += '\\addtocounter{subsubsection}{1} '
       result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
-    if self.toc:
+    if self.new:
+      result += r'\textbf{'
+      if self.toc:
+        result += r'\Large '
+      result += r'\color{orange} '
+    elif self.toc:
       result += '{\\Large \\color{darkgray}'
     result += self.format_text.to_latex(id_map)
-    if self.toc:
+    if self.toc or self.new:
       result += '}'
     result += '\n'
     if self.snippet:

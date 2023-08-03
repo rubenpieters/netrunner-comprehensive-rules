@@ -60,9 +60,10 @@ def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement
 
 def parse_subrule(yaml_sub_rule: Any = False) -> SubRule:
   id = parse_id(yaml_sub_rule, 'rule')
+  new = parse_boolean(yaml_sub_rule, 'new')
   text = parse_format_text_field(yaml_sub_rule, 'text')
   examples = parse_subelements(yaml_sub_rule, 'examples', parse_example)
-  return SubRule(id, text, examples)
+  return SubRule(id, new, text, examples)
 
 def parse_rule(yaml_rule: Any) -> Rule:
   id = parse_id(yaml_rule, 'rule')
@@ -73,13 +74,14 @@ def parse_rule(yaml_rule: Any) -> Rule:
 
 def parse_subsection(yaml_rule: Any) -> SubSection:
   id = parse_id(yaml_rule, 'subsection')
+  new = parse_boolean(yaml_rule, 'new')
   toc = parse_boolean(yaml_rule, 'toc')
   steps = parse_boolean(yaml_rule, 'steps')
   text = parse_format_text_field(yaml_rule, 'text')
   snippet = parse_with_default(yaml_rule, 'snippet', None, parse_format_text_field)
   examples = parse_subelements(yaml_rule, 'examples', parse_example)
   rules = parse_subelements(yaml_rule, 'rules', parse_subrule)
-  return SubSection(id, text, toc, steps, snippet, examples, rules)
+  return SubSection(id, new, text, toc, steps, snippet, examples, rules)
 
 def parse_section_element(yaml_section_element: Any) -> SectionElement:
   funcs: list[Callable[[Any], SectionElement]] = [parse_rule, parse_timing_structure, parse_subsection]

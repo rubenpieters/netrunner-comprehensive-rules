@@ -36,7 +36,7 @@
 \newcommand*{\hreful}[2]{\href{#1}{\color{blue}\setulcolor{blue}\ul{#2}}}
 
 % Game term.
-\newcommand*{\gameterm}{\fontfamily{cmr}\selectfont\textsc}
+\newcommand*{\gameterm}{\small\uppercase}
 
 \begin{document}
 
@@ -65,6 +65,9 @@ To see this document with a complete list of changes and with new material highl
 % Table of Contents
 
 \newpage
+
+% Add empty section, to make sure ToC self-link works correctly.
+\section*{}
 
 % ToC indentation.
 \makeatletter

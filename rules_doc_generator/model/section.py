@@ -160,10 +160,10 @@ class SubSection:
     if self.new:
       result += r'\textbf{'
       if self.toc:
-        result += r'\Large '
+        result += r'\large '
       result += r'\color{orange} '
     elif self.toc:
-      result += '{\\Large \\color{darkgray}'
+      result += '{\\large \\color{darkgray}'
     result += self.format_text.to_latex(id_map)
     if self.toc or self.new:
       result += '}'

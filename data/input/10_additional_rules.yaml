@@ -123,13 +123,13 @@ sections:
   - subsection: rule_damage_types
     text: The three types of damage the Runner can suffer are meat, net, and core damage
     rules:
-    - rule: 
+    - rule: rule_meat_net_damage
       text: |-
         {term:meat damage} and {term:net damage} are resolved the same way. For each point of damage suffered, 1 card is randomly trashed from the grip.
-    - rule:
+    - rule: rule_core_damage
       text: |-
         For each point of {term:core damage} suffered, 1 card is randomly trashed from the grip, and the Runner's maximum hand size is permanently reduced by 1. The Runner takes a core damage counter for each core damage suffered to track the reduction in hand size.
-    - rule:
+    - rule: rule_brain_damage
       text: Some cards refer to "brain damage". This is an older term for core damage. The two terms are interchangeable.
   - subsection: rule_multiple_damage_taken_simultaneously
     text:  If the Runner suffers more than 1 damage of any type, the cards are randomly trashed simultaneously.
@@ -148,7 +148,7 @@ sections:
 - section: sec_tags
   text: Tags
   snippet: |-
-    Tags represent the Corp's possession of valuable information about the Runner, such as a data trail they’ve left behind or the physical location they are jacked in from.
+    Tags represent the Corp's possession of valuable information about the Runner, such as a data trail they've left behind or the physical location they are jacked in from.
   rules:
   - rule: rule_tag
     text: |-

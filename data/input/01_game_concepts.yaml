@@ -416,7 +416,7 @@ sections:
     - text: The Corp uses the first ability on {card:Vaporframe Fabricator}, which specifies that it can only be used once per turn, and trashes {card:Vaporframe Fabricator} during the installation process. Then the Corp plays Restore, reinstalling the same copy of {card:Vaporframe Fabricator} from Archives. Even though it is the same physical card, the reinstalled {card:Vaporframe Fabricator} is a new object, and its "once per turn" ability is available to be used this turn.
     - text: The Runner accesses {card:Ganked!} from the root of a server they are breaching. The Corp uses {card:Ganked!}'s ability to trash it and force the Runner to encounter {card:Drafter}. While resolving {card:Drafter}'s subroutines during that encounter, the Corp reinstalls the same copy of {card:Ganked!} from Archives into the same root. Since the {card:Ganked!} card left and reentered the zone it was accessed from, it is now a new object, and the Runner must access that object before completing the breach. Thus, if the Runner does not interfere (such as by breaking {card:Drafter}'s subroutines), the Corp could repeat this sequence of events several times.
     rules:
-    - rule:
+    - rule: rule_identify_object_after_move
       text: An ability that moves cards can identify the new objects that those cards become and continue to act on them.
       examples:
       - text: The Corp plays {card:Priority Construction}, installing a piece of ice from HQ. That ice is now a new object in the play area, but {card:Priority Construction}'s second instruction can still find it and place advancement counters on it.
@@ -805,7 +805,7 @@ sections:
     rules:
     - rule: rule_hidden_secret_faceup_facedown
       text: Cards in hidden or secret zones (see {ref:sec_game_zones_general}) are neither faceup nor facedown.
-    - rule: 
+    - rule: rule_hosted_cards_treated_as_group
       text: Some effects host multiple cards on an object at the same time or set aside multiple cards at the same time. Facedown cards that enter a zone at the same time by the same effect are treated as a group. See {ref:rule_host_faceup_facedown} and {ref:rule_facedown_set_aside_distinct_groups}, respectively.
   - subsection: rule_look
     text: When a player {term:looks} at a card, they are allowed to see the front face of the card even if the front face would not normally be visible to them. A player should look at that card without showing it to the other player if it is not normally visible to that player.

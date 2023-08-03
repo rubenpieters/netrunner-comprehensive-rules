@@ -857,9 +857,9 @@ sections:
       text: When a timing structure is opened, the checkpoints in that timing structure are carried out. See {ref:rule_timing_structure} for a list of timing structures.
     - rule: rule_draw_checkpoint
       text: When a player draws cards, a checkpoint occurs at {ref:step_draw_checkpoint} of that procedure.
-    - rule: rule_
+    - rule: rule_play_checkpoint
       text: When an event or operation is played, a checkpoint occurs at {ref:rule_steps_playing_played_checkpoint} of that procedure.
-    - rule:
+    - rule: rule_trace_checkpoint
       text: When a trace is initiated, a checkpoint occurs at {ref:step_trace_checkpoint} of that procedure.
 
   - subsection: rule_step_in_timing_structure_is_instruction

@@ -397,11 +397,11 @@ sections:
   - subsection: rule_swap_simultaneous
     text: If two cards are swapped between zones, each card moves to the zone the other is in simultaneously.
     rules:
-    - rule: 
+    - rule: rule_state_of_swap_into_zone
       text: Each of the swapped cards enters its destination zone in the same state that a card would normally enter that zone. A card swapped into Archives enters Archives facedown unless it was visible to the Runner at the time of the swap, a Corp card swapped into the play area enters unrezzed, etc.
-    - rule: 
+    - rule: rule_swap_become_installed
       text: If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host).
-    - rule: 
+    - rule: rule_swap_score_area
       text: If two agendas are swapped between the players' score areas, any hosted cards or counters remain hosted on their respective host agendas.
-    - rule: 
+    - rule: rule_swap_set_aside
       text: If a card is swapped with a set-aside card, the card moving into the set-aside zone becomes part of the group of cards being acted on by the ability that had set the other card aside, and the card moving out of the set-aside zone ceases to be acted on by that ability. See {ref:rule_drawn_card_swapped} for a specific case where this can happen, and see also {ref:rule_set_aside_zone_passthrough} regarding effects acting on cards in the set-aside zone.

@@ -50,7 +50,8 @@ def parse_format_text(str: str) -> FormatText:
 
 def parse_example(yaml_example: Any) -> Example:
   text = parse_format_text_field(yaml_example, 'text')
-  return Example(text)
+  new = parse_boolean(yaml_example, 'new')
+  return Example(text, new)
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
   text = parse_with_default(yaml_timing_structure, 'text', None, parse_format_text_field)

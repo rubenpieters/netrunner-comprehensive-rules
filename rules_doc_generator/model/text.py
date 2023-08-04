@@ -176,9 +176,17 @@ class FormatText:
 @dataclass
 class Example:
   text: FormatText
+  new: bool
 
   def to_html(self, id_map: RefDict) -> str:
     return f'<p class="Example">Example: {self.text.to_html(id_map)}</p>'
 
   def to_latex(self, id_map: RefDict) -> str:
-    return f'\emph{{Example: {self.text.to_latex(id_map)}}}'
+    result = r'\emph{'
+    if self.new:
+      result += r'\color{orange} \textbf{'
+    result += f'Example: {self.text.to_latex(id_map)}'
+    result += r'}'
+    if self.new:
+      result += r'}'
+    return result

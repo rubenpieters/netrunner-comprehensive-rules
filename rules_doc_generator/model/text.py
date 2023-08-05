@@ -137,7 +137,7 @@ class NewStart:
     return ''
 
   def to_latex(self, id_map: RefDict) -> str:
-    return '{\\color{orange}'
+    return '\\textbf{\\color{orange}'
 
 @dataclass
 class NewEnd:

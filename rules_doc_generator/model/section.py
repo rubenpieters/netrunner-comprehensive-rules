@@ -172,6 +172,8 @@ class SubSection:
     result += self.format_text.to_latex(config, id_map)
     if self.toc or (self.new and config.annotated):
       result += '\\color{black} \\normalfont'
+    if self.toc:
+      result += ' \\normalsize'
     result += '\n'
     if self.snippet:
       snippet_lines = self.snippet.to_latex(config, id_map).split('\n')

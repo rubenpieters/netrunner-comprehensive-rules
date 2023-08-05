@@ -84,12 +84,15 @@ class SubRule:
   
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% SubRule {self.id}\n'
-    result += f'  \\2 \\refstepcounter{{manual_refs}}\label{{{self.id}}} '
+    result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new and config.annotated:
-      result += '\\textbf{\\color{orange}'
+      result += '\\global \\colorlabeltrue '
+    result += '\\2 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
     result += self.format_text.to_latex(config, id_map)
     if self.new and config.annotated:
-      result += '}'
+      result += '\\color{black} \\normalfont'
     result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
@@ -111,13 +114,15 @@ class Rule:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Rule {self.id}\n'
-    result += '\\1 '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new and config.annotated:
-      result += '\\textbf{\\color{orange}'
+      result += '\\global \\colorlabeltrue '
+    result += '\\1 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
     result += self.format_text.to_latex(config, id_map)
     if self.new and config.annotated:
-      result += '}'
+      result += '\\color{black} \\normalfont'
     result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
@@ -150,22 +155,23 @@ class SubSection:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% SubSection {self.id}\n'
-    result += '\\1 '
     if self.toc:
       result += '\\phantomsection '
       result += '\\addtocounter{subsubsection}{1} '
       result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(config, id_map) + '} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new and config.annotated:
-      result += r'\textbf{'
-      if self.toc:
-        result += r'\large '
-      result += r'\color{orange}'
-    elif self.toc:
-      result += '{\\large \\color{darkgray}'
+      result += '\\global \\colorlabeltrue '
+    result += '\\1 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
+    if self.toc:
+      result += '\\large '
+    if self.toc and not (self.new and config.annotated):
+      result += '\\bfseries \\color{darkgray}'
     result += self.format_text.to_latex(config, id_map)
     if self.toc or (self.new and config.annotated):
-      result += '}'
+      result += '\\color{black} \\normalfont'
     result += '\n'
     if self.snippet:
       snippet_lines = self.snippet.to_latex(config, id_map).split('\n')
@@ -211,7 +217,7 @@ class Section:
     if self.toc_entry:
       result += f'\subsection[{self.toc_entry}]{{{self.text.to_latex(config, id_map)}}}\n'
     elif self.new and config.annotated:
-      result += f'\subsection[{self.text.to_latex(config, id_map)}]{{\color{{orange}}{self.text.to_latex(config, id_map)}}}\n'
+      result += f'{{\color{{orange}}\subsection{{{self.text.to_latex(config, id_map)}}}}}\n'
     else:
       result += f'\subsection{{{self.text.to_latex(config, id_map)}}}\n'
     result += f'\label{{{self.id}}}\n'

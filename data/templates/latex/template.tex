@@ -38,6 +38,11 @@
 % Game term.
 \newcommand*{\gameterm}{\small\upshape\uppercase}
 
+\newcommand{\colorlabel}{%
+  \ifcolorlabel\bfseries\color{orange}\global\colorlabelfalse\fi
+}
+\newif\ifcolorlabel
+
 \begin{document}
 
 % Prelude
@@ -87,8 +92,8 @@ To see this document with a complete list of changes and with new material highl
 \newpage
 
 % Change style for enumerate sections.
-\setlist[enumerate,1]{label=\arabic{section}.\arabic{subsection}.\arabic*.,leftmargin=*,labelindent=15pt}
-\setlist[enumerate,2]{label=\alph*.}
+\setlist[enumerate,1]{label=\protect\colorlabel\arabic{section}.\arabic{subsection}.\arabic*.,leftmargin=50pt,labelindent=15pt}
+\setlist[enumerate,2]{label=\protect\colorlabel\alph*.}
 
 %__DOCUMENT_PLACEHOLDER__%
 

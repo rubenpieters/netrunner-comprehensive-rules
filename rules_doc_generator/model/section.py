@@ -186,6 +186,7 @@ SectionElement = Union[Rule, SubSection, TimingStructureElement]
 @dataclass
 class Section:
   id: str
+  new: bool
   text: FormatText
   toc_entry: str | None
   snippet: Optional[FormatText]
@@ -207,9 +208,9 @@ class Section:
   def to_latex(self, id_map: RefDict) -> str:
     result = f'% Section {self.id}.\n'
     if self.toc_entry:
-      result += '\\addtocounter{subsection}{1}\n'
-      result += '\\addcontentsline{toc}{subsection}{\\arabic{section}.\\arabic{subsection}~~ ' + self.toc_entry + '}\n'
-      result += f'\subsection*{{\\arabic{{section}}.\\arabic{{subsection}}~~ {self.text.to_latex(id_map)}}}\n'
+      result += f'\subsection[{self.toc_entry}]{{{self.text.to_latex(id_map)}}}\n'
+    elif self.new:
+      result += f'\subsection[{self.text.to_latex(id_map)}]{{\color{{orange}}{self.text.to_latex(id_map)}}}\n'
     else:
       result += f'\subsection{{{self.text.to_latex(id_map)}}}\n'
     result += f'\label{{{self.id}}}\n'

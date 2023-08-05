@@ -85,10 +85,10 @@ class SubRule:
     result = f'% SubRule {self.id}\n'
     result += f'  \\2 \\refstepcounter{{manual_refs}}\label{{{self.id}}} '
     if self.new:
-      result += '\\textbf{'
+      result += '\\textbf{\\color{orange}'
     result += self.format_text.to_latex(id_map)
     if self.new:
-      result += '} \\color{black}'
+      result += '}'
     result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
@@ -110,15 +110,13 @@ class Rule:
 
   def to_latex(self, id_map: RefDict) -> str:
     result = f'% Rule {self.id}\n'
-    if self.new:
-      result += '\\color{orange}'
     result += '\\1 '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new:
-      result += '\\textbf{'
+      result += '\\textbf{\\color{orange}'
     result += self.format_text.to_latex(id_map)
     if self.new:
-      result += '} \\color{black}'
+      result += '}'
     result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
@@ -161,7 +159,7 @@ class SubSection:
       result += r'\textbf{'
       if self.toc:
         result += r'\large '
-      result += r'\color{orange} '
+      result += r'\color{orange}'
     elif self.toc:
       result += '{\\large \\color{darkgray}'
     result += self.format_text.to_latex(id_map)

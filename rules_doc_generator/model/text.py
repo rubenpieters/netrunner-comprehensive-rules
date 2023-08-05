@@ -184,7 +184,7 @@ class Example:
   def to_latex(self, id_map: RefDict) -> str:
     result = r'\emph{'
     if self.new:
-      result += r'\color{orange} \textbf{'
+      result += r'\textbf{\color{orange}'
     result += f'Example: {self.text.to_latex(id_map)}'
     result += r'}'
     if self.new:

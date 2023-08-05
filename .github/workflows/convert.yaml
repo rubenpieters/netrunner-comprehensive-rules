@@ -34,16 +34,21 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Convert input files
-        run: python3 -m rules_doc_generator
+        run: python3 -m rules_doc_generator -a
 
       - name: Create pdf output
-        run: latexmk -pdf -jobname=latex/demo latex/demo.tex
+        run: latexmk -pdf -jobname=latex/rules latex/rules.tex
+
+      - name: Create pdf output of annotated version
+        run: latexmk -pdf -jobname=latex_annotated/rules_annotated latex_annotated/rules_annotated.tex
 
       - name: Upload pdf output
         uses: actions/upload-artifact@v3
         with:
           name: pdf-output
-          path: latex/demo.pdf
+          path: |
+            latex/rules.pdf
+            latex_annotated/rules_annotated.pdf
 
       - name: Upload pdf output
         uses: actions/upload-artifact@v3
@@ -65,7 +70,7 @@ jobs:
           path: '.'
 
       - name: Move index.html
-        run: mv demo.html index.html
+        run: mv rules.html index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

@@ -9,7 +9,7 @@ from rules_doc_generator.model.analysis.references import construct_reference_ma
 
 # Parse command line arguments.
 parser = ArgumentParser()
-parser.add_argument("-a", "--annotated", default=False, help="annotated version with highlights of new parts", action="store_true")
+parser.add_argument("-a", "--annotated", default=False, help="also generate annotated version with highlights of new parts", action="store_true")
 args = parser.parse_args()
 config = Config(args.annotated)
 
@@ -21,9 +21,11 @@ document = yaml_to_document()
 print("Constructing Model...")
 ref_dict = construct_reference_map(document)
 print("Writing Output...")
-write_to_file('html', 'demo.html', standalone_html(document, config, ref_dict))
-write_to_file('latex', 'demo.tex', standalone_latex(document, config, ref_dict))
+write_to_file('html', 'rules.html', standalone_html(document, config, ref_dict))
+if config.annotated:
+  write_to_file('latex_annotated', 'rules_annotated.tex', standalone_latex(document, config, ref_dict))
+write_to_file('latex', 'rules.tex', standalone_latex(document, config.not_annotated(), ref_dict))
 print("Ready!")
 
 shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('html', 'credit.svg'))
-shutil.copyfile(os.path.join('data', 'templates', 'html', 'demo.css'), os.path.join('html', 'demo.css'))
+shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('html', 'rules.css'))

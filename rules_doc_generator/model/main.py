@@ -13,7 +13,7 @@ def create_toc_html(id_map: RefDict):
   return result
 
 def standalone_html(document: Document, config: Config, id_map: RefDict):
-  result = '<!DOCTYPE html><html><head><link rel="stylesheet" href="demo.css"></head><body>'
+  result = '<!DOCTYPE html><html><head><link rel="stylesheet" href="rules.css"></head><body>'
   result += '<div class="RulesGrid">'
   result += f'<ul class="RulesToc">{create_toc_html(id_map)}</ul>'
   result += f'<div class="RulesContent">{document.to_html(config, id_map)}</div>'

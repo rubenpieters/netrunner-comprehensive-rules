@@ -1,5 +1,6 @@
 /html/
 /latex/
+/latex_annotated/
 __pycache__/
 .venv
 .vscode

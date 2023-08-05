@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional, Union
 
+from rules_doc_generator.config import (Config)
 from rules_doc_generator.model.text import (RefDict, FormatText, Example)
 
 @dataclass
@@ -10,54 +11,54 @@ class TimingStructureElement:
   bold: bool
   elements: list[TimingStructureElement]
 
-  def to_html_l1(self, id_map: RefDict) -> str:
-    result = f'<li class="TimingStructureL1">{self.text.to_html(id_map)}'
+  def to_html_l1(self, config: Config, id_map: RefDict) -> str:
+    result = f'<li class="TimingStructureL1">{self.text.to_html(config, id_map)}'
     result += f'<ol>'
     for elem in self.elements:
-      result += elem.to_html_l2(id_map)
+      result += elem.to_html_l2(config, id_map)
     result += '</ol></li>'
     return result
 
-  def to_html_l2(self, id_map: RefDict) -> str:
-    result = f'<li class="TimingStructureL2">{self.text.to_html(id_map)}'
+  def to_html_l2(self, config: Config, id_map: RefDict) -> str:
+    result = f'<li class="TimingStructureL2">{self.text.to_html(config, id_map)}'
     result += f'<ol>'
     for elem in self.elements:
-      result += elem.to_html_l3(id_map)
+      result += elem.to_html_l3(config, id_map)
     result += '</ol></li>'
     return result
 
-  def to_html_l3(self, id_map: RefDict) -> str:
-    return f'<li class="TimingStructureL3">{self.text.to_html(id_map)}</li>'
+  def to_html_l3(self, config: Config, id_map: RefDict) -> str:
+    return f'<li class="TimingStructureL3">{self.text.to_html(config, id_map)}</li>'
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     result = '<ol class="TimingStructureList">'
     for elem in self.elements:
-      result += elem.to_html_l1(id_map)
+      result += elem.to_html_l1(config, id_map)
     result += '</ol>'
     return result
 
-  def to_latex_l1(self, id_map: RefDict, bold: bool) -> str:
+  def to_latex_l1(self, config: Config, id_map: RefDict, bold: bool) -> str:
     result = '\\1 '
     if bold:
       result += '\\textbf{'
-    result += self.text.to_latex(id_map)
+    result += self.text.to_latex(config, id_map)
     if bold:
       result += '}'
     result += '\n'
     for elem in self.elements:
-      result += elem.to_latex_l2(id_map)
+      result += elem.to_latex_l2(config, id_map)
     return result
 
-  def to_latex_l2(self, id_map: RefDict) -> str:
-    result = f'  \\2 {self.text.to_latex(id_map)}\n'
+  def to_latex_l2(self, config: Config, id_map: RefDict) -> str:
+    result = f'  \\2 {self.text.to_latex(config, id_map)}\n'
     for elem in self.elements:
-      result += elem.to_latex_l3(id_map)
+      result += elem.to_latex_l3(config, id_map)
     return result
 
-  def to_latex_l3(self, id_map: RefDict) -> str:
-    return f'    \\3 {self.text.to_latex(id_map)}\n'
+  def to_latex_l3(self, config: Config, id_map: RefDict) -> str:
+    return f'    \\3 {self.text.to_latex(config, id_map)}\n'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     if self.bold:
       result = '\setlist[enumerate,1]{label=\\textbf{\\arabic*)}}\n'
     else:
@@ -65,7 +66,7 @@ class TimingStructureElement:
     result += '\setlist[enumerate,2]{label=\\alph*)}\n'
     result += '\setlist[enumerate,3]{label=\\roman*)}\n'
     for elem in self.elements:
-      result += elem.to_latex_l1(id_map, self.bold)
+      result += elem.to_latex_l1(config, id_map, self.bold)
     return result
 
 @dataclass
@@ -75,24 +76,24 @@ class SubRule:
   format_text: FormatText
   examples: list[Example]
 
-  def to_html(self, id_map: RefDict) -> str:
-    result = self.format_text.to_html(id_map)
+  def to_html(self, config: Config, id_map: RefDict) -> str:
+    result = self.format_text.to_html(config, id_map)
     for example in self.examples:
-      result += example.to_html(id_map)
+      result += example.to_html(config, id_map)
     return result
   
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% SubRule {self.id}\n'
     result += f'  \\2 \\refstepcounter{{manual_refs}}\label{{{self.id}}} '
-    if self.new:
+    if self.new and config.annotated:
       result += '\\textbf{\\color{orange}'
-    result += self.format_text.to_latex(id_map)
-    if self.new:
+    result += self.format_text.to_latex(config, id_map)
+    if self.new and config.annotated:
       result += '}'
     result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
-      result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+      result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
     return result
 
 @dataclass
@@ -102,25 +103,25 @@ class Rule:
   format_text: FormatText
   examples: list[Example]
 
-  def to_html(self, id_map: RefDict) -> str:
-    result = self.format_text.to_html(id_map)
+  def to_html(self, config: Config, id_map: RefDict) -> str:
+    result = self.format_text.to_html(config, id_map)
     for example in self.examples:
-      result += example.to_html(id_map)
+      result += example.to_html(config, id_map)
     return result
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Rule {self.id}\n'
     result += '\\1 '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
-    if self.new:
+    if self.new and config.annotated:
       result += '\\textbf{\\color{orange}'
-    result += self.format_text.to_latex(id_map)
-    if self.new:
+    result += self.format_text.to_latex(config, id_map)
+    if self.new and config.annotated:
       result += '}'
     result += '\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
-      result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+      result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
     return result
 
 @dataclass
@@ -134,48 +135,48 @@ class SubSection:
   examples: list[Example]
   rules: list[SubRule]
 
-  def to_html(self, id_map: RefDict) -> str:
-    result = self.format_text.to_html(id_map)
+  def to_html(self, config: Config, id_map: RefDict) -> str:
+    result = self.format_text.to_html(config, id_map)
     if self.rules:
       result += '<ol class="SubRules">'
       if self.snippet:
-        result += f'<p>{self.snippet.to_html(id_map)}</p>'
+        result += f'<p>{self.snippet.to_html(config, id_map)}</p>'
       for example in self.examples:
-        result += example.to_html(id_map)
+        result += example.to_html(config, id_map)
       for rule in self.rules:
-        result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(id_map)}</li>'
+        result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(config, id_map)}</li>'
       result += '</ol>'
     return result
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% SubSection {self.id}\n'
     result += '\\1 '
     if self.toc:
       result += '\\phantomsection '
       result += '\\addtocounter{subsubsection}{1} '
-      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(id_map) + '} '
+      result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(config, id_map) + '} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
-    if self.new:
+    if self.new and config.annotated:
       result += r'\textbf{'
       if self.toc:
         result += r'\large '
       result += r'\color{orange}'
     elif self.toc:
       result += '{\\large \\color{darkgray}'
-    result += self.format_text.to_latex(id_map)
-    if self.toc or self.new:
+    result += self.format_text.to_latex(config, id_map)
+    if self.toc or (self.new and config.annotated):
       result += '}'
     result += '\n'
     if self.snippet:
-      snippet_lines = self.snippet.to_latex(id_map).split('\n')
+      snippet_lines = self.snippet.to_latex(config, id_map).split('\n')
       for snippet_text in snippet_lines:
         result += f'\n\\noindent\emph{{{snippet_text}}}\n\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
-      result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(id_map)} \end{{adjustwidth}}\n'
+      result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
     if self.rules:
       for rule in self.rules:
-        result += rule.to_latex(id_map)
+        result += rule.to_latex(config, id_map)
     return result
   
   def toc_text(self):
@@ -192,36 +193,36 @@ class Section:
   snippet: Optional[FormatText]
   section_elements: list[SectionElement]
 
-  def to_html(self, id_map: RefDict) -> str:
-    result = f'<h2 class="Section" id="{self.id}">{self.text.to_html(id_map)}</h2>'
+  def to_html(self, config: Config, id_map: RefDict) -> str:
+    result = f'<h2 class="Section" id="{self.id}">{self.text.to_html(config, id_map)}</h2>'
     if self.snippet:
-      result += f'<p>{self.snippet.to_html(id_map)}</p>'
+      result += f'<p>{self.snippet.to_html(config, id_map)}</p>'
     result += '<ol class="Rules">'
     for elem in self.section_elements:
       match elem:
-        case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(id_map)}</li>'
-        case TimingStructureElement(): result += elem.to_html(id_map)
+        case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
+        case TimingStructureElement(): result += elem.to_html(config, id_map)
     result += '</ol>'
     return result
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Section {self.id}.\n'
     if self.toc_entry:
-      result += f'\subsection[{self.toc_entry}]{{{self.text.to_latex(id_map)}}}\n'
-    elif self.new:
-      result += f'\subsection[{self.text.to_latex(id_map)}]{{\color{{orange}}{self.text.to_latex(id_map)}}}\n'
+      result += f'\subsection[{self.toc_entry}]{{{self.text.to_latex(config, id_map)}}}\n'
+    elif self.new and config.annotated:
+      result += f'\subsection[{self.text.to_latex(config, id_map)}]{{\color{{orange}}{self.text.to_latex(config, id_map)}}}\n'
     else:
-      result += f'\subsection{{{self.text.to_latex(id_map)}}}\n'
+      result += f'\subsection{{{self.text.to_latex(config, id_map)}}}\n'
     result += f'\label{{{self.id}}}\n'
     if self.snippet:
-      snippet_lines = self.snippet.to_latex(id_map).split('\n')
+      snippet_lines = self.snippet.to_latex(config, id_map).split('\n')
       for snippet_text in snippet_lines:
         result += f'\\noindent\emph{{{snippet_text}}}\n\n'
 
     result += '\\begin{outline}[enumerate]\n'
     for elem in self.section_elements:
-      result += elem.to_latex(id_map)
+      result += elem.to_latex(config, id_map)
     result += '\end{outline}\n'
     return result
   
@@ -234,18 +235,18 @@ class Chapter:
   text: str
   sections: list[Section]
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     result = f'<h1 class="Chapter" id="{self.id}">{self.text}</h1>'
     for section in self.sections:
-      result += section.to_html(id_map)
+      result += section.to_html(config, id_map)
     return result
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Chapter {self.id}.\n'
     result += f'\section{{{self.text}}}\n'
     result += f'\label{{{self.id}}}\n'
     for section in self.sections:
-      result += section.to_latex(id_map)
+      result += section.to_latex(config, id_map)
     return result
 
 @dataclass
@@ -253,21 +254,21 @@ class Document:
   changelog: list[FormatText]
   chapters: list[Chapter]
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     result = ''
     for chapter in self.chapters:
-      result += chapter.to_html(id_map)
+      result += chapter.to_html(config, id_map)
     return result
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     latex_template = open("data/templates/latex/template.tex", "r")
     latex_content = latex_template.read()
     latex_template.close()
     
-    changelog_content = "\n\\1 ".join(map(lambda x: x.to_latex(id_map), self.changelog))
+    changelog_content = "\n\\1 ".join(map(lambda x: x.to_latex(config, id_map), self.changelog))
     latex_content = latex_content.replace("%__CHANGELOG_PLACEHOLDER__%", f'\\1 {changelog_content}')
 
-    document_content = ''.join(map(lambda x: x.to_latex(id_map), self.chapters))
+    document_content = ''.join(map(lambda x: x.to_latex(config, id_map), self.chapters))
     latex_content = latex_content.replace("%__DOCUMENT_PLACEHOLDER__%", document_content)
 
     return latex_content

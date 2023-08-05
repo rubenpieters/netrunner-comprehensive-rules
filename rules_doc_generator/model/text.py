@@ -3,6 +3,8 @@ from typing import Callable, Union
 
 import re
 
+from rules_doc_generator.config import (Config)
+
 @dataclass
 class RefInfo:
   reference: str
@@ -22,10 +24,10 @@ def lookup_ref(id_map: RefDict, referenced_id: str):
 class Image:
   text: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return f'<img class="Symbol" src="{self.text}.svg" alt="{self.text}"/>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\includegraphics[height=8pt]{{{self.text}.png}}'
 
 @dataclass
@@ -35,10 +37,10 @@ class Text:
   def to_plaintext(self) -> str:
     return self.text
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return self.text
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return self.text
 
 @dataclass
@@ -47,10 +49,10 @@ class Ref:
   capitalize: bool
   combiner: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return self.to_text(" ", id_map, lambda ref_id, ref_text: fr'<a href=#{ref_id}>{ref_text}</a>')
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return self.to_text("~", id_map, lambda ref_id, ref_text: fr'\reful{{{ref_id}}}{{{ref_text}}}')
 
   def to_text(self, spacer: str, id_map: RefDict, mk_link: Callable[[str, str], str]) -> str:
@@ -84,40 +86,40 @@ class Ref:
 class Term:
   text: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return f'<span class="Term">{self.text}</span>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'{{\\gameterm{{{self.text}}}}}'
 
 @dataclass
 class SubType:
   text: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return f'<span class="SubType">{self.text}</span>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\textbf{{{self.text}}}'
 
 @dataclass
 class Card:
   text: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return f'<span class="Card">{self.text}</span>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\textit{{{self.text}}}'
 
 @dataclass
 class Product:
   text: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return f'<span class="Product">{self.text}</span>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\textit{{{self.text}}}'
 
 @dataclass
@@ -125,27 +127,33 @@ class Link:
   text: str
   link: str
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return f'<a href={self.link}>{self.text}</a>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\hreful{{{self.link}}}{{{self.text}}}'
 
 @dataclass
 class NewStart:
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return ''
 
-  def to_latex(self, id_map: RefDict) -> str:
-    return '\\textbf{\\color{orange}'
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
+    if config.annotated:
+      return '\\textbf{\\color{orange}'
+    else:
+      return ''
 
 @dataclass
 class NewEnd:
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     return ''
 
-  def to_latex(self, id_map: RefDict) -> str:
-    return '}'
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
+    if config.annotated:
+      return '}'
+    else:
+      return ''
 
 TextElement = Union[Text, Ref, Term, Image, SubType, Product, Card, Link, NewStart, NewEnd]
 
@@ -159,16 +167,16 @@ class FormatText:
       result += element.to_plaintext()
     return result
 
-  def to_html(self, id_map: RefDict) -> str:
+  def to_html(self, config: Config, id_map: RefDict) -> str:
     result = ''
     for element in self.textElements:
-      result += element.to_html(id_map)
+      result += element.to_html(config, id_map)
     return result
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = ''
     for element in self.textElements:
-      result += element.to_latex(id_map)
+      result += element.to_latex(config, id_map)
     result = re.sub(r'\"(.*?)\"', r"``\1''", result)
     result = re.sub('&', '\&', result)
     return result
@@ -178,15 +186,15 @@ class Example:
   text: FormatText
   new: bool
 
-  def to_html(self, id_map: RefDict) -> str:
-    return f'<p class="Example">Example: {self.text.to_html(id_map)}</p>'
+  def to_html(self, config: Config, id_map: RefDict) -> str:
+    return f'<p class="Example">Example: {self.text.to_html(config, id_map)}</p>'
 
-  def to_latex(self, id_map: RefDict) -> str:
+  def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = r'\emph{'
-    if self.new:
+    if self.new and config.annotated:
       result += r'\textbf{\color{orange}'
-    result += f'Example: {self.text.to_latex(id_map)}'
+    result += f'Example: {self.text.to_latex(config, id_map)}'
     result += r'}'
-    if self.new:
+    if self.new and config.annotated:
       result += r'}'
     return result

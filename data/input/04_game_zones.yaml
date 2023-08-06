@@ -240,6 +240,9 @@ sections:
       - text: The Corp uses {card:Nanisivik Grid} to turn a facedown {card:Border Control} in Archives faceup and resolve its first subroutine. {card:Border Control} was not moved between servers, so "this server" in that subroutine refers to Archives.
     - rule: rule_another_server
       text: If an ability on a card currently or previously located in a server, its root, or protecting it  refers to "another server", this means any server except "this server" as interpreted by {ref:rule_this_server}. If a card's abilities involve choosing a server, "another server" in a linked ability means any server except the chosen server. If neither of the previous cases apply and a run is in progress, "another server" means any server except the attacked server.
+    - rule: rule_host_server
+      new:
+      text: If an ability on an object uses the phrase "this server", and that object is hosted on another object (see {ref:sec_host}), the server referred to is the server of the host object. 
 
   - subsection: subsec_central_servers
     text: Central Servers

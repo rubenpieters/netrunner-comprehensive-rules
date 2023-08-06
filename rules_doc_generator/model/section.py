@@ -93,7 +93,8 @@ class SubRule:
     result += self.format_text.to_latex(config, id_map)
     if self.new and config.annotated:
       result += '\\color{black} \\normalfont'
-    result += '\n'
+    # Additional newline after this paragraph to ensure correct spacing.
+    result += '\n\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
@@ -114,6 +115,7 @@ class Rule:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Rule {self.id}\n'
+    result += '\\addtocounter{subsubsection}{1} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new and config.annotated:
       result += '\\global \\colorlabeltrue '
@@ -123,7 +125,8 @@ class Rule:
     result += self.format_text.to_latex(config, id_map)
     if self.new and config.annotated:
       result += '\\color{black} \\normalfont'
-    result += '\n'
+    # Additional newline after this paragraph to ensure correct spacing.
+    result += '\n\n'
     for i, example in enumerate(self.examples):
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
@@ -155,9 +158,11 @@ class SubSection:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% SubSection {self.id}\n'
+    result += '\\addtocounter{subsubsection}{1} '
     if self.toc:
+      # Needed for hyperref to jump to the correct place.
+      # https://tex.stackexchange.com/questions/44088/when-do-i-need-to-invoke-phantomsection
       result += '\\phantomsection '
-      result += '\\addtocounter{subsubsection}{1} '
       result += '\\addcontentsline{toc}{subsubsection}{\\arabic{section}.\\arabic{subsection}.\\arabic{subsubsection}~~ ' + self.format_text.to_latex(config, id_map) + '} '
     result += f'\\refstepcounter{{manual_refs}} \label{{{self.id}}} '
     if self.new and config.annotated:

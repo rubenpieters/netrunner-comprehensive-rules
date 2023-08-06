@@ -19,6 +19,9 @@ sections:
       text: Each ability is categorized as either a static ability ({ref:sec_static_abilities}), a paid ability ({ref:sec_paid_abilities}), a conditional ability ({ref:sec_conditional_abilities}), a play ability ({ref:sec_play_abilities}), or a subroutine ({ref:sec_subroutines}).
     - rule: rule_interrupt_link
       text: Abilities marked with [interrupt] or that include the words "prevent" or "avoid" in their instructions have special timing rules that differ from other abilities. See {ref:sec_interrupts_replacements}.
+    - rule: rule_instruction_link
+      new:
+      text: Each non-static ability contains one or more {term:instructions} that make up the ability's component steps. {ref:Rule_instruction} describes the nature and function of instructions in an ability's text. An instruction that the game is presently concerned with can be either {term:imminent} or {term:resolving}.
 
   - subsection: rule_resolve_ability
     text: To {term:resolve an ability} means to resolve each of that ability's instructions in the order they appear. If an ability contains more than one instruction, a checkpoint occurs between each consecutive instruction. To {term:resolve an instruction} means to carry out that instruction.
@@ -27,6 +30,17 @@ sections:
       text: While resolving an ability, other abilities can meet their conditions. When this happens, a "chain reaction" is created. The current instruction finishes resolving, then more recent abilities fully resolve before the next instruction of the original ability. If any other abilities meet their conditions while resolving the "chained" abilities, then another "chain" is created before continuing to resolve the previous chained abilities. Resolve each set of chained abilities one at a time, from the most recently met condition to the oldest, before continuing with the original ability that started the chain reaction.
       examples:
       - text: The Runner's identity is {card:Armand "Geist" Walker}. They access a {card:Snare!} from R&D with only 2 cards in their grip. Before taking a tag or suffering any net damage, the Runner triggers {card:Decoy}'s ability in order to avoid the tag. Using the {card:Decoy} meets the trigger condition of {card:Geist}'s ability. As this is the most recent ability to meet its trigger condition, {card:Geist}'s ability must resolve first, before {card:Decoy} avoids the tag and before {card:Snare!} finishes resolving. The Runner draws a card from {card:Geist}, avoids the tag from {card:Snare!} with {card:Decoy}, and then finally suffers (and survives) the 3 net damage from {card:Snare!}.
+    - rule: rule_is_resolving
+      new:
+      text: An ability "is resolving" from when its first instruction becomes imminent until its last instruction has finished resolving. See also {ref:sec_interrupts_replacements}. An event or operation "is resolving" throughout {ref:rule_steps_playing_resolve_play_abilities} of playing that event or operation.
+      examples:
+      - new:
+        text: |-
+          The Corp resolves a subroutine on {card:Attini} while its first ability is active. The subroutine is resolving during the interrupt window for its instruction, so the Runner cannot spend credits during that window and will not be able to use {card:Caldera}'s ability to prevent net damage.
+      - new:
+        text: |-
+          The Runner is playing {card:Zahya Sadeghi: Versatile Smuggler} and plays {card:Direct Access} to run HQ. The static ability on {card:Direct Access} removes {card:Zahya Sadeghi}'s ability whie it is resolving. Normally, that ability would meet its trigger condition and resolve immediately after the "Run any server." instruction. This reaction window is outside of the run, but it is still part of {card:Direct Access} resolving, so the ability is not present at the needed time and cannot be triggered or resolved.
+          
 
   - subsection: rule_source
     text: The {term:source} of an ability is the card, counter, or game rule that originated it.
@@ -285,7 +299,7 @@ sections:
     rules:
     - rule: rule_ability_flag_types
       text: |-
-        There are four ability flags: access, interface, [interrupt], and persistent.
+        There are {n}five{/n} ability flags: access, interface, [interrupt], persistent, {n}and threat N{/n}.
     - rule: rule_access_flag
       text: The "access" flag appears on Runner card paid abilities and affects the timing for triggering those abilities. The Runner can use abilities with this flag only during the mid-access ability window at {ref:step_mid_access_ability} of accessing a card. See {ref:rule_mid_access_window}.
     - rule: rule_interface_flag
@@ -294,6 +308,9 @@ sections:
       text: The interrupt flag ([interrupt]) appears on paid and conditional abilities and affects the timing for triggering those abilities. Players can use abilities with this flag only during interrupt windows, and only if the ability is relevant to the imminent instruction. See {ref:sec_interrupts_replacements}.
     - rule: rule_persistent_flag
       text: The "persistent" flag appears on Corp card abilities and changes the rules about when those abilities are active. An ability with this flag can persist until the end of the run after its source card is trashed. See {ref:subsec_persistent}.
+    - rule: rule_threat_flag
+      new:
+      text: The "threat N" flag can appear on any type of ability. Abilities with this flag are only active if the threat level is greater than or equal to N, regardless of {ref:rule_ability_active_inactive_source_card}. See {ref:rule_threat_level}.
 
   - subsection: rule_ability_classification
     text: The five types of abilities can be identified by the types of text they are made of.
@@ -496,6 +513,28 @@ sections:
       examples:
       - text: |-
           {card:Joshua B}'s ability allows the Runner to gain [click]. If they do, it creates a delayed conditional ability that is independent of {card:Joshua B} itself, which will meet its trigger condition only once, when that turn ends. After that ability resolves, the game no longer maintains the lingering effect creating the ability.
+
+  - subsection: rule_references_to_trigger_conditions
+    new:
+    text: |-
+      Some cards refer to a class of conditional abilities according to their trigger condition.
+    rules:
+    - rule: rule_when_encountered
+      new:
+      text: A "when encountered" ability is any ability that could meet its trigger condition at {ref:step_encounter_begins} of an encounter with its source.
+    - rule: rule_when_installed
+      new:
+      text: A "when installed" ability is any ability that could meet its trigger condition at {ref:rule_steps_installing_installed_condition} of the process of installing its source.
+    - rule: rule_when_scored
+      new:
+      text: A "when scored" ability is any ability on an agenda that could meet its trigger condition as a result of the Corp choosing the option to score that agenda during a paid ability window (see {ref:rule_paid_ability_window_corp_score}).
+    - rule: rule_instructed_to_resolve_conditional_ability
+      new:
+      text: |-
+        If an effect attempts to resolve a conditional ability according to one of the classes identified in {ref:rule_references_to_trigger_conditions}, the ability is marked pending as though the stipulation of that class had occurred. Any additional requirements of the trigger condition in question must still be met by the game state.
+      examples:
+      - new:
+        text: The Corp has scored {card:AstroScript Pilot Program} and {card:Market Research}. They forfeit one of those agendas to play {card:24/7 News Cycle} and resolve the "when scored" ability of the other agenda, even though neither agenda was actually scored at this time. The Corp can forfeit {card:Market Research} to resolve {card:AstroScript Pilot Program}'s ability and put an agenda counter on it, with no other stipulations. If the Runner is tagged, the Corp could instead forfeit {card:AstroScript Pilot Program} to put an agenda counter on {card:Market Research}. However, if the Runner is not tagged, the additional requirement of {card:Market Research}'s trigger condition will not be met, so its "when scored" ability cannot become pending or resolve.
 
   - subsection: sec_steps_of_triggering_and_resolving_a_conditional_ability
     text: Steps of Triggering and Resolving a Conditional Ability

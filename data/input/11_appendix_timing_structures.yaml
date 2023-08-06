@@ -32,8 +32,8 @@ sections:
           Paid ability window: (P) (R) (S).
       - text: Does the Corp have unspent clicks?
         elements:
-        - text: If yes, the Corp takes an action.
         - text: If no, go to (3).
+        - text: If yes, the Corp takes an action.
       - text: Return to (a).
     - text: Discard Phase
       elements:
@@ -61,8 +61,8 @@ sections:
           Paid ability window: (P) (R).
       - text: Does the Runner have unspent clicks?
         elements:
-        - text: If yes, the Runner takes an action.
         - text: If no, go to (2).
+        - text: If yes, the Runner takes an action.
       - text: Return to (e).
     - text: Discard Phase
       elements:

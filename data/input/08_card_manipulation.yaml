@@ -161,8 +161,12 @@ sections:
       examples:
       - text: The Corp takes their mandatory draw while they have {card:Daily Business Show} and {card:Raman Rai} rezzed. They set aside {card:Wraparound} and {card:Enigma} from the top of R&D. After looking at those cards and the cards in Archives, the Corp uses {card:Raman Rai} to reveal the {card:Enigma} and a {card:Tollbooth} from Archives and swap them. Then, the corp uses {card:Daily Business Show} to add {card:Tollbooth} to the bottom of the deck. Finally, the Corp adds {card:Wraparound} to HQ.
 
-  - rule: rule_drawing_simultaneously
+  - subsection: rule_drawing_simultaneously
     text: If an ability directs multiple players to draw cards at the same time, those players follow the procedure for drawing cards together. Abilities relating to all of those draws will become pending in the same reaction window.
+    rules:
+    - rule: rule_optional_drawing_simultaneously
+      new:
+      text: If an ability gives multiple players the option to draw cards at the same time, first each player indicates whether or how many cards they will draw, starting with the active player. Then the indicated draws are performed simultaneously.
 
   - subsection: sec_steps_of_drawing_n_cards
     text: Steps of Drawing N Cards
@@ -391,8 +395,15 @@ sections:
     text: A card can only ever be swapped into a location it is normally allowed to occupy. When a player resolves a swap effect, they must observe any applicable game rules or card abilities that would affect that card in its final destination. If a swap effect would resolve while there are no legal exchanges possible, then that effect does nothing.
     examples:
     - text: When the subroutine on {card:Metamorph} resolves, the Corp cannot choose to swap an agenda and an upgrade such that the agenda would end up in the same remote server as an asset.
-  - rule: rule_swap_installed_cards
+  - subsection: rule_swap_installed_cards
     text: If two installed cards are swapped, each card moves to the other's location simultaneously. The two cards remain installed throughout the process of swapping, and do not otherwise affect any other part of the game state.
+    rules:
+    - rule: rule_swap_installed_cards_preserves_hosting
+      new:
+      text: When swapping installed cards, any cards or counters hosted on either of the swapped cards maintain their hosting relationships.
+      examples:
+      - new:
+        text: The Corp uses {card:Thimblerig}'s ability to swap it with a {card:Palisade} hosting {card:Botulus}. The {card:Botulus} remains hosted on the {card:Palisade} throughout this process. 
 
   - subsection: rule_swap_simultaneous
     text: If two cards are swapped between zones, each card moves to the zone the other is in simultaneously.
@@ -400,8 +411,13 @@ sections:
     - rule: rule_state_of_swap_into_zone
       text: Each of the swapped cards enters its destination zone in the same state that a card would normally enter that zone. A card swapped into Archives enters Archives facedown unless it was visible to the Runner at the time of the swap, a Corp card swapped into the play area enters unrezzed, etc.
     - rule: rule_swap_become_installed
-      text: If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host).
-    - rule: rule_swap_score_area
+      text: |-
+        If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host). {n}The normal procedure for installing a card is not followed, so no install cost is paid and like cards cannot be trashed. At the next checkpoint after the swap takes place, trigger conditions related to uninstalling or installing the two cards are met, respectively.{/n}
+      examples:
+      - new:
+        text: |-
+          The Corp is playing {card:A Teia: IP Recovery} and has {card:Tatu-Bola} protecting a remote server. The Runner runs that server and passes {card:Tatu-Bola}. The Corp swaps it with a piece of ice from HQ. After the swap, the Corp can use {card:A Teia}'s ability to install a card in the root of another remote server. They then continue resolving the next instruction of {card:Tatu-Bola}'s ability, gaining 4[c].
+    - rule: rule_swap_score_areas
       text: If two agendas are swapped between the players' score areas, any hosted cards or counters remain hosted on their respective host agendas.
-    - rule: rule_swap_set_aside
+    - rule: rule_swap_to_set_aside
       text: If a card is swapped with a set-aside card, the card moving into the set-aside zone becomes part of the group of cards being acted on by the ability that had set the other card aside, and the card moving out of the set-aside zone ceases to be acted on by that ability. See {ref:rule_drawn_card_swapped} for a specific case where this can happen, and see also {ref:rule_set_aside_zone_passthrough} regarding effects acting on cards in the set-aside zone.

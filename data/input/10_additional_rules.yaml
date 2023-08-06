@@ -26,6 +26,20 @@ sections:
     - text: The subroutine on the original printing of {card:Kitsune} includes the phrase "trash Kitsune." This phrase means "trash this ice.".
     - text: |-
         {card:Boomerang}'s text refers to "a copy of Boomerang". This is not self-referential language and refers to any card named {card:Boomerang}.
+
+  - subsection: sec_infinite_loops
+    new:
+    toc:
+    text: Infinite Loops
+    rules:
+    - rule: rule_mandatory_infinite_loop
+      text: If a mandatory infinite loop is created (a player cannot choose to stop resolving the loop) then the player who is resolving the loop chooses a number. The loop instantaneously resolves that many times, and then ends.
+      examples:
+      - text: |-
+          The Runner runs into a rezzed {card:Wormhole}. The only other piece of ice that is rezzed is a {card:Wormhole}, and so a mandatory infinite loop is created where each of the {card:Wormhole}s' subroutines resolves the other. The Corp chooses how many times this loop occurs, say 2,157 times, and then the Runner continues the run.
+    - rule: rule_optional_infinite_loop
+      text: If an optional infinite loop is created (a player can choose to stop resolving the loop) during a run, then the Runner must jack out unless another card ability prevents them from doing so. If the Runner cannot jack out, then it is the Corp's responsibility to end the loop by letting the Runner continue the run.
+  
 - section: sec_information
   text: Information
   snippet: The game, at its core, is about information. Much of the game revolves around deducing information about the opponent's cards and strategy.
@@ -57,6 +71,7 @@ sections:
       examples:
       - text: |-
           The Runner installs {card:Femme Fatale}, choosing a piece of ice protecting HQ with Femme's ability. The Runner must explicitly state to the Corp which ice has been chosen and must continue to do so if the Corp asks for {card:Femme Fatale}'s target during a later turn.
+
 - section: sec_checkpoints
   text: Checkpoints
   rules:
@@ -111,6 +126,7 @@ sections:
     examples:
     - text: |-
         The Runner, playing as {card:Jesminder Sareen: Girl Behind the Curtain}, steals an agenda during a run on a server with {card:AMAZE Amusements} rezzed in its root. Since {card:AMAZE Amusements}'s ability meets its trigger condition when the run ends, it will become pending in the reaction window following {ref:step_run_complete} and attempt to give the Runner 2 tags. During this window, the run timing structure has closed, and Jesminder's interrupt ability cannot apply to those tags.
+
 - section: sec_damage
   text: Damage
   rules:
@@ -145,6 +161,7 @@ sections:
   - rule: rule_flatlined
     text: |-
       If the Runner takes more damage than the number of cards in their grip, or if they have a maximum hand size of less than zero at the end of their turn, then they are {term:flatlined} and the Corp wins the game.
+
 - section: sec_tags
   text: Tags
   snippet: |-
@@ -183,6 +200,7 @@ sections:
       text: If the Corp takes bad publicity while a run is already underway, the Runner does not gain additional bad publicity credits for that run.
   - rule: rule_runner_can_pay_bad_publicity_costs
     text: The Corp controls each bad publicity on them, but the Runner can pay costs involving bad publicity as if they controlled the Corp's bad publicity.
+
 - section: sec_link
   text: Link
   snippet: |-
@@ -194,6 +212,7 @@ sections:
   - rule: rule_link_contests_traces
     text: |-
        Link is primarily used to contest traces, as described in {ref:sec_traces}, but other abilities can also refer to the Runner's link value.
+
 - section: sec_traces
   text: Traces
   snippet: |-
@@ -233,6 +252,7 @@ sections:
       text: The trace is determined to be successful or unsuccessful.
     - rule: step_trace_complete
       text: The trace is complete.
+
 - section: sec_load_and_empty
   text: Load and Empty
   rules:
@@ -248,6 +268,7 @@ sections:
     text: If any other types of counters are placed on that card without having been loaded, and those counters are subsequently removed, then empty abilities on that card do not meet their condition.
   - rule: rule_loading_does_not_restrict_counters
     text: Loading a card with counters does not impose any further restrictions upon those counters for that card. Other abilities can still issue instructions to act upon counters of that type, including but not limited to placing more of them or removing some of them.
+
 - section: sec_charge
   text: Charge
   snippet: |-
@@ -261,6 +282,7 @@ sections:
       If an instruction directs a player to charge 1 or more cards from among a set of cards, the particular cards to be charged are chosen as targets of that instruction. Only cards in the indicated set with at least 1 hosted power counter are valid targets. See {ref:sec_targets}.
   - rule: rule_charge_requires_hosted_counter
     text: If an instruction directs you to charge a particular card, that part of the instruction can only be resolved if the card has at least 1 hosted power counter at the time the instruction becomes imminent.
+
 - section: sec_mark
   text: Mark
   snippet: |-
@@ -286,6 +308,7 @@ sections:
     examples:
      - text: |-
          The Runner has no mark and plays {card:Jailbreak} to make a run on HQ. When the run is successful, they draw {card:Virtuoso} with {card:Jailbreak}'s ability. The Runner continues their turn by installing {card:Virtuoso} and playing {card:Carpe Diem}. If {card:Carpe Diem}'s instruction to "identify your mark" results in HQ becoming the mark, the subsequent run it allows will meet the trigger condition for {card:Virtuoso}'s third ability if it is successful. Even though there was a successful run on HQ earlier in the turn, HQ was not designated as the mark at that time, so the run made with {card:Carpe Diem} is the first time the Runner makes a successful run on their mark this turn. The Runner will access 1 additional card when they breach HQ.
+
 - section: sec_sabotage
   text: Sabotage
   snippet: |-
@@ -314,13 +337,56 @@ sections:
       - text: The Runner uses {card:Chastushka}'s ability to sabotage 4. The Corp has 5 cards in HQ and 2 cards in R&D. The Corp must choose at least 2 cards in HQ to be trashed, so that the total number of cards trashed is 4.
       - text: |-
           The Runner uses {card:Chastushka}'s ability to sabotage 4. The Corp has 2 cards in HQ and 1 card in R&D. The Corp must trash all cards from HQ and R&D.
-- section: sec_infinite_loops
-  text: Infinite Loops
+
+- section: sec_bidding
+  new:
+  text: Bidding
   rules:
-  - rule: rule_mandatory_infinite_loop
-    text: If a mandatory infinite loop is created (a player cannot choose to stop resolving the loop) then the player who is resolving the loop chooses a number. The loop instantaneously resolves that many times, and then ends.
+  - rule: rule_bidding
+    new:
+    text: A {term:bid} is a number of credits that a player secretly chooses to spend as part of resolving an ability. Some effects instruct only a single player to bid, while other effects require both players to bid simultaneously.
+  - rule: rule_bid_secret
+    new:
+    text: Players select their bids in secret. This can be accomplished by writing down a number, by hiding a number of credit counters in a closed fist, or by any other unambiguous method.
+  - rule: rule_bid_possible
+    new:
+    text: A player cannot bid a number of credits they are unable to spend. Players can always bid 0[c].
     examples:
-    - text: |-
-        The Runner runs into a rezzed {card:Wormhole}. The only other piece of ice that is rezzed is a {card:Wormhole}, and so a mandatory infinite loop is created where each of the {card:Wormhole}s' subroutines resolves the other. The Corp chooses how many times this loop occurs, say 2,157 times, and then the Runner continues the run.
-  - rule: rule_optional_infinite_loop
-    text: If an optional infinite loop is created (a player can choose to stop resolving the loop) during a run, then the Runner must jack out unless another card ability prevents them from doing so. If the Runner cannot jack out, then it is the Corp's responsibility to end the loop by letting the Runner continue the run.
+    - new:
+      text: The Runner has no credits in their credit pool and 1 credit hosted on {card:Fencer Fueno} when they make a successful run on a server with {card:Adrian Seis} rezzed in its root. When the ability on {card:Adrian Seis} resolves, the players play a Psi Game, which requires them both to bid 0, 1, or 2[c]. In this case, the Runner cannot bid 2[c], as they are not able to spend that number of credits. They can, however, bid 1[c], as they will be able to spend the credit from {card:Fencer Fueno} to pay for that bid.
+    - new:
+      text: The Runner encounters {card:RSVP} and its subroutine resolves. Later in that run, they are required to bid credits by another ability. Since the effect of {card:RSVP}'s subroutine prohibits the Runner from spending credits, they must bid 0[c].
+  - subsection: rule_bid_reveal_spend
+    new:
+    text: After all bids are selected, the ability that called for the bids continues resolving. Players will later be instructed to reveal their bids. Each player must spend a number of credits equal to their bid as soon as the bid is revealed.
+    rules:
+    - rule: rule_bid_spent_immediately
+      new:
+      text: Spending credits for a revealed bid is not a conditional ability and does not wait for a checkpoint or priority window after revealing the number of credits bid.
+    - rule: rule_bid_is_cost
+      new:
+      text: Spending credits for a bid counts as paying a nested cost. See {ref:sec_costs}.
+    - rule: rule_bid_payment_choices
+      new:
+      text: If both players are bidding and a player has multiple sources of credits available from which to pay for their bid (see {ref:rule_spend_credits}), that player chooses how to pay after learning the number of credits their opponent bid. If both players have multiple ways to pay for their bids, first the active player chooses how to pay, then the inactive player chooses how to pay. In either circumstance, the credits are spent simultaneously.
+  - rule: rule_bid_secretly_spend
+    new:
+    text: Some older cards direct players to "secretly spend credits" without reference to bidding. These abilities still follow the rules for bidding. Trigger conditions based on players "secretly spending credits" or "revealing secretly spent credits" are met at the next checkpoint after bids are revealed and paid for.
+
+  - subsection: sec_psi_games
+    toc:
+    new:
+    text: Psi Games
+    rules:
+    - rule: rule_psi_game
+      new:
+      text: A {term:Psi Game} is a bidding contest in which the outcome depends on whether the number of credits each player bid was the same or different. The instruction "Play a Psi Game." encompasses both bidding and revealing bids.
+    - rule: rule_psi_bid_options
+      new:
+      text: When playing a Psi Game, each player can bid 0[c], 1[c], or 2[c].
+    - rule: rule_psi_bid_reveal
+      new:
+      text: Playing a Psi Game is handled as a single instruction. After both players have selected a bid for a Psi Game, they immediately proceed to reveal and spend their bids. There are no checkpoints during this process until after both players have paid for their bids.
+    - rule: rule_psi_outcome
+      new:
+      text: In an ability that calls for a Psi Game, subsequent instructions will depend on the outcome of the Psi Game. The condition "if the bids match" is satisfied if the Corp and Runner bid the same number of credits. The condition "if the bids differ" is satisfied if the Corp and Runner did not bid the same number of credits.

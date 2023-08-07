@@ -80,7 +80,7 @@ sections:
 
   - rule: movement_arrange
     text: |-
-      To {term:arrange} a set of cards is to reposition them among their current locations. The ful rules for arranging are detailed in {ref:sec_arranging_rearranging}.
+      To {term:arrange} a set of cards is to reposition them among their current locations. The full rules for arranging are detailed in {ref:sec_arranging_rearranging}.
       
   - rule: movement_draw
     text: |-

@@ -193,7 +193,7 @@ sections:
   - subsection: subsec_corp_action_phase
     steps:
     text: |-
-      During the draw phase, the following steps occur in order:
+      During the action phase, the following steps occur in order:
     rules:
     - rule: step_corp_turn_action_phase_paw
       text: A paid ability window occurs, in which players may use paid abilities, the Corp may rez non-ice cards, and the Corp may score agendas. (P) (R) (S)

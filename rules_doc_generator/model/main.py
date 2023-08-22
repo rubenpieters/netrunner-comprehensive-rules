@@ -9,7 +9,7 @@ def create_toc_html(id_map: RefDict):
   for id in id_map:
     ref_info = id_map[id]
     if ref_info.toc:
-      result += f'<li>{ref_info.reference} {ref_info.text}</li>'
+      result += f'<li><a href="#{ref_info.id}">{ref_info.reference} {ref_info.text}</a></li>'
   return result
 
 def standalone_html(document: Document, config: Config, id_map: RefDict):

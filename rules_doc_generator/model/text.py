@@ -187,7 +187,7 @@ class Example:
   new: bool
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
-    return f'<p class="Example">Example: {self.text.to_html(config, id_map)}</p>'
+    return f'<li class="Example">Example: {self.text.to_html(config, id_map)}</li>'
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = r'\emph{'

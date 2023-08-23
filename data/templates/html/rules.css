@@ -20,6 +20,7 @@
 .Rules {
   counter-reset: rule_counter;
   list-style: none;
+  line-height: 1.5em;
 }
 
 .SubType {
@@ -29,6 +30,7 @@
 .SubRules {
   counter-reset: sub_rule_counter;
   list-style: none;
+  line-height: 1.5em;
 }
 
 .Chapter:before {
@@ -73,6 +75,12 @@
 
 .Example {
   font-style: italic;
+}
+
+.Examples {
+  font-style: italic;
+  list-style: none;
+  line-height: 1.5em;
 }
 
 .TimingStructureList {

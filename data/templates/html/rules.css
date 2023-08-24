@@ -1,3 +1,7 @@
+body {
+  font-family: 'Atkinson Hyperlegible';
+}
+
 .RulesGrid {
   display: grid;
   grid-template-columns: 15% 85%;
@@ -21,6 +25,8 @@
   counter-reset: rule_counter;
   list-style: none;
   line-height: 1.5em;
+  margin-left: 3.5em;
+  text-indent: -3.5em;
 }
 
 .SubType {
@@ -31,6 +37,7 @@
   counter-reset: sub_rule_counter;
   list-style: none;
   line-height: 1.5em;
+  text-indent: -1.5em;
 }
 
 .Chapter:before {
@@ -81,6 +88,8 @@
   font-style: italic;
   list-style: none;
   line-height: 1.5em;
+  margin-left: 0em;
+  text-indent: 0em;
 }
 
 .TimingStructureList {

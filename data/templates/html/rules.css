@@ -74,6 +74,7 @@ body {
 
 .Term {
   font-variant: small-caps;
+  font-style: normal;
 }
 
 .Symbol {
@@ -90,6 +91,10 @@ body {
   line-height: 1.5em;
   margin-left: 0em;
   text-indent: 0em;
+}
+
+.Snippet {
+  font-style: italic;
 }
 
 .TimingStructureList {

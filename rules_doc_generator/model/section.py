@@ -152,7 +152,7 @@ class SubSection:
     if self.rules:
       result += '<ol class="SubRules">'
       if self.snippet:
-        result += f'<p>{self.snippet.to_html(config, id_map)}</p>'
+        result += f'<p class="Snippet">{self.snippet.to_html(config, id_map)}</p>'
       result += '<ol class="Examples">'
       for example in self.examples:
         result += example.to_html(config, id_map)
@@ -215,7 +215,7 @@ class Section:
   def to_html(self, config: Config, id_map: RefDict) -> str:
     result = f'<h2 class="Section" id="{self.id}">{self.text.to_html(config, id_map)}</h2>'
     if self.snippet:
-      result += f'<p>{self.snippet.to_html(config, id_map)}</p>'
+      result += f'<p class="Snippet">{self.snippet.to_html(config, id_map)}</p>'
     result += '<ol class="Rules">'
     for elem in self.section_elements:
       match elem:

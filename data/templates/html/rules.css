@@ -101,21 +101,26 @@ body {
   counter-reset: timing_structure_l1;
 }
 
+.TimingStructureBold {
+  font-weight: bold;
+}
+
+.TimingStructureNormal {
+  font-weight: normal;
+}
+
 .TimingStructureL1 {
   counter-reset: timing_structure_l2;
   list-style: none;
-  font-weight: bold;
 }
 
 .TimingStructureL2 {
   counter-reset: timing_structure_l3;
   list-style: none;
-  font-weight: normal;
 }
 
 .TimingStructureL3 {
   list-style: none;
-  font-weight: normal;
 }
 
 .TimingStructureL1:before {

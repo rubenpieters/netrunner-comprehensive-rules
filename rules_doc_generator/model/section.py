@@ -11,8 +11,11 @@ class TimingStructureElement:
   bold: bool
   elements: list[TimingStructureElement]
 
-  def to_html_l1(self, config: Config, id_map: RefDict) -> str:
-    result = f'<li class="TimingStructureL1">{self.text.to_html(config, id_map)}'
+  def to_html_l1(self, config: Config, id_map: RefDict, bold: bool) -> str:
+    if bold:
+      result = f'<li class="TimingStructureL1 TimingStructureBold">{self.text.to_html(config, id_map)}'
+    else:
+      result = f'<li class="TimingStructureL1 TimingStructureNormal">{self.text.to_html(config, id_map)}'
     result += f'<ol>'
     for elem in self.elements:
       result += elem.to_html_l2(config, id_map)
@@ -20,7 +23,7 @@ class TimingStructureElement:
     return result
 
   def to_html_l2(self, config: Config, id_map: RefDict) -> str:
-    result = f'<li class="TimingStructureL2">{self.text.to_html(config, id_map)}'
+    result = f'<li class="TimingStructureL2 TimingStructureNormal">{self.text.to_html(config, id_map)}'
     result += f'<ol>'
     for elem in self.elements:
       result += elem.to_html_l3(config, id_map)
@@ -28,12 +31,12 @@ class TimingStructureElement:
     return result
 
   def to_html_l3(self, config: Config, id_map: RefDict) -> str:
-    return f'<li class="TimingStructureL3">{self.text.to_html(config, id_map)}</li>'
+    return f'<li class="TimingStructureL3 TimingStructureNormal">{self.text.to_html(config, id_map)}</li>'
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
     result = '<ol class="TimingStructureList">'
     for elem in self.elements:
-      result += elem.to_html_l1(config, id_map)
+      result += elem.to_html_l1(config, id_map, self.bold)
     result += '</ol>'
     return result
 

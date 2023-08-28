@@ -85,11 +85,23 @@ body {
   font-style: italic;
 }
 
+.ExamplesSubRule {
+  margin-left: -1.5em;
+}
+
+.ExamplesRule {
+  margin-left: -3.6em;
+}
+
+.ExamplesSubSection {
+  margin-left: -6em;
+}
+
 .Examples {
   font-style: italic;
   list-style: none;
   line-height: 1.5em;
-  margin-left: 0em;
+  padding-left: 0;
   text-indent: 0em;
 }
 

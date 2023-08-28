@@ -81,7 +81,7 @@ class SubRule:
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
     result = self.format_text.to_html(config, id_map)
-    result += '<ol class="Examples">'
+    result += '<ol class="Examples ExamplesSubRule">'
     for example in self.examples:
       result += example.to_html(config, id_map)
     result += '</ol>'
@@ -114,7 +114,7 @@ class Rule:
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
     result = self.format_text.to_html(config, id_map)
-    result += '<ol class="Examples">'
+    result += '<ol class="Examples ExamplesRule">'
     for example in self.examples:
       result += example.to_html(config, id_map)
     result += '</ol>'
@@ -156,7 +156,7 @@ class SubSection:
       result += '<ol class="SubRules">'
       if self.snippet:
         result += f'<p class="Snippet">{self.snippet.to_html(config, id_map)}</p>'
-      result += '<ol class="Examples">'
+      result += '<ol class="Examples ExamplesSubSection">'
       for example in self.examples:
         result += example.to_html(config, id_map)
       result += '</ol>'

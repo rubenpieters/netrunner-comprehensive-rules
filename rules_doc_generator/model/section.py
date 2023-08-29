@@ -151,7 +151,10 @@ class SubSection:
   rules: list[SubRule]
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
-    result = self.format_text.to_html(config, id_map)
+    if self.toc:
+      result = f'<span class="SubSection">{self.format_text.to_html(config, id_map)}</span>'
+    else:
+      result = self.format_text.to_html(config, id_map)
     if self.rules:
       result += '<ol class="SubRules">'
       if self.snippet:
@@ -223,7 +226,7 @@ class Section:
     for elem in self.section_elements:
       match elem:
         case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}'
         case TimingStructureElement(): result += elem.to_html(config, id_map)
     result += '</ol>'
     return result

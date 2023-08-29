@@ -40,6 +40,12 @@ body {
   text-indent: -1.5em;
 }
 
+.SubSection {
+  color: #494949;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 .Chapter:before {
   content: counter(hdr_counter) ".";
   counter-increment: hdr_counter;

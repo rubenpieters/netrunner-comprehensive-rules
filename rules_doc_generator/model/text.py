@@ -29,6 +29,9 @@ class Image:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\includegraphics[height=8pt]{{{self.text}.png}}'
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return '<img>'
 
 @dataclass
 class Text:
@@ -42,6 +45,9 @@ class Text:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return self.text
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.text
 
 @dataclass
 class Ref:
@@ -54,6 +60,9 @@ class Ref:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return self.to_text("~", id_map, lambda ref_id, ref_text: fr'\reful{{{ref_id}}}{{{ref_text}}}')
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.to_text(" ", id_map, lambda ref_id, ref_text: ref_text)
 
   def to_text(self, spacer: str, id_map: RefDict, mk_link: Callable[[str, str], str]) -> str:
     try:
@@ -91,6 +100,9 @@ class Term:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'{{\\gameterm{{{self.text}}}}}'
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.text.upper()
 
 @dataclass
 class SubType:
@@ -101,6 +113,9 @@ class SubType:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\textbf{{{self.text}}}'
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.text
 
 @dataclass
 class Card:
@@ -111,6 +126,9 @@ class Card:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\textit{{{self.text}}}'
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.text
 
 @dataclass
 class Product:
@@ -121,6 +139,9 @@ class Product:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\textit{{{self.text}}}'
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.text
 
 @dataclass
 class Link:
@@ -132,6 +153,9 @@ class Link:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     return f'\\hreful{{{self.link}}}{{{self.text}}}'
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return f'{self.text} ({self.link})'
 
 @dataclass
 class NewStart:
@@ -143,6 +167,9 @@ class NewStart:
       return '\\textbf{\\color{orange}'
     else:
       return ''
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return ''
 
 @dataclass
 class NewEnd:
@@ -154,6 +181,9 @@ class NewEnd:
       return '}'
     else:
       return ''
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return ''
 
 TextElement = Union[Text, Ref, Term, Image, SubType, Product, Card, Link, NewStart, NewEnd]
 
@@ -180,6 +210,12 @@ class FormatText:
     result = re.sub(r'\"(.*?)\"', r"``\1''", result)
     result = re.sub('&', '\&', result)
     return result
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    result = ''
+    for element in self.textElements:
+      result += element.to_json(config, id_map).replace('"', '\\"')
+    return result
 
 @dataclass
 class Example:
@@ -198,3 +234,6 @@ class Example:
     if self.new and config.annotated:
       result += r'}'
     return result
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return self.text.to_json(config, id_map).replace('"', '\\"')

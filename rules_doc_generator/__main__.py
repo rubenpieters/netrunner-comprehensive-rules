@@ -3,7 +3,7 @@ import os
 import shutil
 
 from rules_doc_generator.config import Config
-from rules_doc_generator.model.main import standalone_html, standalone_latex, write_to_file
+from rules_doc_generator.model.main import standalone_html, standalone_latex, standalone_json, write_to_file
 from rules_doc_generator.input.yaml.parser import yaml_to_document
 from rules_doc_generator.model.analysis.references import construct_reference_map
 
@@ -25,6 +25,7 @@ write_to_file('html', 'rules.html', standalone_html(document, config, ref_dict))
 if config.annotated:
   write_to_file('latex_annotated', 'rules_annotated.tex', standalone_latex(document, config, ref_dict))
 write_to_file('latex', 'rules.tex', standalone_latex(document, config.not_annotated(), ref_dict))
+write_to_file('json', 'rules.json', standalone_json(document, config.not_annotated(), ref_dict))
 print("Ready!")
 
 shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('html', 'credit.svg'))

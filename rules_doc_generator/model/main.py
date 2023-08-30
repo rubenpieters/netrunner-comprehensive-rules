@@ -25,6 +25,12 @@ def standalone_latex(document: Document, config: Config, id_map: RefDict):
   result = document.to_latex(config, id_map)
   return result
 
+def standalone_json(document: Document, config: Config, id_map: RefDict):
+  result = '{\n'
+  result += document.to_json(config, id_map)
+  result += '\n}'
+  return result
+
 def write_to_file(folder: str, filename: str, content: str):
   os.makedirs(folder, exist_ok=True)
   file = open(os.path.join(folder, filename), 'w')

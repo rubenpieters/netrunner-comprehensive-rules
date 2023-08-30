@@ -71,6 +71,9 @@ class TimingStructureElement:
     for elem in self.elements:
       result += elem.to_latex_l1(config, id_map, self.bold)
     return result
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return 'TODO'
 
 @dataclass
 class SubRule:
@@ -138,6 +141,9 @@ class Rule:
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-27pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
     return result
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return f'"{self.id}": "{self.format_text.to_json(config, id_map)}"'
 
 @dataclass
 class SubSection:
@@ -204,6 +210,9 @@ class SubSection:
         result += rule.to_latex(config, id_map)
     return result
   
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return f'"{self.id}": "{self.format_text.to_json(config, id_map)}"'
+  
   def toc_text(self):
     return self.format_text.to_plaintext() if self.toc else ''
 
@@ -251,6 +260,10 @@ class Section:
     result += '\end{outline}\n'
     return result
   
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return f'"{self.id}": "{self.text.to_json(config, id_map)}",\n' + \
+      ',\n'.join(map(lambda element: element.to_json(config, id_map), self.section_elements))
+  
   def toc_text(self):
     return self.toc_entry if self.toc_entry else self.text.to_plaintext()
 
@@ -273,6 +286,10 @@ class Chapter:
     for section in self.sections:
       result += section.to_latex(config, id_map)
     return result
+
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return f'"{self.id}": "{self.text}",\n' + \
+      ',\n'.join(map(lambda section: section.to_json(config, id_map), self.sections))
 
 @dataclass
 class Document:
@@ -297,5 +314,8 @@ class Document:
     latex_content = latex_content.replace("%__DOCUMENT_PLACEHOLDER__%", document_content)
 
     return latex_content
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    return ',\n'.join(map(lambda chapter: chapter.to_json(config, id_map), self.chapters[:-1]))
 
 ModelElement = Union[Document, Chapter, Section, SectionElement, SubRule]

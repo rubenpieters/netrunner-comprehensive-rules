@@ -7,7 +7,7 @@ from rules_doc_generator.model.text import (RefDict, FormatText, Example)
 
 @dataclass
 class TimingStructureElement:
-  text: FormatText | None
+  text: FormatText
   bold: bool
   elements: list[TimingStructureElement]
 

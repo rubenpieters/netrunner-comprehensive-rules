@@ -659,7 +659,7 @@ sections:
   - rule: rule_replace_subroutine_resolution
     text: One card, {card:Tsakhia "Bankhar" Gantulga}, can apply a replacement effect while a subroutine is imminent in order to resolve a different subroutine instead. The replaced subroutine is treated as having the same source as the original imminent subroutine.
     examples:
-    - text: The Runner encounters {card:Bloop} while {card:Tsakhia "Bankhar" Gantulga}'s replacement effect applies. All 3 of {card:Bloop}'s subroutines would resolve, but are replaced by "sub] Do 1 net damage." by the replacement effect. These subroutines count as resolving from {card:Bloop}, so when the Runner passes {card:Bloop} after the encounter, the Runner can use {card:Persephone} to trash the top card of their stack and the top 3 cards of R&D.
+    - text: The Runner encounters {card:Bloop} while {card:Tsakhia "Bankhar" Gantulga}'s replacement effect applies. All 3 of {card:Bloop}'s subroutines would resolve, but are replaced by "[sub] Do 1 net damage." by the replacement effect. These subroutines count as resolving from {card:Bloop}, so when the Runner passes {card:Bloop} after the encounter, the Runner can use {card:Persephone} to trash the top card of their stack and the top 3 cards of R&D.
 
   - subsection: sec_steps_of_resolving_a_subroutine
     text: Steps of Resolving a Subroutine

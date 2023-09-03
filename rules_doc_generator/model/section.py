@@ -107,6 +107,12 @@ class SubRule:
       result += f'% Example {i}\n'
       result += f'\\begin{{adjustwidth}}{{-14pt}}{{0pt}} {example.to_latex(config, id_map)} \end{{adjustwidth}}\n'
     return result
+  
+  def to_json(self, config: Config, id_map: RefDict) -> str:
+    obj = "{"
+    obj += f'"{self.id}": "{self.format_text.to_json(config, id_map)}", "children": []'
+    obj += "}"
+    return obj
 
 @dataclass
 class Rule:
@@ -143,7 +149,10 @@ class Rule:
     return result
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
-    return f'"{self.id}": "{self.format_text.to_json(config, id_map)}"'
+    obj = "{"
+    obj += f'"{self.id}": "{self.format_text.to_json(config, id_map)}", "children": []'
+    obj += "}"
+    return obj
 
 @dataclass
 class SubSection:
@@ -211,7 +220,13 @@ class SubSection:
     return result
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
-    return f'"{self.id}": "{self.format_text.to_json(config, id_map)}"'
+    obj = "{"
+    obj += f'"{self.id}": "{self.format_text.to_json(config, id_map)}",'
+    childrenIds = ','.join(map(lambda rule: f'"{rule.id}"', self.rules))
+    obj += f'"children": [{childrenIds}]'
+    obj += "}"
+    return f'{obj},\n' + \
+      ',\n'.join(map(lambda element: element.to_json(config, id_map), self.rules))
   
   def toc_text(self):
     return self.format_text.to_plaintext() if self.toc else ''
@@ -261,7 +276,12 @@ class Section:
     return result
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
-    return f'"{self.id}": "{self.text.to_json(config, id_map)}",\n' + \
+    obj = "{"
+    obj += f'"{self.id}": "{self.text.to_json(config, id_map)}",'
+    childrenIds = ','.join(map(lambda element: f'"{element.id}"' if hasattr(element, "id") else "TODO", self.section_elements))
+    obj += f'"children": [{childrenIds}]'
+    obj += "}"
+    return f'{obj},\n' + \
       ',\n'.join(map(lambda element: element.to_json(config, id_map), self.section_elements))
   
   def toc_text(self):
@@ -288,7 +308,12 @@ class Chapter:
     return result
 
   def to_json(self, config: Config, id_map: RefDict) -> str:
-    return f'"{self.id}": "{self.text}",\n' + \
+    obj = "{"
+    obj += f'"{self.id}": "{self.text}",'
+    childrenIds = ','.join(map(lambda section: f'"{section.id}"', self.sections))
+    obj += f'"children": [{childrenIds}]'
+    obj += "}"
+    return f'{obj},\n' + \
       ',\n'.join(map(lambda section: section.to_json(config, id_map), self.sections))
 
 @dataclass

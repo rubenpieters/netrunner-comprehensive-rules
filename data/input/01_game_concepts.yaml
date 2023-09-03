@@ -819,6 +819,9 @@ sections:
       text: Some effects host multiple cards on an object at the same time or set aside multiple cards at the same time. Facedown cards that enter a zone at the same time by the same effect are treated as a group. See {ref:rule_host_faceup_facedown} and {ref:rule_facedown_set_aside_distinct_groups}, respectively.
   - subsection: rule_look
     text: When a player {term:looks} at a card, they are allowed to see the front face of the card even if the front face would not normally be visible to them. A player should look at that card without showing it to the other player if it is not normally visible to that player.
+    rules:
+    - rule: rule_look_at_controlled_facedown
+      text: A player may look at facedown cards they control at any time
   - rule: rule_reveal
     text: To {term:reveal} a card is to show its front face to all players, then return it to its previous state.
   - rule: rule_expose

@@ -26,9 +26,9 @@ def standalone_latex(document: Document, config: Config, id_map: RefDict):
   return result
 
 def standalone_json(document: Document, config: Config, id_map: RefDict):
-  result = '{\n'
+  result = '[\n'
   result += document.to_json(config, id_map)
-  result += '\n}'
+  result += '\n]'
   return result
 
 def write_to_file(folder: str, filename: str, content: str):

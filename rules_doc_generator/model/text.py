@@ -194,7 +194,9 @@ class FormatText:
   def to_plaintext(self) -> str:
     result = ''
     for element in self.textElements:
-      result += element.to_plaintext()
+      match element:
+        case Text(): result += element.to_plaintext()
+        case _: raise Exception(f'Unexpected element type for plaintext: {element}')
     return result
 
   def to_html(self, config: Config, id_map: RefDict) -> str:

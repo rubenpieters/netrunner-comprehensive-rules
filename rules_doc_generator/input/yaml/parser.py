@@ -3,7 +3,7 @@ from typing import Any, Callable, TypeVar
 import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link, NewStart, NewEnd)
-from rules_doc_generator.model.section import (Rule, SubRule, SubSection, Section, Chapter, Document, SectionElement, TimingStructureElement)
+from rules_doc_generator.model.section import (Rule, SubRule, SubSection, Section, Chapter, Document, SectionElement, TimingStructure, TimingStructureElement)
 
 # Parsing model elements.
 
@@ -53,11 +53,15 @@ def parse_example(yaml_example: Any) -> Example:
   new = parse_boolean(yaml_example, 'new')
   return Example(text, new)
 
-def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructureElement:
-  text = parse_with_default(yaml_timing_structure, 'text', None, parse_format_text_field)
+def parse_timing_structure_element(yaml_timing_structure_element: Any) -> TimingStructureElement:
+  text = parse_format_text_field(yaml_timing_structure_element, 'text')
+  elements = parse_subelements(yaml_timing_structure_element, 'elements', parse_timing_structure_element)
+  return TimingStructureElement(text, elements)
+
+def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructure:
   bold = parse_boolean(yaml_timing_structure, 'bold')
-  elements = parse_subelements(yaml_timing_structure, 'elements', parse_timing_structure)
-  return TimingStructureElement(text, bold, elements)
+  elements = parse_subelements(yaml_timing_structure, 'elements', parse_timing_structure_element)
+  return TimingStructure(bold, elements)
 
 def parse_subrule(yaml_sub_rule: Any = False) -> SubRule:
   id = parse_id(yaml_sub_rule, 'rule')

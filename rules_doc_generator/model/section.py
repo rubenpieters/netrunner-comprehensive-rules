@@ -8,7 +8,6 @@ from rules_doc_generator.model.text import (RefDict, FormatText, Example)
 @dataclass
 class TimingStructureElement:
   text: FormatText
-  bold: bool
   elements: list[TimingStructureElement]
 
   def to_html_l1(self, config: Config, id_map: RefDict, bold: bool) -> str:
@@ -33,13 +32,6 @@ class TimingStructureElement:
   def to_html_l3(self, config: Config, id_map: RefDict) -> str:
     return f'<li class="TimingStructureL3 TimingStructureNormal">{self.text.to_html(config, id_map)}</li>'
 
-  def to_html(self, config: Config, id_map: RefDict) -> str:
-    result = '<ol class="TimingStructureList">'
-    for elem in self.elements:
-      result += elem.to_html_l1(config, id_map, self.bold)
-    result += '</ol>'
-    return result
-
   def to_latex_l1(self, config: Config, id_map: RefDict, bold: bool) -> str:
     result = '\\1 '
     if bold:
@@ -60,6 +52,19 @@ class TimingStructureElement:
 
   def to_latex_l3(self, config: Config, id_map: RefDict) -> str:
     return f'    \\3 {self.text.to_latex(config, id_map)}\n'
+
+
+@dataclass
+class TimingStructure:
+  bold: bool
+  elements: list[TimingStructureElement]
+
+  def to_html(self, config: Config, id_map: RefDict) -> str:
+    result = '<ol class="TimingStructureList">'
+    for elem in self.elements:
+      result += elem.to_html_l1(config, id_map, self.bold)
+    result += '</ol>'
+    return result
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     if self.bold:
@@ -246,7 +251,7 @@ class SubSection:
   def toc_text(self):
     return self.format_text.to_plaintext() if self.toc else ''
 
-SectionElement = Union[Rule, SubSection, TimingStructureElement]
+SectionElement = Union[Rule, SubSection, TimingStructure]
 
 @dataclass
 class Section:
@@ -265,8 +270,8 @@ class Section:
     for elem in self.section_elements:
       match elem:
         case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}'
-        case TimingStructureElement(): result += elem.to_html(config, id_map)
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
+        case TimingStructure(): result += elem.to_html(config, id_map)
     result += '</ol>'
     return result
 

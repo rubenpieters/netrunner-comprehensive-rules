@@ -56,6 +56,12 @@ jobs:
           name: html-output
           path: html/*
 
+      - name: Upload json output
+        uses: actions/upload-artifact@v3
+        with:
+          name: json-output
+          path: json/rules.json
+
   deploy:
     if: github.repository == 'rubenpieters/netrunner-comprehensive-rules'
     needs: convert_files

@@ -77,7 +77,7 @@ class TimingStructureElement:
 
 @dataclass
 class SubRule:
-  id: Union[str, None]
+  id: str
   new: bool
   format_text: FormatText
   examples: list[Example]
@@ -110,13 +110,18 @@ class SubRule:
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
     obj = "{"
-    obj += f'"{self.id}": "{self.format_text.to_json(config, id_map)}", "children": []'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{id_map[self.id].reference}",'
+    obj += f'"type": "{id_map[self.id].type}",'
+    obj += f'"text": "{self.format_text.to_json(config, id_map)}", "children": [],'
+    examples = ','.join(map(lambda example: f'"{example.text.to_json(config, id_map)}"', self.examples))
+    obj += f'"examples": [{examples}]'
     obj += "}"
     return obj
 
 @dataclass
 class Rule:
-  id: Union[str, None]
+  id: str
   new: bool
   format_text: FormatText
   examples: list[Example]
@@ -150,13 +155,18 @@ class Rule:
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
     obj = "{"
-    obj += f'"{self.id}": "{self.format_text.to_json(config, id_map)}", "children": []'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{id_map[self.id].reference}",'
+    obj += f'"type": "{id_map[self.id].type}",'
+    obj += f'"text": "{self.format_text.to_json(config, id_map)}", "children": [],'
+    examples = ','.join(map(lambda example: f'"{example.text.to_json(config, id_map)}"', self.examples))
+    obj += f'"examples": [{examples}]'
     obj += "}"
     return obj
 
 @dataclass
 class SubSection:
-  id: Union[str, None]
+  id: str
   new: bool
   format_text: FormatText
   toc: bool
@@ -221,9 +231,14 @@ class SubSection:
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
     obj = "{"
-    obj += f'"{self.id}": "{self.format_text.to_json(config, id_map)}",'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{id_map[self.id].reference}",'
+    obj += f'"type": "{id_map[self.id].type}",'
+    obj += f'"text": "{self.format_text.to_json(config, id_map)}",'
     childrenIds = ','.join(map(lambda rule: f'"{rule.id}"', self.rules))
-    obj += f'"children": [{childrenIds}]'
+    obj += f'"children": [{childrenIds}],'
+    examples = ','.join(map(lambda example: f'"{example.text.to_json(config, id_map)}"', self.examples))
+    obj += f'"examples": [{examples}]'
     obj += "}"
     return f'{obj},\n' + \
       ',\n'.join(map(lambda element: element.to_json(config, id_map), self.rules))
@@ -277,7 +292,10 @@ class Section:
   
   def to_json(self, config: Config, id_map: RefDict) -> str:
     obj = "{"
-    obj += f'"{self.id}": "{self.text.to_json(config, id_map)}",'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{id_map[self.id].reference}",'
+    obj += f'"type": "{id_map[self.id].type}",'
+    obj += f'"text": "{self.text.to_json(config, id_map)}",'
     childrenIds = ','.join(map(lambda element: f'"{element.id}"' if hasattr(element, "id") else "TODO", self.section_elements))
     obj += f'"children": [{childrenIds}]'
     obj += "}"
@@ -309,7 +327,10 @@ class Chapter:
 
   def to_json(self, config: Config, id_map: RefDict) -> str:
     obj = "{"
-    obj += f'"{self.id}": "{self.text}",'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{id_map[self.id].reference}",'
+    obj += f'"type": "{id_map[self.id].type}",'
+    obj += f'"text": "{self.text}",'
     childrenIds = ','.join(map(lambda section: f'"{section.id}"', self.sections))
     obj += f'"children": [{childrenIds}]'
     obj += "}"

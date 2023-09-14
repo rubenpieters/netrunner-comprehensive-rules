@@ -1,14 +1,2 @@
 changelog:
-- text: Added {ref:rule_game_numbers} to clarify that by default, values can be negative numbers, but cannot be non-integer numbers.
-- text: Added {ref:rule_threat_level} and {ref:rule_threat_flag} to define threat levels and the "threat N" ability flag.
-- text: Updated list of subtypes ({ref:rule_subtypes_list}) to add {subtype:expendable} and expand {subtype:enforcer} and {subtype:clone} to new card types.
-- text: Added {ref:rule_host_server} to clarify the meaning of "this server" on {subtype:trojans}.
-- text: Added {ref:rule_finish_action_trigger_condition} to codify trigger conditions related to an action ending.
-- text: Added {ref:rule_optional_drawing_simultaneously} to clarify the procedure for the card draw ability on {card:Umbrella}.
-- text: Updated {ref:rule_swap_become_installed} to clarify the nature of installations performed as part of a swap, and added {ref:rule_swap_installed_cards_preserves_hosting} to clarify what happens to hosted objects when two already-installed cards are swapped.
-- text: Added {ref:rule_instruction_link} to better highlight the importance of the concept of "instructions" and define "imminent" and "resolving" as statuses an instruction can have.
-- text: Added {ref:rule_is_resolving} to clarify when an ability or event "is resolving".
-- text: Added {ref:rule_references_to_trigger_conditions} to better codify the meaning of "'when encountered' abilities" and similar cases.
-- text: Moved rules for Infinite Loops into {ref:sec_additional_general} pending future revisions.
-- text: Added rules for bidding procedures in general ({ref:sec_bidding}) and the Psi Game keyword in particular ({ref:sec_psi_games}).
-- text: Switched "yes" and "no" branches of the action windows to improve readability of the timing structure reference ({ref:sec_appendix_timing_structure_corps_turn,sec_appendix_timing_structure_runners_turn}).
+- 

@@ -13,7 +13,6 @@ sections:
     text: |-
       Each player needs a legal deck, an identity card for their role, and any extra cards used from outside their deck. They also need a supply of tokens as described in {ref:sec_counters_and_tokens}. The constraints that define the legality of a deck are defined in {ref:sec_deck_construction}, and the cases where cards outside the deck and identity can be used are defined in {ref:sec_extra_cards}.
   - rule: rule_game_numbers
-    new:
     text: All numbers used in the game are integers. Unless otherwise stated, a given value can be positive, negative, or zero.
 - section: sec_golden_rules
   text: Golden Rules
@@ -726,10 +725,8 @@ sections:
     text: The sum of all agenda points on agendas in a player's score area is that player's {term:score}.
     rules:
     - rule: rule_threat_level
-      new:
       text: The {term:threat level} is equal to the greatest score of any player. The "Threat N" ability flag makes use of the threat level ({ref:rule_threat_flag}).
       examples:
-      - new:
         text: If the Runner's score is 4 agenda points, and the Corp's score is 3 agenda points, the threat level is 4.
   - rule: rule_game_win
     text: If at any time a player's score is greater than or equal to 7, they win the game at the next checkpoint. See {ref:sec_ending_the_game} regarding winning the game, and {ref:sec_checkpoints} for details about checkpoints.

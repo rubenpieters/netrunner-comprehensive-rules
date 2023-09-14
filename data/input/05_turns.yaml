@@ -48,7 +48,6 @@ sections:
     - rule: rule_action_conditional_ability_trigger
       text: A conditional ability that meets its trigger condition due to a player taking an action resolves after the action's trigger cost is paid, before the effects of the action itself. See {ref:rule_chain_reaction}.
     - rule: rule_finish_action_trigger_condition
-      new:
       text: Some conditional abilities meet their trigger conditions due to an action "ending", "finishing", or "completing". These abilities resolve in the reaction window following {ref:step_corp_turn_action} or {ref:step_runner_turn_action}, for actions taken by the Corp and Runner, respectively.
   - rule: rule_basic_actions
     text: Each player has several basic actions they can always perform. The Corp's basic actions are listed in {ref:rule_corp_actions}, and the Runner's basic actions are listed in {ref:rule_runner_actions}.

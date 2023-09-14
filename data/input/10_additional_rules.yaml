@@ -28,7 +28,6 @@ sections:
         {card:Boomerang}'s text refers to "a copy of Boomerang". This is not self-referential language and refers to any card named {card:Boomerang}.
 
   - subsection: sec_infinite_loops
-    new:
     toc:
     text: Infinite Loops
     rules:
@@ -339,54 +338,38 @@ sections:
           The Runner uses {card:Chastushka}'s ability to sabotage 4. The Corp has 2 cards in HQ and 1 card in R&D. The Corp must trash all cards from HQ and R&D.
 
 - section: sec_bidding
-  new:
   text: Bidding
   rules:
   - rule: rule_bidding
-    new:
     text: A {term:bid} is a number of credits that a player secretly chooses to spend as part of resolving an ability. Some effects instruct only a single player to bid, while other effects require both players to bid simultaneously.
   - rule: rule_bid_secret
-    new:
     text: Players select their bids in secret. This can be accomplished by writing down a number, by hiding a number of credit counters in a closed fist, or by any other unambiguous method.
   - rule: rule_bid_possible
-    new:
     text: A player cannot bid a number of credits they are unable to spend. Players can always bid 0[c].
     examples:
-    - new:
-      text: The Runner has no credits in their credit pool and 1 credit hosted on {card:Fencer Fueno} when they make a successful run on a server with {card:Adrian Seis} rezzed in its root. When the ability on {card:Adrian Seis} resolves, the players play a Psi Game, which requires them both to bid 0, 1, or 2[c]. In this case, the Runner cannot bid 2[c], as they are not able to spend that number of credits. They can, however, bid 1[c], as they will be able to spend the credit from {card:Fencer Fueno} to pay for that bid.
-    - new:
-      text: The Runner encounters {card:RSVP} and its subroutine resolves. Later in that run, they are required to bid credits by another ability. Since the effect of {card:RSVP}'s subroutine prohibits the Runner from spending credits, they must bid 0[c].
+    - text: The Runner has no credits in their credit pool and 1 credit hosted on {card:Fencer Fueno} when they make a successful run on a server with {card:Adrian Seis} rezzed in its root. When the ability on {card:Adrian Seis} resolves, the players play a Psi Game, which requires them both to bid 0, 1, or 2[c]. In this case, the Runner cannot bid 2[c], as they are not able to spend that number of credits. They can, however, bid 1[c], as they will be able to spend the credit from {card:Fencer Fueno} to pay for that bid.
+    - text: The Runner encounters {card:RSVP} and its subroutine resolves. Later in that run, they are required to bid credits by another ability. Since the effect of {card:RSVP}'s subroutine prohibits the Runner from spending credits, they must bid 0[c].
   - subsection: rule_bid_reveal_spend
-    new:
     text: After all bids are selected, the ability that called for the bids continues resolving. Players will later be instructed to reveal their bids. Each player must spend a number of credits equal to their bid as soon as the bid is revealed.
     rules:
     - rule: rule_bid_spent_immediately
-      new:
       text: Spending credits for a revealed bid is not a conditional ability and does not wait for a checkpoint or priority window after revealing the number of credits bid.
     - rule: rule_bid_is_cost
-      new:
       text: Spending credits for a bid counts as paying a nested cost. See {ref:sec_costs}.
     - rule: rule_bid_payment_choices
-      new:
       text: If both players are bidding and a player has multiple sources of credits available from which to pay for their bid (see {ref:rule_spend_credits}), that player chooses how to pay after learning the number of credits their opponent bid. If both players have multiple ways to pay for their bids, first the active player chooses how to pay, then the inactive player chooses how to pay. In either circumstance, the credits are spent simultaneously.
   - rule: rule_bid_secretly_spend
-    new:
     text: Some older cards direct players to "secretly spend credits" without reference to bidding. These abilities still follow the rules for bidding. Trigger conditions based on players "secretly spending credits" or "revealing secretly spent credits" are met at the next checkpoint after bids are revealed and paid for.
 
   - subsection: sec_psi_games
     toc:
-    new:
     text: Psi Games
     rules:
     - rule: rule_psi_game
-      new:
       text: A {term:Psi Game} is a bidding contest in which the outcome depends on whether the number of credits each player bid was the same or different. The instruction "Play a Psi Game." encompasses both bidding and revealing bids.
     - rule: rule_psi_bid_options
-      new:
       text: When playing a Psi Game, each player can bid 0[c], 1[c], or 2[c].
     - rule: rule_psi_bid_reveal
-      new:
       text: Playing a Psi Game is handled as a single instruction. After both players have selected a bid for a Psi Game, they immediately proceed to reveal and spend their bids. There are no checkpoints during this process until after both players have paid for their bids.
     - rule: rule_psi_outcome
-      new:
       text: In an ability that calls for a Psi Game, subsequent instructions will depend on the outcome of the Psi Game. The condition "if the bids match" is satisfied if the Corp and Runner bid the same number of credits. The condition "if the bids differ" is satisfied if the Corp and Runner did not bid the same number of credits.

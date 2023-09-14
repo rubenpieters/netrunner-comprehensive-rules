@@ -165,7 +165,6 @@ sections:
     text: If an ability directs multiple players to draw cards at the same time, those players follow the procedure for drawing cards together. Abilities relating to all of those draws will become pending in the same reaction window.
     rules:
     - rule: rule_optional_drawing_simultaneously
-      new:
       text: If an ability gives multiple players the option to draw cards at the same time, first each player indicates whether or how many cards they will draw, starting with the active player. Then the indicated draws are performed simultaneously.
 
   - subsection: sec_steps_of_drawing_n_cards
@@ -399,10 +398,8 @@ sections:
     text: If two installed cards are swapped, each card moves to the other's location simultaneously. The two cards remain installed throughout the process of swapping, and do not otherwise affect any other part of the game state.
     rules:
     - rule: rule_swap_installed_cards_preserves_hosting
-      new:
       text: When swapping installed cards, any cards or counters hosted on either of the swapped cards maintain their hosting relationships.
       examples:
-      - new:
         text: The Corp uses {card:Thimblerig}'s ability to swap it with a {card:Palisade} hosting {card:Botulus}. The {card:Botulus} remains hosted on the {card:Palisade} throughout this process. 
 
   - subsection: rule_swap_simultaneous
@@ -412,9 +409,8 @@ sections:
       text: Each of the swapped cards enters its destination zone in the same state that a card would normally enter that zone. A card swapped into Archives enters Archives facedown unless it was visible to the Runner at the time of the swap, a Corp card swapped into the play area enters unrezzed, etc.
     - rule: rule_swap_become_installed
       text: |-
-        If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host). {n}The normal procedure for installing a card is not followed, so no install cost is paid and like cards cannot be trashed. At the next checkpoint after the swap takes place, trigger conditions related to uninstalling or installing the two cards are met, respectively.{/n}
+        If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host). The normal procedure for installing a card is not followed, so no install cost is paid and like cards cannot be trashed. At the next checkpoint after the swap takes place, trigger conditions related to uninstalling or installing the two cards are met, respectively.
       examples:
-      - new:
         text: |-
           The Corp is playing {card:A Teia: IP Recovery} and has {card:Tatu-Bola} protecting a remote server. The Runner runs that server and passes {card:Tatu-Bola}. The Corp swaps it with a piece of ice from HQ. After the swap, the Corp can use {card:A Teia}'s ability to install a card in the root of another remote server. They then continue resolving the next instruction of {card:Tatu-Bola}'s ability, gaining 4[c].
     - rule: rule_swap_score_areas

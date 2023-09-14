@@ -727,7 +727,7 @@ sections:
     - rule: rule_threat_level
       text: The {term:threat level} is equal to the greatest score of any player. The "Threat N" ability flag makes use of the threat level ({ref:rule_threat_flag}).
       examples:
-        text: If the Runner's score is 4 agenda points, and the Corp's score is 3 agenda points, the threat level is 4.
+      - text: If the Runner's score is 4 agenda points, and the Corp's score is 3 agenda points, the threat level is 4.
   - rule: rule_game_win
     text: If at any time a player's score is greater than or equal to 7, they win the game at the next checkpoint. See {ref:sec_ending_the_game} regarding winning the game, and {ref:sec_checkpoints} for details about checkpoints.
   - subsection: rule_score_steal

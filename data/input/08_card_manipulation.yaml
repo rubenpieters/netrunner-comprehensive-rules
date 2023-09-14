@@ -400,7 +400,7 @@ sections:
     - rule: rule_swap_installed_cards_preserves_hosting
       text: When swapping installed cards, any cards or counters hosted on either of the swapped cards maintain their hosting relationships.
       examples:
-        text: The Corp uses {card:Thimblerig}'s ability to swap it with a {card:Palisade} hosting {card:Botulus}. The {card:Botulus} remains hosted on the {card:Palisade} throughout this process. 
+      - text: The Corp uses {card:Thimblerig}'s ability to swap it with a {card:Palisade} hosting {card:Botulus}. The {card:Botulus} remains hosted on the {card:Palisade} throughout this process. 
 
   - subsection: rule_swap_simultaneous
     text: If two cards are swapped between zones, each card moves to the zone the other is in simultaneously.
@@ -411,7 +411,7 @@ sections:
       text: |-
         If only one of the cards to be swapped is installed, then it becomes uninstalled as it moves to the destination zone. Any cards or counters hosted on it are trashed. The other card becomes installed in the exact position the first card occupied, maintaining any specific location (such as server, ice position, or host). The normal procedure for installing a card is not followed, so no install cost is paid and like cards cannot be trashed. At the next checkpoint after the swap takes place, trigger conditions related to uninstalling or installing the two cards are met, respectively.
       examples:
-        text: |-
+      - text: |-
           The Corp is playing {card:A Teia: IP Recovery} and has {card:Tatu-Bola} protecting a remote server. The Runner runs that server and passes {card:Tatu-Bola}. The Corp swaps it with a piece of ice from HQ. After the swap, the Corp can use {card:A Teia}'s ability to install a card in the root of another remote server. They then continue resolving the next instruction of {card:Tatu-Bola}'s ability, gaining 4[c].
     - rule: rule_swap_score_areas
       text: If two agendas are swapped between the players' score areas, any hosted cards or counters remain hosted on their respective host agendas.

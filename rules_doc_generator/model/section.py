@@ -362,7 +362,7 @@ class Document:
     latex_content = latex_content.replace("%__CHANGELOG_PLACEHOLDER__%", f'\\1 {changelog_content}')
 
     document_content = ''.join(map(lambda x: x.to_latex(config, id_map), self.chapters))
-    date_content = f'This version of the Comprehensive Rules document is effective \\textbf{{07 August 2023}}.'
+    date_content = f'This version of the Comprehensive Rules document is effective \\textbf{{{config.effective_date_str()}}}.'
     latex_content = latex_content.replace("%__DATE_PLACEHOLDER__%", date_content)
     latex_content = latex_content.replace("%__DOCUMENT_PLACEHOLDER__%", document_content)
 

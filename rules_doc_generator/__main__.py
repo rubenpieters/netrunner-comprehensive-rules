@@ -9,9 +9,12 @@ from rules_doc_generator.model.analysis.references import construct_reference_ma
 
 # Parse command line arguments.
 parser = ArgumentParser()
-parser.add_argument("-a", "--annotated", default=False, help="also generate annotated version with highlights of new parts", action="store_true")
+parser.add_argument("-a", "--annotated", default=False, help="Also generate annotated version with highlights of new parts", action="store_true")
+parser.add_argument("-y", "--year", default="2023", help="Effective year", action="store")
+parser.add_argument("-m", "--month", default="08", help="Effective month", action="store")
+parser.add_argument("-d", "--day", default="07", help="Effective day", action="store")
 args = parser.parse_args()
-config = Config(args.annotated)
+config = Config(args.annotated, args.year, args.month, args.day)
 
 print("- Config -")
 print("- Annotated: " + str(config.annotated))

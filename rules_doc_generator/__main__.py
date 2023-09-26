@@ -33,3 +33,4 @@ print("Ready!")
 
 shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('html', 'credit.svg'))
 shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('html', 'rules.css'))
+shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.js'), os.path.join('html', 'rules.js'))

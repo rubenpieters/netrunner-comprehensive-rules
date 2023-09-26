@@ -267,10 +267,12 @@ class Section:
     if self.snippet:
       result += f'<p class="Snippet">{self.snippet.to_html(config, id_map)}</p>'
     result += '<ol class="Rules">'
-    for elem in self.section_elements:
+    for n, elem in enumerate(self.section_elements):
+      rulenr:str = f'{id_map[self.id].reference}.{n+1}.'
+
       match elem:
-        case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
+        case Rule():       result += f'<li class="Rule" id="{elem.id}"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="?r={elem.id}">{rulenr}</a>{elem.to_html(config, id_map)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="?r={elem.id}">{rulenr}</a>{elem.to_html(config, id_map)}</li>'
         case TimingStructure(): result += elem.to_html(config, id_map)
     result += '</ol>'
     return result

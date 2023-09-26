@@ -14,6 +14,7 @@ body {
 
 .RulesContent {
   grid-column: 2;
+  margin-left: 1em;
   counter-reset: hdr_counter;
 }
 
@@ -25,8 +26,16 @@ body {
   counter-reset: rule_counter;
   list-style: none;
   line-height: 1.5em;
-  margin-left: 3.5em;
-  text-indent: -3.5em;
+  margin-left: 4em;
+  margin-top: 0;
+  /* text-indent: -3.5em; */
+}
+
+.Rule a.RuleLink {
+  display: inline-block;
+  width: 0;
+  position: relative;
+  left:-3em;
 }
 
 .SubType {
@@ -37,7 +46,7 @@ body {
   counter-reset: sub_rule_counter;
   list-style: none;
   line-height: 1.5em;
-  text-indent: -1.5em;
+  /* text-indent: -1.5em; */
 }
 
 .SubSection {
@@ -46,29 +55,29 @@ body {
   font-size: 1.2em;
 }
 
-.Chapter:before {
-  content: counter(hdr_counter) ".";
-  counter-increment: hdr_counter;
-  padding-right: 10px;
-}
+/* .Chapter:before { */
+  /* content: counter(hdr_counter) "."; */
+  /* counter-increment: hdr_counter; */
+  /* padding-right: 10px; */
+/* } */
 
-.Section:before {
-  content: counter(hdr_counter) "." counter(sec_counter) ".";
-  counter-increment: sec_counter;
-  padding-right: 10px;
-}
+/* .Section:before { */
+  /* content: counter(hdr_counter) "." counter(sec_counter) "."; */
+  /* counter-increment: sec_counter; */
+  /* padding-right: 10px; */
+/* } */
 
-.Rule:before {
-  content: counter(hdr_counter) "." counter(sec_counter) "." counter(rule_counter) ".";
-  counter-increment: rule_counter;
-  padding-right: 10px;
-}
+/* .Rule:before { */
+  /* content: counter(hdr_counter) "." counter(sec_counter) "." counter(rule_counter) "."; */
+  /* counter-increment: rule_counter; */
+  /* padding-right: 10px; */
+/* } */
 
-.SubRule:before {
-  content: counters(sub_rule_counter, "", lower-alpha) ".";
-  counter-increment: sub_rule_counter;
-  padding-right: 10px;
-}
+/* .SubRule:before { */
+  /* content: counters(sub_rule_counter, "", lower-alpha) "."; */
+  /* counter-increment: sub_rule_counter; */
+  /* padding-right: 10px; */
+/* } */
 
 .Card {
   font-style: italic;
@@ -92,15 +101,15 @@ body {
 }
 
 .ExamplesSubRule {
-  margin-left: -1.5em;
+  /* margin-left: -1.5em; */
 }
 
 .ExamplesRule {
-  margin-left: -3.6em;
+  /* margin-left: -3.6em; */
 }
 
 .ExamplesSubSection {
-  margin-left: -6em;
+  /* margin-left: -6em; */
 }
 
 .Examples {

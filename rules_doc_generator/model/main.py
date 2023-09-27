@@ -13,7 +13,7 @@ def create_toc_html(id_map: RefDict):
   return result
 
 def standalone_html(document: Document, config: Config, id_map: RefDict):
-  result = '<?xml encoding="utf-8" ?><!DOCTYPE html><html><head><script src="rules.js" defer></script><link rel="stylesheet" href="rules.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /></head><body>'
+  result = '<?xml encoding="utf-8" ?><!DOCTYPE html><html><head><script src="html/rules.js" defer></script><link rel="stylesheet" href="html/rules.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /></head><body>'
   result += '<div class="RulesGrid">'
   result += f'<ul class="RulesToc">{create_toc_html(id_map)}</ul>'
   result += f'<div class="RulesContent">{document.to_html(config, id_map)}</div>'

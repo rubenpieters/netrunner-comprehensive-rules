@@ -2,6 +2,15 @@ body {
   font-family: 'Atkinson Hyperlegible';
 }
 
+.material-symbols-outlined {
+  vertical-align: bottom;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+
 .RulesGrid {
   display: grid;
   grid-template-columns: 15% 85%;
@@ -15,27 +24,60 @@ body {
 .RulesContent {
   grid-column: 2;
   margin-left: 1em;
-  counter-reset: hdr_counter;
+  position: relative; /* Relative positioning to allow absolute positioning of RuleLink */
 }
 
 .Chapter {
-  counter-reset: sec_counter;
 }
 
-.Rules {
-  counter-reset: rule_counter;
+ol.Rules, ol.SubRules {
   list-style: none;
   line-height: 1.5em;
-  margin-left: 4em;
-  margin-top: 0;
-  /* text-indent: -3.5em; */
 }
 
-.Rule a.RuleLink {
+.Rules, .SubRules {
+  margin-top: 0;
+}
+.Rules {
+  margin-left: 2em;
+}
+.SubRules {
+  margin-left: 1em;
+}
+
+
+.RuleLinkOuterWrapper{
   display: inline-block;
   width: 0;
   position: relative;
-  left:-3em;
+  left: -.5em;
+}
+.RuleLinkInnerWrapper{
+  display: inline-block;
+  transform: translateX(-100%);
+}
+a.RuleLink:link, a.RuleLink:visited {
+  color: inherit;
+}
+
+.RuleLinkSymbol{
+  display:inline!important;
+  opacity:0;
+  transition: opacity ease-in 200ms;
+}
+
+a.RuleLink:hover+.RuleLinkSymbol{
+  opacity:1;
+}
+
+.Section a.RuleLink {
+  text-decoration: none;
+}
+
+.Section a.RuleLink+.RuleLinkSymbol {
+  margin-left:.5rem;
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 40;
+  font-size: 130%;
 }
 
 .SubType {
@@ -43,10 +85,8 @@ body {
 }
 
 .SubRules {
-  counter-reset: sub_rule_counter;
   list-style: none;
   line-height: 1.5em;
-  /* text-indent: -1.5em; */
 }
 
 .SubSection {
@@ -54,30 +94,6 @@ body {
   font-weight: bold;
   font-size: 1.2em;
 }
-
-/* .Chapter:before { */
-  /* content: counter(hdr_counter) "."; */
-  /* counter-increment: hdr_counter; */
-  /* padding-right: 10px; */
-/* } */
-
-/* .Section:before { */
-  /* content: counter(hdr_counter) "." counter(sec_counter) "."; */
-  /* counter-increment: sec_counter; */
-  /* padding-right: 10px; */
-/* } */
-
-/* .Rule:before { */
-  /* content: counter(hdr_counter) "." counter(sec_counter) "." counter(rule_counter) "."; */
-  /* counter-increment: rule_counter; */
-  /* padding-right: 10px; */
-/* } */
-
-/* .SubRule:before { */
-  /* content: counters(sub_rule_counter, "", lower-alpha) "."; */
-  /* counter-increment: sub_rule_counter; */
-  /* padding-right: 10px; */
-/* } */
 
 .Card {
   font-style: italic;
@@ -124,10 +140,6 @@ body {
   font-style: italic;
 }
 
-.TimingStructureList {
-  counter-reset: timing_structure_l1;
-}
-
 .TimingStructureBold {
   font-weight: bold;
 }
@@ -137,12 +149,10 @@ body {
 }
 
 .TimingStructureL1 {
-  counter-reset: timing_structure_l2;
   list-style: none;
 }
 
 .TimingStructureL2 {
-  counter-reset: timing_structure_l3;
   list-style: none;
 }
 
@@ -151,19 +161,13 @@ body {
 }
 
 .TimingStructureL1:before {
-  content: counter(timing_structure_l1) ")";
-  counter-increment: timing_structure_l1;
   padding-right: 7px;
 }
 
 .TimingStructureL2:before {
-  content: counters(timing_structure_l2, "", lower-alpha) ")";
-  counter-increment: timing_structure_l2;
   padding-right: 7px;
 }
 
 .TimingStructureL3:before {
-  content: counters(timing_structure_l3, "", lower-roman) ")";
-  counter-increment: timing_structure_l3;
   padding-right: 7px;
 }

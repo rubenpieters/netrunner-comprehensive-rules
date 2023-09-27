@@ -70,11 +70,17 @@ a.RuleLink:hover+.RuleLinkSymbol{
   opacity:1;
 }
 
-.Section a.RuleLink {
+.Section a.RuleLink, .Chapter a.RuleLink {
   text-decoration: none;
 }
 
 .Section a.RuleLink+.RuleLinkSymbol {
+  margin-left:.5rem;
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 40;
+  font-size: 130%;
+}
+
+.Chapter a.RuleLink+.RuleLinkSymbol {
   margin-left:.5rem;
   font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 40;
   font-size: 130%;

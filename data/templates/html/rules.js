@@ -1,16 +1,16 @@
 addEventListener("load", (event) => {
     const urlParams = new URLSearchParams(window.location.search);
-    const ruleID = urlParams.get('r');
-    if(ruleID) {
-        document.getElementById(ruleID).scrollIntoView();
+    const ruleId = urlParams.get('r');
+    if(ruleId) {
+        document.getElementById(ruleId).scrollIntoView();
     }
 });
 
 // Prevent reloading page while following rules links
 // The rule link still appears in the user's navigation bar to copy and paste 
 const $elems = document.querySelectorAll('a.RuleLink')
-var elems = Array.from($elems)
-elems.map(a => {
+const elems = Array.from($elems)
+elems.forEach(a => {
     url = new URL(a.href);
     url.search = url.hash.replace('#', '?r=');
     url.hash = "";

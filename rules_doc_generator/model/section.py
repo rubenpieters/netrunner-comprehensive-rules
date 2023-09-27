@@ -265,7 +265,7 @@ class Section:
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
     secnr:str = f'{id_map[self.id].reference}.'
-    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, id_map)}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></h2>'
+    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, id_map)}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>'
     if self.snippet:
       result += f'<p class="Snippet">{self.snippet.to_html(config, id_map)}</p>'
     result += '<ol class="Rules">'
@@ -321,7 +321,8 @@ class Chapter:
   sections: list[Section]
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
-    result = f'<h1 class="Chapter" id="{self.id}">{self.text}</h1>'
+    chapnr:str = f'{id_map[self.id].reference}.'
+    result = f'<h1 class="Chapter" id="{self.id}"><a class="RuleLink" href="#{self.id}">{chapnr} {self.text}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>'
     for section in self.sections:
       result += section.to_html(config, id_map)
     return result

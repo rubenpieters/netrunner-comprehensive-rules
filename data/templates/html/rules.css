@@ -24,7 +24,6 @@ body {
 .RulesContent {
   grid-column: 2;
   margin-left: 1em;
-  position: relative; /* Relative positioning to allow absolute positioning of RuleLink */
 }
 
 ol.Rules, ol.SubRules {

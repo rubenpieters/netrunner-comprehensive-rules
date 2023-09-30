@@ -102,15 +102,15 @@ a.RuleLink:link, a.RuleLink:visited {
 }
 
 .ExamplesSubRule {
-  /* margin-left: -1.5em; */
+  margin-left: -1.3em;
 }
 
 .ExamplesRule {
-  /* margin-left: -3.6em; */
+  margin-left: -2em;
 }
 
 .ExamplesSubSection {
-  /* margin-left: -6em; */
+  margin-left: -6em;
 }
 
 .Examples {

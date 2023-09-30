@@ -144,15 +144,3 @@ a.RuleLink:link, a.RuleLink:visited {
 .TimingStructureL3 {
   list-style: lower-roman;
 }
-
-.TimingStructureL1:before {
-  padding-right: 7px;
-}
-
-.TimingStructureL2:before {
-  padding-right: 7px;
-}
-
-.TimingStructureL3:before {
-  padding-right: 7px;
-}

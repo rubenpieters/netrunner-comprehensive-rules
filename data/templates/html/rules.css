@@ -134,15 +134,15 @@ a.RuleLink:link, a.RuleLink:visited {
 }
 
 .TimingStructureL1 {
-  list-style: none;
+  list-style: decimal;
 }
 
 .TimingStructureL2 {
-  list-style: none;
+  list-style: lower-alpha;
 }
 
 .TimingStructureL3 {
-  list-style: none;
+  list-style: lower-roman;
 }
 
 .TimingStructureL1:before {

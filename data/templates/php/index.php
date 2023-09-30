@@ -11,7 +11,7 @@ if(isset($_GET['r'])) {
     $rule = '';
 }
 
-$path = 'json/rules.json';
+$path = 'rules.json';
 $jsonString = file_get_contents($path);
 $jsonData = json_decode($jsonString, true);
 
@@ -84,7 +84,7 @@ if($jsonRule) {
 
 $doc = new DOMDocument('1.0', 'UTF-8');
 $internalErrors = libxml_use_internal_errors(true);
-$doc->loadHTMLFile("html/rules.html");
+$doc->loadHTMLFile("rules.html");
 
 $head = $doc->getElementsByTagName('head')[0];
 

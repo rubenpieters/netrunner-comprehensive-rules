@@ -56,6 +56,7 @@ a.RuleLink:link, a.RuleLink:visited {
   color: inherit;
 }
 
+/* The symbol is disabled for the HTML stand-alone version. Overridden in extended.css */
 .RuleLinkSymbol{
   display:none;
 }

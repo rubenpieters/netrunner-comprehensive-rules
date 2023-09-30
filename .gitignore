@@ -2,6 +2,7 @@
 /latex/
 /json/
 /latex_annotated/
+/php/
 __pycache__/
 .venv
 .vscode

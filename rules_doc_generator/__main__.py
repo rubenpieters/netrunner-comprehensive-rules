@@ -47,6 +47,6 @@ if config.generate_php:
   shutil.copyfile(os.path.join('data', 'templates', 'php', 'index.php'), os.path.join('php', 'index.php'))
   shutil.copyfile(os.path.join('data', 'templates', 'php', 'logo.png'), os.path.join('php', 'logo.png'))
   phpConfigFile = "<?php\n$CONFIG = array (\n"
-  phpConfigFile += f"  'basepath' => '{config.php_base_path}',\n"
+  phpConfigFile += f"  'base_path' => '{config.php_base_path}',\n"
   phpConfigFile += ");\n?>\n"
   write_to_file('php', 'config.php', phpConfigFile)

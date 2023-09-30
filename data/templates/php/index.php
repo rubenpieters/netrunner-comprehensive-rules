@@ -1,17 +1,26 @@
 <?php
-$image = "logo.png";
+require './config.php';
 
+// ----------------------------------------------------------------
+// Set base OpenGraph information. May be overridden by later code.
+// ----------------------------------------------------------------
+$image_file = "logo.png";
 $og_site_name = "NSG Comprehensive Rules";
 $og_title = "NSG Comprehensive Rules";
 $og_description = "Description";
 
-if(isset($_GET['r'])) {
-    $rule = $_GET['r'];
-} else {
-    $rule = '';
+function stripTrailingSlash(&$component) {
+    $component = rtrim($component, '/');
 }
+$parts = array($CONFIG['base_path'], $image_file);
+array_walk_recursive($parts, 'stripTrailingSlash'); 
+$og_image_url = implode('/', $parts);
 
+// --------------------
+// Load json rules file
+// --------------------
 $path = 'rules.json';
+
 $jsonString = file_get_contents($path);
 $jsonData = json_decode($jsonString, true);
 
@@ -23,6 +32,18 @@ function search_for_rule($jsonData, $key, $value) {
     }
 }
 
+// --------------------------
+// Check for ?r=... GET query
+// --------------------------
+if(isset($_GET['r'])) {
+    $rule = $_GET['r'];
+} else {
+    $rule = '';
+}
+
+// ---------------------------------------------------------------------------
+// Search for rule given by GET query and set og_desc and og_title accordingly
+// ---------------------------------------------------------------------------
 $og_desc = "Access the complete rules framework that makes Netrunner click.";
 $jsonRule = null;
 if($rule) {
@@ -42,7 +63,6 @@ if($jsonRule) {
             - og:description will be $jsonRule and its children
     */
     $level = count(explode('.', $jsonRule['nr']));
-
     if($level == 1) {
         $og_title = $jsonRule['nr'].". ".$jsonRule['text'];
         $og_desc = "";
@@ -82,6 +102,9 @@ if($jsonRule) {
     }
 }
 
+// ---------------------------------------------------
+// Load rules.html file and insert OpenGraph meta tags
+// ---------------------------------------------------
 $doc = new DOMDocument('1.0', 'UTF-8');
 $internalErrors = libxml_use_internal_errors(true);
 $doc->loadHTMLFile("rules.html");
@@ -91,10 +114,9 @@ $head = $doc->getElementsByTagName('head')[0];
 $metaProps = array();
 $metaProps[] = array("property" => "og:title", "content" => $og_title);
 $metaProps[] = array("property" => "og:type", "content" => "website");
-$metaProps[] = array("property" => "og:image", "content" => "https://dumpyard.lostgeek.de/rules/logo.png");
+$metaProps[] = array("property" => "og:image", "content" => $og_image_url);
 $metaProps[] = array("property" => "og:site_name", "content" => $og_site_name);
 $metaProps[] = array("property" => "og:description", "content" => $og_desc);
-
 
 foreach($metaProps as $entry) {
     $el = $doc->createElement('meta');
@@ -103,6 +125,8 @@ foreach($metaProps as $entry) {
     $head->appendChild($el);
 }
 
-
+// -----------------
+// Serve HTML output
+// -----------------
 echo $doc->saveHTML();
 ?>

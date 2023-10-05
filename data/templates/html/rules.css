@@ -2,6 +2,15 @@ body {
   font-family: 'Atkinson Hyperlegible';
 }
 
+.material-symbols-outlined {
+    vertical-align: bottom;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
 .RulesGrid {
   display: grid;
   grid-template-columns: 15% 85%;
@@ -14,19 +23,45 @@ body {
 
 .RulesContent {
   grid-column: 2;
-  counter-reset: hdr_counter;
+  margin-left: 1em;
 }
 
-.Chapter {
-  counter-reset: sec_counter;
-}
-
-.Rules {
-  counter-reset: rule_counter;
+ol.Rules, ol.SubRules {
   list-style: none;
   line-height: 1.5em;
-  margin-left: 3.5em;
-  text-indent: -3.5em;
+}
+
+.Rules, .SubRules {
+  margin-top: 0;
+}
+.Rules {
+  margin-left: 2em;
+}
+.SubRules {
+  margin-left: 1em;
+}
+
+.RuleLinkOuterWrapper{
+  display: inline-block;
+  width: 0;
+  position: relative;
+  left: -.5em;
+}
+.RuleLinkInnerWrapper{
+  display: inline-block;
+  transform: translateX(-100%);
+}
+a.RuleLink:link, a.RuleLink:visited {
+  color: inherit;
+}
+
+/* The symbol is disabled for the HTML stand-alone version. Overridden in extended.css */
+.RuleLinkSymbol{
+  display:none;
+}
+
+.Section a.RuleLink, .Chapter a.RuleLink {
+  text-decoration: none;
 }
 
 .SubType {
@@ -34,40 +69,14 @@ body {
 }
 
 .SubRules {
-  counter-reset: sub_rule_counter;
   list-style: none;
   line-height: 1.5em;
-  text-indent: -1.5em;
 }
 
 .SubSection {
   color: #494949;
   font-weight: bold;
   font-size: 1.2em;
-}
-
-.Chapter:before {
-  content: counter(hdr_counter) ".";
-  counter-increment: hdr_counter;
-  padding-right: 10px;
-}
-
-.Section:before {
-  content: counter(hdr_counter) "." counter(sec_counter) ".";
-  counter-increment: sec_counter;
-  padding-right: 10px;
-}
-
-.Rule:before {
-  content: counter(hdr_counter) "." counter(sec_counter) "." counter(rule_counter) ".";
-  counter-increment: rule_counter;
-  padding-right: 10px;
-}
-
-.SubRule:before {
-  content: counters(sub_rule_counter, "", lower-alpha) ".";
-  counter-increment: sub_rule_counter;
-  padding-right: 10px;
 }
 
 .Card {
@@ -92,11 +101,11 @@ body {
 }
 
 .ExamplesSubRule {
-  margin-left: -1.5em;
+  margin-left: -1.3em;
 }
 
 .ExamplesRule {
-  margin-left: -3.6em;
+  margin-left: -2em;
 }
 
 .ExamplesSubSection {
@@ -115,10 +124,6 @@ body {
   font-style: italic;
 }
 
-.TimingStructureList {
-  counter-reset: timing_structure_l1;
-}
-
 .TimingStructureBold {
   font-weight: bold;
 }
@@ -128,33 +133,13 @@ body {
 }
 
 .TimingStructureL1 {
-  counter-reset: timing_structure_l2;
-  list-style: none;
+  list-style: decimal;
 }
 
 .TimingStructureL2 {
-  counter-reset: timing_structure_l3;
-  list-style: none;
+  list-style: lower-alpha;
 }
 
 .TimingStructureL3 {
-  list-style: none;
-}
-
-.TimingStructureL1:before {
-  content: counter(timing_structure_l1) ")";
-  counter-increment: timing_structure_l1;
-  padding-right: 7px;
-}
-
-.TimingStructureL2:before {
-  content: counters(timing_structure_l2, "", lower-alpha) ")";
-  counter-increment: timing_structure_l2;
-  padding-right: 7px;
-}
-
-.TimingStructureL3:before {
-  content: counters(timing_structure_l3, "", lower-roman) ")";
-  counter-increment: timing_structure_l3;
-  padding-right: 7px;
+  list-style: lower-roman;
 }

@@ -13,7 +13,14 @@ def create_toc_html(id_map: RefDict):
   return result
 
 def standalone_html(document: Document, config: Config, id_map: RefDict):
-  result = '<!DOCTYPE html><html><head><link rel="stylesheet" href="rules.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible"></head><body>'
+  result = '<?xml encoding="utf-8" ?><!DOCTYPE html><html><head>'
+  result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">'
+  result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />'
+  result += '<link rel="stylesheet" href="rules.css">'
+  if config.generate_php:
+    result += '<script src="rules.js" defer></script>'
+    result += '<link rel="stylesheet" href="extended.css">'
+  result += '</head><body>'
   result += '<div class="RulesGrid">'
   result += f'<ul class="RulesToc">{create_toc_html(id_map)}</ul>'
   result += f'<div class="RulesContent">{document.to_html(config, id_map)}</div>'

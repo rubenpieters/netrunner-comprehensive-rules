@@ -1,0 +1,34 @@
+.RuleLinkSymbol{
+  display:inline!important;
+  opacity:0;
+  transition: opacity ease-in 200ms;
+}
+
+a.RuleLink:hover+.RuleLinkSymbol{
+  opacity:1;
+}
+
+.Section a.RuleLink+.RuleLinkSymbol {
+  margin-left:.5rem;
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 40;
+  font-size: 130%;
+}
+
+.Chapter a.RuleLink+.RuleLinkSymbol {
+  margin-left:.5rem;
+  font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 40;
+  font-size: 130%;
+}
+
+/* Add another 1.5rem to account for link symbol width */
+.ExamplesSubRule {
+  margin-left: -2.8em;
+}
+
+.ExamplesRule {
+  margin-left: -4.5em;
+}
+
+.ExamplesSubSection {
+  margin-left: -7.5em;
+}

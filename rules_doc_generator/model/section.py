@@ -194,7 +194,8 @@ class SubSection:
         result += example.to_html(config, id_map)
       result += '</ol>'
       for rule in self.rules:
-        result += f'<li class="SubRule" id="{rule.id}">{rule.to_html(config, id_map)}</li>'
+        ruleletter:str = f'{id_map[rule.id].reference[-1]}.'
+        result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{rule.to_html(config, id_map)}</li>'
       result += '</ol>'
     return result
 
@@ -263,14 +264,17 @@ class Section:
   section_elements: list[SectionElement]
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
-    result = f'<h2 class="Section" id="{self.id}">{self.text.to_html(config, id_map)}</h2>'
+    secnr:str = f'{id_map[self.id].reference}.'
+    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, id_map)}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>'
     if self.snippet:
       result += f'<p class="Snippet">{self.snippet.to_html(config, id_map)}</p>'
     result += '<ol class="Rules">'
-    for elem in self.section_elements:
+    for n, elem in enumerate(self.section_elements):
+      rulenr:str = f'{id_map[self.id].reference}.{n+1}.'
+
       match elem:
-        case Rule(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}">{elem.to_html(config, id_map)}</li>'
+        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{elem.to_html(config, id_map)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{elem.to_html(config, id_map)}</li>'
         case TimingStructure(): result += elem.to_html(config, id_map)
     result += '</ol>'
     return result
@@ -317,7 +321,8 @@ class Chapter:
   sections: list[Section]
 
   def to_html(self, config: Config, id_map: RefDict) -> str:
-    result = f'<h1 class="Chapter" id="{self.id}">{self.text}</h1>'
+    chapnr:str = f'{id_map[self.id].reference}.'
+    result = f'<h1 class="Chapter" id="{self.id}"><a class="RuleLink" href="#{self.id}">{chapnr} {self.text}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>'
     for section in self.sections:
       result += section.to_html(config, id_map)
     return result

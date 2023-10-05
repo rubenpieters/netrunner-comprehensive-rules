@@ -22,10 +22,15 @@ class Config:
   effective_year: str
   effective_month: str
   effective_day: str
-
-  def not_annotated(self):
-    return Config(False, self.effective_year, self.effective_month, self.effective_day)
+  generate_php: bool
+  php_base_path: str
   
+  def not_annotated(self):
+    return Config(False, self.effective_year, self.effective_month, self.effective_day, self.generate_php, self.php_base_path)
+  
+  def not_php(self):
+    return Config(self.annotated, self.effective_year, self.effective_month, self.effective_day, False, self.php_base_path)
+
   def version_string(self):
     return f'{self.effective_year[2:]}.{self.effective_month}'
   

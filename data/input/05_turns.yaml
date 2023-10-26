@@ -135,7 +135,7 @@ sections:
     text: During a player's action phase, they must continue to take actions until they have no more clicks or the phase is ended directly by a card ability. The player may take actions in any combination and order as long as they pay the appropriate costs. Once they have no remaining clicks, the action phase ends.
   - subsection: rule_forced_action_phase_end
     text: |-
-      A player's action phase can be forced to end by certain card abilities (e.g. via the ability on a {term: terminal} operation or event). When a player's action phase is forced to end, the following occurs:
+      A player's action phase can be forced to end by certain card abilities (e.g. via the ability on a {subtype: terminal} operation or event). When a player's action phase is forced to end, the following occurs:
     rules:
     - rule: rule_terminal_step_ends
       text: The current step of the action phase ends, and all remaining steps are skipped.

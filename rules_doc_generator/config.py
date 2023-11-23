@@ -22,14 +22,15 @@ class Config:
   effective_year: str
   effective_month: str
   effective_day: str
-  generate_php: bool
   php_base_path: str
+  output_types: list[str]
   
   def not_annotated(self):
-    return Config(False, self.effective_year, self.effective_month, self.effective_day, self.generate_php, self.php_base_path)
+    return Config(False, self.effective_year, self.effective_month, self.effective_day, self.php_base_path, self.output_types)
   
-  def not_php(self):
-    return Config(self.annotated, self.effective_year, self.effective_month, self.effective_day, False, self.php_base_path)
+  def without_opengraph(self):
+    without_opengraph = list(filter(lambda x: x != "opengraph", self.output_types))
+    return Config(self.annotated, self.effective_year, self.effective_month, self.effective_day, self.php_base_path, without_opengraph)
 
   def version_string(self):
     return f'{self.effective_year[2:]}.{self.effective_month}'
@@ -38,5 +39,9 @@ class Config:
     if not self.effective_month in short_month_to_full:
       raise Exception(f'Not a valid month string: {self.effective_month}')
     return f'{self.effective_day} {short_month_to_full[self.effective_month]} {self.effective_year}'
-
-
+  
+def parse_output_types(arguments: list[str]):
+  lowercase_arguments = list(map(lambda x: x.lower(), arguments))
+  if "all" in lowercase_arguments:
+    return ["pdf", "web", "opengraph", "json"]
+  return list(filter(lambda x: x == "pdf" or x == "web" or x == "opengraph" or x == "json", lowercase_arguments))

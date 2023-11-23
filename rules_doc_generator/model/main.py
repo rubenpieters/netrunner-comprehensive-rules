@@ -12,12 +12,12 @@ def create_toc_html(id_map: RefDict):
       result += f'<li><a href="#{ref_info.id}">{ref_info.reference} {ref_info.text}</a></li>'
   return result
 
-def standalone_html(document: Document, config: Config, id_map: RefDict):
+def standalone_html(document: Document, config: Config, id_map: RefDict, opengraph: bool):
   result = '<?xml encoding="utf-8" ?><!DOCTYPE html><html><head>'
   result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">'
   result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />'
   result += '<link rel="stylesheet" href="rules.css">'
-  if config.generate_php:
+  if opengraph:
     result += '<script src="rules.js" defer></script>'
     result += '<link rel="stylesheet" href="extended.css">'
   result += '</head><body>'

@@ -62,6 +62,12 @@ jobs:
           name: json-output
           path: json/rules.json
 
+      - name: Upload php output
+        uses: actions/upload-artifact@v3
+        with:
+          name: php-output
+          path: php/*
+
   deploy:
     if: github.repository == 'rubenpieters/netrunner-comprehensive-rules'
     needs: convert_files

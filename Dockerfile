@@ -6,3 +6,5 @@ RUN apt-get -y install php-cli php-dom
 
 ADD requirements.txt .
 RUN pip install -r requirements.txt
+
+WORKDIR /workdir

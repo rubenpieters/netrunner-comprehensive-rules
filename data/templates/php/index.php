@@ -5,8 +5,8 @@ require './config.php';
 // Set base OpenGraph information. May be overridden by later code.
 // ----------------------------------------------------------------
 $image_file = "logo.png";
-$og_site_name = "NSG Comprehensive Rules";
-$og_title = "NSG Comprehensive Rules";
+$og_site_name = "Netrunner Comprehensive Rules";
+$og_title = "Netrunner Comprehensive Rules";
 $og_description = "Description";
 
 function stripTrailingSlash(&$component) {

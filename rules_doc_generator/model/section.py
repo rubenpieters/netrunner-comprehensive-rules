@@ -260,6 +260,7 @@ class Section:
   new: bool
   text: FormatText
   toc_entry: str | None
+  steps: bool
   snippet: Optional[FormatText]
   section_elements: list[SectionElement]
 

@@ -35,11 +35,12 @@ def _construct_reference_map(
       ref_map[id] = RefInfo(f'{chapter_index}', 'section', text, id, toc=True)
       for i, section in enumerate(sections):
         _construct_reference_map(section, ref_map, chapter_index, i+1, 0, 0)
-    case Section(id=id, section_elements=section_elements, text=text):
+    case Section(id=id, section_elements=section_elements, text=text, steps=steps):
       check_id_defined(ref_map, id)
       ref_map[id] = RefInfo(f'{chapter_index}.{section_index}', 'section', element.toc_text(), id, toc=True)
+      sub_ref_type = 'step' if steps else 'rule'
       for i, section_element in enumerate(section_elements):
-        _construct_reference_map(section_element, ref_map, chapter_index, section_index, i+1, 0)
+        _construct_reference_map(section_element, ref_map, chapter_index, section_index, i+1, 0, sub_ref_type)
     case SubSection(id=id, rules=rules, steps=steps, toc=toc):
       if id is not None:
         check_id_defined(ref_map, id)

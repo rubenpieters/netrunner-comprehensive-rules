@@ -101,9 +101,10 @@ def parse_section(yaml_section: Any) -> Section:
   new = parse_boolean(yaml_section, 'new')
   text = parse_format_text_field(yaml_section, 'text')
   toc_entry = parse_with_default(yaml_section, 'toc_entry', None, parse_str_field)
+  steps = parse_boolean(yaml_section, 'steps')
   snippet = parse_with_default(yaml_section, 'snippet', None, parse_format_text_field)
   section_elements = parse_subelements(yaml_section, 'rules', parse_section_element)
-  return Section(id, new, text, toc_entry, snippet, section_elements)
+  return Section(id, new, text, toc_entry, steps, snippet, section_elements)
 
 def parse_chapter(yaml_chapter: Any) -> Chapter:
   id = parse_id(yaml_chapter, 'chapter')

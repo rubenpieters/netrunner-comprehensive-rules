@@ -282,12 +282,19 @@ class Section:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Section {self.id}.\n'
-    if self.toc_entry:
-      result += f'\subsection[{self.toc_entry}]{{{self.text.to_latex(config, id_map)}}}\n'
-    elif self.new and config.annotated:
-      result += f'{{\color{{orange}}\subsection{{{self.text.to_latex(config, id_map)}}}}}\n'
+    text = self.text.to_latex(config, id_map)
+    toc_text = self.toc_entry if self.toc_entry else text
+
+    result += '\\addtocounter{subsection}{1} \setcounter{subsubsection}{0} '
+    # Needed for hyperref to jump to the correct place.
+    # https://tex.stackexchange.com/questions/44088/when-do-i-need-to-invoke-phantomsection
+    result += '\\phantomsection '
+    result += f'\\addcontentsline{{toc}}{{subsection}}{{\\arabic{{section}}.\\arabic{{subsection}}~~ {toc_text}}} '
+    if self.new and config.annotated:
+      result += f'\subsection*{{\\color{{orange}} \\arabic{{section}}.\\arabic{{subsection}}~~ {text}}}'
     else:
-      result += f'\subsection{{{self.text.to_latex(config, id_map)}}}\n'
+      result += f'\subsection*{{\\arabic{{section}}.\\arabic{{subsection}}~~ {text}}}'
+
     result += f'\label{{{self.id}}}\n'
     if self.snippet:
       snippet_lines = self.snippet.to_latex(config, id_map).split('\n')
@@ -318,6 +325,7 @@ class Section:
 @dataclass
 class Chapter:
   id: str
+  new: bool
   text: str
   sections: list[Section]
 
@@ -330,7 +338,17 @@ class Chapter:
 
   def to_latex(self, config: Config, id_map: RefDict) -> str:
     result = f'% Chapter {self.id}.\n'
-    result += f'\section{{{self.text}}}\n'
+
+    result += '\\addtocounter{section}{1} \setcounter{subsection}{0}  \setcounter{subsubsection}{0} '
+    # Needed for hyperref to jump to the correct place.
+    # https://tex.stackexchange.com/questions/44088/when-do-i-need-to-invoke-phantomsection
+    result += '\\phantomsection '
+    result += f'\\addcontentsline{{toc}}{{section}}{{\\arabic{{section}}~~ {self.text}}} '
+    if self.new and config.annotated:
+      result += f'\section*{{\\color{{orange}} \\arabic{{section}}~~ {self.text}}}'
+    else:
+      result += f'\section*{{\\arabic{{section}}~~ {self.text}}}'
+
     result += f'\label{{{self.id}}}\n'
     for section in self.sections:
       result += section.to_latex(config, id_map)

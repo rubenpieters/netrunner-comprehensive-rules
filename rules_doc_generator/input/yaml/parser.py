@@ -108,9 +108,10 @@ def parse_section(yaml_section: Any) -> Section:
 
 def parse_chapter(yaml_chapter: Any) -> Chapter:
   id = parse_id(yaml_chapter, 'chapter')
+  new = parse_boolean(yaml_chapter, 'new')
   text = parse_str_field(yaml_chapter, 'text')
   sections = parse_subelements(yaml_chapter, 'sections', parse_section)
-  return Chapter(id, text, sections)
+  return Chapter(id, new, text, sections)
 
 def parse_changelog_entry(yaml_changelog_entry: Any) -> FormatText:
   text = parse_format_text_field(yaml_changelog_entry, 'text')

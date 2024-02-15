@@ -37,10 +37,6 @@ sections:
     text: A player can only take an action or use an ability if its effect has the potential to change the game state. This potential is assessed strictly by what the action or ability can be expected to accomplish, without regard to the consequences of paying any costs to initiate that action or ability and without regard to any other abilities that may meet their conditions in the process of initiating or resolving that action or ability.
     examples:
     - text: |-
-        The Corp has one unrezzed piece of ice installed and {card:Liquidation} in HQ. As {card:Liquidation} requires the Corp to have at least one rezzed card to trash, the Corp cannot play {card:Liquidation} as it cannot change the game state.
-    - text: |-
-        The Corp has one rezzed piece of ice installed and {card:Liquidation} in HQ. Because the Corp has at least one rezzed card that could be trashed (which would change the game state), they can play {card:Liquidation}, spending a click and paying its play cost. The Corp then chooses any number of their rezzed cards to trash, which could be zero cards.
-    - text: |-
         The Runner is playing {card:Armand "Geist" Walker} and has {card:Forger} installed. The Runner can only trash {card:Forger} and trigger {card:Geist}'s ability when they are about to take a tag (which {card:Forger} could avoid) or while they have a tag (which {card:Forger} could remove). Using {card:Forger} at any other time has no potential to change the game state.
 
 - section: sec_symbols

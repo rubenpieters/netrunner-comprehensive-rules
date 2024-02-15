@@ -1,2 +1,4 @@
 changelog:
 - text: Removed examples in {ref:rule_ncigs} relating to play abilities of operations. Players do not need to check if the contents of an event or operation have the potential to change the game state in order to trigger an ability that allows them to play an event or operation (e.g., the basic action). Such an ability has the potential to change the game state as long as a card exists that can be played.
+- text: |-
+    Updated {ref:rule_limit_remote_servers} to also include {card:A Teia: IP Recovery}.

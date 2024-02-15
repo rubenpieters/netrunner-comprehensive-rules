@@ -264,7 +264,7 @@ sections:
     - rule: rule_remote_server
       text: A {term:remote server} is the only type of server that can contain an asset or agenda in its root.
     - rule: rule_creating_remote_servers
-      text: The Corp starts the game with no remote servers. The Corp creates a new remote server by declaring it as the destination server for a card they are about to install. There is usually no limit to the number of remote servers the Corp can have at any given time.
+      text: The Corp starts the game with no remote servers. The Corp creates a new remote server by declaring it as the destination server for a card they are about to install. There is {n}usually{/n} no limit to the number of remote servers the Corp can have at any given time.
     - rule: rule_separate_remote_servers
       text: Cards installed in the roots of separate remote servers are placed in a vertical orientation in a row extending away from the central servers to indicate the locations of the remote servers relative to other servers. The ice installed protecting each remote server are placed in a horizontal orientation in front of any cards in the root of that server, outwards towards the Runner.
     - rule: rule_remote_server_existence
@@ -272,11 +272,13 @@ sections:
     - rule: rule_remote_server_cease_to_exist
       text: During checkpoints, a remote server ceases to exist if there are no cards installed in its root and no cards installed protecting it. If a server ceases to exist during a run against it, then the run ends after any currently open paid ability window closes. Unless the run has already been declared either successful or unsuccessful, it is neither. See {ref:rule_server_ceases_to_exist}.
     - rule: rule_limit_remote_servers
+      new:
       text: |-
         Some abilities limit the number of remote servers. While such an ability is active, the Corp cannot create a new remote server if this would raise the total number of remote servers above the specified limit. During {ref:rule_checkpoint_card_restrictions} of each checkpoint, if there are more remote servers than an active limit allows, the Corp player chooses a number of servers equal to the limit. The checkpoint then trashes all cards in the root of and protecting each remote server that was not chosen.
       examples:
       - text: |-
-        The Corp's identity is {card:Earth Station: SEA Headquarters}, which has the ability "Limit 1 remote server." If any remote servers exist, the Corp cannot create a new remote server.
+          The Corp's identity is {card:Earth Station: SEA Headquarters}, which has the ability "Limit 1 remote server." If any remote servers exist, the Corp cannot create a new remote server.
+        new:
 
   - subsection: subsec_protecting_a_server
     text: Protecting a Server

@@ -77,43 +77,44 @@ sections:
   - subsection: rule_checkpoints
     text: |-
       A {term:checkpoint} is a process wherein objects that have entered an illegal state are corrected, expired effects are removed, and other important conditions are checked. This procedure is automatically performed at several timing points during the game, and entails the following steps, which are performed in order:
+    steps:
     rules:
-    - rule: rule_checkpoint_conditional_abilities
+    - rule: step_checkpoint_conditional_abilities
       text: |-
         Each active conditional ability looks at the changes to the game state since the beginning of the last checkpoint to see if its condition has been met. Any ability that has met its condition creates the appropriate instances of itself and marks them as pending, as described in {ref:sec_conditional_abilities}.
-    - rule: rule_checkpoint_duration_abilities
+    - rule: step_checkpoint_duration_abilities
       text: Any ability with a duration that has passed is removed from the game state.
       examples:
       - text: During the checkpoint that follows the end of an encounter, abilities that increased the strength of an {subtype:icebreaker} during that encounter expire and the {subtype:icebreaker}'s strength is correspondingly lowered.
       - text: |-
           The Corp has {card:Targeted Marketing} in the play area when the Runner steals an agenda. In the next checkpoint, the game recognizes that the ability on {card:Targeted Marketing} that was preventing the operation from being trashed no longer applies, and so the Corp trashes {card:Targeted Marketing} as if it were completing its resolution.
-    - rule: rule_checkpoint_agenda_points
+    - rule: step_checkpoint_agenda_points
       text: If the agendas in either player's score area total 7 or more agenda points, that player wins the game. If both players would win this way simultaneously, the game ends in a draw.
-    - rule: rule_checkpoint_uniqueness
+    - rule: step_checkpoint_uniqueness
       text: |-
         If 2 or more unique (◆) cards with the same name are active, for each such name, all of those cards except the one that became active most recently are trashed. If 2 or more {subtype:console} cards are installed under the control of the same player, for each such player, all of those cards except the one that became active most recently are trashed.
-    - rule: rule_checkpoint_card_restrictions
+    - rule: step_checkpoint_card_restrictions
       text: If any objects break any restrictions of card abilities or the game rules (such as the Runner's memory limit) or are installed or hosted in an illegal location, an appropriate set of those objects are trashed. A set is appropriate for this purpose if trashing the objects in the set would leave all remaining installed or hosted objects in legal locations and if no object can be removed from the set while maintaining that property. If there are multiple distinct appropriate sets, and one player controls all the objects in each of those sets, that player chooses which set to trash. If the sets contain objects controlled by both players, the active player chooses which set is trashed.
       examples:
       - text: The Runner controls a {card:Chisel} hosted on an unrezzed piece of ice. The Corp rezzes that ice, revealing it to be {card:Tithonium}. Since {card:Tithonium} has an ability prohibiting cards from being hosted on it, {card:Chisel} is now installed in an illegal location and must be trashed.
       - text: |-
           The Runner has installed programs with total memory cost equal to their memory limit when the Corp plays {card:Bad Times}, reducing the memory limit by 2[MU]. The Runner can trash any two programs with a memory cost of 1[MU] each, or any one program with a memory cost of 2[MU] or greater. They cannot trash any 0[MU] programs, nor can they trash any set of more than one program with a greater total memory cost than 2[MU], since those objects can be removed from the trashed set while maintaining that the result will be a legal game state.
-    - rule: rule_checkpoint_hosted_on_agenda
+    - rule: step_checkpoint_hosted_on_agenda
       text: Any objects that were hosted on an agenda that moved from a score area to any zone other than a score area are trashed.
-    - rule: rule_checkpoint_hosted_on_installed_cards
+    - rule: step_checkpoint_hosted_on_installed_cards
       text: |-
         Any objects that were hosted on an installed card that was uninstalled are trashed, except for cards or counters that are temporarily in the set-aside zone because of {ref:rule_trash_ability_keeps_track_of_hosted_objects}. This step is repeated until no more cards or counters are trashed.
-    - rule: rule_checkpoint_remote_server
+    - rule: step_checkpoint_remote_server
       text: Any remote server with no cards protecting it, in its root, or in the process of being installed with a destination protecting it or in its root ceases to exist.
-    - rule: rule_checkpoint_card_entering_root_during_breach
+    - rule: step_checkpoint_card_entering_root_during_breach
       new:
       text: If a server is being breached and 1 or more cards entered the root of that server since the previous checkpoint, for each such card, the Runner declares whether or not it becomes a candidate for access in this breach. See also {ref:sec_determining_candidates}.
       examples:
       - text: The Runner accesses {card:Ganked!} and encounters {card:Drafter} in the middle of breaching a server. The second subroutine on {card:Drafter} resolves, and the Corp uses its effect to install a card in the root of the server being breached. When the installation is completed, the Runner declares whether or not the installed card becomes a candidate. If it does become a candidate, the Runner will select it for access later in the breach.
         new:
-    - rule: rule_checkpoint_discard_pile_cards
+    - rule: step_checkpoint_discard_pile_cards
       text: Any cards in discard piles that had been converted into counters or agendas return to their printed characteristics.
-    - rule: rule_checkpoint_discard_pile_counters
+    - rule: step_checkpoint_discard_pile_counters
       text: Any counters in a discard pile are returned to the bank.
   - rule: rule_after_checkpoint_reaction_window
     text: After a checkpoint is completed, if it marked any instances of conditional abilities as pending, a new reaction window immediately opens to handle those abilities, even if this takes place during another reaction window. After a reaction window closes, the game proceeds to whatever was due to occur after the checkpoint that caused it to open.

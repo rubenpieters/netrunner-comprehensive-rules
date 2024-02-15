@@ -137,7 +137,7 @@ sections:
     text: Cards entering a server while a breach is in progress can become candidates.
     rules:
     - rule: rule_candidates_entering_root
-      text: If a card enters the root of a server during a breach of that server, {n}the Runner decides whether that card becomes a candidate during {ref:rule_checkpoint_card_entering_root_during_breach} of the next checkpoint.{/n}
+      text: If a card enters the root of a server during a breach of that server, {n}the Runner decides whether that card becomes a candidate during {ref:step_checkpoint_card_entering_root_during_breach} of the next checkpoint.{/n}
     - rule: rule_candidates_entering_hq
       text: If a card enters the Corp's hand during a breach of HQ while the random access limit has not yet been reached, that card becomes a candidate.
     - rule: rule_candidates_entering_rnd

@@ -274,7 +274,7 @@ sections:
     - rule: rule_limit_remote_servers
       new:
       text: |-
-        Some abilities limit the number of remote servers. While such an ability is active, the Corp cannot create a new remote server if this would raise the total number of remote servers above the specified limit. During {ref:rule_checkpoint_card_restrictions} of each checkpoint, if there are more remote servers than an active limit allows, the Corp player chooses a number of servers equal to the limit. The checkpoint then trashes all cards in the root of and protecting each remote server that was not chosen.
+        Some abilities limit the number of remote servers. While such an ability is active, the Corp cannot create a new remote server if this would raise the total number of remote servers above the specified limit. During {ref:step_checkpoint_card_restrictions} of each checkpoint, if there are more remote servers than an active limit allows, the Corp player chooses a number of servers equal to the limit. The checkpoint then trashes all cards in the root of and protecting each remote server that was not chosen.
       examples:
       - text: |-
           The Corp's identity is {card:Earth Station: SEA Headquarters}, which has the ability "Limit 1 remote server." If any remote servers exist, the Corp cannot create a new remote server.

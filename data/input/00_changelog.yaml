@@ -4,3 +4,4 @@ changelog:
 - text: |-
     Updated {ref:rule_limit_remote_servers} to also include {card:A Teia: IP Recovery}.
 - text: Changed {ref:rule_candidates_entering_root} to allow the Runner to decline accessing a card entering the root of a breached server.
+- text: Split up the rule for valid search targets in {ref:rule_valid_search_target_criteria} and {ref:rule_valid_search_target_install_play} to clarify that this applies to install/play instructions.

@@ -373,8 +373,6 @@ sections:
       text: If a player is searching for a set number of cards without any specified criteria, they must find that many cards from that zone or all the cards in that zone if there are not enough.
     - rule: rule_fail_to_find
       text: If a player is searching a deck for one or more cards with specified criteria, they may choose to fail to find anything, even if one or more cards matching the criteria exist in that deck.
-    - rule: rule_search_different_names
-      text: If a player is directed to search a zone for cards "with different names," each card that player finds must have a different English name from every other card found for that search.
 
   - rule: rule_shuffle_deck_after_search
     text: Once a search through a deck is complete, whether or not any cards are found, the deck must be immediately reshuffled before continuing to resolve any remaining effects from the ability that initiated the search. The shuffling takes precedence over anything that would be done with the found card(s), as well as any chain reactions that occur as a result of the search, finding, or remaining abilities.

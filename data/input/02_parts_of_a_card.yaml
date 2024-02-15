@@ -14,6 +14,9 @@ sections:
       When a card refers to its own name, it is a self-reference. See {ref:sec_old_self_reference_rules}.
   - rule: rule_copies_of
     text: When a card refers to "copies of" cards with a particular name, it refers to any card with that name.
+  - rule: rule_act_on_different_names
+    new:
+    text: If a player is directed to choose or search for cards "with different names", each card chosen or found by the search must have a different English name from every other card chosen or found. See also {ref:sec_searching_cards}.
 
 - section: sec_unique_symbol
   text: Unique Symbol

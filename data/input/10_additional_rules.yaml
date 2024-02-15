@@ -105,6 +105,12 @@ sections:
         Any objects that were hosted on an installed card that was uninstalled are trashed, except for cards or counters that are temporarily in the set-aside zone because of {ref:rule_trash_ability_keeps_track_of_hosted_objects}. This step is repeated until no more cards or counters are trashed.
     - rule: rule_checkpoint_remote_server
       text: Any remote server with no cards protecting it, in its root, or in the process of being installed with a destination protecting it or in its root ceases to exist.
+    - rule: rule_checkpoint_card_entering_root_during_breach
+      new:
+      text: If a server is being breached and 1 or more cards entered the root of that server since the previous checkpoint, for each such card, the Runner declares whether or not it becomes a candidate for access in this breach. See also {ref:sec_determining_candidates}.
+      examples:
+      - text: The Runner accesses {card:Ganked!} and encounters {card:Drafter} in the middle of breaching a server. The second subroutine on {card:Drafter} resolves, and the Corp uses its effect to install a card in the root of the server being breached. When the installation is completed, the Runner declares whether or not the installed card becomes a candidate. If it does become a candidate, the Runner will select it for access later in the breach.
+        new:
     - rule: rule_checkpoint_discard_pile_cards
       text: Any cards in discard piles that had been converted into counters or agendas return to their printed characteristics.
     - rule: rule_checkpoint_discard_pile_counters

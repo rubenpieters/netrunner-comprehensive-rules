@@ -3,3 +3,4 @@ changelog:
 - text: Generalized the rule about cards "with different names" to apply to "choose" effects as well as search effects, and moved it from {ref:sec_searching_cards} to {ref:rule_act_on_different_names}.
 - text: |-
     Updated {ref:rule_limit_remote_servers} to also include {card:A Teia: IP Recovery}.
+- text: Changed {ref:rule_candidates_entering_root} to allow the Runner to decline accessing a card entering the root of a breached server.

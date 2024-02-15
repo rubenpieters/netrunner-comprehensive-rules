@@ -412,7 +412,6 @@ sections:
     text: Restrictions and effects on a card or counter only apply for as long as that card or counter remains the same object. Cards and counters have no memory of the objects they were in the past.
     examples:
     - text: The Corp uses the first ability on {card:Vaporframe Fabricator}, which specifies that it can only be used once per turn, and trashes {card:Vaporframe Fabricator} during the installation process. Then the Corp plays Restore, reinstalling the same copy of {card:Vaporframe Fabricator} from Archives. Even though it is the same physical card, the reinstalled {card:Vaporframe Fabricator} is a new object, and its "once per turn" ability is available to be used this turn.
-    - text: The Runner accesses {card:Ganked!} from the root of a server they are breaching. The Corp uses {card:Ganked!}'s ability to trash it and force the Runner to encounter {card:Drafter}. While resolving {card:Drafter}'s subroutines during that encounter, the Corp reinstalls the same copy of {card:Ganked!} from Archives into the same root. Since the {card:Ganked!} card left and reentered the zone it was accessed from, it is now a new object, and the Runner must access that object before completing the breach. Thus, if the Runner does not interfere (such as by breaking {card:Drafter}'s subroutines), the Corp could repeat this sequence of events several times.
     rules:
     - rule: rule_identify_object_after_move
       text: An ability that moves cards can identify the new objects that those cards become and continue to act on them.

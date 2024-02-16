@@ -10,7 +10,7 @@ from rules_doc_generator.model.analysis.references import construct_reference_ma
 # Parse command line arguments.
 parser = ArgumentParser()
 parser.add_argument("-a", "--annotated", default=False, help="Also generate annotated version with highlights of new parts", action="store_true")
-parser.add_argument("-y", "--year", default="2023", help="Effective year", action="store")
+parser.add_argument("-y", "--year", default="XXXX", help="Effective year", action="store")
 parser.add_argument("-m", "--month", default="XX", help="Effective month", action="store")
 parser.add_argument("-d", "--day", default="XX", help="Effective day", action="store")
 parser.add_argument("-b", "--php-base-path", default="https://example.org/", help="Basepath of php server", action="store")

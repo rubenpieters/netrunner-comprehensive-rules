@@ -1,7 +1,2 @@
 changelog:
-- text: Removed examples in {ref:rule_ncigs} relating to play abilities of operations. Players do not need to check if the contents of an event or operation have the potential to change the game state in order to trigger an ability that allows them to play an event or operation (e.g., the basic action). Such an ability has the potential to change the game state as long as a card exists that can be played.
-- text: Generalized the rule about cards "with different names" to apply to "choose" effects as well as search effects, and moved it from {ref:sec_searching_cards} to {ref:rule_act_on_different_names}.
-- text: |-
-    Updated {ref:rule_limit_remote_servers} to also include {card:A Teia: IP Recovery}.
-- text: Changed {ref:rule_candidates_entering_root} to allow the Runner to decline accessing a card entering the root of a breached server.
-- text: Split up the rule for valid search targets in {ref:rule_valid_search_target_criteria} and {ref:rule_valid_search_target_install_play} to clarify that this applies to install/play instructions.
+- text: Add new changelog entries here.

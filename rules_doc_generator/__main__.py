@@ -19,6 +19,8 @@ args = parser.parse_args()
 config = Config(args.annotated, args.year, args.month, args.day, args.php_base_path, parse_output_types(args.output_types))
 
 print("- Config -")
+print("- Version String: " + str(config.version_string()))
+print("- Effective Date: " + str(config.effective_date_str()))
 print("- Annotated: " + str(config.annotated))
 print("- Output types: " + str(config.output_types))
 
@@ -31,18 +33,22 @@ ref_dict = construct_reference_map(document)
 print("Writing Output...")
 # PDF Version Output
 if "pdf" in config.output_types:
+  shutil.rmtree('latex')
+  write_to_file('latex', f"Null_Signal_Games_Netrunner_Comprehensive_Rules_v{config.version_string()}.tex", standalone_latex(document, config.not_annotated(), ref_dict))
   if config.annotated:
-    write_to_file('latex_annotated', 'rules_annotated.tex', standalone_latex(document, config, ref_dict))
-  write_to_file('latex', 'rules.tex', standalone_latex(document, config.not_annotated(), ref_dict))
+    shutil.rmtree('latex_annotated')
+    write_to_file('latex_annotated', f"Null_Signal_Games_Netrunner_Comprehensive_Rules_v{config.version_string()}_Annotated.tex", standalone_latex(document, config, ref_dict))
 
 # Web Version Output
 if "web" in config.output_types:
+  shutil.rmtree('html')
   write_to_file('html', 'rules.html', standalone_html(document, config, ref_dict, opengraph=False))
   shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('html', 'credit.svg'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('html', 'rules.css'))
 
 # Opengraph Web Version Output
 if "opengraph" in config.output_types:
+  shutil.rmtree('php')
   write_to_file('php', 'rules.html', standalone_html(document, config, ref_dict, opengraph=True))
   write_to_file('php', 'rules.json', standalone_json(document, config, ref_dict))
   shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('php', 'credit.svg'))
@@ -58,6 +64,7 @@ if "opengraph" in config.output_types:
 
 # Json Output
 if "json" in config.output_types:
+  shutil.rmtree('json')
   write_to_file('json', 'rules.json', standalone_json(document, config.not_annotated(), ref_dict))
 
 print("Ready!")

@@ -212,15 +212,15 @@ sections:
     - rule: rule_identity_subtypes
       text: The identity subtypes are Bioroid, Clone, Corp, Cyborg, Digital, Division, G-mod, Megacorp, Natural, Police Department, Stealth, and Subsidiary.
     - rule: rule_agenda_subtypes
-      text: The agenda subtypes are Ambush, Expansion, Expendable, Initiative, NEXT, Psi, Public, Research, Security, Sensie, and Source.
+      text: The agenda subtypes are Ambush, {n}Assassination{/n}, Expansion, Expendable, Initiative, NEXT, Psi, Public, Research, Security, Sensie, and Source.
     - rule: rule_asset_subtypes
       text: The asset subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Cast, Character, Clone, Corporation, Enforcer, Executive, Facility, Government, Hostile, Illicit, Industrial, Political, Psi, Region, Research, Ritzy, Seedy, and Transaction.
     - rule: rule_ice_subtypes
-      text: The ice subtypes are AP, Advertisement, Ambush, Barrier, Bioroid, Code Gate, Deflector, Destroyer, Expendable, Grail, Harmonic, Illicit, Morph, Mythic, NEXT, Observer, Psi, Sentry, Tracer, and Trap.
+      text: The ice subtypes are AP, Advertisement, Ambush, Barrier, Bioroid, Code Gate, {n}Deep Net{/n}, Deflector, Destroyer, Expendable, Grail, Harmonic, Illicit, Morph, Mythic, NEXT, Observer, Psi, Sentry, Tracer, and Trap.
     - rule: rule_operation_subtypes
-      text: The operation subtypes are Alliance, Black Ops, Condition, Current, Double, Gray Ops, Illicit, Lockdown, Psi, Reprisal, Terminal, Transaction, and Triple.
+      text: The operation subtypes are Alliance, Black Ops, Condition, Current, Double, Gray Ops, Illicit, Lockdown, {n}Mandate{/n}, Psi, Reprisal, Terminal, Transaction, and Triple.
     - rule: rule_upgrade_subtypes
-      text: The upgrade subtypes are Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Character, Clone, Enforcer, Executive, Expendable, Facility, Hostile, Off-site, Orgcrime, Psi, Region, Ritzy, Seedy, Security Protocol, Sysop, and Unorthodox.
+      text: The upgrade subtypes are {n}Academic{/n}, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Character, Clone, Enforcer, Executive, Expendable, Facility, Hostile, Off-site, Orgcrime, Psi, Region, Ritzy, Seedy, Security Protocol, Sysop, and Unorthodox.
     - rule: rule_event_subtypes
       text: The event subtypes are Condition, Current, Double, Job, Mod, Orgcrime, Priority, Run, Sabotage, Stealth, and Terminal.
     - rule: rule_hardware_subtypes

@@ -446,8 +446,16 @@ sections:
     - rule: rule_condition_if_successful
       text: The phrase "If successful" in reference to a run is a trigger condition with specific rules. See {ref:rule_if_successful}. The phrases "If successful" and "If unsuccessful" are also frequently used as trigger conditions relating to the results of a trace. See {ref:sec_traces}.
 
-  - rule: rule_trigger_condition_checked
+  - subsection: rule_trigger_condition_checked
     text: Trigger conditions look for an instantaneous change in the game state. The next checkpoint after that change takes place marks an instance of the ability as pending for each occurrence of the change that was looked for.
+    rules:
+    - rule: rule_instruction_requirements_past_state
+      text: Some conditional abilities refer to the game state before the trigger condition was met, using the word "had". The previous game state referred to is the game state at the time of {ref:step_checkpoint_conditional_abilities} of the checkpoint immediately preceding the checkpoint in which the ability became pending.
+      new:
+      examples:
+      - text: |-
+          The ability of {card:Weyland Consortium: Built to Last} only causes the Corp to gain 2{c} when they advance a card that "had no advancement counters". This ability becomes pending immediately after an instruction resolves in which the Corp advances a card, and the requirement is checked against the state of the game at the previous checkpoint, before that advancement took place.
+        new:
 
   - subsection: rule_conditional_ability_with_static_condition
     text: Conditional abilities with a static condition instead of a trigger condition describe an effect that must be performed repeatedly, if possible, while the condition is true. Such abilities usually attempt to end their own repetition by uninstalling their source.

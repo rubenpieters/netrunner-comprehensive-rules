@@ -1050,3 +1050,21 @@ sections:
       text: A persisting ability is only applicable to the run during which it began to persist. After the checkpoint following {ref:step_run_complete} of the run, no more instances of the ability can be created. Even if another run initiates during the reaction window following that checkpoint, new instances of any abilities persisting from the first run cannot become pending during the second run, even if their trigger conditions would normally be met during that second run.
       examples:
       - text: The Runner trashes {card:AMAZE Amusements}, causing its "Whenever a run on this server ends" ability to persist. When the run ends, the Runner uses {card:Doppelgänger} to make another run while the persisting ability is still pending. The ability remains active so that its existing pending instance can resolve, but another instance cannot be created even if the Runner steals an agenda during the second run.
+
+  - subsection: sebsec_modal_abilities
+    toc:
+    text: Modal Abilities
+    new:
+    rules:
+    - rule: rule_mode_definition
+      text: Some abilities contain text organized into bulletted lists. These are called {term:modal abilities}, and each list item is called a {term:mode}.
+      new:
+    - rule: rule_choose_next_mode
+      text: Each modal ability contains an instruction directing its controller to resolve 1 or more of its modes. The effect of this instruction is for the relevant player to choose the next mode to resolve. The first instruction of the chosen mode will be the next instruction to become imminent. The player does not need to choose modes in the order they are written. If the description of the number of modes to resolve contains "up to", the player may also choose not to resolve any more modes.
+      new:
+    - rule: rule_after_resolving_mode
+      text: After the instructions of a mode are complete, the game returns to the instruction to resolve 1 or more modes. If the maximum allowed number of modes have not yet been resolved, the player will choose another mode to resolve, as if resolving that initial instruction again. If the maximum number of allowed modes have been resolved, the game proceeds to the next instruction or ability following the list of modes.
+      new:
+    - rule: rule_cannot_repeat_modes
+      text: In a single instance of resolving a modal ability, each mode can be resolved no more than 1 time, unless the ability specifically states that its modes can be chosen more than once.
+      new:

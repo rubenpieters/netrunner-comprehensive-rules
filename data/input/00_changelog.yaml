@@ -1,4 +1,5 @@
 changelog:
+- text: Added {ref:subsec_modal_abilities} to clarify how modal abilities (bulletted lists) are resolved.
 - text: Added {ref:rule_with_the_basic_action} clarifying when conditions and costs related to the basic action apply.
 - text: Add {ref:rule_instruction_requirements_past_state} to clarify how conditional abilities check requirements that refer to past game states.
 - text: Added {ref:rule_ice_strength_modification_duration} to allow modifications to ice strength "for the remainder of this run" to work the same as modifications to {subtype:icebreaker} strength. Namely, if an encounter takes place outside of a run, these effects last for the remainder of the encounter.

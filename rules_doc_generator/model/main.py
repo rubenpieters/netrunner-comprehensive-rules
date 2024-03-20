@@ -17,13 +17,18 @@ def standalone_html(document: Document, config: Config, id_map: RefDict, opengra
   result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">'
   result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />'
   result += '<link rel="stylesheet" href="rules.css">'
+  result += f'<title>Netrunner Comprehensive Rules v{config.version_string()}</title>'
   if opengraph:
     result += '<script src="rules.js" defer></script>'
     result += '<link rel="stylesheet" href="extended.css">'
   result += '</head><body>'
   result += '<div class="RulesGrid">'
   result += f'<ul class="RulesToc">{create_toc_html(id_map)}</ul>'
-  result += f'<div class="RulesContent">{document.to_html(config, id_map)}</div>'
+  result += f'<div class="RulesContent">'
+  result += f'<div class="Title">Netrunner Comprehensive Rules v{config.version_string()}</div>'
+  result += f'<div class="SubTitle">Null Signal Games</div>'
+  result += document.to_html(config, id_map)
+  result += '</div>'
   result += '</div>'
   result += '</body></html>'
   return result

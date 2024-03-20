@@ -26,6 +26,17 @@ body {
   margin-left: 1em;
 }
 
+.Title {
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.SubTitle {
+  font-weight: bold;
+  font-size: x-large;
+  color: dimgray;
+}
+
 ol.Rules, ol.SubRules {
   list-style: none;
   line-height: 1.5em;

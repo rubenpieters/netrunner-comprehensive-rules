@@ -29,12 +29,15 @@ body {
 .Title {
   font-weight: bolder;
   font-size: xx-large;
+  margin: 0;
+  margin-bottom: 0.3em;
 }
 
 .SubTitle {
   font-weight: bold;
   font-size: x-large;
   color: dimgray;
+  margin: 0;
 }
 
 ol.Rules, ol.SubRules {

@@ -34,11 +34,11 @@ def standalone_html(document: Document, config: Config, id_map: RefDict, opengra
   result += f'<p class="Title">Netrunner Comprehensive Rules</p>'
   result += f'<p class="SubTitle">Null Signal Games</p>'
   result += f'<p>This rules document is to be used as reference material. It is not intended to be read straight through. If you still have questions after consulting this document, please ask us online via <a href="mailto:rules@nullsignal.games">email</a>. This version of the Comprehensive Rules document is effective <b>{config.effective_date_str()}</b>.</p>'
-  result += f'<details><summary><b>Summary of Changes (v{config.version_string()})</b></summary><ul>'
+  result += f'<details><summary class="Clickable"><b>Summary of Changes (v{config.version_string()})</b></summary><ul>'
   for changelog_entry in document.changelog:
     result += f'<li>{changelog_entry.to_html(config, id_map)}</li>'
   result += '</ul></details>'
-  result += '<details><summary><b>Acknowledgements</b></summary>'
+  result += '<details><summary class="Clickable"><b>Acknowledgements</b></summary>'
   result += '<ul>'
   result += '<li>Netrunner Original Game Design: Richard Garfield</li>'
   result += '<li>Android: Netrunner'

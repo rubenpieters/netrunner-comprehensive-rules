@@ -19,6 +19,10 @@ body {
   margin: 0;
 }
 
+.Clickable {
+  cursor: pointer;
+}
+
 .RulesToc {
   list-style-type: none;
   width: 0;

@@ -4,7 +4,7 @@ function closeToc() {
     tocElement.style.overflow = "hidden";
     tocElement.style.padding = "0em";
     const contentElement = document.getElementById("RulesContent");
-    contentElement.style.marginLeft = "0em";
+    contentElement.style.marginLeft = "1.6em";
     contentElement.style.marginTop = "1.5em";
     const tocOpenElement = document.getElementById("TocOpen");
     tocOpenElement.style.visibility = "visible";

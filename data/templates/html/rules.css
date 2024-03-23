@@ -201,3 +201,9 @@ a.RuleLink:link, a.RuleLink:visited {
 .TimingStructureL3 {
   list-style: lower-roman;
 }
+
+@media print{
+  .noprint {
+      display:none;
+  }
+}

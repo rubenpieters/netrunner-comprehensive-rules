@@ -28,7 +28,7 @@ def standalone_html(document: Document, config: Config, id_map: RefDict, opengra
   result += '<div id="TocClose" class="TocClose" onClick="closeToc()">×</div>'
   result += f'<ul class="RulesTocList">{create_toc_html(id_map)}</ul>'
   result += '</div>'
-  result += f'<div id="TocOpen" class="TocOpen" onClick="openToc()"><b>Table of Contents</b></div>'
+  result += f'<div id="TocOpen" class="TocOpen noprint" onClick="openToc()"><b>Table of Contents</b></div>'
   result += f'<div id="RulesContent" class="RulesContent">'
   result += '<div>'
   result += f'<p class="Title">Netrunner Comprehensive Rules</p>'

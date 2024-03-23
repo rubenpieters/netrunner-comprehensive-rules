@@ -14,6 +14,7 @@ def create_toc_html(id_map: RefDict):
 
 def standalone_html(document: Document, config: Config, id_map: RefDict, opengraph: bool):
   result = '<?xml encoding="utf-8" ?><!DOCTYPE html><html><head>'
+  result += '<meta name="viewport" content="width=device-width, initial-scale=1">'
   result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible">'
   result += '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />'
   result += '<link rel="stylesheet" href="rules.css">'

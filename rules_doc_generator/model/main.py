@@ -5,7 +5,7 @@ from rules_doc_generator.model.text import (RefDict)
 from rules_doc_generator.model.section import (Document)
 
 def create_toc_html(id_map: RefDict):
-  result = ''
+  result = '<li><b>Table of Contents</b></li>'
   for id in id_map:
     ref_info = id_map[id]
     if ref_info.toc:
@@ -23,8 +23,12 @@ def standalone_html(document: Document, config: Config, id_map: RefDict, opengra
     result += '<link rel="stylesheet" href="extended.css">'
   result += '</head><body>'
   result += '<div class="RulesGrid">'
-  result += f'<ul class="RulesToc">{create_toc_html(id_map)}</ul>'
-  result += f'<div class="RulesContent">'
+  result += '<div id="RulesToc" class="RulesToc">'
+  result += '<div id="TocClose" class="TocClose" onClick="closeToc()">×</div>'
+  result += f'<ul class="RulesTocList">{create_toc_html(id_map)}</ul>'
+  result += '</div>'
+  result += f'<div id="TocOpen" class="TocOpen" onClick="openToc()"><b>Table of Contents</b></div>'
+  result += f'<div id="RulesContent" class="RulesContent">'
   result += '<div>'
   result += f'<p class="Title">Netrunner Comprehensive Rules</p>'
   result += f'<p class="SubTitle">Null Signal Games</p>'

@@ -1,3 +1,31 @@
+function closeToc() {
+    const tocElement = document.getElementById("RulesToc");
+    tocElement.style.width = "0em";
+    tocElement.style.overflow = "hidden";
+    tocElement.style.padding = "0em";
+    const contentElement = document.getElementById("RulesContent");
+    contentElement.style.marginLeft = "0em";
+    contentElement.style.marginTop = "1.5em";
+    const tocOpenElement = document.getElementById("TocOpen");
+    tocOpenElement.style.visibility = "visible";
+    const tocCloseElement = document.getElementById("TocClose");
+    tocCloseElement.style.visibility = "hidden";
+}
+
+function openToc() {
+    const tocElement = document.getElementById("RulesToc");
+    tocElement.style.width = "15em";
+    tocElement.style.overflow = "scroll";
+    tocElement.style.padding = "0.6em";
+    const contentElement = document.getElementById("RulesContent");
+    contentElement.style.marginLeft = "17em";
+    contentElement.style.marginTop = "0px";
+    const tocOpenElement = document.getElementById("TocOpen");
+    tocOpenElement.style.visibility = "hidden";
+    const tocCloseElement = document.getElementById("TocClose");
+    tocCloseElement.style.visibility = "visible";
+}
+
 addEventListener("load", (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const ruleId = urlParams.get('r');

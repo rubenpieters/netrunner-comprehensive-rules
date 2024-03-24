@@ -339,7 +339,8 @@ sections:
     - rule: rule_steps_playing_active
       text: The card becomes active.
     - rule: rule_steps_playing_played_condition
-      text: Any "When played..." abilities that apply meet their trigger conditions.
+      text: Conditions related to playing an event or operation are met.
+      new:
     - rule: rule_steps_playing_played_checkpoint
       text: A checkpoint occurs.
     - rule: rule_steps_playing_resolve_play_abilities
@@ -347,7 +348,8 @@ sections:
     - rule: rule_steps_playing_trash_played_card
       text: Trash the card if it is still in the play area.
     - rule: rule_steps_playing_after_resolve_condition
-      text: Any "After you resolve..." abilities that apply meet their trigger conditions.
+      text: Conditions related to after resolving or finishing resolving an event or operation are met.
+      new:
     - rule: rule_steps_playing_complete
       text: The play effect is complete.
 

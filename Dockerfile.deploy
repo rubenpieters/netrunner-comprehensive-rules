@@ -14,12 +14,9 @@ RUN python3 -m rules_doc_generator -a -t all -m 03 -d 30 -y 2024
 
 ENTRYPOINT /bin/sh 
 
-FROM php:8.2-cli-alpine AS final
+FROM alpine:3.19 AS final
 
+RUN rm -rf /var/www/html
 COPY --from=build /workdir/php/* /var/www/html/
 
-EXPOSE 80 
-
-WORKDIR /var/www/html
-
-CMD ["php", "-S", "0.0.0.0:80"]
+ENTRYPOINT ["/bin/sh", "-c", "exit"]

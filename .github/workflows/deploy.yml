@@ -1,0 +1,49 @@
+name: Deploy
+
+# This action works with pull requests and pushes
+on:
+  release:
+    types: [published]
+
+env:  
+  IMAGENAME: registry.digitalocean.com/nsgcr/netrunner-comprehensive-rules
+
+jobs:
+  build_and_push:
+    name: Build docker image
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout the repo 
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+        images: $IMAGENAME 
+        flavor: |
+          latest=true
+        tags: |
+          type=ref,event=tag
+
+      - name: Build image 
+        run: docker build -t $IMAGENAME:latest -f ./Dockerfile.deploy .
+
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Tag image with run id
+        run:
+          docker tag $IMAGENAME:latest $IMAGENAME:${{ steps.meta.outputs.tags }}
+
+      - name: Push image to DO Container Registry
+        run: docker push $IMAGENAME:${{ github.run_id }} && docker push $IMAGENAME:latest

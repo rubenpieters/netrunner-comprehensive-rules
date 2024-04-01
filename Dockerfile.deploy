@@ -16,7 +16,6 @@ ENTRYPOINT /bin/sh
 
 FROM alpine:3.19 AS final
 
-RUN rm -rf /var/www/html
-COPY --from=build /workdir/php/* /var/www/html/
+COPY --from=build /workdir/php/* /rules/
 
-ENTRYPOINT ["/bin/sh", "-c", "exit"]
+ENTRYPOINT ["/bin/sh", "-c", "rm -rf /var/www/html/* && cp -r /rules/* /var/www/html/ && exit"]

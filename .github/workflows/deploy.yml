@@ -21,7 +21,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build image 
-        run: docker build -t $IMAGENAME:latest -f ./Dockerfile.deploy .
+        run: docker build -t $IMAGENAME:${{ github.ref_name }} -t $IMAGENAME:latest -f ./Dockerfile.deploy .
 
       - name: Install doctl 
         uses: digitalocean/action-doctl@v2

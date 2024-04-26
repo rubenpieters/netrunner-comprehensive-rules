@@ -136,7 +136,7 @@ sections:
   rules:
   - rule: rule_suffer_or_take_damage
     text: |-
-      Many cards and ice subroutines inflict damage on the Runner. The Runner {term:suffers} (sometimes referred to as "{term:takes}") damage according to the rules for the type of damage specified. If a Corp card "does" damage to the Runner, they suffer that much damage, with the additional provision that the Corp and the source card are responsiblenfor that damage. If a card directs or allows the Runner to "suffer" damage, then the Runner and the source card are responsible for that damage.
+      Many cards and ice subroutines inflict damage on the Runner. The Runner {term:suffers} (sometimes referred to as "{term:takes}") damage according to the rules for the type of damage specified. If a Corp card "does" damage to the Runner, they suffer that much damage, with the additional provision that the Corp and the source card are responsible for that damage. If a card directs or allows the Runner to "suffer" damage, then the Runner and the source card are responsible for that damage.
     examples:
     - text: |-
         The Corp, playing as {card:Argus Security: Protection Guaranteed}, has scored {card:The Cleaners}. The Runner makes a run on R&D and steals {card:Hostile Takeover}. Argus Security's ability triggers and the Runner chooses to suffer 2 meat damage. As {card:The Cleaners} only adds additional damage to damage done by the Corp, its ability does not apply. When the Corp plays {card:Punitive Counterstrike} on their next turn, {card:The Cleaners} does increase the amount of damage done by {card:Punitive Counterstrike}.

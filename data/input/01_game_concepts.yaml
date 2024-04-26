@@ -144,7 +144,7 @@ sections:
         After players reveal their identities, the player playing Adam selects exactly 3 of their provided {subtype:directive} cards. Those cards begin the game installed in the play area. All other {subtype:directives} the player brought this way remain outside the game.
     - rule: rule_adam_directives_deck
       text: |-
-        A player playing Adam can also include {subtype:directives} cards in their deck. The cards chosen to be installed at the beginning of the game do not impact the deck's influence requirements or the maximum allowed number of copies of those cards.
+        A player playing Adam can also include {subtype:directive} cards in their deck. The cards chosen to be installed at the beginning of the game do not impact the deck's influence requirements or the maximum allowed number of copies of those cards.
     - rule: rule_adam_directives_during_game
       text: |-
         Once the game has begun, the cards installed this way are treated exactly as any other installed cards. Abilities that move these cards to other zones function normally, including shuffling them into the stack.

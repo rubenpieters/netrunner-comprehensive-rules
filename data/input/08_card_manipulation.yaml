@@ -305,7 +305,7 @@ sections:
   rules:
   - rule: rule_playing
     text: |-
-      {term:Playing} an event or operation is the act of placing that card into the play area. Agendas, assets, ice, upgrades, hardware, programs, and resources, and identities are never played.
+      {term:Playing} an event or operation is the act of placing that card into the play area. Agendas, assets, ice, upgrades, hardware, programs, resources, and identities are never played.
 
   - subsection: rule_playing_play_cost
     text: Normally, playing an operation or event requires paying its play cost. Abilities that initiate playing a card may ignore the play cost or require it to be paid.

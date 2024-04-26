@@ -83,7 +83,7 @@ sections:
       new:
       examples:
       - text: |-
-          The Runner accesses and encounters an {card:Archangel} in HQ with {card:Gang Sign}. If the Runner uses {card:Devil Charm} to lower the strength of the {card:Archangel}. That strength reduction would normally last for the remainder of the current run, but since no run is in progress, it instead lasts for the remainder of the encounter.
+          The Runner accesses and encounters an {card:Archangel} in HQ with {card:Gang Sign}. The Runner uses {card:Devil Charm} to lower the strength of {card:Archangel}. That strength reduction would normally last for the remainder of the current run, but since no run is in progress, it instead lasts for the remainder of the encounter.
         new:
   - subsection: rule_ice_trash_cost
     text: Some ice have trash costs. If the Runner accesses an ice with a trash cost, they may pay the trash cost to trash that ice. See {ref:rule_basic_trash_ability}.
@@ -170,7 +170,7 @@ sections:
     toc:
     rules:
     - rule: rule_hardware_console
-      text: Some hardware have the subtype {subtype:console}. All {subtype:console} have the text "Limit 1 {subtype:console} per player."
+      text: Some hardware have the subtype {subtype:console}. All {subtype:consoles} have the text "Limit 1 {subtype:console} per player."
     - rule: rule_install_console
       text: If a player ever controls more than one installed {subtype:console}, all but the most recently active {subtype:console} are trashed. Trashing cards this way cannot be prevented.
     - rule: rule_console_limitation

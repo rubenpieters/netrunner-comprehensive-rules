@@ -241,4 +241,4 @@ sections:
       Many cards have italicised text written after their game text. This is {term:flavor text}, and has no effect on the game or the function of the card, nor can other abilities reference or interact with it.
   - rule: rule_reminder_text
     text: |-
-      Some cards have italicised text in parenthesis. This is {term:reminder text}, and has no effect on the game or the function of the card, nor can other abilities reference or interact with it directly. Reminder text simply summarizes a rule that may apply to that card text.
+      Some cards have italicised text in parentheses. This is {term:reminder text}, and has no effect on the game or the function of the card, nor can other abilities reference or interact with it directly. Reminder text simply summarizes a rule that may apply to that card text.

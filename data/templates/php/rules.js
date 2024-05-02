@@ -4,8 +4,7 @@ function closeToc() {
     tocElement.style.overflow = "hidden";
     tocElement.style.padding = "0em";
     const contentElement = document.getElementById("RulesContent");
-    contentElement.style.marginLeft = "1.6em";
-    contentElement.style.marginTop = "1.5em";
+    contentElement.style.gridColumn = "1 / 3";
     const tocOpenElement = document.getElementById("TocOpen");
     tocOpenElement.style.visibility = "visible";
     const tocCloseElement = document.getElementById("TocClose");
@@ -18,8 +17,7 @@ function openToc() {
     tocElement.style.overflow = "scroll";
     tocElement.style.padding = "0.6em";
     const contentElement = document.getElementById("RulesContent");
-    contentElement.style.marginLeft = "17em";
-    contentElement.style.marginTop = "0px";
+    contentElement.style.gridColumn = "2";
     const tocOpenElement = document.getElementById("TocOpen");
     tocOpenElement.style.visibility = "hidden";
     const tocCloseElement = document.getElementById("TocClose");

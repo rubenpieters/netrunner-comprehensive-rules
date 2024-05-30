@@ -451,11 +451,9 @@ sections:
     rules:
     - rule: rule_instruction_requirements_past_state
       text: Some conditional abilities refer to the game state before the trigger condition was met, using the word "had". The previous game state referred to is the game state at the time of {ref:step_checkpoint_conditional_abilities} of the checkpoint immediately preceding the checkpoint in which the ability became pending.
-      new:
       examples:
       - text: |-
           The ability of {card:Weyland Consortium: Built to Last} only causes the Corp to gain 2{c} when they advance a card that "had no advancement counters". This ability becomes pending immediately after an instruction resolves in which the Corp advances a card, and the requirement is checked against the state of the game at the previous checkpoint, before that advancement took place.
-        new:
 
   - subsection: rule_conditional_ability_with_static_condition
     text: Conditional abilities with a static condition instead of a trigger condition describe an effect that must be performed repeatedly, if possible, while the condition is true. Such abilities usually attempt to end their own repetition by uninstalling their source.
@@ -1054,17 +1052,12 @@ sections:
   - subsection: subsec_modal_abilities
     toc:
     text: Modal Abilities
-    new:
     rules:
     - rule: rule_mode_definition
       text: Some abilities contain text organized into bulleted lists. These are called {term:modal abilities}, and each list item is called a {term:mode}.
-      new:
     - rule: rule_choose_next_mode
       text: Each modal ability contains an instruction directing its controller to resolve 1 or more of its modes. The effect of this instruction is for the relevant player to choose the next mode to resolve. The first instruction of the chosen mode will be the next instruction to become imminent. The player does not need to choose modes in the order they are written. If the description of the number of modes to resolve contains "up to", the player may also choose not to resolve any more modes.
-      new:
     - rule: rule_after_resolving_mode
       text: After the instructions of a mode are complete, the game returns to the instruction to resolve 1 or more modes. If the maximum allowed number of modes have not yet been resolved, the player will choose another mode to resolve, as if resolving that initial instruction again. If the maximum number of allowed modes have been resolved, the game proceeds to the next instruction or ability following the list of modes.
-      new:
     - rule: rule_cannot_repeat_modes
       text: In a single instance of resolving a modal ability, each mode can be resolved no more than 1 time, unless the ability specifically states that its modes can be chosen more than once.
-      new:

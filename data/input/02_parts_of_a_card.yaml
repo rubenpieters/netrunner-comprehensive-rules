@@ -15,7 +15,6 @@ sections:
   - rule: rule_copies_of
     text: When a card refers to "copies of" cards with a particular name, it refers to any card with that name.
   - rule: rule_act_on_different_names
-    new:
     text: If a player is directed to choose or search for cards "with different names", each card chosen or found by the search must have a different English name from every other card chosen or found. See also {ref:sec_searching_cards}.
 
 - section: sec_unique_symbol
@@ -212,15 +211,15 @@ sections:
     - rule: rule_identity_subtypes
       text: The identity subtypes are Bioroid, Clone, Corp, Cyborg, Digital, Division, G-mod, Megacorp, Natural, Police Department, Stealth, and Subsidiary.
     - rule: rule_agenda_subtypes
-      text: The agenda subtypes are Ambush, {n}Assassination{/n}, Expansion, Expendable, Initiative, NEXT, Psi, Public, Research, Security, Sensie, and Source.
+      text: The agenda subtypes are Ambush, Assassination, Expansion, Expendable, Initiative, NEXT, Psi, Public, Research, Security, Sensie, and Source.
     - rule: rule_asset_subtypes
       text: The asset subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Cast, Character, Clone, Corporation, Enforcer, Executive, Facility, Government, Hostile, Illicit, Industrial, Political, Psi, Region, Research, Ritzy, Seedy, and Transaction.
     - rule: rule_ice_subtypes
-      text: The ice subtypes are AP, Advertisement, Ambush, Barrier, Bioroid, Code Gate, {n}Deep Net{/n}, Deflector, Destroyer, Expendable, Grail, Harmonic, Illicit, Morph, Mythic, NEXT, Observer, Psi, Sentry, Tracer, and Trap.
+      text: The ice subtypes are AP, Advertisement, Ambush, Barrier, Bioroid, Code Gate, Deep Net, Deflector, Destroyer, Expendable, Grail, Harmonic, Illicit, Morph, Mythic, NEXT, Observer, Psi, Sentry, Tracer, and Trap.
     - rule: rule_operation_subtypes
-      text: The operation subtypes are Alliance, Black Ops, Condition, Current, Double, Gray Ops, Illicit, Lockdown, {n}Mandate{/n}, Psi, Reprisal, Terminal, Transaction, and Triple.
+      text: The operation subtypes are Alliance, Black Ops, Condition, Current, Double, Gray Ops, Illicit, Lockdown, Mandate, Psi, Reprisal, Terminal, Transaction, and Triple.
     - rule: rule_upgrade_subtypes
-      text: The upgrade subtypes are {n}Academic{/n}, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Character, Clone, Enforcer, Executive, Expendable, Facility, Hostile, Off-site, Orgcrime, Psi, Region, Ritzy, Seedy, Security Protocol, Sysop, and Unorthodox.
+      text: The upgrade subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Character, Clone, Enforcer, Executive, Expendable, Facility, Hostile, Off-site, Orgcrime, Psi, Region, Ritzy, Seedy, Security Protocol, Sysop, and Unorthodox.
     - rule: rule_event_subtypes
       text: The event subtypes are Condition, Current, Double, Job, Mod, Orgcrime, Priority, Run, Sabotage, Stealth, and Terminal.
     - rule: rule_hardware_subtypes

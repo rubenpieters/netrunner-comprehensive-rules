@@ -80,11 +80,9 @@ sections:
     rules:
     - rule: rule_ice_strength_modification_duration
       text: If an ability modifies the strength of a piece of ice for the remainder of a run, and that ability resolves during an encounter outside of a run, the modification instead lasts for the remainder of that encounter.
-      new:
       examples:
       - text: |-
           The Runner accesses and encounters an {card:Archangel} in HQ with {card:Gang Sign}. The Runner uses {card:Devil Charm} to lower the strength of {card:Archangel}. That strength reduction would normally last for the remainder of the current run, but since no run is in progress, it instead lasts for the remainder of the encounter.
-        new:
   - subsection: rule_ice_trash_cost
     text: Some ice have trash costs. If the Runner accesses an ice with a trash cost, they may pay the trash cost to trash that ice. See {ref:rule_basic_trash_ability}.
     rules:

@@ -63,7 +63,7 @@ body {
   visibility: visible;
   cursor: pointer;
   width: 1em;
-  height: 1.2em;
+  height: 1.1em;
   overflow: clip;
 
   transition: width 0.2s ease-out 100ms

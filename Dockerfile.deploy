@@ -1,14 +1,16 @@
 FROM python:3.11.4-bookworm AS build
 
+# RUN apt-cache policy
+RUN apt-get clean
 RUN apt-get update
 RUN apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-fonts-extra latexmk
 RUN apt-get -y install php-cli php-dom
 
-ADD ../requirements.txt .
+ADD ./requirements.txt .
 RUN pip install -r requirements.txt
 
 WORKDIR /workdir
-COPY ../ /workdir
+COPY ./ /workdir
 
 RUN python3 -m rules_doc_generator -a -t all -m 03 -d 30 -y 2024
 

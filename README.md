@@ -190,3 +190,12 @@ Highlight a piece of text as new.
 ```
 text: This is old text. {n}This is new text.{/n}
 ```
+
+## Deployment
+
+For local development, simply run `docker compose build` and `docker compose up -d`.
+
+For production deployment, do the following, after a successful `docker login registry.digitalocean.com`:
+ 
+* `docker compose pull`
+* `docker compose up -d` 

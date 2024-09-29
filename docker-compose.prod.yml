@@ -1,0 +1,15 @@
+services:
+  # service configuration for our dockerized Rails app
+  web:
+    environment:
+      VIRTUAL_HOST: rules.nullsignal.games
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: rules.nullsignal.games
+      LETSENCRYPT_EMAIL: website@nisei.net
+
+    networks:
+      - null_signal
+
+networks:
+  null_signal:
+    external: true

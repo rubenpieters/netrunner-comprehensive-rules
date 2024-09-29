@@ -1,23 +1,21 @@
-version: "3.2"
-
 services:
   rules:
-    restart: none
+    restart: no
+    image: registry.digitalocean.com/nsgcr/netrunner-comprehensive-rules:${RULES_IMAGE_VERSION:-latest}
     # use the Dockerfile next to this file
-    # TODO(plural): Switch to the container image.
     build:
       dockerfile: Dockerfile.deploy
 
     volumes:
       - rules:/var/www/html
-  
+
   web:
     restart: unless-stopped
     image: php:8.2-cli-alpine
 
     ports:
       - "8999:80"
-   
+
     volumes:
       - rules:/var/www/html
 

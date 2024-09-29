@@ -198,4 +198,4 @@ For local development, simply run `docker compose build` and `docker compose up 
 For production deployment, do the following, after a successful `docker login registry.digitalocean.com`:
  
 * `docker compose pull`
-* `docker compose up -d` 
+* `docker compose -f docker-compose.prod.yml -f docker-compose.yml up -d`

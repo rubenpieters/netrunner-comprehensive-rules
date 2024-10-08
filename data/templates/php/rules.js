@@ -1,27 +1,10 @@
 function closeToc() {
-    const tocElement = document.getElementById("RulesToc");
-    tocElement.style.width = "0em";
-    tocElement.style.overflow = "hidden";
-    tocElement.style.padding = "0em";
-    const contentElement = document.getElementById("RulesContent");
-    contentElement.style.gridColumn = "1 / 3";
-    const tocOpenElement = document.getElementById("TocOpen");
-    tocOpenElement.style.visibility = "visible";
-    const tocCloseElement = document.getElementById("TocClose");
-    tocCloseElement.style.visibility = "hidden";
+    const parent = document.querySelector("#RulesParent");
+    parent.removeAttribute("data-tocopen");
 }
-
 function openToc() {
-    const tocElement = document.getElementById("RulesToc");
-    tocElement.style.width = "15em";
-    tocElement.style.overflow = "scroll";
-    tocElement.style.padding = "0.6em";
-    const contentElement = document.getElementById("RulesContent");
-    contentElement.style.gridColumn = "2";
-    const tocOpenElement = document.getElementById("TocOpen");
-    tocOpenElement.style.visibility = "hidden";
-    const tocCloseElement = document.getElementById("TocClose");
-    tocCloseElement.style.visibility = "visible";
+    const parent = document.querySelector("#RulesParent");
+    parent.setAttribute("data-tocopen", "");
 }
 
 addEventListener("load", (event) => {
@@ -51,7 +34,7 @@ elems.forEach(a => {
         // Replace link symbol with clipboard symbol
         navigator.clipboard.writeText(a.href);
         a.parentElement.getElementsByClassName('material-symbols-outlined')[0].innerText = "content_paste_go";
-
+        
         // Revert back to link symbol after 1s
         setTimeout(() => {
             a.parentElement.getElementsByClassName('material-symbols-outlined')[0].innerText = "link";

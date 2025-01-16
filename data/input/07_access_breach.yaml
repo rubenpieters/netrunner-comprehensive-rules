@@ -107,9 +107,9 @@ sections:
       The candidates at the beginning of a breach are as follows:
     rules:
      - rule: rule_candidates_in_server_root
-       text: Each card in the root of the breached server is a candidate
+       text: Each card in the root of the breached server is a candidate.
      - rule: rule_candidates_in_hq
-       text: If the breached server is HQ, each card in the Corp's hand is a candidate
+       text: If the breached server is HQ, each card in the Corp's hand is a candidate.
      - rule: rule_candidates_in_rnd
        text: If the breached server is R&D, the top card of the Corp's deck is a candidate.
      - rule: rule_candidates_in_archives

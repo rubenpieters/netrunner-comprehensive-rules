@@ -22,7 +22,7 @@ jobs:
     container: python:3.11.4-bookworm
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update apt cache
         run: apt-get update
@@ -43,7 +43,7 @@ jobs:
         run: latexmk -pdf -jobname=latex_annotated/%A latex_annotated/*.tex
 
       - name: Upload pdf output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pdf-output
           path: |
@@ -51,19 +51,19 @@ jobs:
             latex_annotated/*.pdf
 
       - name: Upload pdf output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: html-output
           path: html/*
 
       - name: Upload json output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: json-output
           path: json/rules.json
 
       - name: Upload php output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: php-output
           path: php/*
@@ -76,7 +76,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: html-output
           path: '.'
@@ -85,7 +85,7 @@ jobs:
         run: mv rules.html index.html
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

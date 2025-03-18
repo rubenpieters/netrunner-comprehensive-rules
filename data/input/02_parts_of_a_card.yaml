@@ -209,11 +209,11 @@ sections:
     text: Below is a list of all subtypes.
     rules:
     - rule: rule_identity_subtypes
-      text: The identity subtypes are Bioroid, Clone, Corp, Cyborg, Digital, Division, G-mod, Megacorp, Natural, Police Department, Stealth, and Subsidiary.
+      text: The identity subtypes are Bioroid, Clone, Corp, Cyborg, Digital, Division, G-mod, Megacorp, Natural, Police Department, Stealth, Subsidiary, and {n}Unsubstantiated{/n}.
     - rule: rule_agenda_subtypes
       text: The agenda subtypes are Ambush, Assassination, Expansion, Expendable, Initiative, NEXT, Psi, Public, Research, Security, Sensie, and Source.
     - rule: rule_asset_subtypes
-      text: The asset subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Cast, Character, Clone, Corporation, Enforcer, Executive, Facility, Government, Hostile, Illicit, Industrial, Political, Psi, Region, Research, Ritzy, Seedy, and Transaction.
+      text: The asset subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Cast, Character, Clone, Corporation, {n}Deep Net{/n}, Enforcer, Executive, Facility, Government, Hostile, Illicit, Industrial, Political, Psi, Region, Research, Ritzy, Seedy, and Transaction.
     - rule: rule_ice_subtypes
       text: The ice subtypes are AP, Advertisement, Ambush, Barrier, Bioroid, Code Gate, Deep Net, Deflector, Destroyer, Expendable, Grail, Harmonic, Illicit, Morph, Mythic, NEXT, Observer, Psi, Sentry, Tracer, and Trap.
     - rule: rule_operation_subtypes

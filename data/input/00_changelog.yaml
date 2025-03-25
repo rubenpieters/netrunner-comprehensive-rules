@@ -1,2 +1,3 @@
 changelog:
 - text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
+- text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.

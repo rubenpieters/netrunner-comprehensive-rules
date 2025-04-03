@@ -218,7 +218,7 @@ sections:
       examples:
       - text: |-
           {card:Gordian Blade} has the ability "1[c]: +1 strength for the remainder of this run." This ability applies until the end of the current run, whether it is triggered during an encounter or another step of the run. If the ability is triggered during an encounter that takes place outside of a run, the strength increase applies for the duration of that encounter.
-    - rule: rule_icebreaker_strength_increase_outside_of_encounter.
+    - rule: rule_icebreaker_strength_increase_outside_of_encounter
       text: If an {subtype:icebreaker}'s paid ability modifies its strength outside of an encounter and does not specify another applicable duration, the modification expires during the next checkpoint.
       examples:
       - text: If the Runner uses {card:Corroder}'s ability to increase its strength outside of an encounter, it applies only until the next checkpoint.

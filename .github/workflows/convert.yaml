@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   convert_files:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: python:3.11.4-bookworm
     steps:
       - name: Check out repository
@@ -74,7 +74,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:

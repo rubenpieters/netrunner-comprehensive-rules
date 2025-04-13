@@ -1019,7 +1019,7 @@ sections:
     - rule: rule_must_cannot_force_additional_cost
       text: A singular "must" ability cannot force a player to pay an additional cost they wish to decline, but a player cannot avoid choosing a fully resolvable effect from among multiple options in a "must" ability by declining to pay the additional cost for one of those choices.
       examples:
-      - text: If {card:Service Outage} is active and the Runner has {card:Always Be Running} installed, the Runner can decline to pay the additional 1[c] to make a run with their first [click], thus satisfying the "must" of {card:Always Be Running} and allowing them to spend their first click on a different action. However, if a Runner plays a {card:Forged Activation Orders} on an unrezzed Archer, the Corporation cannot choose to rez the Archer but decline to forfeit an agenda; the Corp must either pay 4[c] and forfeit an agenda to rez the Archer or trash the Archer.
+      - text: If {card:Service Outage} is active and the Runner has {card:Always Be Running} installed, the Runner can decline to pay the additional 1[c] to make a run with their first [click], thus satisfying the "must" of {card:Always Be Running} and allowing them to spend their first click on a different action. However, if a Runner {n}has a {card:False Echo} installed and passes an unrezzed Archer{/n}, the Corporation cannot choose to rez the Archer but decline to forfeit an agenda; the Corp must either pay 4[c] and forfeit an agenda to rez the Archer {n}or add the Archer to HQ{/n}.
 
   - subsection: subsec_repeat_this_process
     toc:

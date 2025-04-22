@@ -1,4 +1,9 @@
 changelog:
+- text: Add {ref:rule_install_and_rez_reducing_total} to codify how to apply a reduction in the "total" cost of an "install and rez" effect.
+- text: Add clarification in {ref:rule_cost_checkpoint_cost_zero} that a checkpoint occurs even when the cost is 0.
+- text: Add {ref:rule_install_and_rez} to clarify how to resolve an "install and rez" instruction.
+- text: Add {ref:rule_install_and_rez_one_at_a_time} to clarify installing and rezzing multiple cards at once.
+- text: Update {ref:rule_condition_only_met_while_active} to be more precise in its language, and add examples.
 - text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.
 - text: Update {ref:sec_memory} to better define phrases like "unused [MU]" and "[MU] is full". Add {ref:rule_memory_restrictions} to codify abilities that restrict how [MU] can be used.
 - text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.

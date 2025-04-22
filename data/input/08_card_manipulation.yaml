@@ -282,6 +282,14 @@ sections:
     examples:
     - text: The Corp uses {card:Nanisivik Grid} to resolve the first subroutine on a copy of {card:Brân 1.0} in Archives. This subroutine attempts to install ice "directly inward" from {card:Brân 1.0}, but this copy of {card:Brân 1.0} is not protecting a server and therefore does not have a position from which "directly inward" can be evaluated. There is no legal way to install a card as directed, so the subroutine will have no effect.
 
+  - subsection: rule_install_and_rez
+    text: Some abilities instruct the Corp to "install and rez" a card. To resolve this instruction, the Corp first installs the card normally. After the installation is complete, the Corp rezzes the card. See also {ref:rule_reveal_for_install_and_rez}.
+    new:
+    rules:
+    - rule: rule_install_and_rez_one_at_a_time
+      text: Some "install and rez" abilities affect more than 1 card. In this case, each card is rezzed directly after it is installed, as part of the same instruction and before the next installation begins. See also {ref:rule_install_one_at_a_time}.
+      new:
+
   - subsection: sec_steps_installing
     steps:
     toc:

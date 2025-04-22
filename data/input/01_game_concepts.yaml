@@ -639,8 +639,18 @@ sections:
           {card:Psychographics} is an operation with a play cost of X. It also has the ability, "X must be equal to or less than the number of tags the Runner has." If the Runner has 3 tags, the Corp can choose 0, 1, 2, or 3 as the value for X when they play {card:Psychographics}.
     - rule: rule_cost_x_out_of_context
       text: If an ability needs to know the value of a cost in a context where that cost is not being paid, treat any X that appears in that cost as 0.
-  - rule: rule_cost_checkpoint
+    - rule: rule_install_and_rez_reducing_total
+      text: An ability that instructs the Corp to install and rez a card can also reduce the "total" cost to do so. This use of "total" indicates that the Corp can divide the modifier between the install cost and the rez cost of the relevant card. When such a modifier applies, the Corp declares a number of credits by which to reduce the install cost and a number of credits by which to reduce the rez cost. This declaration is made at the beginning of {ref:rule_steps_installing_pay_install_cost}, before calculating the value of the install cost, and the numbers declared this way must be nonnegative numbers whose sum is equal to the number of credits specified by the original "total" modifier. The respective costs are then lowered by the declared amounts, following the normal procedure described in {ref:rule_cost_calculation}.
+      new:
+      examples:
+      - text: The Corp uses the ability on {card:Tucana} to install and rez a copy of {card:Logjam} from R&D, paying a total of 3[c] less. They install the {card:Logjam} protecting a server that already has 1 piece of ice protecting it, meaning that without the "total of 3[c] less" modifier, the install cost would be 1[c] and the rez cost would be 6[c]. The Corp applies 1[c] of the discount to the install cost and 2[c] to the rez cost, leaving a final install cost of 0[c] and a final rez cost of 4[c].
+        new:
+  - subsection: rule_cost_checkpoint
     text: After a player pays a cost, a checkpoint occurs. See {ref:sec_checkpoints}.
+    rules:
+    - rule: rule_cost_checkpoint_cost_zero
+      text: This checkpoint occurs even if the cost being paid is 0.
+      new:
   - subsection: rule_types_of_costs
     text: |-
       There are six main types of costs: install costs (found mainly on hardware, programs, and resources, and incurred when installing ice), play costs (found on operations and events), rez costs (found on assets, upgrades, and ice), paid ability trigger costs, additional costs, and nested costs.

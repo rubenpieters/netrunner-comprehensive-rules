@@ -342,6 +342,29 @@ sections:
       - text: |-
           The Runner uses {card:Chastushka}'s ability to sabotage 4. The Corp has 2 cards in HQ and 1 card in R&D. The Corp must trash all cards from HQ and R&D.
 
+- section: sec_dividends
+  new:
+  text: Dividends
+  snippet: |-
+    {n}Dividends are rewards the Corp receives for over-investing in their agendas. Dividends might represent a bumper harvest of construction biomaterials, investigative journalists uncovering (or fabricating) a particularly effective story, or simply reaping record-setting profits after an especially risky investment.{/n}
+  rules:
+  - rule: rule_dividends 
+    text: |-
+      {term:Dividends} is a keyword that represents a conditional ability. "Dividends N" means "When you score this agenda, place N agenda counters on it for each hosted advancement counter past its advancement requirement.".
+    examples:
+    - text: |-
+        The Corp scores {card:Embedded Reporting} with 5 advancement counters on it. The Corp will put 4 agenda counters on the agenda in their score area, 2 agenda counters for each of the 2 excess advancement counters.
+      new:
+    new:
+  - rule: rule_dividends_timing
+    text: |-
+      A dividends ability checks its source agenda's advancement requirement and number of hosted advancement counters at the time that agenda began to be scored, before it moved to the Corp's score area.
+    examples:
+    - text: |-
+        The Corp has {card:Project Ingatan} and a rezzed {card:SanSan City Grid} in the root of a server. The Corp advances {card:Project Ingatan} 3 times and scores it. Once {card:Project Ingatan} moves to the Corp's score area, its hosted advancement counters are all removed, and the modifier from {card:SanSan City Grid} no longer applies. But it did have 3 hosted advancement counters and an advancement requirement of 2 at the time it was scored, so the Corp places 1 agenda counter on it with its dividends 1 ability.
+      new:
+    new:
+
 - section: sec_bidding
   text: Bidding
   rules:

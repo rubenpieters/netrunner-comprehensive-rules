@@ -190,7 +190,7 @@ sections:
     - rule: rule_program_memory
       text: Installing a program does not permanently consume memory. The program claims its designated quantity of memory units until it becomes uninstalled, at which point those memory units become available for use by other programs.
     - rule: rule_program_install_exceed_memory_limit
-      text: When the Runner installs a program that would increase the total memory cost of installed programs over their memory limit, they must trash one or more installed programs such that the total memory cost of installed programs including the new program will not exceed their memory limit. See section 8.5.
+      text: When the Runner installs a program that would increase the total memory cost of installed programs over their memory limit, they must trash one or more installed programs such that the total memory cost of installed programs including the new program will not exceed their memory limit. See {ref:sec_install_uninstall}.
     - rule: rule_program_other_exceed_memory_limit
       text: If the Runner's memory limit decreases below the total memory cost of installed programs, or if the total memory cost of installed programs increases above the memory limit for any reason other than installing another program, the Runner must trash one or more installed programs such that the total memory cost of the remaining programs does not exceed their memory limit. This occurs during the next checkpoint after the memory limit is exceeded. See {ref:sec_checkpoints}.
     - rule: rule_program_memory_not_a_cost

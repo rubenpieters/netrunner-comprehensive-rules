@@ -32,7 +32,7 @@ sections:
       The play, install, or rez cost of a card is a number that appears in the top-left corner of most card types. Play and install costs appear within a large circular icon, while rez costs appear within a small octagonal icon.
   - rule: rule_paying_printed_costs
     text: |-
-      Play, install, and rez costs on cards are all paid in credits. {ref:chpt_card_manipulation} details how cards are played, installed, and rezzed.
+      Play, install, and rez costs on cards are all paid in credits. {ref:Chpt_card_manipulation} details how cards are played, installed, and rezzed.
   - rule: rule_card_types_with_play_costs
     text: Events and operations have a play cost.
   - subsection: rule_card_types_with_install_costs
@@ -101,7 +101,7 @@ sections:
     text: Base link is a number appearing in the top-left of Runner identity cards.
   - rule: rule_base_link_citation
     text: |-
-      The Runner's base link contributes to their link value. {ref:sec_link} defines how the Runner's link value is calculated, and {ref:sec_traces} explains how it contributes to contesting trace attempts.
+      The Runner's base link contributes to their link value. {ref:Sec_link} defines how the Runner's link value is calculated, and {ref:sec_traces} explains how it contributes to contesting trace attempts.
 
 - section: sec_memory_limit
   text: Starting Memory Limit
@@ -149,7 +149,7 @@ sections:
       A card's faction can be identified by the color of its background, as well as a faction logo in one of its four corners. This logo also appears as a watermark behind the text box. If a card has a white background and no logo, it is neutral.
   - rule: rule_faction_citation
     text: |-
-      Each identity is associated with one faction. {ref:sec_deck_construction} details how factions affect deckbuilding.
+      Each identity is associated with one faction. {ref:Sec_deck_construction} details how factions affect deckbuilding.
 
 - section: sec_inf_cost
   text: Influence Cost

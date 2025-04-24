@@ -813,7 +813,7 @@ sections:
       text: The Runner's {term:unused} [MU] is their memory limit minus the total memory cost of all of their installed programs. The Runner's [MU] is {term:full} if they have 0 unused [MU].
       new:
   - rule: rule_memory_cost
-    text: Programs have a {term:memory cost} that is continually applied against the memory limit. {ref:rule_program_memory_cost} details how the Runner's installed programs are constrained by the memory limit.
+    text: Programs have a {term:memory cost} that is continually applied against the memory limit. {ref:Rule_program_memory_cost} details how the Runner's installed programs are constrained by the memory limit.
 
 - section: sec_card_visibility
   text: Card Visibility

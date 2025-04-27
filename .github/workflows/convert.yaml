@@ -34,7 +34,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Convert input files
-        run: python3 -m rules_doc_generator -a -t all -m 04 -d 24 -y 2025
+        run: python3 -m rules_doc_generator -a -t all -m 04 -d 28 -y 2025
 
       - name: Create pdf output
         run: latexmk -pdf -jobname=latex/%A latex/*.tex

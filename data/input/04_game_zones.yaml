@@ -172,7 +172,7 @@ sections:
     rules:
     - rule: rule_play_area_start_game
       text: |-
-        {ref:sec_extra_cards} details cases where an ability may cause cards to start the game in the play area.
+        {ref:Sec_extra_cards} details cases where an ability may cause cards to start the game in the play area.
   - rule: rule_play_area_number_location_open_info
     text: The number of cards in the play area and the location of each card in the play area is always open information.
   - rule: rule_play_area_card_open_info

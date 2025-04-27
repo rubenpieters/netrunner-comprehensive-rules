@@ -4,8 +4,8 @@ changelog:
 - text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.
 - text: Make {ref:rule_additional_identity_double_sided} more general to account for a new double-sided Runner identity.
 - text: Cleared up duplicate definitions of the flatline condition for negative maximum hand size. The main reference is {ref:rule_flatline}.
-- text: Update and add examples to {ref:rule_trash_hosted_objects_when_host_trashed} to clarify the exception when agendas move between score areas.
 - text: Add {ref:rule_previous_object_source} to clarify that an object can still be the source of lingering effects after it ceases to exist.
+- text: Update and add examples to {ref:rule_trash_hosted_objects_when_host_trashed} to clarify the exception when agendas move between score areas.
 - text: Expand {ref:rule_hosted_installed_state} to make {ref:rule_host_without_install} its own rule and give it clearer wording.
 - text: Add {ref:rule_host_corp_card_uninstall} to clarify that cards like {card:Film Critic} and {card:Cupellation} uninstall Corp cards that become hosted on them.
 - text: Add {ref:rule_install_from_hosted} to clarify that installing a card that was hosted on another card ends the relationship to its former host.

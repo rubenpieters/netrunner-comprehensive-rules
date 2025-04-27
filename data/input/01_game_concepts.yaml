@@ -434,15 +434,25 @@ sections:
         new:
 
 - section: sec_host
-  text: Host, Hosted and Hosting
+  text: Host, Hosted, and Hosting
   rules:
   - subsection: rule_placed_loaded
     text: Whenever an object is "placed" or "loaded" onto a card, a host relationship is created between those two objects. The object placed on top of a card is {term:hosted} on that card. The card onto which the other object is placed is the {term:host}.
     rules:
     - rule: rule_valid_hosts
       text: Only cards in score areas and the play area can host objects.
-  - rule: rule_hosted_installed_state
-    text: The state of being hosted is distinct, but not exclusive from, the state of being installed. If an ability instructs a player to host a card from an inactive state without reference to installing it, the hosted card remains inactive.
+  - subsection: rule_hosted_installed_state
+    text: The state of being hosted is distinct, but not exclusive from, the state of being installed.
+    rules:
+    - rule: rule_host_without_install
+      new:
+      text: If an ability instructs a player to host a card that is not installed without reference to installing it, the hosted card does not become installed.
+    - rule: rule_host_corp_card_uninstall
+      new:
+      text: If an installed Corp card becomes hosted on a Runner card, the Corp card becomes uninstalled.
+    - rule: rule_install_from_hosted
+      new:
+      text: If a card is installed from a hosted state, it ceases to be hosted. The hosting relationship ends at step {ref:rule_steps_installing_place} of the installation.
   - rule: rule_hosted_limit
     text: An object can only be hosted on a single card at any given time.
   - rule: rule_hosting_limit

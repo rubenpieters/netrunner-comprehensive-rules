@@ -134,7 +134,7 @@ sections:
       text: No checkpoints occur during the sequence of swaps. An ability that meets its condition while ice is being arranged will become pending at the end of resolving the instruction in which arranging ice is taking place.
   
   - rule: rule_arrange_secretly
-    text: When a player arranges cards from the top of their deck or their opponent's deck, that player sets those cards aside facedown, secretly puts them in the order of their choice, and returns them to the top of that deck. They do not declare which cards moved to which positions. All of the arranged cards become new objects after they are arranged, even cards that remain in the same location in the deck.
+    text: When a player arranges cards from the top of their deck or their opponent's deck, that player sets those cards aside facedown, secretly puts them in the order of their choice, and returns them to the top of that deck. They do not declare which cards moved to which positions. {n}If the player is arranging an opponent's deck, that opponent cannot look at the set-aside cards during this process.{/n} All of the arranged cards become new objects after they are arranged, even cards that remain in the same location in the deck.
 
 - section: sec_drawing_cards
   text: Drawing Cards

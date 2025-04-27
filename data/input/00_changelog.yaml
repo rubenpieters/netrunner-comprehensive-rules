@@ -17,6 +17,7 @@ changelog:
 - text: Add {ref:rule_end_action_phase_outside_action_phase} to address the case where a {subtype:terminal} operation resolves outside of its controller's action phase.
 - text: Organize the discard step rules under {ref:rule_discard_step}
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.
+- text: Update {ref:rule_arrange_secretly} to clarify that facedown cards cannot be looked at by their controller while they are being (re-)arranged by their opponent.
 - text: Remove the rule about static abilities in {ref:sec_prevent_avoid}. All cards that previously used a static ability to apply a prevention effect have received updates to their official text and now use a conditional ability interrupt instead.
 - text: Add an example to {ref:rule_prevent_all}.
 - text: Add {ref:rule_prevent_as_trigger_condition} to clarify how {card:Guru Davinder} interacts with other interrupt abilities.

@@ -433,11 +433,18 @@ sections:
     text: A card that is turned faceup or facedown is still the same object.
     examples:
     - text: The Corp uses {card:Vaporframe Fabricator}, installing a piece of ice at no cost, and then plays Divert Power to derez {card:Vaporframe Fabricator} and rez their newly-installed ice at a discount. The Corp can rez {card:Vaporframe Fabricator} again, but since it is still the same object, its "once per turn" ability cannot be used again this turn.
-  - rule: rule_previous_object
+  - subsection: rule_previous_object
     text: When a card or counter becomes a new object, its previous object ceases to exist, but can still be remembered by rules or abilities that refer to past game states.
     examples:
     - text: The Runner plays {card:Bravado}. During the run, a piece of ice that the Runner has already passed is trashed. When the run ends, {card:Bravado}'s ability must determine how many pieces of ice the Runner passed during that run. It does this by reviewing the game history and counting each distinct ice object that the Runner passed. Even though the object corresponding to the trashed ice no longer exists in the present game state, {card:Bravado} can still count it.
     - text: The Runner trashes the top card of R&D while accessing it. The object corresponding to that card in its location on top of R&D ceases to exist, but still counts against the number of cards the Runner can access from R&D during this breach.
+    rules:
+    - rule: rule_previous_object_source
+      text: An object that has ceased to exist still counts as the source for any active lingering effects created by that object. See {ref:sec_lingering_effects} for information about lingering effects.
+      new:
+      examples:
+      - text: The Runner runs a server, steals an agenda, and accesses a rezzed copy of {card:AMAZE Amusements}. The Runner trashes {card:AMAZE Amusements}, and the object they had accessed ceases to exist, while the trashed card becomes a new object in Archives. The source of the persistent ability created by the trashing is the original object in the root of the server, so the reference to "this server" in the persistent ability still refers to the attacked server, and the Runner will take 2 tags when the run ends.
+        new:
 
 - section: sec_host
   text: Host, Hosted and Hosting

@@ -1,7 +1,7 @@
 changelog:
 - text: Expand {ref:rule_hosted_installed_state} to make {ref:rule_host_without_install} its own rule and give it clearer wording.
 - text: Add {ref:rule_host_corp_card_uninstall} to clarify that cards like {card:Film Critic} and {card:Cupellation} uninstall Corp cards that become hosted on them.
-- text: Add {ref:install_from_hosted} to clarify that installing a card that was hosted on another card ends the relationship to its former host.
+- text: Add {ref:rule_install_from_hosted} to clarify that installing a card that was hosted on another card ends the relationship to its former host.
 - text: Remove "potential to change the game state" requirement from {ref:sec_golden_rules} and {ref:sec_abilities_general}.
 - text: Add {ref:rule_paid_ability_effect_based_timing_restrictions} for abilities that can only be triggered in specific situations.
 - text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.

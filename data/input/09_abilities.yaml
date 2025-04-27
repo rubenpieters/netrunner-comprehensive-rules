@@ -568,7 +568,8 @@ sections:
   - rule: rule_play_ability
     text: Any ability on an event or operation that is not a paid, conditional, or static ability is a {term:play ability}. Play abilities are the abilities that resolve as part of playing that event or operation during {ref:rule_steps_playing_resolve_play_abilities}.
     examples:
-    - text: The operation card {card:Hyoubu Precog Manifold} has several abilities of different types. The first sentence reads "Play only if there is no active lockdown." This is a static ability that contains a restriction and no declarations. The second sentence ("This operation is not trashed until your next turn begins.") is a play ability that has no immediate impact on the game state but creates a lingering effect that alters how the operation will leave the play area after resolving. The second paragraph reads simply, "Choose a server." This play ability instruction is the main part of the card that actively affects the game state while the operation resolves. Finally, the third paragraph is a single conditional ability with multiple instructions that is active as long as the operation remains in the play area.
+    - text: The operation card {card:Oppo Research} has several abilities of different types. The first ability reads "Play only if the Runner stole or trashed a Corp card during their last turn." This is a static ability that contains a restriction and no declarations. The second ability ("After you resolve this operation, your action phase ends.") is a conditional ability that meets its trigger condition and resolves after the Corp finishes playing and resolving {card:Oppo Research}. The third and fourth abilities contain instructions with no trigger conditions or paid ability trigger costs, so they are both play abilities. They resolve in sequence while {card:Oppo Research} is being played.
+      new:
 
   - subsection: sec_steps_of_resolving_a_play_ability
     text: Steps of Resolving a Play Ability

@@ -13,5 +13,6 @@ changelog:
 - text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
 - text: Organize the discard step rules under {ref:rule_discard_step}
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.
+- text: Update outdated example about play abilities in {ref:rule_play_ability}.
 - text: Add the "once per turn" ability flag in {ref:rule_ability_flag}.
 - text: Add {ref:sec_dividends} detailing the Dividends keyword.

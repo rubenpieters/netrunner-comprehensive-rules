@@ -827,6 +827,17 @@ sections:
       new:
   - rule: rule_memory_cost
     text: Programs have a {term:memory cost} that is continually applied against the memory limit. {ref:Rule_program_memory_cost} details how the Runner's installed programs are constrained by the memory limit.
+  - subsection: rule_memory_restricted_mu
+    new:
+    text: Some abilities give the Runner [MU] that can only be used for programs that meet a given requirement.
+    rules:
+    - rule: rule_memory_counting_mu_ignores_restrictions
+      new:
+      text: If a calculated value refers directly to the Runner's memory limit or to their unused [MU], that calculation ignores requirements about how that [MU] can be filled.
+    - rule: rule_memory_check_mu_restrictions
+      new:
+      text: |-
+        To determine if the Runner's installed programs satisfy the restrictions on their [MU], create a mapping that assigns each 1[MU] in the memory cost of each installed program to a specific source (either the Runner's starting memory limit or an ability providing additional [MU]). The total [MU] assigned to each source must not exceed the amount of [MU] it provides, and all programs with [MU] assigned to a given source must meet all restrictions imposed on that [MU]. If it is not possible to create such a mapping, the Runner is considered to have exceeded their memory limit, and they must trash installed programs as described in {ref:rule_program_memory_cost}.
 
 - section: sec_card_visibility
   text: Card Visibility

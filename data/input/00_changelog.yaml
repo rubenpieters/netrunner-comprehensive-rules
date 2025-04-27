@@ -9,7 +9,7 @@ changelog:
 - text: Add {ref:rule_install_and_rez_one_at_a_time} to clarify installing and rezzing multiple cards at once.
 - text: Update {ref:rule_condition_only_met_while_active} to be more precise in its language, and add examples.
 - text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.
-- text: Update {ref:sec_memory} to better define phrases like "unused [MU]" and "[MU] is full". Add {ref:rule_memory_restrictions} to codify abilities that restrict how [MU] can be used.
+- text: Update {ref:sec_memory} to better define phrases like "unused [MU]" and "[MU] is full". Add {ref:rule_memory_restricted_mu} to codify abilities that restrict how [MU] can be used.
 - text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
 - text: Organize the discard step rules under {ref:rule_discard_step}
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.

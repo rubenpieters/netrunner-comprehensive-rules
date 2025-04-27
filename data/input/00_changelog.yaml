@@ -3,34 +3,34 @@ changelog:
 - text: Add {ref:rule_host_corp_card_uninstall} to clarify that cards like {card:Film Critic} and {card:Cupellation} uninstall Corp cards that become hosted on them.
 - text: Add {ref:install_from_hosted} to clarify that installing a card that was hosted on another card ends the relationship to its former host.
 - text: Remove "potential to change the game state" requirement from {ref:sec_golden_rules} and {ref:sec_abilities_general}.
+- text: Add {ref:rule_paid_ability_effect_based_timing_restrictions} for abilities that can only be triggered in specific situations.
+- text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.
+- text: Make {ref:rule_additional_identity_double_sided} more general to account for a new double-sided Runner identity.
+- text: Cleared up duplicate definitions of the flatline condition for negative maximum hand size. The main reference is {ref:rule_flatline}.
 - text: Update and add examples to {ref:rule_trash_hosted_objects_when_host_trashed} to clarify the exception when agendas move between score areas.
 - text: Add {ref:rule_previous_object_source} to clarify that an object can still be the source of lingering effects after it ceases to exist.
 - text: Add {ref:rule_alternate_payment} to codify the ability on {card:Biawak}.
-- text: Make {ref:rule_additional_identity_double_sided} more general to account for a new double-sided Runner identity.
-- text: Cleared up duplicate definitions of the flatline condition for negative maximum hand size. The main reference is {ref:rule_flatline}.
 - text: Add {ref:rule_install_and_rez_reducing_total} to codify how to apply a reduction in the "total" cost of an "install and rez" effect.
 - text: Add clarification in {ref:rule_cost_checkpoint_cost_zero} that a checkpoint occurs even when the cost is 0.
-- text: Add {ref:rule_install_and_rez} to clarify how to resolve an "install and rez" instruction.
-- text: Add {ref:rule_install_and_rez_one_at_a_time} to clarify installing and rezzing multiple cards at once.
-- text: Update {ref:rule_condition_only_met_while_active} to be more precise in its language, and add examples.
-- text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.
 - text: Update {ref:sec_memory} to better define phrases like "unused [MU]" and "[MU] is full". Add {ref:rule_memory_restricted_mu} to codify abilities that restrict how [MU] can be used.
-- text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
 - text: Update the descriptions in {ref:chpt_parts_of_a_card} for the new card frames.
-- text: Overhaul {ref:sec_position}. Ice positions are now handled as an explicit game construct, which simplifies cases where ice movements affect the progression of a run. If the Runner is occupying the position of a piece of ice that is uninstalled or moved, that position now continues to exist until the Runner leaves it normally, rather than immediately "collapsing" the server and forcing the current timing step of the run to be changed.
-- text: Add {ref:step_checkpoint_vacant_position} to clean up empty positions during checkpoints.
-- text: Add a paid ability window in the Initiation Phase at {ref:step_initiation_paw}. Add {ref:step_runner_position} to set the initial position of the Runner immediately before the new paid ability window.
-- text: Add an explicit timing step for "action phase" ends abilities to meet their trigger condition, at {ref:step_corp_turn_action_phase_end} for the Corp's turn and {ref:step_runner_turn_action_phase_end} for the Runner's turn.
+- text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
+- text: Add an explicit timing step for "action phase ends" abilities to meet their trigger condition, at {ref:step_corp_turn_action_phase_end} for the Corp's turn and {ref:step_runner_turn_action_phase_end} for the Runner's turn.
 - text: Update {ref:rule_forced_action_phase_end} to cover how {subtype:terminal} operations interact with "action phase ends" trigger conditions.
 - text: Add {ref:rule_end_action_phase_outside_action_phase} to address the case where a {subtype:terminal} operation resolves outside of its controller's action phase.
 - text: Organize the discard step rules under {ref:rule_discard_step}
-- text: Add {ref:rule_play_no_trash} to list cases where an event or operation is not trashed after resolving it. Add {ref:rule_play_no_trash_if_play_effect_will_rfg} to cover the new case of abilities that play an operation and remove it from the game afterward.
+- text: Overhaul {ref:sec_position}. Ice positions are now handled as an explicit game construct, which simplifies cases where ice movements affect the progression of a run. If the Runner is occupying the position of a piece of ice that is uninstalled or moved, that position now continues to exist until the Runner leaves it normally, rather than immediately "collapsing" the server and forcing the current timing step of the run to be changed.
+- text: Add {ref:step_checkpoint_vacant_position} to clean up empty positions during checkpoints.
+- text: Add a paid ability window in the Initiation Phase at {ref:step_initiation_paw}. Add {ref:step_runner_position} to set the initial position of the Runner immediately before the new paid ability window.
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.
-- text: Add {ref:rule_paid_ability_effect_based_timing_restrictions} for abilities that can only be triggered in specific situations.
 - text: Update {ref:rule_arrange_secretly} to clarify that facedown cards cannot be looked at by their controller while they are being (re-)arranged by their opponent.
+- text: Add {ref:rule_install_and_rez} to clarify how to resolve an "install and rez" instruction.
+- text: Add {ref:rule_install_and_rez_one_at_a_time} to clarify installing and rezzing multiple cards at once.
+- text: Add {ref:rule_play_no_trash} to list cases where an event or operation is not trashed after resolving it. Add {ref:rule_play_no_trash_if_play_effect_will_rfg} to cover the new case of abilities that play an operation and remove it from the game afterward.
+- text: Add the "once per turn" ability flag in {ref:rule_ability_flag}.
+- text: Update {ref:rule_condition_only_met_while_active} to be more precise in its language, and add examples.
+- text: Update outdated example about play abilities in {ref:rule_play_ability}.
 - text: Remove the rule about static abilities in {ref:sec_prevent_avoid}. All cards that previously used a static ability to apply a prevention effect have received updates to their official text and now use a conditional ability interrupt instead.
 - text: Add an example to {ref:rule_prevent_all}.
 - text: Add {ref:rule_prevent_as_trigger_condition} to clarify how {card:Guru Davinder} interacts with other interrupt abilities.
-- text: Update outdated example about play abilities in {ref:rule_play_ability}.
-- text: Add the "once per turn" ability flag in {ref:rule_ability_flag}.
 - text: Add {ref:sec_dividends} detailing the Dividends keyword.

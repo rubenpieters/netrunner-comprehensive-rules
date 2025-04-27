@@ -1,4 +1,5 @@
 changelog:
+- text: Make {ref:rule_additional_identity_double_sided} more general to account for a new double-sided Runner identity.
 - text: Cleared up duplicate definitions of the flatline condition for negative maximum hand size. The main reference is {ref:rule_flatline}.
 - text: Add {ref:rule_install_and_rez_reducing_total} to codify how to apply a reduction in the "total" cost of an "install and rez" effect.
 - text: Add clarification in {ref:rule_cost_checkpoint_cost_zero} that a checkpoint occurs even when the cost is 0.

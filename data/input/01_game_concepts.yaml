@@ -164,7 +164,7 @@ sections:
         In a tournament, all identities brought to the game this way must be legal for players to use as their actual identity in that tournament.
     - rule: rule_additional_identity_double_sided
       text: |-
-        One Runner identity, {card:Hoshiko Shiro}, is double-sided (see {ref:sec_identities}). If the Runner switches their identity with Hoshiko, it enters play with the front side faceup. If the Runner switches Hoshiko with another identity, the new identity enters play faceup regardless of Hoshiko's current status.
+        If the Runner switches their identity with a {n}double-sided identity{/n}, it enters play with the front side faceup. If the Runner switches a {n}double-sided identity{/n} with another identity, the new identity enters play faceup regardless of the {n}previous identity's{/n} current status.
 
 - section: sec_starting_the_game
   text: Starting the Game

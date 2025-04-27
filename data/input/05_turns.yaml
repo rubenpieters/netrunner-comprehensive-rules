@@ -147,7 +147,14 @@ sections:
     - rule: rule_terminal_completion
       text: Any currently resolving actions or abilities cease resolving and are considered complete.
     - rule: rule_terminal_checkpoint
-      text: A checkpoint occurs, following which the game proceeds to the active player's discard phase.
+      new:
+      text: Conditions related to the action phase ending are met, and a checkpoint occurs. A reaction window created by this checkpoint is still considered to be taking place in the action phase, but players cannot take actions during this window.
+    - rule: rule_terminal_to_discard_phase
+      new:
+      text: After completing any reaction windows opened by the checkpoint from {ref:rule_terminal_checkpoint}, the game proceeds to the active player's discard phase.
+  - rule: rule_end_action_phase_outside_action_phase
+    new:
+    text: If an effect attempts to end a player's action phase during their draw phase, their discard phase, or another player's turn, this effect does nothing.
 - section: sec_discard_phase
   text: Discard Phase
   rules:
@@ -216,6 +223,9 @@ sections:
       text: If the Corp has any unspent [click], the Corp takes an action. Otherwise, skip to (d).
     - rule: step_corp_turn_action_phase_loop
       text: Return to (a).
+    - rule: step_corp_turn_action_phase_end
+      text: The Corp's action phase formally ends. Conditions related to the action phase ending are met.
+      new:
     - rule: step_corp_turn_action_phase_complete
       text: The Corp's action phase is complete. Play proceeds to the Corp's discard phase.
   - subsection: subsec_corp_discard_phase
@@ -257,6 +267,9 @@ sections:
       text: If the Runner has any unspent [click], the Runner takes an action. Otherwise, skip to (h).
     - rule: step_runner_turn_action_loop
       text: Return to (e).
+    - rule: step_runner_turn_action_phase_end
+      text: The Runner's action phase formally ends. Conditions related to the action phase ending are met.
+      new:
     - rule: step_runner_turn_action_phase_complete
       text: The Runner's action phase is complete. Play proceeds to the Runner's discard phase.
   - subsection: subsec_runner_discard_phase

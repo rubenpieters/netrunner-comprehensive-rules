@@ -75,7 +75,7 @@ sections:
       text: If a piece of ice is being installed "in any position", the new position can be created outward from all existing positions, inward from all existing positions, or between any two existing consecutive positions, as the Corp chooses.
     - rule: rule_create_position_mutate
       new:
-      text: One card, {card:Mutate}, has an ability that installs a piece of ice in the "same position" as a particular piece of ice that was previously trashed. This is a different usage of "same position" from that described in {ref:rule_count_position}. For this installation, the ice is installed protecting the same server the trashed ice was protecting, and the new position is created at the same place in that server's sequence of positions as the position the trashed ice had.
+      text: One card, {card:Mutate}, has an ability that installs a piece of ice in the "same position" as a particular piece of ice that was previously trashed. This is a different usage of "same position" from that described in {ref:rule_count_positions}. For this installation, the ice is installed protecting the same server the trashed ice was protecting, and the new position is created at the same place in that server's sequence of positions as the position the trashed ice had.
     - rule: rule_create_position_swap
       new:
       text: If a piece of ice is swapped with a piece of ice protecting a server, no new position is created. The first ice will occupy the position previously held by the second ice (and vice-versa, if the first piece of ice was also protecting a server).

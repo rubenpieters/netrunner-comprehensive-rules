@@ -7,8 +7,12 @@ sections:
   - rule: rule_card_name_definition
     text: |-
       The identifier of a card is its {term:name}, alternatively referred to as its title. It is written along the top of the card for identities, agendas, ice, operations, events, and resources, or immediately below the art box in the case of assets, upgrades, hardware, and programs.
-  - rule: rule_identity_subtitles
+  - subsection: rule_identity_subtitles
     text: Identities have a subtitle written immediately below the main title line. Their full name is the combination of their main title and subtitle.
+    rules:
+    - rule: rule_identity_pronouns
+      text: Runner identities may have the pronouns of the character represented by that identity written next to the subtitle. Pronouns do not affect gameplay.
+      new:
   - rule: rule_self_reference
     text: |-
       When a card refers to its own name, it is a self-reference. See {ref:sec_old_self_reference_rules}.
@@ -98,7 +102,7 @@ sections:
   text: Base Link
   rules:
   - rule: rule_base_link_location
-    text: Base link is a number appearing in the top-left of Runner identity cards.
+    text: Base link is a number appearing {n}near{/n} the top-left of Runner identity cards, {n}next to the [link] symbol{/n}.
   - rule: rule_base_link_citation
     text: |-
       The Runner's base link contributes to their link value. {ref:Sec_link} defines how the Runner's link value is calculated, and {ref:sec_traces} explains how it contributes to contesting trace attempts.
@@ -107,8 +111,7 @@ sections:
   text: Starting Memory Limit
   rules:
   - rule: rule_memory_limit_location
-    text: |-
-      Starting memory limit is a number appearing near the top-left of Runner identity cards, within the [MU] symbol.
+    text: Starting memory limit is a number appearing near the top-left of Runner identity cards, within the [MU] symbol.
   - rule: rule_memory_limit_citation
     text: |-
       The Runner's memory limit is checked against the total memory cost of programs they have installed. This value is calculated by applying any active modifiers to the Runner's starting memory limit. See {ref:sec_memory}.

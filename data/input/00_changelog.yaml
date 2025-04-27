@@ -8,4 +8,5 @@ changelog:
 - text: Update {ref:sec_memory} to better define phrases like "unused [MU]" and "[MU] is full". Add {ref:rule_memory_restrictions} to codify abilities that restrict how [MU] can be used.
 - text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.
+- text: Add the "once per turn" ability flag in {ref:rule_ability_flag}.
 - text: Add {ref:sec_dividends} detailing the Dividends keyword.

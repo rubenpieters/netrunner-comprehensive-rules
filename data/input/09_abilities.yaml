@@ -295,7 +295,7 @@ sections:
     rules:
     - rule: rule_ability_flag_types
       text: |-
-        There are five ability flags: access, interface, [interrupt], persistent, and threat N.
+        There are {n}six{/n} ability flags: access, interface, [interrupt], persistent, threat N, and {n}once per turn{/n}.
     - rule: rule_access_flag
       text: The "access" flag appears on Runner card paid abilities and affects the timing for triggering those abilities. The Runner can use abilities with this flag only during the mid-access ability window at {ref:step_mid_access_ability} of accessing a card. See {ref:rule_mid_access_window}.
     - rule: rule_interface_flag
@@ -306,6 +306,12 @@ sections:
       text: The "persistent" flag appears on Corp card abilities and changes the rules about when those abilities are active. An ability with this flag can persist until the end of the run after its source card is trashed. See {ref:subsec_persistent}.
     - rule: rule_threat_flag
       text: The "threat N" flag can appear on any type of ability. Abilities with this flag are only active if the threat level is greater than or equal to N, regardless of {ref:rule_ability_active_inactive_source_card}. See {ref:rule_threat_level}.
+    - rule: rule_once_per_turn_flag
+      text: The "once per turn" flag appears on paid and conditional abilities. An ability with this flag can only be used once per turn. {ref:rule_using} explains what it means to "use" an ability.
+      new:
+      examples:
+      - text: The Runner is playing as {card:Zahya Sadeghi} and finishes a run on HQ, having accessed 1 card. They choose not to gain 1{c} with Zahya's ability. The ability was not "used", so its "once per turn" restriction has not been expended, even though the ability was able to resolve. The Runner can make another run later in the turn and gain credits with the ability.
+        new:
 
   - subsection: rule_ability_classification
     text: The five types of abilities can be identified by the types of text they are made of.
@@ -359,7 +365,7 @@ sections:
     - rule: rule_interface_ability
       text: If the "interface" flag appears before a paid ability's trigger cost, that ability is an Interface ability and is subject to the restrictions of icebreakers discussed in {ref:subsec_icebreakers}. Interface abilities do not have a special priority window type.
     - rule: rule_other_paid_abilities
-      text: A paid ability that is not an action, interrupt, or mid-access ability can be used during a paid ability window. Each such ability can be used an unlimited number of times as long as its cost is paid each time and any restrictions specified by its effect are observed.
+      text: A paid ability that is not an action, interrupt, or mid-access ability can be used during a paid ability window. Each such ability can be used an unlimited number of times as long as its cost is paid each time and any restrictions specified {n}in its text or by other abilities{/n} are observed.
 
   - subsection: rule_paid_ability_optional
     text: Paid abilities are always optional. A paid ability and its source are considered used when the ability's trigger cost is paid.

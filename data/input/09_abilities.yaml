@@ -763,11 +763,6 @@ sections:
           {card:Tori Hanzō}'s interrupt can only be used "the first time you would do net damage" during a run. If the first net damage that becomes imminent is prevented by the Runner using {card:Feedback Filter}, {card:Tori Hanzō} cannot be used on any other instances of net damage for the remainder of the run, as the next imminent net damage is the second time the Corp "would" deal net damage, not the first time.
     - rule: rule_ordinal_prevented
       text: Abilities that do not use "would" do not see effects that are prevented, as those effects did not occur.
-    - rule: rule_static_ability_prevent
-      text: A static ability can stipulate that a particular effect is always prevented. This kind of prevention effect does not require a player to explicitly trigger it.
-      examples:
-      - text: |-
-          {card:Paparazzi} reads in part, "Prevent all meat damage." This is a static ability that applies automatically to any instruction that would deal meat damage.
 
   - subsection: sec_modifiable_values
     text: Some instructions make use of an associated value. These values can be changed by interrupts and replacement effects.
@@ -794,6 +789,10 @@ sections:
           The Runner takes a tag on their turn, allowing the Corp to trigger {card:Mr. Stone}. While the 1 meat damage from {card:Mr. Stone}'s ability is imminent, both players can trigger interrupts to modify the damage effect. Since it is the Runner's turn, they receive priority first and use {card:Biometric Spoofing} to prevent 2 damage. The imminent effect is now expected to do -1 damage. When the Corp receives priority, they trigger two copies of {card:The Cleaners} that each add 1 to the expected damage, increasing the total to 0 and then to 1. The ability will resolve with 1 damage even though the amount of damage was temporarily 0 or less while the effect was imminent.
     - rule: rule_prevent_all
       text: If an effect prevents "all damage" or "any amount of damage" while an instruction is imminent, the damage is removed from the expected effects entirely, and there is no longer a value to be modified. If an effect avoids "all tags" or "any number of tags" while an instruction is imminent, taking tags is removed from the expected effects entirely, and there is no longer a value to be modified.
+      examples:
+      - text: |-
+          The Runner installs {card:Net-Ready Eyes} and uses {card:Chrome Parlor} to prevent all of the damage from its first ability. There is no longer an imminent damage effect, so the Corp cannot use {card:The Cleaners}.
+        new:
     - rule: rule_prevent_all_but_one
       text: One card, {card:Bio-Modeled Network}, has an instruction that prevents "all but 1 net damage." This ability is relevant when the imminent instruction's expected effects include doing net damage and the amount of the damage is 2 or more. The effect of this ability is to set the value for the amount of damage to 1. Previously-applied modifiers to the value are ignored. The value can still be modified by other interrupts after being set to 1 this way.
     - rule: rule_negative_values_resolution
@@ -805,6 +804,14 @@ sections:
       text: Any effects making use of modified values maintain their restrictions and specifications with the new values.
       examples:
       - text: While the result of a successful trace from {card:Flare} is imminent, the Corp triggers {card:The Cleaners} to increase the imminent meat damage by 1. Even though the damage from {card:Flare} has been increased from 2 to 3, none of that meat damage can be prevented.
+    - rule: rule_prevent_as_trigger_condition
+      new:
+      text: |-
+        One card, {card:Guru Davinder}, has a non-interrupt conditional ability with the trigger condition "Whenever this resource prevents 1 or more damage". The trigger condition is met when the following occurs: the expected effects of an imminent instruction include a damage effect with a value greater than 0 for the amount of the damage; an interrupt ability resolves from the same source object as the conditional ability; and the interrupt decreases the value for the damage amount or removes the damage effect entirely.
+      examples:
+      - text: |-
+          The Runner installs {card:Respirocytes} and is about to take 1 meat damage from its first ability. They use {card:Plascrete Carapace} to prevent 1 meat damage, leaving the imminent instruction with the expected effect "Do 0 meat damage.". At this point, the 0 value for the damage can still be modified by abilities like {card:The Cleaners}. But then the Runner resolves the interrupt ability on {card:Guru Davinder}, which removes the damage effect altogether. Since the value for the damage was 0, {card:Guru Davinder}'s second ability does not meet its trigger condition and the Runner does not have to trash {card:Guru Davinder} or pay 4[c]. There is no longer an imminent damage effect, so the Corp cannot use {card:The Cleaners}.
+        new:
 
   - subsection: sec_replacement_effects
     text: |-

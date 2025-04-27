@@ -19,25 +19,12 @@ sections:
   rules:
   - rule: rule_card_precedence
     text: If the text of a card directly contradicts these rules, the text of the card takes precedence.
-  - subsection: rule_cannot_precedence
+  - rule: rule_cannot_precedence
     text: If a rule or ability directs something to happen, but another effect states that it cannot happen, the "cannot" ability takes precedence.
-    rules:
-    - rule: rule_cannot_ncigs
-      text: If a "cannot" effect prohibits all of the effects of another ability, that ability cannot be triggered.
-    - rule: rule_partially_cannot
-      text: If a "cannot" effect prohibits only part of another ability, that ability can be triggered, but the prohibited steps of resolving that ability are not carried out.
-      examples:
-      - text: |-
-          During a run, {card:Lockdown}'s subroutine resolves, preventing the Runner from drawing cards for the remainder of the turn. The Runner has a {card:Diesel} and a {card:Process Automation} in their grip. For the remainder of this turn, they cannot play {card:Diesel} as its entire ability is prohibited, but they can play {card:Process Automation}. Even though cards cannot be drawn through {card:Process Automation}, the Runner can play it to gain 2[c].
   - rule: rule_if_able
     text: If an instruction includes the words "if able," it can only be carried out fully or not at all. If any part of the instruction is not possible to carry out, the entire instruction is ignored.
   - rule: rule_do_as_much_as_you_can
     text: If an instruction does not include the words "if able," as much of that instruction as possible is carried out. Any parts of the instruction that are not possible to carry out are ignored.
-  - rule: rule_ncigs
-    text: A player can only take an action or use an ability if its effect has the potential to change the game state. This potential is assessed strictly by what the action or ability can be expected to accomplish, without regard to the consequences of paying any costs to initiate that action or ability and without regard to any other abilities that may meet their conditions in the process of initiating or resolving that action or ability.
-    examples:
-    - text: |-
-        The Runner is playing {card:Armand "Geist" Walker} and has {card:Forger} installed. The Runner can only trash {card:Forger} and trigger {card:Geist}'s ability when they are about to take a tag (which {card:Forger} could avoid) or while they have a tag (which {card:Forger} could remove). Using {card:Forger} at any other time has no potential to change the game state.
 
 - section: sec_symbols
   text: Symbols

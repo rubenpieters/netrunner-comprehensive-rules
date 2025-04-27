@@ -54,8 +54,6 @@ sections:
     rules:
     - rule: rule_with_the_basic_action
       text: If an ability has a trigger condition related to an effect being performed “with the basic action”, that trigger condition is met by any basic action that performs the indicated effect. If an ability imposes a cost on performing an effect “with the basic action”, that cost applies to any instance of the indicated effect that would occur as part of resolving a basic action.
-  - rule: rule_action_ncigs
-    text: A player can only take an action if its effect has the potential to change the game state. See {ref:rule_ncigs}.
   - rule: rule_actions_outside_action_phase
     text: A player can only take actions during the action phase of their turn. If an effect directs a player to take an action outside of that player's action phase, instead that player does nothing.
   - subsection: rule_same_different_actions

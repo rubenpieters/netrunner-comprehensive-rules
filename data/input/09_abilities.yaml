@@ -18,7 +18,7 @@ sections:
     - rule: rule_ability_categories
       text: Each ability is categorized as either a static ability ({ref:sec_static_abilities}), a paid ability ({ref:sec_paid_abilities}), a conditional ability ({ref:sec_conditional_abilities}), a play ability ({ref:sec_play_abilities}), or a subroutine ({ref:sec_subroutines}).
     - rule: rule_interrupt_link
-      text: Abilities marked with [interrupt] or that include the words "prevent" or "avoid" in their instructions have special timing rules that differ from other abilities. See {ref:sec_interrupts_replacements}.
+      text: Abilities marked with [interrupt] or that include the {n}word "would"{/n} in their instructions have special timing rules that differ from other abilities. See {ref:sec_interrupts_replacements}.
     - rule: rule_instruction_link
       text: Each non-static ability contains one or more {term:instructions} that make up the ability's component steps. {ref:Rule_instruction} describes the nature and function of instructions in an ability's text. An instruction that the game is presently concerned with can be either {term:imminent} or {term:resolving}.
 
@@ -58,8 +58,6 @@ sections:
     rules:
     - rule: rule_effect_beyond_resolution
       text: Any of a non-static ability's effects that apply beyond the duration of that ability's resolution become independent of that ability and its source. The game engine takes responsibility for managing these {term:lingering effects} directly, and deletes them from the game state as their durations expire. See {ref:sec_lingering_effects}.
-    - rule: rule_determining_potential_to_change_game_state
-      text: When determining whether a certain ability has the potential to change the game state, look only at the expected effects of the ability. Do not consider its costs or restrictions, and do not consider other abilities that could become pending or relevant because of triggering or resolving the ability. See {ref:rule_ncigs} of the Golden Rules.
 
   - subsection: rule_using
     text: Any time a player chooses to resolve an optional ability or an optional part of an ability, the player is considered to be {term:using} that ability and the source card of that ability. Players do not "use" abilities that are entirely mandatory.
@@ -72,8 +70,6 @@ sections:
       text: If an ability allows a player to spend or move counters, that ability's source card is considered used at the time the player pays a cost by spending or moving those counters, even if the counters are spent or moved from cards other than the card that is the source of that ability.
       examples:
       - text: The Runner spends the credit hosted on {card:Cyberfeeder} to pay the trigger cost of {card:Mimic}'s ability. Because the Runner triggered {card:Mimic}'s paid ability and {card:Cyberfeeder}'s ability allowed the credit to be spent, both {card:Mimic} and {card:Cyberfeeder} have been used.
-    - rule: rule_use_ncigs_link
-      text: A player can only use an ability if its effect has the potential to change the game state. See {ref:rule_ncigs}.
 
   - rule: rule_ability_active
     text: Abilities are {term:active} if they are eligible to be resolved or apply to the current game state, and {term:inactive} otherwise. By default, a card's abilities are active if and only if that card is active (see {ref:rule_active_cards}). Abilities of counters are active for as long as the counter exists.
@@ -364,6 +360,9 @@ sections:
       text: If the "access" flag appears before a paid ability's trigger cost, that ability is a mid-access ability. The Runner can use up to 1 mid-access ability during the mid-access ability window at {ref:step_mid_access_ability} of accessing a card.
     - rule: rule_interface_ability
       text: If the "interface" flag appears before a paid ability's trigger cost, that ability is an Interface ability and is subject to the restrictions of icebreakers discussed in {ref:subsec_icebreakers}. Interface abilities do not have a special priority window type.
+    - rule: rule_paid_ability_timing_restriction_reference
+      new:
+      text: Certain paid abilities can only be used at times appropriate to their effects, as detailed in {ref:rule_paid_ability_effect_based_timing_restrictions}.
     - rule: rule_other_paid_abilities
       text: A paid ability that is not an action, interrupt, or mid-access ability can be used during a paid ability window. Each such ability can be used an unlimited number of times as long as its cost is paid each time and any restrictions specified {n}in its text or by other abilities{/n} are observed.
 
@@ -384,6 +383,28 @@ sections:
     - text: |-
         The Runner uses the [trash] ability on {card:Street Peddler}. They pay the trigger cost and set the 3 hosted cards aside. When the ability resolves, the Runner installs one of the set-aside cards. Since the other two cards are still set aside, the next checkpoint trashes them just as in any other case of cards that were hosted on a card that is no longer installed. No other abilities are able to tell that the cards were set aside: they are treated as having been installed or trashed from their previous location in the play area.
     - text: This example describes a situation similar to the previous examples, but covers the sequence of steps the game carries out in a higher level of detail. The Corp has priority in a paid ability window, and chooses to trigger the [trash] ability on {card:Reconstruction Contract}. As they pay the trigger cost, moving {card:Reconstruction Contract} to Archives, they set aside the advancement counters hosted on {card:Reconstruction Contract}. Next, a checkpoint occurs following the cost having been paid. After that checkpoint and any corresponding reaction window, the [trash] ability's instruction is ready to become imminent. The Corp chooses a card they can advance to be the instruction's target, and an interrupt window opens. After the interrupt window (assuming the effects of the instruction are not prevented), the Corp moves the set-aside counters to the target card.
+
+  - subsection: rule_paid_ability_effect_based_timing_restrictions
+    text: Paid abilities with certain effects can only be triggered in specific situations.
+    new:
+    rules:
+    - rule: rule_paid_ability_breaks_subroutines
+      new:
+      text: A paid ability that contains an instruction that could break 1 or more subroutines can only be used during an encounter.
+    - rule: rule_paid_ability_refers_to_approached_ice
+      new:
+      text: A paid ability that refers to ice the Runner is approaching can only be used during the Approach Ice Phase of a run, and only if the ice being approached meets all stipulations used in referring to it.
+      examples:
+      - text: The Corp can only use the paid ability on {card:Project Wotan} while the Runner is approaching a rezzed piece of {subtype:bioroid} ice.
+        new:
+    - rule: rule_paid_ability_refers_to_encountered_ice
+      new:
+      text: A paid ability that refers to ice the Runner is encountering can only be used during an encounter with a piece of ice that meets all stipulations used in referring to it.
+      examples:
+      - text: The Runner cannot trigger the first ability on {card:Arruaceiras Crew} at an arbitrary time to give themself a tag. They can only use this ability during an encounter.
+        new:
+      - text: The Runner can use the [trash] ability on {card:Abagnale} during an encounter with a {subtype:code gate}. They can only use the interface ability on {card:Abagnale} during an encounter with a {subtype:code gate} that {card:Abagnale} has sufficient strength to interface with.
+        new:
 
   - subsection: sec_steps_of_using_a_paid_ability
     text: Steps of Using a Paid Ability
@@ -475,11 +496,12 @@ sections:
       text: A conditional ability with a static condition can only be marked pending during a checkpoint if the condition is true at the beginning of that checkpoint.
     - rule: rule_conditional_ability_static_one_instance
       text: A conditional ability with a static condition can only be marked pending if no other instance of the same ability from the same source is already pending, imminent, or resolving.
-    - rule: rule_conditional_ability_static_condition_ncigs
-      text: A conditional ability with a static condition can only be marked pending if the instructions in the ability have the potential to change the game state.
+    - rule: rule_conditional_ability_static_condition_no_effect
+      text: If a conditional ability with a static condition resolves and no instruction in that ability had any expected effects at the time that instruction's interrupt window opened, that ability cannot be marked pending again until a timing structure step is completed.
+      new:
       examples:
       - text: |-
-          {card:Parasite} is hosted on a piece of ice with 0 strength. {card:Parasite}'s ability tries to trash that ice. If the effect of an interrupt ability prevents the ice from being trashed without increasing its strength, the condition is still true, so the ability will become pending again. But this does not occur while the previous instance of the ability is still pending or resolving. Conversely, if a static ability (such as the one on Architect) prohibits {card:Parasite} from trashing the ice, {card:Parasite}'s ability does not have the potential to change the game state, and therefore it does not become pending.
+          {card:Parasite} is hosted on a piece of ice with 0 strength. {card:Parasite}'s ability tries to trash that ice. If the effect of an interrupt ability prevents the ice from being trashed without increasing its strength, the condition is still true, so the ability will become pending again. But this does not occur while the previous instance of the ability is still pending or resolving. Conversely, if a static ability (such as the one on {card:Architect}) prohibits {card:Parasite} from trashing the ice, {n}there are no effects {card:Parasite}'s ability can perform, and therefore the ability resolves only once per timing structure step.{/n}
 
   - subsection: rule_trigger_conditional_ability
     text: A player can trigger a conditional ability while they have priority in a reaction window in which the ability is pending.

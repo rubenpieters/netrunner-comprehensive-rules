@@ -7,13 +7,9 @@ sections:
   - rule: rule_uniqueness
     text: |-
       Some cards are {term:unique}, and have a unique symbol (◆) before their name to designate this. There can be only one unique card of the same name active at a time. If a unique card becomes active, any other card that shares its name is trashed during the next checkpoint. Trashing a card this way cannot be prevented. See {ref:sec_checkpoints}.
-  - subsection: rule_purge
+  - rule: rule_purge
     text: |-
       To {term:purge virus counters} is to remove all virus counters hosted on cards and return them to the bank. The Corp can purge virus counters as a basic action or with a card ability.
-    rules:
-    - rule: rule_purge_ncigs
-      text: |-
-        The Corp can always use a purge effect, even if there are no virus counters currently hosted on any cards. This is an exception to {ref:rule_ncigs}.
   - rule: rule_add_card_to_score_area
     text: |-
       Some abilities add a card to a player's score area "as an agenda". When this happens, the card loses all its previous properties and gains only those properties specified in the effect converting it. This conversion lasts until the card moves to a zone that is not a score area, at which point it returns to being its original printed card. If this happens in any way other than by agenda forfeit, the card is immediately trashed. See {ref:movement_forfeit}.

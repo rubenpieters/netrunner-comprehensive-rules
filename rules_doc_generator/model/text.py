@@ -84,10 +84,11 @@ class Ref:
         raise Exception('No referenced ids')
     except Exception as e:
       if "does not exist" in str(e):
-        # TODO: make this configurable with a strict option.
-        # For now, emit an unknown ref string.
-        unknown_ref_string = ','.join(self.referenced_ids).replace('_', '\_')
-        return f"UNKNOWNREF({unknown_ref_string})"
+        # TODO: make this a configurable option with a strict/non-strict setting.
+        #unknown_ref_string = ','.join(self.referenced_ids).replace('_', '\_')
+        #return f"UNKNOWNREF({unknown_ref_string})"
+        # Default behavior is to re-raise the reference error.
+        raise e
       else:
         raise e
 

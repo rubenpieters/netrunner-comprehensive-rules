@@ -1,4 +1,5 @@
 changelog:
+- text: Remove "potential to change the game state" requirement from {ref:sec_golden_rules} and {ref:sec_abilities_general}.
 - text: Update and add examples to {ref:rule_trash_hosted_objects_when_host_trashed} to clarify the exception when agendas move between score areas.
 - text: Add {ref:rule_previous_object_source} to clarify that an object can still be the source of lingering effects after it ceases to exist.
 - text: Add {ref:rule_alternate_payment} to codify the ability on {card:Biawak}.
@@ -20,6 +21,7 @@ changelog:
 - text: Add {ref:rule_end_action_phase_outside_action_phase} to address the case where a {subtype:terminal} operation resolves outside of its controller's action phase.
 - text: Organize the discard step rules under {ref:rule_discard_step}
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.
+- text: Add {ref:rule_paid_ability_effect_based_timing_restrictions} for abilities that can only be triggered in specific situations.
 - text: Update {ref:rule_arrange_secretly} to clarify that facedown cards cannot be looked at by their controller while they are being (re-)arranged by their opponent.
 - text: Remove the rule about static abilities in {ref:sec_prevent_avoid}. All cards that previously used a static ability to apply a prevention effect have received updates to their official text and now use a conditional ability interrupt instead.
 - text: Add an example to {ref:rule_prevent_all}.

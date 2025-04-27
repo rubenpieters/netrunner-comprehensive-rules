@@ -502,7 +502,14 @@ sections:
   - rule: rule_remove_spend_hosted_objects
     text: Hosted objects can be removed or spent from their host without affecting the host.
   - rule: rule_trash_hosted_objects_when_host_trashed
-    text: If a host card changes zones, all objects hosted on that card (and all objects hosted on those objects, and so on) are trashed during the next checkpoint. This cannot be prevented. See {ref:sec_checkpoints} for details on checkpoints.
+    text: If a host card changes zones, {n}except by moving from a player's score area to another player's score area,{/n} all objects hosted on that card (and all objects hosted on those objects, and so on) are trashed during the next checkpoint. This cannot be prevented. See {ref:sec_checkpoints} for details on checkpoints.
+    examples:
+    - text: The Runner has an installed copy of {card:Detente} with Corp cards hosted on it. They play {card:Rejig}, adding {card:Detente} to their grip. The hosted Corp cards are trashed.
+      new:
+    - text: The Runner has {card:Next Big Thing} in their score area with a hosted agenda counter. The Corp plays {card:IP Enforcement} to install that agenda. The hosted agenda counter will be trashed after {ref:rule_steps_installing_pay_install_cost} of the installation.
+      new:
+    - text: The Runner has {card:Next Big Thing} in their score area with a hosted agenda counter. The Corp plays {card:Exchange of Information} to swap that agenda to their own score area. The agenda counter remains hosted on {card:Next Big Thing}.
+      new:
   - rule: rule_condition_counters_can_host
     text: Condition counters are the only type of counter that can host other objects. Hosting on condition counters follows the same rules as hosting on cards.
 

@@ -1,4 +1,5 @@
 changelog:
+- text: Update and add examples to {ref:rule_trash_hosted_objects_when_host_trashed} to clarify the exception when agendas move between score areas.
 - text: Add {ref:rule_previous_object_source} to clarify that an object can still be the source of lingering effects after it ceases to exist.
 - text: Add {ref:rule_alternate_payment} to codify the ability on {card:Biawak}.
 - text: Make {ref:rule_additional_identity_double_sided} more general to account for a new double-sided Runner identity.

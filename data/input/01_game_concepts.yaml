@@ -639,6 +639,12 @@ sections:
           {card:Psychographics} is an operation with a play cost of X. It also has the ability, "X must be equal to or less than the number of tags the Runner has." If the Runner has 3 tags, the Corp can choose 0, 1, 2, or 3 as the value for X when they play {card:Psychographics}.
     - rule: rule_cost_x_out_of_context
       text: If an ability needs to know the value of a cost in a context where that cost is not being paid, treat any X that appears in that cost as 0.
+    - rule: rule_alternate_payment
+      text: Some abilities modify a cost by allowing a player to pay part or all of that cost in an alternate way. This does not change the value of the cost, but gives the player an additional option when deciding how to pay that cost.
+      new:
+      - examples:
+        - text: The Corp rezzes {card:Biawak}, which has the ability "You can forfeit 1 agenda as you rez this ice to pay for 10[c] of its rez cost." and a rez cost of 14[c]. The Corp chooses to pay {card:Biawak}'s rez cost by spending 2[c] from their credit pool, spending 2[c] from a {card:Mahkota Langit Grid}, and forfeiting 1 agenda.
+          new:
     - rule: rule_install_and_rez_reducing_total
       text: An ability that instructs the Corp to install and rez a card can also reduce the "total" cost to do so. This use of "total" indicates that the Corp can divide the modifier between the install cost and the rez cost of the relevant card. When such a modifier applies, the Corp declares a number of credits by which to reduce the install cost and a number of credits by which to reduce the rez cost. This declaration is made at the beginning of {ref:rule_steps_installing_pay_install_cost}, before calculating the value of the install cost, and the numbers declared this way must be nonnegative numbers whose sum is equal to the number of credits specified by the original "total" modifier. The respective costs are then lowered by the declared amounts, following the normal procedure described in {ref:rule_cost_calculation}.
       new:

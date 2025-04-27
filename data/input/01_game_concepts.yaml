@@ -214,7 +214,7 @@ sections:
         Either player can win by collecting agenda points in their score area (usually done by scoring or stealing agendas; see {ref:sec_score_scoring_steal}). A player with a score of 7 or more wins the game.
     - rule: rule_flatline
       text: |-
-        The Corp wins if the Runner is flatlined. The Runner is flatlined immediately if they suffer more damage than they have cards in their grip. The Runner is also flatlined if, at the beginning of their discard phase, their maximum hand size is less than 0. See {ref:sec_damage} for more information about damage.
+        The Corp wins if the Runner is {term:flatlined}. The Runner is flatlined immediately if they suffer more damage than they have cards in their grip. {n}See {ref:sec_damage} for information about damage.{/n} The Runner is also flatlined if, at the beginning of their discard {n}step{/n}, their maximum hand size is less than 0. {n}See {ref:sec_discard_phase} for information about maximum hand size and the discard step.{/n}
     - rule: rule_empty_rnd
       text: |-
         The Runner wins if the Corp is required to draw a card from R&D but cannot because R&D is empty.

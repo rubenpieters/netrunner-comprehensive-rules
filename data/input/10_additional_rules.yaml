@@ -162,9 +162,9 @@ sections:
       examples:
       - text: |-
           The Corp is playing as {card:Chronos Protocol: Selective Mind Mapping} when the Runner accesses a {card:Snare!} before taking any other damage during this turn. The Corp looks at the grip and selects a card to be trashed as the first point of net damage for the turn, then two other cards are randomly selected. All 3 cards are trashed simultaneously.
-  - rule: rule_flatlined
-    text: |-
-      If the Runner takes more damage than the number of cards in their grip, or if they have a maximum hand size of less than zero at the end of their turn, then they are {term:flatlined} and the Corp wins the game.
+  - rule: rule_flatline_damage_reference
+    text: If the Runner takes more damage than the number of cards in their grip, they are flatlined. See {ref:rule_flatline}.
+    new:
 
 - section: sec_tags
   text: Tags

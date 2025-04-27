@@ -114,8 +114,6 @@ sections:
     rules:
     - rule: rule_grip_name
       text: The {term:grip} is the name for the Runner's hand.
-    - rule: rule_grip_damage
-      text: Suffering damage forces the Runner to discard cards from their grip at random, and suffering core damage also reduces the Runner's maximum hand size. The Runner flatlines and loses the game if they suffer more damage than they have cards in grip or must discard down to a hand size lower than zero. See {ref:sec_damage}.
 
 - section: sec_discard_pile
   text: Discard Pile

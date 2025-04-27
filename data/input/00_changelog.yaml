@@ -24,6 +24,7 @@ changelog:
 - text: Update {ref:rule_forced_action_phase_end} to cover how {subtype:terminal} operations interact with "action phase ends" trigger conditions.
 - text: Add {ref:rule_end_action_phase_outside_action_phase} to address the case where a {subtype:terminal} operation resolves outside of its controller's action phase.
 - text: Organize the discard step rules under {ref:rule_discard_step}
+- text: Add {ref:rule_play_no_trash} to list cases where an event or operation is not trashed after resolving it. Add {ref:rule_play_no_trash_if_play_effect_will_rfg} to cover the new case of abilities that play an operation and remove it from the game afterward.
 - text: Clarify that {ref:rule_ice_change_approach_swap} applies to swaps from other zones as well as swaps with other installed ice.
 - text: Add {ref:rule_paid_ability_effect_based_timing_restrictions} for abilities that can only be triggered in specific situations.
 - text: Update {ref:rule_arrange_secretly} to clarify that facedown cards cannot be looked at by their controller while they are being (re-)arranged by their opponent.

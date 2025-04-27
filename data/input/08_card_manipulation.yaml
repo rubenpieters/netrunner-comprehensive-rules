@@ -313,7 +313,7 @@ sections:
   rules:
   - rule: rule_playing
     text: |-
-      {term:Playing} an event or operation is the act of placing that card into the play area. Agendas, assets, ice, upgrades, hardware, programs, resources, and identities are never played.
+      {term:Playing} an event or operation {n}is a process in which that card is placed into the play area, its play abilities are resolved, and then the card is trashed{/n}. Agendas, assets, ice, upgrades, hardware, programs, resources, and identities are never played.
 
   - subsection: rule_playing_play_cost
     text: Normally, playing an operation or event requires paying its play cost. Abilities that initiate playing a card may ignore the play cost or require it to be paid.
@@ -335,6 +335,26 @@ sections:
   - rule: rule_playing_timing_structure
     text: An operation or event that initiates a timing structure remains active in the play area for the duration of that timing structure. It is not considered fully resolved until the timing structure is completed and any abilities on the card that meet their trigger conditions when the timing structure ends are resolved.
 
+  - subsection: rule_play_no_trash
+    text: In certain circumstances, a played card is not trashed after resolving it.
+    new:
+    rules:
+    - rule: rule_play_no_trash_left_play_area
+      text: If the played card is no longer in the play area when {ref:rule_steps_playing_trash_played_card} is reached, it is not trashed.
+      new:
+      examples:
+      - text: The Runner plays {card:Ashen Epilogue} and resolves its play abilities. Its last ability removes it from the game.
+        new:
+    - rule: rule_play_no_trash_hosted
+      text: If the played card has been converted to a condition counter or otherwise hosted on a card while resolving its play abilities, it is not trashed. See also {ref:rule_card_to_counter}.
+      new:
+    - rule: rule_play_not_trashed_until
+      text: If the played card has an ability indicating that it is not trashed until a certain effect occurs, instead of trashing it, a lingering effect is created with a duration that expires as the indicated effect occurs. See also {ref:sec_lingering_effects}.
+      new:
+    - rule: rule_play_no_trash_if_play_effect_will_rfg
+      text: If an ability that plays an event or operation also contains the nested conditional ability "After it resolves, remove it from the game.", the event or operation is not trashed. The card remains in the play area until the conditional ability removes it from the game.
+      new:
+  
   - subsection: sec_steps_playing
     steps:
     toc:
@@ -353,7 +373,7 @@ sections:
     - rule: rule_steps_playing_resolve_play_abilities
       text: Resolve the play abilities of the card.
     - rule: rule_steps_playing_trash_played_card
-      text: Trash the card if it is still in the play area.
+      text: Trash the card {n}if applicable{/n}.
     - rule: rule_steps_playing_after_resolve_condition
       text: Conditions related to after resolving or finishing resolving an event or operation are met.
     - rule: rule_steps_playing_complete

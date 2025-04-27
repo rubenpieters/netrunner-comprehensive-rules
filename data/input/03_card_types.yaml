@@ -102,9 +102,9 @@ sections:
     - rule: rule_operation_condition
       text: Some operations have the subtype {subtype:condition}. As part of their abilities, {subtype:condition} operations convert themselves into {subtype:condition} counters and install themselves. A {subtype:condition} operation cannot be installed by an install effect; it can only be installed through its own conversion ability. See {ref:rule_card_to_counter}.
     - rule: rule_operation_current
-      text: Some operations have the subtype {subtype:current}. As part of their abilities, {subtype:current} operations prevent themselves from being trashed until another {subtype:current} operation or event is played or the Runner steals an agenda. When one of these occurs, the active {subtype:current} is trashed during the next checkpoint. See {ref:sec_checkpoints}.
+      text: Some operations have the subtype {subtype:current}. As part of their abilities, {subtype:current} operations prevent themselves from being trashed until another {subtype:current} operation or event is played or the Runner steals an agenda. When one of these occurs, the active {subtype:current} is trashed during the next checkpoint. See {n}{ref:rule_play_not_trashed_until}{/n}.
     - rule: rule_operation_lockdown
-      text: Some operations have the subtype {subtype:lockdown}. As part of their abilities, {subtype:lockdown} operations prevent themselves from being trashed until the start of the Corp's next turn after the operation is played. Once the Corp's turn begins, this effect expires and the operation is trashed during the next checkpoint, before any conditional abilities marked pending at that time can be triggered. See {ref:sec_checkpoints}.
+      text: Some operations have the subtype {subtype:lockdown}. As part of their abilities, {subtype:lockdown} operations prevent themselves from being trashed until the start of the Corp's next turn after the operation is played. Once the Corp's turn begins, this effect expires and the operation is trashed during the next checkpoint, before any conditional abilities marked pending at that time can be triggered. See {n}{ref:rule_play_not_trashed_until}{/n}.
   - rule: rule_operation_play_cost
     text: Operations are the only Corp cards with play costs. An operation's play cost is the number of credits the Corp must spend to play the operation. See {ref:sec_playing_events_and_operations}.
   - rule: rule_operation_trash_cost
@@ -145,7 +145,7 @@ sections:
     - rule: rule_event_condition
       text: One event, {card:On the Lam}, has the subtype {subtype:condition}. As part of its abilities, it converts itself into a condition counter and installs itself. This event cannot be installed by an install effect; it can only be installed through its own conversion ability. See {ref:rule_card_to_counter}.
     - rule: rule_event_current
-      text: Some events have the subtype {subtype:current}. As part of their abilities, {subtype:current} events prevent themselves from being trashed until another {subtype:current} operation or event is played or the Corp scores an agenda. When one of these occurs, the active {subtype:current} is trashed during the next checkpoint. See {ref:sec_checkpoints}.
+      text: Some events have the subtype {subtype:current}. As part of their abilities, {subtype:current} events prevent themselves from being trashed until another {subtype:current} operation or event is played or the Corp scores an agenda. When one of these occurs, the active {subtype:current} is trashed during the next checkpoint. See {n}{ref:rule_play_not_trashed_until}{/n}.
   - rule: rule_event_play_cost
     text: Events are the only Runner cards with play costs. An event's play cost is the number of credits the Runner must spend to play the event. See {ref:sec_playing_events_and_operations}.
 

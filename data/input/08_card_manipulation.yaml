@@ -201,7 +201,7 @@ sections:
     - rule: rule_upgrade_root_central_remote_server
       text: The Corp always installs an upgrade into the root of a central or remote server.
     - rule: rule_ice_outermost_position
-      text: Unless otherwise indicated, the Corp always installs ice into the outermost position protecting the destination server.
+      text: Unless otherwise indicated, the Corp always installs ice {n}to{/n} the outermost position protecting the destination server. {n}See {ref:rule_create_position}.{/n}
 
   - subsection: rule_cards_in_server_cannot_be_rearranged
     text: |-

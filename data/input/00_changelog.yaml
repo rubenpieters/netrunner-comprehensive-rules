@@ -12,6 +12,9 @@ changelog:
 - text: Update {ref:rule_symbol_mu} to better represent how the [MU] symbol is used in card text.
 - text: Update {ref:sec_memory} to better define phrases like "unused [MU]" and "[MU] is full". Add {ref:rule_memory_restricted_mu} to codify abilities that restrict how [MU] can be used.
 - text: Update list of subtypes {ref:rule_subtypes_list} to add {subtype:unsubstantiated} and expand {subtype:deep net} to new card types.
+- text: Overhaul {ref:sec_position}. Ice positions are now handled as an explicit game construct, which simplifies cases where ice movements affect the progression of a run. If the Runner is occupying the position of a piece of ice that is uninstalled or moved, that position now continues to exist until the Runner leaves it normally, rather than immediately "collapsing" the server and forcing the current timing step of the run to be changed.
+- text: Add {ref:step_checkpoint_vacant_position} to clean up empty positions during checkpoints.
+- text: Add a paid ability window in the Initiation Phase at {ref:step_initiation_paw}. Add {ref:step_runner_position} to set the initial position of the Runner immediately before the new paid ability window.
 - text: Add an explicit timing step for "action phase" ends abilities to meet their trigger condition, at {ref:step_corp_turn_action_phase_end} for the Corp's turn and {ref:step_runner_turn_action_phase_end} for the Runner's turn.
 - text: Update {ref:rule_forced_action_phase_end} to cover how {subtype:terminal} operations interact with "action phase ends" trigger conditions.
 - text: Add {ref:rule_end_action_phase_outside_action_phase} to address the case where a {subtype:terminal} operation resolves outside of its controller's action phase.

@@ -129,7 +129,10 @@ B = TypeVar('B')
 def parse_id(obj: Any, id_type: str) -> str:
   if not id_type in obj:
     raise Exception(f'Expected id type: {id_type}, instead got fields: {str(obj.keys())}')
-  return obj[id_type]
+  id = obj[id_type]
+  if id is None or id.strip() == '':
+    raise Exception(f'Empty id of type {id_type}')
+  return id
 
 def parse_str_field(obj: Any, field_type: str) -> str:
   return parse_str_field_generic(obj, field_type, lambda x: x)

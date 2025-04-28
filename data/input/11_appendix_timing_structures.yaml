@@ -35,6 +35,7 @@ sections:
         - text: If no, go to (3).
         - text: If yes, the Corp takes an action.
       - text: Return to (a).
+      - text: The Corp's action phase ends.
     - text: Discard Phase
       elements:
       - text: The Corp discards cards.
@@ -64,6 +65,7 @@ sections:
         - text: If no, go to (2).
         - text: If yes, the Runner takes an action.
       - text: Return to (e).
+      - text: The Runner's action phase ends.
     - text: Discard Phase
       elements:
       - text: The Runner discards cards.
@@ -84,6 +86,9 @@ sections:
       - text: The Runner announces the attacked server.
       - text: The Runner gains bad publicity credits.
       - text: The run begins.
+      - text: The Runner's position is set to the outermost ice, if any.
+      - text: |-
+          Paid ability window: (P) (R).
       - text: Is there ice protecting server?
         elements:
         - text: If yes, go to (2).

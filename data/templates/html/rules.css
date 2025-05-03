@@ -260,3 +260,25 @@ a.RuleLink:link, a.RuleLink:visited {
       display:none;
   }
 }
+
+.Thumbnail:hover {
+  background-color: transparent;
+  z-index: 50;
+}
+
+.Thumbnail span {
+  position: fixed;
+  background-color: transparent;
+  visibility: hidden;
+  text-decoration: none;
+}
+
+.Thumbnail span img {
+  border-width: 0;
+  padding: 4px;
+  border-radius: 15px;
+}
+
+.Thumbnail:hover span {
+  visibility: visible;
+}

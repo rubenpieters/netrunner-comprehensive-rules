@@ -42,3 +42,10 @@ elems.forEach(a => {
         }, 1000);
     }
 })
+
+jQuery(document).ready(function($){
+    $('.Thumbnail').hover(function(){
+        const data_src = $(this).children('span').children('img').attr('data-src');
+        $(this).children('span').children('img').attr('src', data_src);
+    });
+});

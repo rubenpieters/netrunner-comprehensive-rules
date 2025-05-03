@@ -1,5 +1,8 @@
 from dataclasses import dataclass
 
+import argparse
+import os
+
 short_month_to_full = {
   'XX': 'XX',
   '01': 'January',
@@ -19,6 +22,8 @@ short_month_to_full = {
 @dataclass
 class Config:
   annotated: bool
+  generate_nrdb_info: bool
+  nrdb_info_folder: str
   effective_year: str
   effective_month: str
   effective_day: str
@@ -26,11 +31,11 @@ class Config:
   output_types: list[str]
   
   def not_annotated(self):
-    return Config(False, self.effective_year, self.effective_month, self.effective_day, self.php_base_path, self.output_types)
+    return Config(False, self.generate_nrdb_info, self.nrdb_info_folder, self.effective_year, self.effective_month, self.effective_day, self.php_base_path, self.output_types)
   
   def without_opengraph(self):
     without_opengraph = list(filter(lambda x: x != "opengraph", self.output_types))
-    return Config(self.annotated, self.effective_year, self.effective_month, self.effective_day, self.php_base_path, without_opengraph)
+    return Config(self.annotated, self.generate_nrdb_info, self.nrdb_info_folder, self.effective_year, self.effective_month, self.effective_day, self.php_base_path, without_opengraph)
 
   def version_string(self):
     return f'{self.effective_year[2:]}.{self.effective_month}'
@@ -45,3 +50,8 @@ def parse_output_types(arguments: list[str]):
   if "all" in lowercase_arguments:
     return ["pdf", "web", "opengraph", "json"]
   return list(filter(lambda x: x == "pdf" or x == "web" or x == "opengraph" or x == "json", lowercase_arguments))
+
+def validate_nrdb_info_folder(file: str):
+    if not os.path.exists(file):
+        raise argparse.ArgumentTypeError(f"{file} does not exist")
+    return file

@@ -65,7 +65,7 @@ sections:
       text: Actions a player performs are different if each of them is initiated from a different basic action or card ability. Instances of equivalent abilities on different cards are still different actions.
       examples: 
       - text: |-
-          The Corp, playing {card:MirrorMorph: Endless Iteration}, plays {card: Hedge Fund} as the first action of their turn, then plays {card:Lateral Growth}. Even though two different cards were played, both times the Corp used the basic action to "Play 1 operation from HQ". Since their first two actions were the same, the Corp will not be able to trigger the ability on MirrorMorph this turn.
+          The Corp, playing {card:MirrorMorph: Endless Iteration}, plays {card:Hedge Fund} as the first action of their turn, then plays {card:Lateral Growth}. Even though two different cards were played, both times the Corp used the basic action to "Play 1 operation from HQ". Since their first two actions were the same, the Corp will not be able to trigger the ability on MirrorMorph this turn.
   - subsection: rule_corp_actions
     text: Corp Actions
     rules:

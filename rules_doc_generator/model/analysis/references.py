@@ -1,4 +1,4 @@
-from rules_doc_generator.model.text import (RefInfo)
+from rules_doc_generator.model.model_data import (RefInfo)
 from rules_doc_generator.model.section import (ModelElement, Document, Chapter, Section, SubSection, Rule, SubRule, TimingStructureElement)
 
 import string

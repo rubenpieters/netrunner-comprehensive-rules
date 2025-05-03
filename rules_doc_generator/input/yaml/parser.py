@@ -4,6 +4,7 @@ import yaml
 
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link, NewStart, NewEnd)
 from rules_doc_generator.model.section import (Rule, SubRule, SubSection, Section, Chapter, Document, SectionElement, TimingStructure, TimingStructureElement)
+from rules_doc_generator.model.nrdb_info import (NrdbInfo)
 
 # Parsing model elements.
 
@@ -164,6 +165,9 @@ def parse_boolean(obj: Any, field_type: str) -> bool:
     return True
   return False
 
+def parse_int(obj: Any, field_type: str) -> int:
+  return parse_with_default(obj, field_type, -1, lambda x: int(x))
+
 def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callable[[Any, str], A]) -> A:
   if not field_type in obj:
     return default
@@ -218,6 +222,11 @@ def yaml_to_document() -> Document:
     ]
   chapters = list(map(read_chapter_from_file, chapter_files))
   return Document(changelog, chapters)
+
+def read_nrdb_info_from_file() -> dict[str, str]:
+  with open(f'generated/nrdb/nrdb.yaml', "r", encoding="utf8") as stream:
+    nrdb_info = load_yaml(stream)
+    return nrdb_info
 
 if __name__ == "__main__":
   doc = yaml_to_document()

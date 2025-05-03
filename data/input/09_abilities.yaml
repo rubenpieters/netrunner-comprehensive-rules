@@ -28,7 +28,7 @@ sections:
     - rule: rule_chain_reaction
       text: While resolving an ability, other abilities can meet their conditions. When this happens, a "chain reaction" is created. The current instruction finishes resolving, then more recent abilities fully resolve before the next instruction of the original ability. If any other abilities meet their conditions while resolving the "chained" abilities, then another "chain" is created before continuing to resolve the previous chained abilities. Resolve each set of chained abilities one at a time, from the most recently met condition to the oldest, before continuing with the original ability that started the chain reaction.
       examples:
-      - text: The Runner's identity is {card:Armand "Geist" Walker}. They access a {card:Snare!} from R&D with only 2 cards in their grip. Before taking a tag or suffering any net damage, the Runner triggers {card:Decoy}'s ability in order to avoid the tag. Using the {card:Decoy} meets the trigger condition of {card:Geist}'s ability. As this is the most recent ability to meet its trigger condition, {card:Geist}'s ability must resolve first, before {card:Decoy} avoids the tag and before {card:Snare!} finishes resolving. The Runner draws a card from {card:Geist}, avoids the tag from {card:Snare!} with {card:Decoy}, and then finally suffers (and survives) the 3 net damage from {card:Snare!}.
+      - text: The Runner's identity is {card:Armand "Geist" Walker}. They access a {card:Snare!} from R&D with only 2 cards in their grip. Before taking a tag or suffering any net damage, the Runner triggers {card:Decoy}'s ability in order to avoid the tag. Using the {card:Decoy} meets the trigger condition of {card:Armand "Geist" Walker}'s ability. As this is the most recent ability to meet its trigger condition, {card:Armand "Geist" Walker}'s ability must resolve first, before {card:Decoy} avoids the tag and before {card:Snare!} finishes resolving. The Runner draws a card from {card:Armand "Geist" Walker}, avoids the tag from {card:Snare!} with {card:Decoy}, and then finally suffers (and survives) the 3 net damage from {card:Snare!}.
     - rule: rule_is_resolving
       text: An ability "is resolving" from when its first instruction becomes imminent until its last instruction has finished resolving. See also {ref:sec_interrupts_replacements}. An event or operation "is resolving" throughout {ref:rule_steps_playing_resolve_play_abilities} of playing that event or operation.
       examples:
@@ -546,7 +546,7 @@ sections:
       text: Any other delayed conditional ability exists until the next time it resolves, after which it expires.
       examples:
       - text: |-
-          {card:Joshua B}'s ability allows the Runner to gain [click]. If they do, it creates a delayed conditional ability that is independent of {card:Joshua B} itself, which will meet its trigger condition only once, when that turn ends. After that ability resolves, the game no longer maintains the lingering effect creating the ability.
+          {card:Joshua B.}'s ability allows the Runner to gain [click]. If they do, it creates a delayed conditional ability that is independent of {card:Joshua B.} itself, which will meet its trigger condition only once, when that turn ends. After that ability resolves, the game no longer maintains the lingering effect creating the ability.
 
   - subsection: rule_references_to_trigger_conditions
     text: |-
@@ -640,7 +640,7 @@ sections:
     - rule: rule_subroutines_static_ability_decrease
       text: If the number of subroutines granted to a piece of ice by its own static ability decreases, subroutines are lost beginning with the last subroutine the ice previously had from the same ability and working backwards.
       examples:
-      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:{card:Ashigaru}}. The Runner breaks the first subroutine, then uses {card:Utopia Shard} to force the Corp to discard 2 cards. {card:Ashigaru} correspondingly loses its last 2 subroutines, leaving behind the subroutine that was already broken.
+      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:Ashigaru}. The Runner breaks the first subroutine, then uses {card:Utopia Shard} to force the Corp to discard 2 cards. {card:Ashigaru} correspondingly loses its last 2 subroutines, leaving behind the subroutine that was already broken.
 
   - rule: rule_subroutines_static_ability_remove_subroutines
     text: One card, {card:Hive}, has a static ability that removes its own printed subroutines. Subroutines are lost to this ability beginning with the last printed subroutine and working backwards.

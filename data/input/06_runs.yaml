@@ -35,7 +35,7 @@ sections:
     - rule: rule_run_phase_after
       text: If a condition refers to encountering a piece of ice "after" an approach or passing a piece of ice "after" an encounter, then that condition is only met by the indicated phases or steps occurring in direct sequence according to the standard progression of the run.
       examples:
-      - text: The Runner uses {card:Inversificator} to break the subroutine on a {card:Miraju} that is protecting Archives. When the encounter ends, {card:Miraju}'s ability creates a replacement effect so that the Runner moves to the outermost position of Archives instead of passing {card:Miraju}. Because the ice is not passed, {card:Inversificator}'s ability does not meet its trigger condition. Later, the Runner encounters the same {card:Miraju} again and does not break its subroutine. When this encounter ends, the Runner passes {card:Miraju}. Even though the Runner has used {card:Inversificator} to fully break {card:Miraju} during an encounter earlier in the run, {card:Inversificator}'s trigger condition is not met when the Runner passes {card:Miraju} because the Runner is not passing it after the relevant encounter.
+      - text: The Runner uses {card:Inversificator} to break the subroutine on a {card:Mirāju} that is protecting Archives. When the encounter ends, {card:Mirāju}'s ability creates a replacement effect so that the Runner moves to the outermost position of Archives instead of passing {card:Mirāju}. Because the ice is not passed, {card:Inversificator}'s ability does not meet its trigger condition. Later, the Runner encounters the same {card:Mirāju} again and does not break its subroutine. When this encounter ends, the Runner passes {card:Mirāju}. Even though the Runner has used {card:Inversificator} to fully break {card:Mirāju} during an encounter earlier in the run, {card:Inversificator}'s trigger condition is not met when the Runner passes {card:Mirāju} because the Runner is not passing it after the relevant encounter.
   - rule: rule_end_the_run
     text: To {term:end the run} is to halt the Runner's progress toward the server. When an effect ends the run, the current phase of the run ends without following any of its remaining steps, and before completing open priority windows. The game immediately moves from the current timing point to {ref:rule_sec_run_run_ends_phase}, the Run Ends Phase.
   - subsection: rule_jacking_out
@@ -310,7 +310,7 @@ sections:
     - rule: rule_run_ends_close_paws
       text: If a paid ability window was open when the run was ended, the window closes. No player can trigger further paid abilities or resolve other options the window would normally allow (such as rezzing cards).
       examples:
-      - text: The Corp spends a counter from a scored {card:Nisei Mk II} to end the run. Once this happens, the Runner does not have an opportunity to use their bad publicity credits from this run to pay for using {card:Self-Modifying Code}.
+      - text: The Corp spends a counter from a scored {card:Nisei MK II} to end the run. Once this happens, the Runner does not have an opportunity to use their bad publicity credits from this run to pay for using {card:Self-modifying Code}.
     - rule: rule_run_ends_close_reaction_window
       text: If the run was ended during a reaction window opened due to a phase beginning, the reaction window closes, as per {ref:rule_reaction_window_closing_timing_structure}. No other pending abilities are resolved.
       examples:

@@ -134,7 +134,7 @@ sections:
       text: No checkpoints occur during the sequence of swaps. An ability that meets its condition while ice is being arranged will become pending at the end of resolving the instruction in which arranging ice is taking place.
   
   - rule: rule_arrange_secretly
-    text: When a player arranges cards from the top of their deck or their opponent's deck, that player sets those cards aside facedown, secretly puts them in the order of their choice, and returns them to the top of that deck. They do not declare which cards moved to which positions. {n}If the player is arranging an opponent's deck, that opponent cannot look at the set-aside cards during this process.{/n} All of the arranged cards become new objects after they are arranged, even cards that remain in the same location in the deck.
+    text: When a player arranges cards from the top of their deck or their opponent's deck, that player sets those cards aside facedown, secretly puts them in the order of their choice, and returns them to the top of that deck. They do not declare which cards moved to which positions. If the player is arranging an opponent's deck, that opponent cannot look at the set-aside cards during this process. All of the arranged cards become new objects after they are arranged, even cards that remain in the same location in the deck.
 
 - section: sec_drawing_cards
   text: Drawing Cards
@@ -201,7 +201,7 @@ sections:
     - rule: rule_upgrade_root_central_remote_server
       text: The Corp always installs an upgrade into the root of a central or remote server.
     - rule: rule_ice_outermost_position
-      text: Unless otherwise indicated, the Corp always installs ice {n}to{/n} the outermost position protecting the destination server. {n}See {ref:rule_create_position}.{/n}
+      text: Unless otherwise indicated, the Corp always installs ice to the outermost position protecting the destination server. See {ref:rule_create_position}.
 
   - subsection: rule_cards_in_server_cannot_be_rearranged
     text: |-
@@ -284,11 +284,9 @@ sections:
 
   - subsection: rule_install_and_rez
     text: Some abilities instruct the Corp to "install and rez" a card. To resolve this instruction, the Corp first installs the card normally. After the installation is complete, the Corp rezzes the card. See also {ref:rule_reveal_for_install_and_rez}.
-    new:
     rules:
     - rule: rule_install_and_rez_one_at_a_time
       text: Some "install and rez" abilities affect more than 1 card. In this case, each card is rezzed directly after it is installed, as part of the same instruction and before the next installation begins. See also {ref:rule_install_one_at_a_time}.
-      new:
 
   - subsection: sec_steps_installing
     steps:
@@ -313,7 +311,7 @@ sections:
   rules:
   - rule: rule_playing
     text: |-
-      {term:Playing} an event or operation {n}is a process in which that card is placed into the play area, its play abilities are resolved, and then the card is trashed{/n}. Agendas, assets, ice, upgrades, hardware, programs, resources, and identities are never played.
+      {term:Playing} an event or operation is a process in which that card is placed into the play area, its play abilities are resolved, and then the card is trashed. Agendas, assets, ice, upgrades, hardware, programs, resources, and identities are never played.
 
   - subsection: rule_playing_play_cost
     text: Normally, playing an operation or event requires paying its play cost. Abilities that initiate playing a card may ignore the play cost or require it to be paid.
@@ -337,23 +335,18 @@ sections:
 
   - subsection: rule_play_no_trash
     text: In certain circumstances, a played card is not trashed after resolving it.
-    new:
     rules:
     - rule: rule_play_no_trash_left_play_area
       text: If the played card is no longer in the play area when {ref:rule_steps_playing_trash_played_card} is reached, it is not trashed.
-      new:
       examples:
       - text: The Runner plays {card:Ashen Epilogue} and resolves its play abilities. Its last ability removes it from the game.
-        new:
     - rule: rule_play_no_trash_hosted
       text: If the played card has been converted to a condition counter or otherwise hosted on a card while resolving its play abilities, it is not trashed. See also {ref:rule_card_to_counter}.
-      new:
     - rule: rule_play_not_trashed_until
       text: If the played card has an ability indicating that it is not trashed until a certain effect occurs, instead of trashing it, a lingering effect is created with a duration that expires as the indicated effect occurs. See also {ref:sec_lingering_effects}.
-      new:
     - rule: rule_play_no_trash_if_play_effect_will_rfg
       text: If an ability that plays an event or operation also contains the nested conditional ability "After it resolves, remove it from the game.", the event or operation is not trashed. The card remains in the play area until the conditional ability removes it from the game.
-      new:
+
   
   - subsection: sec_steps_playing
     steps:
@@ -373,7 +366,7 @@ sections:
     - rule: rule_steps_playing_resolve_play_abilities
       text: Resolve the play abilities of the card.
     - rule: rule_steps_playing_trash_played_card
-      text: Trash the card {n}if applicable{/n}.
+      text: Trash the card if applicable.
     - rule: rule_steps_playing_after_resolve_condition
       text: Conditions related to after resolving or finishing resolving an event or operation are met.
     - rule: rule_steps_playing_complete

@@ -145,19 +145,16 @@ sections:
     - rule: rule_terminal_completion
       text: Any currently resolving actions or abilities cease resolving and are considered complete.
     - rule: rule_terminal_checkpoint
-      new:
       text: Conditions related to the action phase ending are met, and a checkpoint occurs. A reaction window created by this checkpoint is still considered to be taking place in the action phase, but players cannot take actions during this window.
     - rule: rule_terminal_to_discard_phase
-      new:
       text: After completing any reaction windows opened by the checkpoint from {ref:rule_terminal_checkpoint}, the game proceeds to the active player's discard phase.
   - rule: rule_end_action_phase_outside_action_phase
-    new:
     text: If an effect attempts to end a player's action phase during their draw phase, their discard phase, or another player's turn, this effect does nothing.
 - section: sec_discard_phase
   text: Discard Phase
   rules:
   - rule: rule_discard_phase_definition
-    text: The discard phase is the last phase of each player's turn. {n}It contains the discard step{/n} and the formal end of that player's turn.
+    text: The discard phase is the last phase of each player's turn. It contains the discard step and the formal end of that player's turn.
   - subsection: rule_discard_phase_discarding
     text: |-
       {term: discarding} is the act by which a player moves a card to their discard pile during their discard phase if they have exceeded their maximum hand size.
@@ -176,19 +173,15 @@ sections:
       text: Each point of core damage the Runner suffers permanently reduces their maximum hand size by 1 card. See {ref:sec_damage}. Other abilities can modify a player's maximum hand size directly.
   - subsection: rule_discard_step
     text: The {term:discard step} is {ref:step_corp_turn_discard} for the Corp, and {ref:step_runner_turn_discard} for the Runner. In that step, the active player discards cards to reach their maximum hand size.
-    new:
     rules:
     - rule: rule_runner_discard_step
       text: Before the Runner discards cards in their discard step, they must check for a flatline. See {ref:rule_flatline}.
-      new:
     - rule: rule_discard_step_noop
       text: If the number of cards in the active player's hand is less than or equal to their maximum hand size, nothing else happens in this step.
-      new:
     - rule: rule_discarding_process
       text: If the number of cards in the active player's hand is greater than their maximum hand size, they discard a number of cards from their hand equal to the difference. The discarding player chooses which of their cards to discard, and the chosen cards are all discarded simultaneously.
-      new:
     - rule: rule_skip_discard_step
-      text: If an effect instructs a player to {n}skip their discard step, the game proceeds directly from the start of their discard phase to the step following the discard step.{/n} They will not check their hand size or discard cards.
+      text: If an effect instructs a player to skip their discard step, the game proceeds directly from the start of their discard phase to the step following the discard step. They will not check their hand size or discard cards.
 
 - section: sec_steps_corp_turn
   text: Steps of the Corp's Turn
@@ -223,7 +216,6 @@ sections:
       text: Return to (a).
     - rule: step_corp_turn_action_phase_end
       text: The Corp's action phase formally ends. Conditions related to the action phase ending are met.
-      new:
     - rule: step_corp_turn_action_phase_complete
       text: The Corp's action phase is complete. Play proceeds to the Corp's discard phase.
   - subsection: subsec_corp_discard_phase
@@ -233,7 +225,6 @@ sections:
     rules:
     - rule: step_corp_turn_discard
       text: The Corp discards cards to reach their maximum hand size.
-      new:
     - rule: step_corp_turn_discard_phase_paw
       text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
     - rule: step_corp_turn_lose_unspent_clicks
@@ -267,7 +258,6 @@ sections:
       text: Return to (e).
     - rule: step_runner_turn_action_phase_end
       text: The Runner's action phase formally ends. Conditions related to the action phase ending are met.
-      new:
     - rule: step_runner_turn_action_phase_complete
       text: The Runner's action phase is complete. Play proceeds to the Runner's discard phase.
   - subsection: subsec_runner_discard_phase
@@ -277,7 +267,6 @@ sections:
     rules:
     - rule: step_runner_turn_discard
       text: The Runner discards cards to reach their maximum hand size.
-      new:
     - rule: step_runner_turn_discard_phase_paw
       text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
     - rule: step_runner_turn_lose_unspent_clicks

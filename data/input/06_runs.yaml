@@ -52,57 +52,40 @@ sections:
   rules:
   - subsection: rule_position
     text: Each server has a sequence of {term:positions} that assign an order to ice protecting that server. A piece of ice protecting a server always occupies exactly 1 position in that server's sequence at a time.
-    new:
     rules:
     - rule: rule_hosted_ice_has_no_position
       text: A piece of ice that is hosted on another card is not protecting a server and does not occupy a position, regardless of whether the ice is installed.
-      new:
   - subsection: rule_create_position
     text: When a piece of ice is installed protecting a server or an installed piece of ice is moved, a new position is created for that ice. For ice being installed, the position is created when the Corp declares an install destination for the ice ({ref:rule_steps_installing_destination}), and the ice occupies that position once the ice becomes installed ({ref:rule_steps_installing_become_installed}). For installed ice being moved, the position is created when the movement happens, and the ice occupies that position immediately.
-    new:
     rules:
     - rule: rule_create_position_outermost
-      new:
       text: If a piece of ice is being installed in or moved to the outermost position protecting a server, the new position is outward from the outermost already-existing position. If an instruction to install a piece of ice does not explicitly specify otherwise, the ice is installed in the outermost position.
     - rule: rule_create_position_innermost
-      new:
       text: If a piece of ice is being installed in or moved to the innermost position protecting a server, the new position is inward from the innermost already-existing position.
     - rule: rule_create_position_directly_inward
-      new:
       text: If a piece of ice is being installed "directly inward" from another piece of ice, the new position is inward from that ice's position, and outward from the next already-existing position inward, if there is one.
     - rule: rule_create_position_any_position
-      new:
       text: If a piece of ice is being installed "in any position", the new position can be created outward from all existing positions, inward from all existing positions, or between any two existing consecutive positions, as the Corp chooses.
     - rule: rule_create_position_mutate
-      new:
       text: One card, {card:Mutate}, has an ability that installs a piece of ice in the "same position" as a particular piece of ice that was previously trashed. This is a different usage of "same position" from that described in {ref:rule_count_positions}. For this installation, the ice is installed protecting the same server the trashed ice was protecting, and the new position is created at the same place in that server's sequence of positions as the position the trashed ice had.
     - rule: rule_create_position_swap
-      new:
       text: If a piece of ice is swapped with a piece of ice protecting a server, no new position is created. The first ice will occupy the position previously held by the second ice (and vice-versa, if the first piece of ice was also protecting a server).
-      
   - rule: rule_count_positions
-    new:
     text: Some abilities refer to ice in the "same position" protecting different servers. Two pieces of ice occupy the "same position" if their respective servers have the same number of positions inward from their respective positions.
     examples:
     - text: A server has 2 pieces of ice protecting it, and a copy of {card:Rook} is hosted on the outermost of those 2 pieces of ice. {card:Rook}'s ability can move it to the 2nd piece of ice protecting any server, counted starting from the innermost piece of ice and moving outward. The {card:Rook} cannot be moved to a server protected by only 1 piece of ice.
-      new:
     - text: The Runner passes a piece of ice in the innermost position protecting a server, and uses {card:Slipstream} to move to another server. Since positions are compared working from the innermost position, the Runner will be able to approach the innermost ice protecting any server, regardless of how many other pieces of ice are outward from that ice.
-      new:
   - rule: rule_destroy_position
-    new:
     text: If a piece of ice leaves its position, except by being swapped with another piece of ice, its former position ceases to exist. This happens during {ref:step_checkpoint_vacant_position} of the next checkpoint, unless the Runner is in that position, in which case the position continues to exist until the Runner moves to another position or ceases to have a position.
   - subsection: rule_position_runner
     text: During a run, the Runner occupies the attacked server's positions.
-    new:
     rules:
     - rule: rule_position_initial
       text: The Runner enters the outermost position protecting the attacked server at {ref:step_runner_position} of the Initiation Phase.
-      new:
     - rule: rule_position_progression
       text: The Runner progresses through the positions of the attacked server in order. While the Runner occupies a position, they approach, encounter (if the ice is rezzed), and pass the ice in that position, then they proceed to the next position moving inward, until they complete this process for the innermost position or the run is ended.
-      new:
     - rule: rule_no_position_after_innermost_ice
-      text: Once the Runner leaves the {n}innermost position{/n} protecting a server, they no longer have a position. This occurs at {ref:step_move_position} of the Movement Phase. However, abilities can still move the Runner to a position later in that phase.
+      text: Once the Runner leaves the innermost position protecting a server, they no longer have a position. This occurs at {ref:step_move_position} of the Movement Phase. However, abilities can still move the Runner to a position later in that phase.
     - rule: rule_no_position_after_approach_server
       text: During the Success Phase and the Run Ends Phase, the Runner has no position and can no longer move to a position.
       examples:
@@ -111,40 +94,33 @@ sections:
       text: The Runner does not have a position while they are not engaged in a run, nor do they maintain their position from one run to the next.
   - subsection: rule_ice_change_can_affect_position
     text: The Runner's current position is a specific element of the sequence of positions, not an index into that sequence. Adding or removing other positions protecting the attacked server does not affect the Runner's position.
-    new:
     rules:
     - rule: rule_ice_change_outward
-      text: If a position outward from the Runner's current position {n}is added to the attacked server{/n}, the Runner will normally not need to approach or encounter the new piece of ice to reach the server.
+      text: If a position outward from the Runner's current position is added to the attacked server, the Runner will normally not need to approach or encounter the new piece of ice to reach the server.
       examples:
       - text: The Runner runs a server protected by 2 pieces of ice. The Runner approaches the outermost ice, and the Corp rezzes {card:Drafter}. During the subsequent encounter, the Corp resolves {card:Drafter}'s second subroutine, installing a new piece of ice protecting the attacked server and trashing both of the other pieces of ice in the process. The new ice is installed to the outermost position protecting the server, which is outward from the Runner's current position, so the Runner will not approach the new piece of ice. This is true even though the number of positions between the new ice and the server is less than the number of positions that were previously between the Runner and the server.
-        new:
     - rule: rule_ice_change_inward
-      text: If a position inward from the Runner's current position {n}is added to or removed from the attacked server, the ice the Runner will need to approach and/or encounter changes accordingly.{/n}
+      text: If a position inward from the Runner's current position is added to or removed from the attacked server, the ice the Runner will need to approach and/or encounter changes accordingly.
       examples:
       - text: The Runner encounters {card:Brân 1.0} and breaks its last two subroutines. {card:Brân 1.0}'s first subroutine resolves and the Corp installs a new piece of ice in the next inward position protecting the server. The Runner will have to approach that new piece of ice later in this run because its position is inward from their current position.
-        new:
   - subsection: rule_ice_change_current_position
-    text: Changes to the piece of ice in the Runner's current position can affect the progression of the run, but they do so differently {n}during an encounter than outside of an encounter.{/n}
+    text: Changes to the piece of ice in the Runner's current position can affect the progression of the run, but they do so differently during an encounter than outside of an encounter.
     rules:
     - rule: rule_ice_change_approach_uninstall_move
-      text: If a piece of ice is uninstalled or moved to another position (protecting this or another server) while it is being approached, {n}the approach ends and the run continues to the Movement Phase.{/n}
+      text: If a piece of ice is uninstalled or moved to another position (protecting this or another server) while it is being approached, the approach ends and the run continues to the Movement Phase.
     - rule: rule_ice_change_approach_swap
       text: If a piece of ice currently being approached is swapped with another piece of ice, the Runner remains in their current position and the run remains in the Approach Ice Phase. The Runner is now approaching the new piece of ice occupying that position. Trigger conditions related to a piece of ice being approached are not met for the new ice.
-      new:
     - rule: rule_ice_change_encounter_uninstall_derez
-      text: If a piece of ice is uninstalled or derezzed while it is being encountered, {n}the Encounter Phase ends and the run continues to the Movement Phase.{/n}
+      text: If a piece of ice is uninstalled or derezzed while it is being encountered, the Encounter Phase ends and the run continues to the Movement Phase.
     - rule: rule_ice_change_encounter_move_swap
       text: If a piece of ice currently being encountered moves to another position or is swapped with installed ice in another position, the Runner remains with the encountered ice and continues the run from that ice's new position.
       examples:
       - text: The Runner encounters {card:Bullfrog} as the innermost piece of ice protecting a remote server. {card:Bullfrog}'s subroutine resolves and it is moved to be the outermost piece of ice protecting Archives. The Runner is now running on Archives and continues the run from {card:Bullfrog}'s new position.
     - rule: rule_ice_change_during_movement
       text: If the piece of ice in the Runner's position is uninstalled, derezzed, moved, or swapped during the Initiation Phase or the Movement Phase, the Runner is not moved and the current timing step of the run does not change.
-      new:
       examples:
       - text: A run begins, and before the Runner approaches the outermost piece of ice protecting the attacked server, the Corp uses {card:Project Yagi-Uda} to swap that ice with another piece of ice. The Runner will approach the new ice.
-        new:
       - text: The Runner passes a piece of ice, and in {ref:step_before_jack_out_paw}, the Corp uses {card:Project Yagi-Uda} to swap that ice with another piece of ice. The Runner has still passed their position (but has not passed the new ice occupying that position) and will proceed to the next position in {ref:step_move_position}. They will not approach or encounter the new ice.
-        new:
   - subsection: rule_move_runner_to_position
     text: During a run, abilities can move the Runner directly to a position.
     rules:
@@ -350,13 +326,11 @@ sections:
       text: The run formally begins. Conditions related to the run beginning or initiating are met.
     - rule: step_runner_position
       text: The Runner's position is set corresponding to the outermost ice protecting the attacked server, if any.
-      new:
     - rule: step_initiation_paw
       text: A paid ability window occurs, in which players may use paid abilities and the Corp may rez non-ice cards. (P) (R)
-      new:
     - rule: step_initiation_complete
       text: |-
-        The Initiation Phase is complete. If the {n}Runner has a position corresponding to a piece of ice{/n}, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, {n}approaching the piece of ice corresponding to their position{/n}. If the {n}Runner has no position or if there is no ice in their position{/n}, proceed to {ref:rule_sec_run_movement_phase}, Movement Phase.
+        The Initiation Phase is complete. If the Runner has a position corresponding to a piece of ice, proceed to {ref:rule_sec_run_approach_ice_phase}, Approach Ice Phase, approaching the piece of ice corresponding to their position. If the Runner has no position or if there is no ice in their position, proceed to {ref:rule_sec_run_movement_phase}, Movement Phase.
   - subsection: rule_sec_run_approach_ice_phase
     steps:
     text: Approach Ice Phase

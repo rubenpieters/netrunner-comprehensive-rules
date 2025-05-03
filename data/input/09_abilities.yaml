@@ -18,7 +18,7 @@ sections:
     - rule: rule_ability_categories
       text: Each ability is categorized as either a static ability ({ref:sec_static_abilities}), a paid ability ({ref:sec_paid_abilities}), a conditional ability ({ref:sec_conditional_abilities}), a play ability ({ref:sec_play_abilities}), or a subroutine ({ref:sec_subroutines}).
     - rule: rule_interrupt_link
-      text: Abilities marked with [interrupt] or that include the {n}word "would"{/n} in their instructions have special timing rules that differ from other abilities. See {ref:sec_interrupts_replacements}.
+      text: Abilities marked with [interrupt] or that include the word "would" in their instructions have special timing rules that differ from other abilities. See {ref:sec_interrupts_replacements}.
     - rule: rule_instruction_link
       text: Each non-static ability contains one or more {term:instructions} that make up the ability's component steps. {ref:Rule_instruction} describes the nature and function of instructions in an ability's text. An instruction that the game is presently concerned with can be either {term:imminent} or {term:resolving}.
 
@@ -291,7 +291,7 @@ sections:
     rules:
     - rule: rule_ability_flag_types
       text: |-
-        There are {n}six{/n} ability flags: access, interface, [interrupt], persistent, threat N, and {n}once per turn{/n}.
+        There are six ability flags: access, interface, [interrupt], persistent, threat N, and once per turn.
     - rule: rule_access_flag
       text: The "access" flag appears on Runner card paid abilities and affects the timing for triggering those abilities. The Runner can use abilities with this flag only during the mid-access ability window at {ref:step_mid_access_ability} of accessing a card. See {ref:rule_mid_access_window}.
     - rule: rule_interface_flag
@@ -304,10 +304,8 @@ sections:
       text: The "threat N" flag can appear on any type of ability. Abilities with this flag are only active if the threat level is greater than or equal to N, regardless of {ref:rule_ability_active_inactive_source_card}. See {ref:rule_threat_level}.
     - rule: rule_once_per_turn_flag
       text: The "once per turn" flag appears on paid and conditional abilities. An ability with this flag can only be used once per turn. {ref:rule_using} explains what it means to "use" an ability.
-      new:
       examples:
       - text: The Runner is playing as {card:Zahya Sadeghi} and finishes a run on HQ, having accessed 1 card. They choose not to gain 1{c} with Zahya's ability. The ability was not "used", so its "once per turn" restriction has not been expended, even though the ability was able to resolve. The Runner can make another run later in the turn and gain credits with the ability.
-        new:
 
   - subsection: rule_ability_classification
     text: The five types of abilities can be identified by the types of text they are made of.
@@ -361,10 +359,9 @@ sections:
     - rule: rule_interface_ability
       text: If the "interface" flag appears before a paid ability's trigger cost, that ability is an Interface ability and is subject to the restrictions of icebreakers discussed in {ref:subsec_icebreakers}. Interface abilities do not have a special priority window type.
     - rule: rule_paid_ability_timing_restriction_reference
-      new:
       text: Certain paid abilities can only be used at times appropriate to their effects, as detailed in {ref:rule_paid_ability_effect_based_timing_restrictions}.
     - rule: rule_other_paid_abilities
-      text: A paid ability that is not an action, interrupt, or mid-access ability can be used during a paid ability window. Each such ability can be used an unlimited number of times as long as its cost is paid each time and any restrictions specified {n}in its text or by other abilities{/n} are observed.
+      text: A paid ability that is not an action, interrupt, or mid-access ability can be used during a paid ability window. Each such ability can be used an unlimited number of times as long as its cost is paid each time and any restrictions specified in its text or by other abilities are observed.
 
   - subsection: rule_paid_ability_optional
     text: Paid abilities are always optional. A paid ability and its source are considered used when the ability's trigger cost is paid.
@@ -386,25 +383,18 @@ sections:
 
   - subsection: rule_paid_ability_effect_based_timing_restrictions
     text: Paid abilities with certain effects can only be triggered in specific situations.
-    new:
     rules:
     - rule: rule_paid_ability_breaks_subroutines
-      new:
       text: A paid ability that contains an instruction that could break 1 or more subroutines can only be used during an encounter.
     - rule: rule_paid_ability_refers_to_approached_ice
-      new:
       text: A paid ability that refers to ice the Runner is approaching can only be used during the Approach Ice Phase of a run, and only if the ice being approached meets all stipulations used in referring to it.
       examples:
       - text: The Corp can only use the paid ability on {card:Project Wotan} while the Runner is approaching a rezzed piece of {subtype:bioroid} ice.
-        new:
     - rule: rule_paid_ability_refers_to_encountered_ice
-      new:
       text: A paid ability that refers to ice the Runner is encountering can only be used during an encounter with a piece of ice that meets all stipulations used in referring to it.
       examples:
       - text: The Runner cannot trigger the first ability on {card:Arruaceiras Crew} at an arbitrary time to give themself a tag. They can only use this ability during an encounter.
-        new:
       - text: The Runner can use the [trash] ability on {card:Abagnale} during an encounter with a {subtype:code gate}. They can only use the interface ability on {card:Abagnale} during an encounter with a {subtype:code gate} that {card:Abagnale} has sufficient strength to interface with.
-        new:
 
   - subsection: sec_steps_of_using_a_paid_ability
     text: Steps of Using a Paid Ability
@@ -464,9 +454,7 @@ sections:
       text: A conditional ability can only recognize its trigger condition occurring if the ability is active at the time the effect or game state that meets its trigger condition is processed by {ref:step_checkpoint_conditional_abilities} of a checkpoint. If a conditional ability becomes active after its trigger condition was met and a checkpoint has occurred, that ability does not become pending, even if a reaction window associated with that condition is open.
       examples:
       - text: The Corp is resolving their "turn begins" abilities, and they trash {card:Reaper Function} to do 2 net damage. This trashing allows the Corp to use the ability on {card:Ob Superheavy Logistics} to install and rez {card:Nico Campaign}. The Corp cannot take credits from {card:Nico Campaign} this turn because the "turn begins" trigger condition has already been processed.
-        new:
       - text: The Corp uses {card:Architect Deployment Test} to install and rez a copy of {card:Tranquility Home Grid}, which is the first card installed this turn. After completing the installation from this effect, the Corp pays the rez cost of {card:Tranquility Home Grid}. Since {card:Architect Deployment Test} specified that all costs are ignored, the rez cost is reduced to 0 (see {ref:rule_ignore_all_costs}), but this step still happens and is still followed by a checkpoint (see {ref:rule_cost_checkpoint_cost_zero}). This is the checkpoint that processes that a card was installed, but {card:Tranquility Home Grid} is not yet active and an instance of its ability cannot be created. After the checkpoint and any corresponding reaction window, the Corp finishes rezzing {card:Tranquility Home Grid} and it becomes active.
-        new:
     - rule: rule_condition_requirements_part_of_condition
       text: A conditional ability can only recognize its trigger condition occurring if all the stipulations and requirements listed in the trigger condition are met at the moment that the trigger condition would occur.
       examples:
@@ -498,10 +486,9 @@ sections:
       text: A conditional ability with a static condition can only be marked pending if no other instance of the same ability from the same source is already pending, imminent, or resolving.
     - rule: rule_conditional_ability_static_condition_no_effect
       text: If a conditional ability with a static condition resolves and no instruction in that ability had any expected effects at the time that instruction's interrupt window opened, that ability cannot be marked pending again until a timing structure step is completed.
-      new:
       examples:
       - text: |-
-          {card:Parasite} is hosted on a piece of ice with 0 strength. {card:Parasite}'s ability tries to trash that ice. If the effect of an interrupt ability prevents the ice from being trashed without increasing its strength, the condition is still true, so the ability will become pending again. But this does not occur while the previous instance of the ability is still pending or resolving. Conversely, if a static ability (such as the one on {card:Architect}) prohibits {card:Parasite} from trashing the ice, {n}there are no effects {card:Parasite}'s ability can perform, and therefore the ability resolves only once per timing structure step.{/n}
+          {card:Parasite} is hosted on a piece of ice with 0 strength. {card:Parasite}'s ability tries to trash that ice. If the effect of an interrupt ability prevents the ice from being trashed without increasing its strength, the condition is still true, so the ability will become pending again. But this does not occur while the previous instance of the ability is still pending or resolving. Conversely, if a static ability (such as the one on {card:Architect}) prohibits {card:Parasite} from trashing the ice, there are no effects {card:Parasite}'s ability can perform, and therefore the ability resolves only once per timing structure step.
 
   - subsection: rule_trigger_conditional_ability
     text: A player can trigger a conditional ability while they have priority in a reaction window in which the ability is pending.
@@ -591,7 +578,6 @@ sections:
     text: Any ability on an event or operation that is not a paid, conditional, or static ability is a {term:play ability}. Play abilities are the abilities that resolve as part of playing that event or operation during {ref:rule_steps_playing_resolve_play_abilities}.
     examples:
     - text: The operation card {card:Oppo Research} has several abilities of different types. The first ability reads "Play only if the Runner stole or trashed a Corp card during their last turn." This is a static ability that contains a restriction and no declarations. The second ability ("After you resolve this operation, your action phase ends.") is a conditional ability that meets its trigger condition and resolves after the Corp finishes playing and resolving {card:Oppo Research}. The third and fourth abilities contain instructions with no trigger conditions or paid ability trigger costs, so they are both play abilities. They resolve in sequence while {card:Oppo Research} is being played.
-      new:
 
   - subsection: sec_steps_of_resolving_a_play_ability
     text: Steps of Resolving a Play Ability
@@ -814,7 +800,6 @@ sections:
       examples:
       - text: |-
           The Runner installs {card:Net-Ready Eyes} and uses {card:Chrome Parlor} to prevent all of the damage from its first ability. There is no longer an imminent damage effect, so the Corp cannot use {card:The Cleaners}.
-        new:
     - rule: rule_prevent_all_but_one
       text: One card, {card:Bio-Modeled Network}, has an instruction that prevents "all but 1 net damage." This ability is relevant when the imminent instruction's expected effects include doing net damage and the amount of the damage is 2 or more. The effect of this ability is to set the value for the amount of damage to 1. Previously-applied modifiers to the value are ignored. The value can still be modified by other interrupts after being set to 1 this way.
     - rule: rule_negative_values_resolution
@@ -827,13 +812,11 @@ sections:
       examples:
       - text: While the result of a successful trace from {card:Flare} is imminent, the Corp triggers {card:The Cleaners} to increase the imminent meat damage by 1. Even though the damage from {card:Flare} has been increased from 2 to 3, none of that meat damage can be prevented.
     - rule: rule_prevent_as_trigger_condition
-      new:
       text: |-
         One card, {card:Guru Davinder}, has a non-interrupt conditional ability with the trigger condition "Whenever this resource prevents 1 or more damage". The trigger condition is met when the following occurs: the expected effects of an imminent instruction include a damage effect with a value greater than 0 for the amount of the damage; an interrupt ability resolves from the same source object as the conditional ability; and the interrupt decreases the value for the damage amount or removes the damage effect entirely.
       examples:
       - text: |-
           The Runner installs {card:Respirocytes} and is about to take 1 meat damage from its first ability. They use {card:Plascrete Carapace} to prevent 1 meat damage, leaving the imminent instruction with the expected effect "Do 0 meat damage.". At this point, the 0 value for the damage can still be modified by abilities like {card:The Cleaners}. But then the Runner resolves the interrupt ability on {card:Guru Davinder}, which removes the damage effect altogether. Since the value for the damage was 0, {card:Guru Davinder}'s second ability does not meet its trigger condition and the Runner does not have to trash {card:Guru Davinder} or pay 4[c]. There is no longer an imminent damage effect, so the Corp cannot use {card:The Cleaners}.
-        new:
 
   - subsection: sec_replacement_effects
     text: |-
@@ -876,9 +859,9 @@ sections:
       text: After applying one replacement effect, a subsequent replacement effect can only be applied if the effect it was to replace is still expected. A replacement effect cannot apply without something to replace.
       examples:
       - text: |-
-          The Runner chooses HQ with {card:Security Testing} when their turn begins, then plays {card:Account Siphon}. When the run becomes successful, both {card:Security Testing} and {card:Account Siphon} create replacement effects. When {ref:step_breach} of the run becomes imminent, the Runner must choose to apply either the replacement effect from {card:Security Testing} or the one from {card:Account Siphon}. Since neither effect creates a new instance of {n}breaching the server{/n}, the effect not chosen to apply first has nothing to replace and does not apply.
+          The Runner chooses HQ with {card:Security Testing} when their turn begins, then plays {card:Account Siphon}. When the run becomes successful, both {card:Security Testing} and {card:Account Siphon} create replacement effects. When {ref:step_breach} of the run becomes imminent, the Runner must choose to apply either the replacement effect from {card:Security Testing} or the one from {card:Account Siphon}. Since neither effect creates a new instance of breaching the server, the effect not chosen to apply first has nothing to replace and does not apply.
       - text: |-
-          The Runner chooses R&D with {card:Security Testing} when their turn begins, then plays {card:Showing Off}. When a run on R&D becomes successful, both {card:Security Testing} and {card:Showing Off} create replacement effects. When {ref:step_breach} of the run becomes imminent, the Runner must choose to apply either the replacement effect from {card:Security Testing} or the one from {card:Showing Off}. If they choose to apply {card:Security Testing} first, {card:Showing Off}'s effect has nothing to replace and does not apply. If they choose to apply {card:Showing Off} first, the expected effects still include breaching R&D, albeit not in the usual way. {card:Security Testing} can still replace this {n}breach{/n}, so it applies next. Either way, the Runner will gain 2[c] and will not {n}breach the server{/n}.
+          The Runner chooses R&D with {card:Security Testing} when their turn begins, then plays {card:Showing Off}. When a run on R&D becomes successful, both {card:Security Testing} and {card:Showing Off} create replacement effects. When {ref:step_breach} of the run becomes imminent, the Runner must choose to apply either the replacement effect from {card:Security Testing} or the one from {card:Showing Off}. If they choose to apply {card:Security Testing} first, {card:Showing Off}'s effect has nothing to replace and does not apply. If they choose to apply {card:Showing Off} first, the expected effects still include breaching R&D, albeit not in the usual way. {card:Security Testing} can still replace this breach, so it applies next. Either way, the Runner will gain 2[c] and will not breach the server.
     
 - section: sec_lingering_effects
   text: Lingering Effects
@@ -1060,7 +1043,7 @@ sections:
     - rule: rule_must_cannot_force_additional_cost
       text: A singular "must" ability cannot force a player to pay an additional cost they wish to decline, but a player cannot avoid choosing a fully resolvable effect from among multiple options in a "must" ability by declining to pay the additional cost for one of those choices.
       examples:
-      - text: If {card:Service Outage} is active and the Runner has {card:Always Be Running} installed, the Runner can decline to pay the additional 1[c] to make a run with their first [click], thus satisfying the "must" of {card:Always Be Running} and allowing them to spend their first click on a different action. However, if a Runner {n}has a {card:False Echo} installed and passes an unrezzed Archer{/n}, the Corporation cannot choose to rez the Archer but decline to forfeit an agenda; the Corp must either pay 4[c] and forfeit an agenda to rez the Archer {n}or add the Archer to HQ{/n}.
+      - text: If {card:Service Outage} is active and the Runner has {card:Always Be Running} installed, the Runner can decline to pay the additional 1[c] to make a run with their first [click], thus satisfying the "must" of {card:Always Be Running} and allowing them to spend their first click on a different action. However, if a Runner has a {card:False Echo} installed and passes an unrezzed Archer, the Corporation cannot choose to rez the Archer but decline to forfeit an agenda; the Corp must either pay 4[c] and forfeit an agenda to rez the Archer or add the Archer to HQ.
 
   - subsection: subsec_repeat_this_process
     toc:

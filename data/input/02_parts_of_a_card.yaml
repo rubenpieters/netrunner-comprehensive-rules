@@ -12,7 +12,6 @@ sections:
     rules:
     - rule: rule_identity_pronouns
       text: Runner identities may have the pronouns of the character represented by that identity written next to the subtitle. Pronouns do not affect gameplay.
-      new:
   - rule: rule_self_reference
     text: |-
       When a card refers to its own name, it is a self-reference. See {ref:sec_old_self_reference_rules}.
@@ -102,7 +101,7 @@ sections:
   text: Base Link
   rules:
   - rule: rule_base_link_location
-    text: Base link is a number appearing {n}near{/n} the top-left of Runner identity cards, {n}next to the [link] symbol{/n}.
+    text: Base link is a number appearing near the top-left of Runner identity cards, next to the [link] symbol.
   - rule: rule_base_link_citation
     text: |-
       The Runner's base link contributes to their link value. {ref:Sec_link} defines how the Runner's link value is calculated, and {ref:sec_traces} explains how it contributes to contesting trace attempts.
@@ -212,11 +211,11 @@ sections:
     text: Below is a list of all subtypes.
     rules:
     - rule: rule_identity_subtypes
-      text: The identity subtypes are Bioroid, Clone, Corp, Cyborg, Digital, Division, G-mod, Megacorp, Natural, Police Department, Stealth, Subsidiary, and {n}Unsubstantiated{/n}.
+      text: The identity subtypes are Bioroid, Clone, Corp, Cyborg, Digital, Division, G-mod, Megacorp, Natural, Police Department, Stealth, Subsidiary, and Unsubstantiated.
     - rule: rule_agenda_subtypes
       text: The agenda subtypes are Ambush, Assassination, Expansion, Expendable, Initiative, NEXT, Psi, Public, Research, Security, Sensie, and Source.
     - rule: rule_asset_subtypes
-      text: The asset subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Cast, Character, Clone, Corporation, {n}Deep Net{/n}, Enforcer, Executive, Facility, Government, Hostile, Illicit, Industrial, Political, Psi, Region, Research, Ritzy, Seedy, and Transaction.
+      text: The asset subtypes are Academic, Advertisement, Alliance, Ambush, Beanstalk, Bioroid, Cast, Character, Clone, Corporation, Deep Net, Enforcer, Executive, Facility, Government, Hostile, Illicit, Industrial, Political, Psi, Region, Research, Ritzy, Seedy, and Transaction.
     - rule: rule_ice_subtypes
       text: The ice subtypes are AP, Advertisement, Ambush, Barrier, Bioroid, Code Gate, Deep Net, Deflector, Destroyer, Expendable, Grail, Harmonic, Illicit, Morph, Mythic, NEXT, Observer, Psi, Sentry, Tracer, and Trap.
     - rule: rule_operation_subtypes

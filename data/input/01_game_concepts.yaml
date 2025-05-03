@@ -35,20 +35,19 @@ sections:
     text: When this document is presented in a format without images, plaintext replacements are used. These replacements are listed along with the symbols themselves for reference.
   - rule: rule_symbol_credits
     text: |-
-      The symbol [c] (plaintext: [c]) stands for "credit". It always appears with a {n}quantity{/n}, such as 1[c], which means "one credit," or 3[c], which means "three credits." See {ref:sec_credits} for rules about credits.
+      The symbol [c] (plaintext: [c]) stands for "credit". It always appears with a quantity, such as 1[c], which means "one credit," or 3[c], which means "three credits." See {ref:sec_credits} for rules about credits.
   - rule: rule_symbol_clicks
     text: |-
       The symbol [click] (plaintext: [click]) stands for "click". Multiple clicks can be represented either by multiple symbols, such as [click][click], or by a numeral and symbol, such as 2[click], both meaning "two clicks." See {ref:sec_clicks} for rules about clicks.
   - rule: rule_symbol_recurring
     text: |-
-      The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a {n}quantity{/n}, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
+      The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a quantity, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
   - rule: rule_symbol_link
     text: |-
       The symbol [link] (plaintext: [link]) stands for "link". It is always used with a quantity, such as 1[link], which means "1 link." See {ref:sec_link} for rules about link.
   - rule: rule_symbol_mu
     text: |-
       The symbol [MU] (plaintext: [MU]) stands for "memory" and also represents the unit used to measure memory. When used with a quantity, it should be read as "memory units". For example, 2[MU] means "2 memory units." See {ref:sec_memory} for rules about memory.
-    new:
   - rule: rule_symbol_sub
     text: |-
       The symbol [sub] (plaintext: [sub]) stands for "subroutine". Each symbol marks a single subroutine on a piece of ice. See {ref:sec_subroutines} for information about subroutines.
@@ -151,7 +150,7 @@ sections:
         In a tournament, all identities brought to the game this way must be legal for players to use as their actual identity in that tournament.
     - rule: rule_additional_identity_double_sided
       text: |-
-        If the Runner switches their identity with a {n}double-sided identity{/n}, it enters play with the front side faceup. If the Runner switches a {n}double-sided identity{/n} with another identity, the new identity enters play faceup regardless of the {n}previous identity's{/n} current status.
+        If the Runner switches their identity with a double-sided identity, it enters play with the front side faceup. If the Runner switches a double-sided identity with another identity, the new identity enters play faceup regardless of the previous identity's current status.
 
 - section: sec_starting_the_game
   text: Starting the Game
@@ -201,7 +200,7 @@ sections:
         Either player can win by collecting agenda points in their score area (usually done by scoring or stealing agendas; see {ref:sec_score_scoring_steal}). A player with a score of 7 or more wins the game.
     - rule: rule_flatline
       text: |-
-        The Corp wins if the Runner is {term:flatlined}. The Runner is flatlined immediately if they suffer more damage than they have cards in their grip. {n}See {ref:sec_damage} for information about damage.{/n} The Runner is also flatlined if, at the beginning of their discard {n}step{/n}, their maximum hand size is less than 0. {n}See {ref:sec_discard_phase} for information about maximum hand size and the discard step.{/n}
+        The Corp wins if the Runner is {term:flatlined}. The Runner is flatlined immediately if they suffer more damage than they have cards in their grip. See {ref:sec_damage} for information about damage. The Runner is also flatlined if, at the beginning of their discard step, their maximum hand size is less than 0. See {ref:sec_discard_phase} for information about maximum hand size and the discard step.
     - rule: rule_empty_rnd
       text: |-
         The Runner wins if the Corp is required to draw a card from R&D but cannot because R&D is empty.
@@ -428,10 +427,8 @@ sections:
     rules:
     - rule: rule_previous_object_source
       text: An object that has ceased to exist still counts as the source for any active lingering effects created by that object. See {ref:sec_lingering_effects} for information about lingering effects.
-      new:
       examples:
       - text: The Runner runs a server, steals an agenda, and accesses a rezzed copy of {card:AMAZE Amusements}. The Runner trashes {card:AMAZE Amusements}, and the object they had accessed ceases to exist, while the trashed card becomes a new object in Archives. The source of the persistent ability created by the trashing is the original object in the root of the server, so the reference to "this server" in the persistent ability still refers to the attacked server, and the Runner will take 2 tags when the run ends.
-        new:
 
 - section: sec_host
   text: Host, Hosted, and Hosting
@@ -445,13 +442,10 @@ sections:
     text: The state of being hosted is distinct, but not exclusive from, the state of being installed.
     rules:
     - rule: rule_host_without_install
-      new:
       text: If an ability instructs a player to host a card that is not installed without reference to installing it, the hosted card does not become installed.
     - rule: rule_host_corp_card_uninstall
-      new:
       text: If an installed Corp card becomes hosted on a Runner card, the Corp card becomes uninstalled.
     - rule: rule_install_from_hosted
-      new:
       text: If a card is installed from a hosted state, it ceases to be hosted. The hosting relationship ends at step {ref:rule_steps_installing_place} of the installation.
   - rule: rule_hosted_limit
     text: An object can only be hosted on a single card at any given time.
@@ -499,14 +493,11 @@ sections:
   - rule: rule_remove_spend_hosted_objects
     text: Hosted objects can be removed or spent from their host without affecting the host.
   - rule: rule_trash_hosted_objects_when_host_trashed
-    text: If a host card changes zones, {n}except by moving from a player's score area to another player's score area,{/n} all objects hosted on that card (and all objects hosted on those objects, and so on) are trashed during the next checkpoint. This cannot be prevented. See {ref:sec_checkpoints} for details on checkpoints.
+    text: If a host card changes zones, except by moving from a player's score area to another player's score area, all objects hosted on that card (and all objects hosted on those objects, and so on) are trashed during the next checkpoint. This cannot be prevented. See {ref:sec_checkpoints} for details on checkpoints.
     examples:
     - text: The Runner has an installed copy of {card:Detente} with Corp cards hosted on it. They play {card:Rejig}, adding {card:Detente} to their grip. The hosted Corp cards are trashed.
-      new:
     - text: The Runner has {card:Next Big Thing} in their score area with a hosted agenda counter. The Corp plays {card:IP Enforcement} to install that agenda. The hosted agenda counter will be trashed after {ref:rule_steps_installing_pay_install_cost} of the installation.
-      new:
     - text: The Runner has {card:Next Big Thing} in their score area with a hosted agenda counter. The Corp plays {card:Exchange of Information} to swap that agenda to their own score area. The agenda counter remains hosted on {card:Next Big Thing}.
-      new:
   - rule: rule_condition_counters_can_host
     text: Condition counters are the only type of counter that can host other objects. Hosting on condition counters follows the same rules as hosting on cards.
 
@@ -652,22 +643,17 @@ sections:
       text: If an ability needs to know the value of a cost in a context where that cost is not being paid, treat any X that appears in that cost as 0.
     - rule: rule_alternate_payment
       text: Some abilities modify a cost by allowing a player to pay part or all of that cost in an alternate way. This does not change the value of the cost, but gives the player an additional option when deciding how to pay that cost.
-      new:
-      - examples:
+      examples:
         - text: The Corp rezzes {card:Biawak}, which has the ability "You can forfeit 1 agenda as you rez this ice to pay for 10[c] of its rez cost." and a rez cost of 14[c]. The Corp chooses to pay {card:Biawak}'s rez cost by spending 2[c] from their credit pool, spending 2[c] from a {card:Mahkota Langit Grid}, and forfeiting 1 agenda.
-          new:
     - rule: rule_install_and_rez_reducing_total
       text: An ability that instructs the Corp to install and rez a card can also reduce the "total" cost to do so. This use of "total" indicates that the Corp can divide the modifier between the install cost and the rez cost of the relevant card. When such a modifier applies, the Corp declares a number of credits by which to reduce the install cost and a number of credits by which to reduce the rez cost. This declaration is made at the beginning of {ref:rule_steps_installing_pay_install_cost}, before calculating the value of the install cost, and the numbers declared this way must be nonnegative numbers whose sum is equal to the number of credits specified by the original "total" modifier. The respective costs are then lowered by the declared amounts, following the normal procedure described in {ref:rule_cost_calculation}.
-      new:
       examples:
       - text: The Corp uses the ability on {card:Tucana} to install and rez a copy of {card:Logjam} from R&D, paying a total of 3[c] less. They install the {card:Logjam} protecting a server that already has 1 piece of ice protecting it, meaning that without the "total of 3[c] less" modifier, the install cost would be 1[c] and the rez cost would be 6[c]. The Corp applies 1[c] of the discount to the install cost and 2[c] to the rez cost, leaving a final install cost of 0[c] and a final rez cost of 4[c].
-        new:
   - subsection: rule_cost_checkpoint
     text: After a player pays a cost, a checkpoint occurs. See {ref:sec_checkpoints}.
     rules:
     - rule: rule_cost_checkpoint_cost_zero
       text: This checkpoint occurs even if the cost being paid is 0.
-      new:
   - subsection: rule_types_of_costs
     text: |-
       There are six main types of costs: install costs (found mainly on hardware, programs, and resources, and incurred when installing ice), play costs (found on operations and events), rez costs (found on assets, upgrades, and ice), paid ability trigger costs, additional costs, and nested costs.
@@ -821,10 +807,9 @@ sections:
   - rule: rule_memory_unit
     text: A {term:memory unit} ([MU]) is a space available to the Runner to install programs.
   - rule: rule_memory_limit
-    text: The Runner's {term:memory limit} is the {n}total amount of [MU]{/n} the Runner has. If the Runner's identity card does not specify a starting memory limit, their starting memory limit is 4[MU]. {n}An ability of the form "+N[MU]" increases the Runner's memory limit by N[MU].{/n}
+    text: The Runner's {term:memory limit} is the total amount of [MU] the Runner has. If the Runner's identity card does not specify a starting memory limit, their starting memory limit is 4[MU]. An ability of the form "+N[MU]" increases the Runner's memory limit by N[MU].
     examples:
-    - text: The Runner {n}is playing an identity with a starting memory limit of 4[MU]. They have an installed copy of {card:T400 Memory Diamond},{/n} which has the ability "+1[MU]". The Runner can therefore have up to 5[MU] worth of programs installed.
-      new:
+    - text: The Runner is playing an identity with a starting memory limit of 4[MU]. They have an installed copy of {card:T400 Memory Diamond}, which has the ability "+1[MU]". The Runner can therefore have up to 5[MU] worth of programs installed.
     rules:
     - rule: rule_memory_unused_mu
       text: The Runner's {term:unused} [MU] is their memory limit minus the total memory cost of all of their installed programs. The Runner's [MU] is {term:full} if they have 0 unused [MU].

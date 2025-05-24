@@ -2,6 +2,7 @@ import re
 from typing import Any, Callable, TypeVar
 import yaml
 
+from rules_doc_generator.config import (Config, default_config)
 from rules_doc_generator.model.text import (FormatText, TextElement, Ref, Image, Text, Term, Example, SubType, Card, Product, Link, NewStart, NewEnd)
 from rules_doc_generator.model.section import (Rule, SubRule, SubSection, Section, Chapter, Document, SectionElement, TimingStructure, TimingStructureElement)
 from rules_doc_generator.model.nrdb_info import (NrdbInfo)
@@ -175,9 +176,9 @@ def parse_with_default(obj: Any, field_type: str, default: A, parse_func: Callab
 
 # General utility.
 
-def read_changelog_from_file() -> list[FormatText]:
+def read_changelog_from_file(config: Config) -> list[FormatText]:
   print(f"Parsing changelog")
-  with open(f'data/input/00_changelog.yaml', "r", encoding="utf8") as stream:
+  with open(f'data/changelogs/{config.version_string()}.yaml', "r", encoding="utf8") as stream:
     yaml_input = load_yaml(stream)
     return parse_changelog(yaml_input)
 
@@ -205,8 +206,8 @@ def load_yaml(stream):
           print ("Something went wrong while parsing yaml file")
       exit()
 
-def yaml_to_document() -> Document:
-  changelog = read_changelog_from_file()
+def yaml_to_document(config: Config) -> Document:
+  changelog = read_changelog_from_file(config)
   chapter_files = \
     [ "01_game_concepts"
     , "02_parts_of_a_card"
@@ -229,5 +230,5 @@ def read_nrdb_info_from_file() -> dict[str, str]:
     return nrdb_info
 
 if __name__ == "__main__":
-  doc = yaml_to_document()
+  doc = yaml_to_document(default_config)
   print(doc)

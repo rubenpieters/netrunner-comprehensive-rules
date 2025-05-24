@@ -390,7 +390,7 @@ class Document:
     toc_content = self.create_toc_html(model_data)
     html_content = re.sub(r"<!--TOC_ENTRIES-->(.*?)<!--END_TOC_ENTRIES-->", toc_content, html_content, flags=re.DOTALL)
 
-    changelog_content = "<li>" + ''.join(map(lambda x: x.to_html(config, model_data), self.changelog)) + "</li>"
+    changelog_content = "<li>" + '</li><li>'.join(map(lambda x: x.to_html(config, model_data), self.changelog)) + "</li>"
     html_content = re.sub(r"<!--CHANGELOG_ENTRIES-->(.*?)<!--END_CHANGELOG_ENTRIES-->", changelog_content, html_content, flags=re.DOTALL)
 
     document_content = ''.join(map(lambda x: x.to_html(config, model_data), self.chapters))

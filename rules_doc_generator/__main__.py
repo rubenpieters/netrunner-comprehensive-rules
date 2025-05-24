@@ -59,7 +59,7 @@ if config.generate_nrdb_info:
   generate_nrdb_info(config.nrdb_info_folder)
 
 print("Parsing...")
-document = yaml_to_document()
+document = yaml_to_document(config)
 
 print("Parsing NRDB Info File...")
 nrdb_info = read_nrdb_info_from_file()

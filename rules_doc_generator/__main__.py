@@ -1,25 +1,51 @@
 from argparse import ArgumentParser
+from dataclasses import replace
 import os
 import shutil
+import yaml
 
-from rules_doc_generator.config import Config, parse_output_types, validate_nrdb_info_folder
+from rules_doc_generator.config import Config, parse_output_types, validate_nrdb_info_folder, default_config
 from rules_doc_generator.model.main import standalone_html, standalone_latex, standalone_json, write_to_file
 from rules_doc_generator.input.yaml.parser import yaml_to_document, read_nrdb_info_from_file
 from rules_doc_generator.model.analysis.references import construct_reference_map
 from rules_doc_generator.model.model_data import ModelData
 from rules_doc_generator.input.json.parser import generate_nrdb_info
 
+config = default_config
+
+# Parse config file.
+with open('config.yaml') as f:
+  yaml_config = yaml.safe_load(f)
+ 
+  if yaml_config["annotated"] is not None:
+    config = replace(config, annotated=yaml_config["annotated"])
+  if yaml_config["output_types"] is not None:
+    config = replace(config, output_types=parse_output_types(yaml_config["output_types"]))
+  if yaml_config["date"] is not None:
+    config = replace(config, effective_year=str(yaml_config["date"]["year"]), effective_month=str(yaml_config["date"]["month"]), effective_day=str(yaml_config["date"]["day"]))
+
 # Parse command line arguments.
 parser = ArgumentParser()
-parser.add_argument("-a", "--annotated", default=False, help="Also generate annotated version with highlights of new parts", action="store_true")
-parser.add_argument("-y", "--year", default="XXXX", help="Effective year", action="store")
-parser.add_argument("-m", "--month", default="XX", help="Effective month", action="store")
-parser.add_argument("-d", "--day", default="XX", help="Effective day", action="store")
-parser.add_argument("-b", "--php-base-path", default="https://example.org/", help="Basepath of php server", action="store")
-parser.add_argument("-t", "--output-types", default=["all"], help="Output types", nargs="*", action="store")
-parser.add_argument("-n", "--nrdb-info-folder", type=validate_nrdb_info_folder, help="Foldder to generate the NRDB info file from", action="store")
+parser.add_argument("-a", "--annotated", const=True, help="Also generate annotated version with highlights of new parts", action="store_const")
+parser.add_argument("-y", "--year", help="Effective year", action="store")
+parser.add_argument("-m", "--month", help="Effective month", action="store")
+parser.add_argument("-d", "--day", help="Effective day", action="store")
+parser.add_argument("-b", "--php-base-path", help="Basepath of php server", action="store")
+parser.add_argument("-t", "--output-types", help="Output types", nargs="*", action="store")
+parser.add_argument("-n", "--nrdb-info-folder", type=validate_nrdb_info_folder, help="Folder to generate the NRDB info file from", action="store")
 args = parser.parse_args()
-config = Config(args.annotated, args.nrdb_info_folder is not None, args.nrdb_info_folder, args.year, args.month, args.day, args.php_base_path, parse_output_types(args.output_types))
+if args.annotated is not None:
+  config = replace(config, annotated=args.annotated)
+if args.nrdb_info_folder is not None:
+  config = replace(config, generate_nrdb_info=True, nrdb_info_folder=args.nrdb_info_folder)
+if args.year is not None and args.month is not None and args.day is not None:
+  config = replace(config, effective_year=args.year, effective_month=args.month, effective_day=args.day)
+if args.php_base_path is not None:
+  config = replace(config, php_base_path=args.php_base_path)
+if args.output_types is not None:
+  config = replace(config, php_base_path=parse_output_types(args.output_types))
+
+not_annotated_config = replace(config, annotated=False)
 
 print("- Config -")
 print("- Version String: " + str(config.version_string()))
@@ -48,7 +74,7 @@ print("Writing Output...")
 if "pdf" in config.output_types:
   if os.path.exists('latex'):
     shutil.rmtree('latex')
-  write_to_file('latex', f"Null_Signal_Games_Netrunner_Comprehensive_Rules_v{config.version_string()}.tex", standalone_latex(document, config.not_annotated(), model_data))
+  write_to_file('latex', f"Null_Signal_Games_Netrunner_Comprehensive_Rules_v{config.version_string()}.tex", standalone_latex(document, not_annotated_config, model_data))
   if config.annotated:
     if os.path.exists('latex_annotated'):
       shutil.rmtree('latex_annotated')
@@ -87,6 +113,6 @@ if "opengraph" in config.output_types:
 if "json" in config.output_types:
   if os.path.exists('json'):
     shutil.rmtree('json')
-  write_to_file('json', 'rules.json', standalone_json(document, config.not_annotated(), model_data))
+  write_to_file('json', 'rules.json', standalone_json(document, not_annotated_config, model_data))
 
 print("Ready!")

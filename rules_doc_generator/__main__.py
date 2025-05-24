@@ -58,7 +58,7 @@ if "pdf" in config.output_types:
 if "web" in config.output_types:
   if os.path.exists('html'):
     shutil.rmtree('html')
-  write_to_file('html', 'rules.html', standalone_html(document, config, model_data, opengraph=False))
+  write_to_file('html', 'rules.html', standalone_html(document, config, model_data))
   shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('html', 'credit.svg'))
   shutil.copyfile(os.path.join('data', 'images', 'preview_placeholder.jpg'), os.path.join('html', 'preview_placeholder.jpg'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.js'), os.path.join('html', 'rules.js'))
@@ -69,7 +69,7 @@ if "web" in config.output_types:
 if "opengraph" in config.output_types:
   if os.path.exists('php'):
     shutil.rmtree('php')
-  write_to_file('php', 'rules.html', standalone_html(document, config, model_data, opengraph=True))
+  write_to_file('php', 'rules.html', standalone_html(document, config, model_data))
   write_to_file('php', 'rules.json', standalone_json(document, config, model_data))
   shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('php', 'credit.svg'))
   shutil.copyfile(os.path.join('data', 'images', 'preview_placeholder.jpg'), os.path.join('php', 'preview_placeholder.jpg'))

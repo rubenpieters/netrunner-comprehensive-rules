@@ -2,6 +2,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional, Union
 
+import re
+
 from rules_doc_generator.config import (Config)
 from rules_doc_generator.model.text import (FormatText, Example)
 from rules_doc_generator.model.model_data import (ModelData)
@@ -372,11 +374,30 @@ class Document:
   changelog: list[FormatText]
   chapters: list[Chapter]
 
-  def to_html(self, config: Config, model_data: ModelData) -> str:
+  def create_toc_html(self, model_data: ModelData):
     result = ''
-    for chapter in self.chapters:
-      result += chapter.to_html(config, model_data)
+    for id in model_data.id_map:
+      ref_info = model_data.id_map[id]
+      if ref_info.toc:
+        result += f'<li><a href="#{ref_info.id}">{ref_info.reference} {ref_info.text}</a></li>'
     return result
+
+  def to_html(self, config: Config, model_data: ModelData) -> str:
+    html_template = open("data/templates/html/rules.html", "r")
+    html_content = html_template.read()
+    html_template.close()
+
+    toc_content = self.create_toc_html(model_data)
+    html_content = re.sub(r"<!--TOC_ENTRIES-->(.*?)<!--END_TOC_ENTRIES-->", toc_content, html_content, flags=re.DOTALL)
+
+    changelog_content = "<li>" + ''.join(map(lambda x: x.to_html(config, model_data), self.changelog)) + "</li>"
+    html_content = re.sub(r"<!--CHANGELOG_ENTRIES-->(.*?)<!--END_CHANGELOG_ENTRIES-->", changelog_content, html_content, flags=re.DOTALL)
+
+    document_content = ''.join(map(lambda x: x.to_html(config, model_data), self.chapters))
+    html_content = re.sub(r"<!--MAIN_CONTENT-->(.*?)<!--END_MAIN_CONTENT-->", document_content, html_content, flags=re.DOTALL)
+    html_content = re.sub(r"<!--VERSION_STRING-->(.*?)<!--END_VERSION_STRING-->", f"v{config.version_string()}", html_content, flags=re.DOTALL)
+    html_content = re.sub(r"<!--EFFECTIVE_DATE-->(.*?)<!--END_EFFECTIVE_DATE-->", f"{config.effective_date_str()}", html_content, flags=re.DOTALL)
+    return html_content
 
   def to_latex(self, config: Config, model_data: ModelData) -> str:
     latex_template = open("data/templates/latex/template.tex", "r")

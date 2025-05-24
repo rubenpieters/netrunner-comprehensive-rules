@@ -22,7 +22,7 @@ with open('config.yaml') as f:
   if yaml_config["output_types"] is not None:
     config = replace(config, output_types=parse_output_types(yaml_config["output_types"]))
   if yaml_config["date"] is not None:
-    config = replace(config, effective_year=str(yaml_config["date"]["year"]), effective_month=str(yaml_config["date"]["month"]), effective_day=str(yaml_config["date"]["day"]))
+    config = replace(config, effective_year=yaml_config["date"]["year"], effective_month=yaml_config["date"]["month"], effective_day=yaml_config["date"]["day"])
 
 # Parse command line arguments.
 parser = ArgumentParser()

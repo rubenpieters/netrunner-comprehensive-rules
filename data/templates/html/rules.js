@@ -55,7 +55,7 @@ function buildMatchPartialWordFromStartExpression(searchValue) {
 };
 
 function buildMatchCompleteWordFromStartExpression(searchValue) {
-    return new RegExp(`(?<=^|\\s)${RegExp.escape(searchValue)}(?=$|\\s)`, 'i');
+    return new RegExp(`(?<=^|\\s|\\>)${RegExp.escape(searchValue)}(?=$|\\s|\\<)`, 'i');
 };
 
 function buildMatchAllCompleteWordsFromStartExpression(searchValue) {
@@ -175,7 +175,7 @@ jQuery(document).ready(function($) {
                 $("#SelectedTags>li").each(function() {
                     const matchCompleteWordFromStart = buildMatchCompleteWordFromStartExpression($(this).text());
                     
-                    if (!matchCompleteWordFromStart.test($rule.text())) {
+                    if (!matchCompleteWordFromStart.test($rule.html())) {
                         allTagsMatch = false;
                     } else {
                         $rule.addHighlightsToRule($(this).text());
@@ -230,7 +230,7 @@ jQuery(document).ready(function($) {
                     $("#SelectedTags>li").each(function() {
                         const matchCompleteWordFromStart = buildMatchCompleteWordFromStartExpression($(this).text());
                         
-                        if (!matchCompleteWordFromStart.test($rule.text())) {
+                        if (!matchCompleteWordFromStart.test($rule.html())) {
                             allTagsMatch = false;
                         };
                     });

@@ -58,12 +58,24 @@ function buildMatchCompleteWordFromStartExpression(searchValue) {
     return new RegExp(`(?<=^|\\s)${RegExp.escape(searchValue)}(?=$|\\s)`, 'i');
 };
 
+function buildMatchAllCompleteWordsFromStartExpression(searchValue) {
+    return new RegExp(`(?<=^|\\s|\\>)(${RegExp.escape(searchValue)})(?=$|\\s|\\<)`, 'gi');
+};
+
 jQuery.fn.addHighlightsToRule = function(textToHighlight) {
     const highlightedText = this.html().replace(buildMatchAllCompleteWordsFromStartExpression(textToHighlight), function(match) {
             return `<span style="background-color:#FFFF00;">${match}</span>`;
         });
 
     this.html(highlightedText);
+};
+
+jQuery.fn.removeHighlightsFromRule = function(textToRemoveHightlight) {
+    let textWithHighlightsRemoved = this.html().replace(buildMatchAllCompleteWordsFromStartExpression(`<span style="background-color:#FFFF00;">${textToRemoveHightlight}</span>`), function() {
+        return textToRemoveHightlight;
+    });
+    
+    this.html(textWithHighlightsRemoved);
 };
 
 // Assumes a chapter heading element is always above a rules element
@@ -184,5 +196,66 @@ jQuery(document).ready(function($) {
         $selectedRules.showHeadingsForEachRule();
 
         $selectedRules.show();
+    });
+
+    // Handles tag deselection, hiding in selected and displaying in available if current search input matches
+    $("#SelectedTags").on('click', 'li', function() {
+        const $clickedTag = $(this);
+        const tagText = $clickedTag.text();
+
+        $clickedTag.remove();
+
+        const searchValue = $('#SearchInput').val();
+
+        // If search input is not empty & matches deselected tag, show in available tags
+        if (searchValue !== '') {
+            const matchPartialWordFromStart = buildMatchPartialWordFromStartExpression(searchValue);
+
+            $("#AvailableTags>li").filter(function() {
+                return $(this).text() === tagText && matchPartialWordFromStart.test($(this).text());
+            }).show();
+        };
+
+        if ($("#SelectedTags>li").length) {
+            const $selectedRules = $("main>.Rules").filter(function() {      
+                let aRuleContainsSelectedTags = false;
+
+                $(this).children(".Rule").each(function() {
+                    const $rule = $(this);
+
+                    $rule.removeHighlightsFromRule($clickedTag.text());
+                    
+                    let allTagsMatch = true;
+                    
+                    $("#SelectedTags>li").each(function() {
+                        const matchCompleteWordFromStart = buildMatchCompleteWordFromStartExpression($(this).text());
+                        
+                        if (!matchCompleteWordFromStart.test($rule.text())) {
+                            allTagsMatch = false;
+                        };
+                    });
+                    
+                    if (allTagsMatch) {                                
+                        $rule.show();
+                        aRuleContainsSelectedTags = true;
+                    } else {
+                        $rule.hide();
+                    }
+                })
+
+                return aRuleContainsSelectedTags;    
+            });
+
+            $selectedRules.showHeadingsForEachRule();
+
+            $selectedRules.show();
+        } else {   
+            $("main").children().show();
+            $(".RulesTocList>li").show();
+            $("main>ol>li").each(function() {
+                $(this).show();
+                $(this).removeHighlightsFromRule($clickedTag.text());
+            });
+        };
     });
 });

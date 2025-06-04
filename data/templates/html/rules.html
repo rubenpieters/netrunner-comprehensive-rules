@@ -27,6 +27,21 @@
          </div>
          <div id="TocOpen" class="TocOpen noprint" onClick="openToc()"><b>☰ Table of Contents</b></div>
          <div id="RulesContent" class="RulesContent">
+            <header id="SearchFilters">
+               <input id="SearchInput" type="text" placeholder="Search..." />
+               <p>Results:</p>
+               <ul id="AvailableTags">
+                  <!-- Requires tags to be generated from card names and desired keywords -->
+                  <li style="display: none">rez</li>
+                  <li style="display: none">derez</li>
+                  <li style="display: none">draw</li>
+                  <li style="display: none">heap</li>
+                  <li style="display: none">ice</li>
+               </ul>
+               <p>Selected:</p>
+               <ul id="SelectedTags">
+               </ul>
+            </header>
             <div>
                <p class="Title">Netrunner Comprehensive Rules</p>
                <p class="SubTitle">Null Signal Games</p>
@@ -66,7 +81,7 @@
                   <p>Netrunner is a ™ of R. Talsorian Games, Inc. Android is ™ & © Fantasy Flight Games. Although these rules are made to be compatible with cards from Android: Netrunner, they are not in any way associated with or endorsed by Fantasy Flight Games, R. Talsorian Games, or Wizards of the Coast.</p>
                </details>
             </div>
-            <div>
+            <main>
               <!--MAIN_CONTENT-->
               <h1 class="Chapter" id="chpt_one"><a class="RuleLink" href="#chpt_one">1. Sample Chapter</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>
               <h2 class="Section" id="sec_one"><a class="RuleLink" href="#sec_one">1.1. Sample Section</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>
@@ -86,7 +101,7 @@
                 </li>
               </ol>
               <!--END_MAIN_CONTENT-->
-            </div>
+            </main>
          </div>
       </div>
    </body>

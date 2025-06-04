@@ -49,3 +49,39 @@ jQuery(document).ready(function($){
         $(this).children('span').children('img').attr('src', data_src);
     });
 });
+
+function buildMatchPartialWordFromStartExpression(searchValue) {
+    return new RegExp(`(?<=^|\\s)${RegExp.escape(searchValue)}`, 'i');
+};
+
+jQuery(document).ready(function($) {
+    // Filters available tags
+    $('#SearchInput').on("keyup", function() {
+        const searchValue = $(this).val();
+
+        if (searchValue === '') {
+            $("#AvailableTags>li").hide();
+        } else {
+            const matchPartialWordFromStart = buildMatchPartialWordFromStartExpression(searchValue);
+
+            $("#AvailableTags>li").filter(function() {
+                const isMatch = matchPartialWordFromStart.test($(this).text());
+
+                if (!isMatch) $(this).hide();
+
+                return isMatch;
+            }).each(function() {
+                const $availableTag = $(this);
+                let isNotSelected = true;
+
+                $("#SelectedTags>li").each(function() {
+                    if ($(this).text() === $availableTag.text()) {
+                        isNotSelected = false;
+                    };
+                });
+
+                if (isNotSelected) $availableTag.show();
+            });
+        };
+    });
+});

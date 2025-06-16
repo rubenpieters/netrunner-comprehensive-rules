@@ -46,7 +46,7 @@ elems.forEach(a => {
 jQuery(document).ready(function($){
     $('.Thumbnail').hover(function(){
         const data_src = $(this).children('.ThumbnailImageContainer').children('img').attr('data-src');
-        $(this).children('ThumbnailImageContainer').children('img').attr('src', data_src);
+        $(this).children('.ThumbnailImageContainer').children('img').attr('src', data_src);
     });
 });
 

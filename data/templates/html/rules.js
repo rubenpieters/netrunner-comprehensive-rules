@@ -51,11 +51,11 @@ jQuery(document).ready(function($){
 });
 
 function buildPartialMatchFromWordStartExpression(searchValue) {
-    return new RegExp(`(?<=^|\\s|\\>)${RegExp.escape(searchValue)}`, 'i');
+    return new RegExp(`(?<=^|\\s|\\>|"|\\()${RegExp.escape(searchValue)}`, 'i');
 };
 
 function buildAllPartialMatchesFromWordStartExpression(searchValue) {
-    return new RegExp(`(?<=^|\\s|\\>)${RegExp.escape(searchValue)}`, 'gi');
+    return new RegExp(`(?<=^|\\s|\\>|"|\\()${RegExp.escape(searchValue)}`, 'gi');
 };
 
 function buildExactMatchExpression(searchValue) {
@@ -66,17 +66,19 @@ function buildAllMatchesExpression(searchValue) {
     return new RegExp(RegExp.escape(searchValue), 'gi');
 };
 
+// Recursively extracts text nodes from nested elements so that search terms match only against text within elements and not the elements themselves
 jQuery.fn.extractNestedTextNodes = function() {
-    const textNodes = []
+    const textNodes = [];
 
-    this.each(function() {  
+    this.each(function() {
+        // The RuleLinkSymbol element contains a hidden text node that returns a false positive when searching "link", this logic ignores this element
         if ($(this).get(0).nodeType === Node.TEXT_NODE && !$(this).parent().is('.RuleLinkSymbol')) {
-            textNodes.push($(this))
+            textNodes.push($(this));
         } else if ($(this).get(0).nodeType === Node.ELEMENT_NODE) {
-            const nestedTextNodes = $(this).contents().extractNestedTextNodes()
-            textNodes.push(...nestedTextNodes)
-        }
-    })
+            const nestedTextNodes = $(this).contents().extractNestedTextNodes();
+            textNodes.push(...nestedTextNodes);
+        };
+    });
 
     return textNodes;
 }
@@ -84,21 +86,20 @@ jQuery.fn.extractNestedTextNodes = function() {
 jQuery.fn.addHighlightsToRule = function(textToHighlight) {
     const allPartialMatchesFromWordStart = buildAllPartialMatchesFromWordStartExpression(textToHighlight);
 
+    // Extraction required in order to handle various ways in which text and elements are nested, avoiding false positives and layout breaking changes
     this.extractNestedTextNodes().forEach(function($node) {
         const nodeText = $node.get(0).nodeValue;
 
-        // TODO When matches a card name that is linked to a thumbnail, the addition of the highlight span removes the highlighted words from the link
         if (allPartialMatchesFromWordStart.test(nodeText)) {
-            const highlightedHTML = nodeText.replace(allPartialMatchesFromWordStart, match => `<span class="Highlight">${match}</span>`)
+            const highlightedHTML = nodeText.replace(allPartialMatchesFromWordStart, match => `<span class="Highlight">${match}</span>`);
+            // Creates throw away wrapper to inject highlighted element into text node 
             const $wrapper = $('<span></span>').html(highlightedHTML);
             $node.replaceWith($wrapper.contents());
-        }
-    })
+        };
+    });
 };
 
-jQuery.fn.removeHighlightsFromRule = function(textToRemoveHightlight) {
-
-    
+jQuery.fn.removeHighlightsFromRule = function(textToRemoveHightlight) {    
     let textWithHighlightsRemoved = this.html().replace(buildAllMatchesExpression(`<span class="Highlight">${textToRemoveHightlight}</span>`), function(match) {
         return match.replace('<span class="Highlight">', '').replace('</span>', '');
     });
@@ -106,45 +107,55 @@ jQuery.fn.removeHighlightsFromRule = function(textToRemoveHightlight) {
     this.html(textWithHighlightsRemoved);
 };
 
-// Assumes a chapter heading element is always above a rules element
+// Returns false if no chapter heading is found before running out of siblings
 jQuery.fn.findChapterHeading = function() {
-    if (this.prev().is(".Chapter")) {
+    if ($.isEmptyObject(this.prev())) {
+        return false;
+    } else if (this.prev().is(".Chapter")) {
         return this.prev();
-    } else {
-        return this.prev().findChapterHeading();
     };
+
+    return this.prev().findChapterHeading();
 };
 
-// Assumes a section heading element is always above a rules element
+// Returns false if no section heading is found before finding a chapter heading or running out of siblings
 jQuery.fn.findSectionHeading = function() {
-    if (this.prev().is(".Section")) {
+    if ($.isEmptyObject(this.prev()) | this.prev().is(".Chapter")) {
+        return false;
+    } else if (this.prev().is(".Section")) {
         return this.prev();
-    } else {
-        return this.prev().findSectionHeading();
-    };
+    }
+    
+    return this.prev().findSectionHeading();
 };
 
 jQuery.fn.showHeadingsForEachRule = function() {
     return this.each(function() {
         const $chapterHeading = $(this).findChapterHeading();
+
+        if ($chapterHeading) {
             $chapterHeading.show();
 
             const [tocChapterReference] = $chapterHeading.text().split('. ');
             $(".RulesTocList>li>a").filter(function() {
                 return $(this).text().startsWith(`${tocChapterReference} `);
             }).parent().show();
+        }
 
-            const $sectionHeading = $(this).findSectionHeading();
+        const $sectionHeading = $(this).findSectionHeading();
+
+        if ($sectionHeading) {
             $sectionHeading.show();
 
             const [tocSectionReference] = $sectionHeading.text().split('. ');
             $(".RulesTocList>li>a").filter(function() {
                 return $(this).text().startsWith(`${tocSectionReference} `);
             }).parent().show();
+        }
 
-            if ($(this).prev().is(".Snippet")) {
-                $(this).prev().show();
-            };
+        if ($(this).prev().is(".Snippet")) {
+            $(this).prev().show();
+        };
     });
 };
 
@@ -157,19 +168,22 @@ jQuery(document).ready(function($) {
             if (searchValue !== '') {
                 const exactMatch = buildExactMatchExpression(searchValue);
 
-                const matchingTags = $("#SelectedTags>li").filter(function() {
+                const matchingTags = $("#SelectedTags>.CustomTag").filter(function() {
                     return exactMatch.test($(this).text());
                 })
 
                 if (matchingTags.length === 0) {
+                    $(".TitleContainer").hide();
                     $("main").children().hide();
                     $(".RulesTocList>li").hide();
                     
                     $("#SelectedTags").append(`<li class="CustomTag">${searchValue}</li>`);
 
-                    const selectedTagExpressions = $.map($("#SelectedTags>li"), function(tag) {
+                    const selectedTagExpressions = $.map($("#SelectedTags>.CustomTag"), function(tag) {
                         return buildPartialMatchFromWordStartExpression($(tag).text());
                     });
+
+                    console.log(selectedTagExpressions)
 
                     const $selectedRules = $("main>.Rules").filter(function() {
                         let aRuleContainsSelectedTags = false;
@@ -185,8 +199,9 @@ jQuery(document).ready(function($) {
                                 })
                             });
                             
+                            $rule.addHighlightsToRule(searchValue);
+
                             if (allTagsMatch) {            
-                                $rule.addHighlightsToRule(searchValue);
                                 $rule.show();
                                 aRuleContainsSelectedTags = true;
                             } else {
@@ -208,14 +223,15 @@ jQuery(document).ready(function($) {
     });
 
     // Handles tag deselection, removing from selected tags list
-    $("#SelectedTags").on('click', 'li', function() {
+    $("#SelectedTags").on('click', '.CustomTag', function() {
         const $clickedTag = $(this);
-        const clickedTagText = $clickedTag.text();
-        
-        $clickedTag.remove();
 
-        if ($("#SelectedTags>li").length) {
-            const selectedTagExpressions = $.map($("#SelectedTags>li"), function(tag) {
+        const $filteredTags = $("#SelectedTags>.CustomTag").filter(function() {
+                return $(this).text() !== $clickedTag.text()
+            })
+
+        if ($filteredTags.length) {
+            const selectedTagExpressions = $.map($filteredTags, function(tag) {
                 return buildPartialMatchFromWordStartExpression($(tag).text());
             });
 
@@ -224,14 +240,13 @@ jQuery(document).ready(function($) {
 
                 $(this).children(".Rule").each(function() {
                     const $rule = $(this);
-                    const textNodes = $(this).extractNestedTextNodes()
+                    $rule.removeHighlightsFromRule($clickedTag.text());
 
-                    $rule.removeHighlightsFromRule(clickedTagText);
-  
+                    const textNodes = $(this).extractNestedTextNodes();
                     const allTagsMatch = selectedTagExpressions.every((selectedTagExpression) => {
                         return textNodes.some((textNode) => {
-                            return selectedTagExpression.test(textNode.get(0).nodeValue)
-                        })
+                            return selectedTagExpression.test(textNode.get(0).nodeValue);
+                        });
                     });
                     
                     if (allTagsMatch) {            
@@ -248,13 +263,16 @@ jQuery(document).ready(function($) {
             $selectedRules.showHeadingsForEachRule();
 
             $selectedRules.show();
-        } else {   
+        } else {
+            $(".TitleContainer").show();
             $("main").children().show();
             $(".RulesTocList>li").show();
             $("main>ol>li").each(function() {
                 $(this).show();
-                $(this).removeHighlightsFromRule(clickedTagText);
+                $(this).removeHighlightsFromRule($clickedTag.text());
             });
         };
+
+        $clickedTag.remove();
     });
 });

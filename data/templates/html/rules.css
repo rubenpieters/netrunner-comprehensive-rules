@@ -266,19 +266,23 @@ a.RuleLink:link, a.RuleLink:visited {
   z-index: 50;
 }
 
-.Thumbnail span {
+.Thumbnail .ThumbnailImageContainer {
   position: fixed;
   background-color: transparent;
   visibility: hidden;
   text-decoration: none;
 }
 
-.Thumbnail span img {
+.Thumbnail .ThumbnailImageContainer img {
   border-width: 0;
   padding: 4px;
   border-radius: 15px;
 }
 
-.Thumbnail:hover span {
+.Thumbnail:hover .ThumbnailImageContainer {
   visibility: visible;
+}
+
+.Highlight {
+  background-color: #FFFF00;
 }

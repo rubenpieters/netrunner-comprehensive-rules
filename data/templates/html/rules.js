@@ -45,34 +45,62 @@ elems.forEach(a => {
 
 jQuery(document).ready(function($){
     $('.Thumbnail').hover(function(){
-        const data_src = $(this).children('span').children('img').attr('data-src');
-        $(this).children('span').children('img').attr('src', data_src);
+        const data_src = $(this).children('.ThumbnailImageContainer').children('img').attr('data-src');
+        $(this).children('ThumbnailImageContainer').children('img').attr('src', data_src);
     });
 });
 
-function buildMatchPartialWordFromStartExpression(searchValue) {
-    return new RegExp(`(?<=^|\\s)${RegExp.escape(searchValue)}`, 'i');
+function buildPartialMatchFromWordStartExpression(searchValue) {
+    return new RegExp(`(?<=^|\\s|\\>)${RegExp.escape(searchValue)}`, 'i');
 };
 
-function buildMatchCompleteWordFromStartExpression(searchValue) {
-    return new RegExp(`(?<=^|\\s|\\>)${RegExp.escape(searchValue)}(?=$|\\s|\\<)`, 'i');
+function buildAllPartialMatchesFromWordStartExpression(searchValue) {
+    return new RegExp(`(?<=^|\\s|\\>)${RegExp.escape(searchValue)}`, 'gi');
 };
 
-function buildMatchAllCompleteWordsFromStartExpression(searchValue) {
-    return new RegExp(`(?<=^|\\s|\\>)(${RegExp.escape(searchValue)})(?=$|\\s|\\<)`, 'gi');
+function buildExactMatchExpression(searchValue) {
+    return new RegExp(`(?<=^)${RegExp.escape(searchValue)}(?=$)`, 'i');
 };
+
+function buildAllMatchesExpression(searchValue) {
+    return new RegExp(RegExp.escape(searchValue), 'gi');
+};
+
+jQuery.fn.extractNestedTextNodes = function() {
+    const textNodes = []
+
+    this.each(function() {  
+        if ($(this).get(0).nodeType === Node.TEXT_NODE && !$(this).parent().is('.RuleLinkSymbol')) {
+            textNodes.push($(this))
+        } else if ($(this).get(0).nodeType === Node.ELEMENT_NODE) {
+            const nestedTextNodes = $(this).contents().extractNestedTextNodes()
+            textNodes.push(...nestedTextNodes)
+        }
+    })
+
+    return textNodes;
+}
 
 jQuery.fn.addHighlightsToRule = function(textToHighlight) {
-    const highlightedText = this.html().replace(buildMatchAllCompleteWordsFromStartExpression(textToHighlight), function(match) {
-            return `<span style="background-color:#FFFF00;">${match}</span>`;
-        });
+    const allPartialMatchesFromWordStart = buildAllPartialMatchesFromWordStartExpression(textToHighlight);
 
-    this.html(highlightedText);
+    this.extractNestedTextNodes().forEach(function($node) {
+        const nodeText = $node.get(0).nodeValue;
+
+        // TODO When matches a card name that is linked to a thumbnail, the addition of the highlight span removes the highlighted words from the link
+        if (allPartialMatchesFromWordStart.test(nodeText)) {
+            const highlightedHTML = nodeText.replace(allPartialMatchesFromWordStart, match => `<span class="Highlight">${match}</span>`)
+            const $wrapper = $('<span></span>').html(highlightedHTML);
+            $node.replaceWith($wrapper.contents());
+        }
+    })
 };
 
 jQuery.fn.removeHighlightsFromRule = function(textToRemoveHightlight) {
-    let textWithHighlightsRemoved = this.html().replace(buildMatchAllCompleteWordsFromStartExpression(`<span style="background-color:#FFFF00;">${textToRemoveHightlight}</span>`), function() {
-        return textToRemoveHightlight;
+
+    
+    let textWithHighlightsRemoved = this.html().replace(buildAllMatchesExpression(`<span class="Highlight">${textToRemoveHightlight}</span>`), function(match) {
+        return match.replace('<span class="Highlight">', '').replace('</span>', '');
     });
     
     this.html(textWithHighlightsRemoved);
@@ -122,126 +150,97 @@ jQuery.fn.showHeadingsForEachRule = function() {
 
 jQuery(document).ready(function($) {
     // Filters available tags
-    $('#SearchInput').on("keyup", function() {
-        const searchValue = $(this).val();
+    $('#SearchInput').on("keyup", function(e) {
+        if (e.key === 'Enter') {
+            const searchValue = $(this).val();
 
-        if (searchValue === '') {
-            $("#AvailableTags>li").hide();
-        } else {
-            const matchPartialWordFromStart = buildMatchPartialWordFromStartExpression(searchValue);
+            if (searchValue !== '') {
+                const exactMatch = buildExactMatchExpression(searchValue);
 
-            $("#AvailableTags>li").filter(function() {
-                const isMatch = matchPartialWordFromStart.test($(this).text());
-
-                if (!isMatch) $(this).hide();
-
-                return isMatch;
-            }).each(function() {
-                const $availableTag = $(this);
-                let isNotSelected = true;
-
-                $("#SelectedTags>li").each(function() {
-                    if ($(this).text() === $availableTag.text()) {
-                        isNotSelected = false;
-                    };
-                });
-
-                if (isNotSelected) $availableTag.show();
-            });
-        };
-    });
-
-    // Handles tag selection, clearing search input, hiding available tags, and displaying selected tag
-    $("#AvailableTags").on('click', 'li', function() {
-        const $clickedTag = $(this);
-
-        $('#SearchInput').val('');
-
-        $("main").children().hide();
-        $(".RulesTocList>li").hide();
-        $("#AvailableTags>li").hide();
-
-        $("#SelectedTags").append(`<li>${$clickedTag.text()}</li>`);
-
-
-        const $selectedRules = $("main>.Rules").filter(function() {
-            let aRuleContainsSelectedTags = false;
-
-            $(this).children(".Rule").each(function() {
-                const $rule = $(this);
-                
-                let allTagsMatch = true;
-                
-                $("#SelectedTags>li").each(function() {
-                    const matchCompleteWordFromStart = buildMatchCompleteWordFromStartExpression($(this).text());
-                    
-                    if (!matchCompleteWordFromStart.test($rule.html())) {
-                        allTagsMatch = false;
-                    } else {
-                        $rule.addHighlightsToRule($(this).text());
-                    }
+                const matchingTags = $("#SelectedTags>li").filter(function() {
+                    return exactMatch.test($(this).text());
                 })
-                
-                if (allTagsMatch) {            
-                    $rule.show();
-                    aRuleContainsSelectedTags = true;
-                } else {
-                    $rule.hide();
+
+                if (matchingTags.length === 0) {
+                    $("main").children().hide();
+                    $(".RulesTocList>li").hide();
+                    
+                    $("#SelectedTags").append(`<li class="CustomTag">${searchValue}</li>`);
+
+                    const selectedTagExpressions = $.map($("#SelectedTags>li"), function(tag) {
+                        return buildPartialMatchFromWordStartExpression($(tag).text());
+                    });
+
+                    const $selectedRules = $("main>.Rules").filter(function() {
+                        let aRuleContainsSelectedTags = false;
+
+                        $(this).children(".Rule").each(function() {
+                            const $rule = $(this);
+
+                            const textNodes = $(this).extractNestedTextNodes()
+                            
+                            const allTagsMatch = selectedTagExpressions.every((selectedTagExpression) => {
+                                return textNodes.some((textNode) => {
+                                    return selectedTagExpression.test(textNode.get(0).nodeValue)
+                                })
+                            });
+                            
+                            if (allTagsMatch) {            
+                                $rule.addHighlightsToRule(searchValue);
+                                $rule.show();
+                                aRuleContainsSelectedTags = true;
+                            } else {
+                                $rule.hide();
+                            };
+                        });
+
+                        return aRuleContainsSelectedTags;
+                    })
+
+                    $selectedRules.showHeadingsForEachRule();
+
+                    $selectedRules.show();
                 }
-            })
-
-            return aRuleContainsSelectedTags;
-        })
-
-        $selectedRules.showHeadingsForEachRule();
-
-        $selectedRules.show();
+                
+                $('#SearchInput').val('');
+            };
+        }
     });
 
-    // Handles tag deselection, hiding in selected and displaying in available if current search input matches
+    // Handles tag deselection, removing from selected tags list
     $("#SelectedTags").on('click', 'li', function() {
         const $clickedTag = $(this);
-        const tagText = $clickedTag.text();
-
+        const clickedTagText = $clickedTag.text();
+        
         $clickedTag.remove();
 
-        const searchValue = $('#SearchInput').val();
-
-        // If search input is not empty & matches deselected tag, show in available tags
-        if (searchValue !== '') {
-            const matchPartialWordFromStart = buildMatchPartialWordFromStartExpression(searchValue);
-
-            $("#AvailableTags>li").filter(function() {
-                return $(this).text() === tagText && matchPartialWordFromStart.test($(this).text());
-            }).show();
-        };
-
         if ($("#SelectedTags>li").length) {
+            const selectedTagExpressions = $.map($("#SelectedTags>li"), function(tag) {
+                return buildPartialMatchFromWordStartExpression($(tag).text());
+            });
+
             const $selectedRules = $("main>.Rules").filter(function() {      
                 let aRuleContainsSelectedTags = false;
 
                 $(this).children(".Rule").each(function() {
                     const $rule = $(this);
+                    const textNodes = $(this).extractNestedTextNodes()
 
-                    $rule.removeHighlightsFromRule($clickedTag.text());
-                    
-                    let allTagsMatch = true;
-                    
-                    $("#SelectedTags>li").each(function() {
-                        const matchCompleteWordFromStart = buildMatchCompleteWordFromStartExpression($(this).text());
-                        
-                        if (!matchCompleteWordFromStart.test($rule.html())) {
-                            allTagsMatch = false;
-                        };
+                    $rule.removeHighlightsFromRule(clickedTagText);
+  
+                    const allTagsMatch = selectedTagExpressions.every((selectedTagExpression) => {
+                        return textNodes.some((textNode) => {
+                            return selectedTagExpression.test(textNode.get(0).nodeValue)
+                        })
                     });
                     
-                    if (allTagsMatch) {                                
+                    if (allTagsMatch) {            
                         $rule.show();
                         aRuleContainsSelectedTags = true;
                     } else {
                         $rule.hide();
-                    }
-                })
+                    };
+                });
 
                 return aRuleContainsSelectedTags;    
             });
@@ -254,7 +253,7 @@ jQuery(document).ready(function($) {
             $(".RulesTocList>li").show();
             $("main>ol>li").each(function() {
                 $(this).show();
-                $(this).removeHighlightsFromRule($clickedTag.text());
+                $(this).removeHighlightsFromRule(clickedTagText);
             });
         };
     });

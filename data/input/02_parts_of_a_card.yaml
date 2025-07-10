@@ -69,7 +69,7 @@ sections:
   text: Trash Cost
   rules:
   - rule: rule_trash_cost_location
-    text: Assets, upgrades, and some ice and operations have trash costs. A trash cost is a number appearing in the lower-right corner of the card within a [trash] symbol.
+    text: Assets, upgrades, and some ice and operations have trash costs. A trash cost is a number appearing in the lower-right corner of the card within a [trashcost] symbol.
   - rule: rule_trash_cost_citation
     text: |-
       {ref:Rule_basic_trash_ability} details how the Runner can trash a card they access by paying its trash cost.

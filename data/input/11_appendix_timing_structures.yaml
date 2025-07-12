@@ -87,8 +87,9 @@ sections:
       - text: The Runner gains bad publicity credits.
       - text: The run begins.
       - text: The Runner's position is set to the outermost ice, if any.
-      - text: |-
-          Paid ability window: (P) (R).
+        new:
+      - text: Paid ability window: (P) (R).
+        new:
       - text: Is there ice protecting server?
         elements:
         - text: If yes, go to (2).

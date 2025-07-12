@@ -34,3 +34,6 @@ changelog:
 - text: Add an example to {ref:rule_prevent_all}.
 - text: Add {ref:rule_prevent_as_trigger_condition} to clarify how {card:Guru Davinder} interacts with other interrupt abilities.
 - text: Add {ref:sec_dividends} detailing the Dividends keyword.
+- text: Add the pre-approach paid ability window (for {card:Mitra Aman}) to the appendix: {ref:Sec_steps_of_a_run}
+- text: Add "action phase ends" step to the appendix reference: {ref:Sec_steps_corp_turn} and {ref:Sec_steps_runner_turn}.
+ to appendix.

@@ -90,7 +90,8 @@ sections:
       - text: The run begins.
       - text: The Runner's position is set to the outermost ice, if any.
         new:
-      - text: Paid ability window: (P) (R).
+      - text: |-
+          Paid ability window: (P) (R).
         new:
       - text: Is there ice protecting server?
         elements:

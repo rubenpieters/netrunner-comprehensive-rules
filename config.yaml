@@ -1,8 +1,8 @@
 # Doc generation config
 
 date:
-  year: "XXXX"
-  month: "XX"
-  day: "XX"
+  year: "2025"
+  month: "07"
+  day: "31"
 output_types: [all]
 annotated: True

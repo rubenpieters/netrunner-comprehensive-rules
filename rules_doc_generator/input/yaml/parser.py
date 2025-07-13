@@ -69,7 +69,8 @@ def parse_example(yaml_example: Any) -> Example:
 def parse_timing_structure_element(yaml_timing_structure_element: Any) -> TimingStructureElement:
   text = parse_format_text_field(yaml_timing_structure_element, 'text')
   elements = parse_subelements(yaml_timing_structure_element, 'elements', parse_timing_structure_element)
-  return TimingStructureElement(text, elements)
+  new = parse_boolean(yaml_timing_structure_element, 'new')
+  return TimingStructureElement(text, elements, new)
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructure:
   bold = parse_boolean(yaml_timing_structure, 'bold')

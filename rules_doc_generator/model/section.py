@@ -12,6 +12,7 @@ from rules_doc_generator.model.model_data import (ModelData)
 class TimingStructureElement:
   text: FormatText
   elements: list[TimingStructureElement]
+  new: bool
 
   def to_html_l1(self, config: Config, model_data: ModelData, bold: bool) -> str:
     if bold:
@@ -39,7 +40,11 @@ class TimingStructureElement:
     result = '\\1 '
     if bold:
       result += '\\textbf{'
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
     result += self.text.to_latex(config, model_data)
+    if self.new and config.annotated:
+      result += ' \\color{black} \\normalfont'
     if bold:
       result += '}'
     result += '\n'
@@ -48,13 +53,26 @@ class TimingStructureElement:
     return result
 
   def to_latex_l2(self, config: Config, model_data: ModelData) -> str:
-    result = f'  \\2 {self.text.to_latex(config, model_data)}\n'
+    result = '  \\2 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
+    result += f'{self.text.to_latex(config, model_data)}'
+    if self.new and config.annotated:
+      result += ' \\color{black} \\normalfont'
+    result += '\n'
     for elem in self.elements:
       result += elem.to_latex_l3(config, model_data)
     return result
 
   def to_latex_l3(self, config: Config, model_data: ModelData) -> str:
-    return f'    \\3 {self.text.to_latex(config, model_data)}\n'
+    result = '    \\3 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
+    result += f'{self.text.to_latex(config, model_data)}'
+    if self.new and config.annotated:
+      result += ' \\color{black} \\normalfont'
+    result += '\n'
+    return result
 
 
 @dataclass

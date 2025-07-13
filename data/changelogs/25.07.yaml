@@ -1,2 +1,4 @@
 changelog:
 - text: Fix the example in {ref:rule_prevent_as_trigger_condition}.
+- text: Add the pre-approach paid ability window to {ref:sec_appendix_timing_structure_of_a_run}
+- text: Add "action phase ends" step to {ref:sec_appendix_timing_structure_corps_turn} and {ref:sec_appendix_timing_structure_runners_turn}.

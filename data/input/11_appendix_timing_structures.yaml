@@ -32,7 +32,7 @@ sections:
           Paid ability window: (P) (R) (S).
       - text: Does the Corp have unspent clicks?
         elements:
-        - text: If no, go to {n}(h){/n}.
+        - text: If no, go to {n}(d){/n}.
         - text: If yes, the Corp takes an action.
       - text: Return to (a).
       - text: The Corp's action phase ends.

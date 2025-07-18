@@ -93,7 +93,8 @@ sections:
       - text: |-
           Paid ability window: (P) (R).
         new:
-      - text: Is there ice protecting server?
+      - text: Does the Runner have a position corresponding to a piece of ice?
+        new:
         elements:
         - text: If yes, go to (2).
         - text: If no, go to (4).

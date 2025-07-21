@@ -1,4 +1,6 @@
 changelog:
 - text: Fix the example in {ref:rule_prevent_as_trigger_condition}.
+- text: Add {ref:rule_visibility_after_access} to clarify that cards the Runner accesses during a breach (most importantly, while breaching HQ) remain visible until the end of the breach.
+- text: Update wording of {ref:rule_archives_facedowns_after_breach} to be consistent with the above.
 - text: Add the pre-approach paid ability window to {ref:sec_appendix_timing_structure_of_a_run}
 - text: Add "action phase ends" step to {ref:sec_appendix_timing_structure_corps_turn} and {ref:sec_appendix_timing_structure_runners_turn}.

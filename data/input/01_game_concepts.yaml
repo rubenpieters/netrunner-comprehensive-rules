@@ -848,6 +848,6 @@ sections:
   - rule: rule_look_reveal_expose_access_distinct
     text: Effects that instruct a player to look at, reveal, expose, or access a card are not the same, even if they would be performed similarly at times. See {ref:chpt_access_breach} for more information on accessing.
   - rule: rule_remain_visible
-    text: If a resolving ability directs one or both players to look at or reveal a card or set of cards, each such card remains visible to the relevant player(s) until the entire ability is finished resolving or the card moves to a different location.
+    text: If a resolving ability directs one or both players to look at or reveal a card or set of cards, each such card remains visible to the relevant player(s) until the entire ability is finished resolving or the card moves to a different location. {n}See also {ref:rule_visibility_after_access}.{/n}
   - rule: rule_ambush_text
     text: The ability "While the Runner is accessing this [type] in R&D, they must reveal it." is a static ability that applies for the entire duration of the access. This is also the case for cards with the older wording, "If [this card] is accessed from R&D, the Runner must reveal it."

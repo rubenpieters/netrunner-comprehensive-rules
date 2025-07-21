@@ -54,19 +54,27 @@ sections:
 - section: sec_breaching_servers
   text: Breaching Servers
   rules: 
-  - rule: rule_breaching_servers
+  - subsection: rule_breaching_servers
     text: |-
       {term:Breaching} a server is the process of the Runner accessing a particular set of cards associated with that server. Most accesses occur during a breach. {ref:Step_breach} of a run calls for the Runner to breach the attacked server, but card abilities can also directly instruct the Runner to breach a server.
+    rules:
+    - rule: rule_visibility_after_access
+      text: After the Runner accesses a card during a breach, that object remains visible to the Runner for the remainder of the breach.
+      new:
+      examples:
+      - text: The Runner breaches HQ and accesses {card:Scatter Field}, {card:Palisade}, and {card:Offworld Office}, in that order. When the Runner steals {card:Offworld Office}, the Corp uses {card:Poétrï Luxury Brands} to install a card from HQ. The Runner will know whether the Corp installs the {card:Scatter Field}, the {card:Palisade}, or an unknown card from the rest of HQ.
+        new:
   - subsection: rule_breaching_archives
     text: When the Runner breaches Archives, all the facedown cards in the Corp's discard pile are turned faceup before the Runner accesses any cards.
     rules:
     - rule: rule_archives_facedowns_after_breach
-      text: If a card is added to Archives facedown after this step, that card remains facedown for the remainder of the breach, even after it is accessed. The Runner can only look at a facedown card in Archives while accessing it.
+      text: If a card is added to Archives facedown after this step, that card remains facedown for the remainder of the breach, even after it is accessed. The Runner can only look at a facedown card in Archives {n}once they have accessed{/n} it.
   - rule: rule_candidates
     text: |-
       The cards associated with a breached server that the Runner could potentially access are called {term:Candidates}. The set of candidates is compiled from the cards in the root of the breached server and, for central servers, the cards in the zone that corresponds to that server (see {ref:rule_three_central_servers}). {ref:Sec_determining_candidates} defines which of these cards are candidates.
   - subsection: rule_candidates_presented
-    text:  During a breach, the Runner is presented with the current candidates. They choose 1 of those cards and access it. This process repeats until there are no longer any candidates.
+    text: During a breach, the Runner is presented with the current candidates. They choose 1 of those cards and access it. This process repeats until there are no longer any candidates.
+    new:
     rules:
     - rule: rule_candidates_breaching_hq
       text: When presented with candidates during a breach of HQ, the Runner chooses either a specific candidate that is not in the Corp's hand or to access a random candidate from among the ones in the Corp's hand. A card randomly chosen this way is treated as though the Runner had chosen it.

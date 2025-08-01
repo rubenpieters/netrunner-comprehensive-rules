@@ -31,32 +31,30 @@ sections:
   rules:
   - rule: rule_symbols
     text: Several non-English symbols appear on cards and in this rules document. This section serves as a basic guide to those symbols.
-  - rule: rule_plaintext_symbols
-    text: When this document is presented in a format without images, plaintext replacements are used. These replacements are listed along with the symbols themselves for reference.
   - rule: rule_symbol_credits
     text: |-
-      The symbol [c] (plaintext: [c]) stands for "credit". It always appears with a quantity, such as 1[c], which means "one credit," or 3[c], which means "three credits." See {ref:sec_credits} for rules about credits.
+      The symbol [c] (plaintext: {curly:c}) stands for "credit". It always appears with a quantity, such as 1[c], which means "one credit," or 3[c], which means "three credits." See {ref:sec_credits} for rules about credits.
   - rule: rule_symbol_clicks
     text: |-
-      The symbol [click] (plaintext: [click]) stands for "click". Multiple clicks can be represented either by multiple symbols, such as [click][click], or by a numeral and symbol, such as 2[click], both meaning "two clicks." See {ref:sec_clicks} for rules about clicks.
+      The symbol [click] (plaintext: {curly:click}) stands for "click". Multiple clicks can be represented either by multiple symbols, such as [click][click], or by a numeral and symbol, such as 2[click], both meaning "two clicks." See {ref:sec_clicks} for rules about clicks.
   - rule: rule_symbol_recurring
     text: |-
-      The symbol [recurring] (plaintext: [recurring]) stands for recurring credit. It always appears with a quantity, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
+      The symbol [recurring] (plaintext: {curly:recurring}) stands for recurring credit. It always appears with a quantity, such as 1[recurring], which means "one recurring credit," or 3[recurring], which means "three recurring credits." See {ref:rule_sec_recurring} for rules about recurring credits.
   - rule: rule_symbol_link
     text: |-
-      The symbol [link] (plaintext: [link]) stands for "link". It is always used with a quantity, such as 1[link], which means "1 link." See {ref:sec_link} for rules about link.
+      The symbol [link] (plaintext: {curly:link}) stands for "link". It is always used with a quantity, such as 1[link], which means "1 link." See {ref:sec_link} for rules about link.
   - rule: rule_symbol_mu
     text: |-
-      The symbol [MU] (plaintext: [MU]) stands for "memory" and also represents the unit used to measure memory. When used with a quantity, it should be read as "memory units". For example, 2[MU] means "2 memory units." See {ref:sec_memory} for rules about memory.
+      The symbol [MU] (plaintext: {curly:MU}) stands for "memory" and also represents the unit used to measure memory. When used with a quantity, it should be read as "memory units". For example, 2[MU] means "2 memory units." See {ref:sec_memory} for rules about memory.
   - rule: rule_symbol_sub
     text: |-
-      The symbol [sub] (plaintext: [sub]) stands for "subroutine". Each symbol marks a single subroutine on a piece of ice. See {ref:sec_subroutines} for information about subroutines.
+      The symbol [sub] (plaintext: {curly:sub}) stands for "subroutine". Each symbol marks a single subroutine on a piece of ice. See {ref:sec_subroutines} for information about subroutines.
   - rule: rule_symbol_trash
     text: |-
-      The symbol [trash] (plaintext: [trash]) stands for "trash this card". It is used as a self-referential cost in card text, such as "[trash]: Draw 2 cards," which means "Trash this card to draw 2 cards." See {ref:sec_costs} for rules about costs, and {ref:sec_trashing} for rules about trashing cards.
+      The symbol [trash] (plaintext: {curly:trash}) stands for "trash this card". It is used as a self-referential cost in card text, such as "[trash]: Draw 2 cards," which means "Trash this card to draw 2 cards." See {ref:sec_costs} for rules about costs, and {ref:sec_trashing} for rules about trashing cards.
   - rule: rule_symbol_interrupt
     text: |-
-      The symbol [interrupt] (plaintext: [interrupt]) stands for "interrupt timing". It is used to designate abilities that resolve immediately before other abilities. See {ref:sec_interrupts_replacements} for rules about interrupt abilities.
+      The symbol [interrupt] (plaintext: {curly:interrupt}) stands for "interrupt timing". It is used to designate abilities that resolve immediately before other abilities. See {ref:sec_interrupts_replacements} for rules about interrupt abilities.
 
 - section: sec_deck_construction
   text: Deck Construction
@@ -850,6 +848,6 @@ sections:
   - rule: rule_look_reveal_expose_access_distinct
     text: Effects that instruct a player to look at, reveal, expose, or access a card are not the same, even if they would be performed similarly at times. See {ref:chpt_access_breach} for more information on accessing.
   - rule: rule_remain_visible
-    text: If a resolving ability directs one or both players to look at or reveal a card or set of cards, each such card remains visible to the relevant player(s) until the entire ability is finished resolving or the card moves to a different location.
+    text: If a resolving ability directs one or both players to look at or reveal a card or set of cards, each such card remains visible to the relevant player(s) until the entire ability is finished resolving or the card moves to a different location. {n}See also {ref:rule_visibility_after_access}.{/n}
   - rule: rule_ambush_text
     text: The ability "While the Runner is accessing this [type] in R&D, they must reveal it." is a static ability that applies for the entire duration of the access. This is also the case for cards with the older wording, "If [this card] is accessed from R&D, the Runner must reveal it."

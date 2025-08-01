@@ -12,6 +12,7 @@ from rules_doc_generator.model.model_data import (ModelData)
 class TimingStructureElement:
   text: FormatText
   elements: list[TimingStructureElement]
+  new: bool
 
   def to_html_l1(self, config: Config, model_data: ModelData, bold: bool) -> str:
     if bold:
@@ -39,7 +40,11 @@ class TimingStructureElement:
     result = '\\1 '
     if bold:
       result += '\\textbf{'
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
     result += self.text.to_latex(config, model_data)
+    if self.new and config.annotated:
+      result += ' \\color{black} \\normalfont'
     if bold:
       result += '}'
     result += '\n'
@@ -48,13 +53,26 @@ class TimingStructureElement:
     return result
 
   def to_latex_l2(self, config: Config, model_data: ModelData) -> str:
-    result = f'  \\2 {self.text.to_latex(config, model_data)}\n'
+    result = '  \\2 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
+    result += f'{self.text.to_latex(config, model_data)}'
+    if self.new and config.annotated:
+      result += ' \\color{black} \\normalfont'
+    result += '\n'
     for elem in self.elements:
       result += elem.to_latex_l3(config, model_data)
     return result
 
   def to_latex_l3(self, config: Config, model_data: ModelData) -> str:
-    return f'    \\3 {self.text.to_latex(config, model_data)}\n'
+    result = '    \\3 '
+    if self.new and config.annotated:
+      result += '\\color{orange} \\bfseries '
+    result += f'{self.text.to_latex(config, model_data)}'
+    if self.new and config.annotated:
+      result += ' \\color{black} \\normalfont'
+    result += '\n'
+    return result
 
 
 @dataclass
@@ -269,7 +287,7 @@ class Section:
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
     secnr:str = f'{model_data.id_map[self.id].reference}.'
-    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, model_data)}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>'
+    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, model_data)}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></h2>'
     if self.snippet:
       result += f'<p class="Snippet">{self.snippet.to_html(config, model_data)}</p>'
     result += '<ol class="Rules">'
@@ -277,8 +295,8 @@ class Section:
       rulenr:str = f'{model_data.id_map[self.id].reference}.{n+1}.'
 
       match elem:
-        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{elem.to_html(config, model_data)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{elem.to_html(config, model_data)}</li>'
+        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span><span class="RuleText">{elem.to_html(config, model_data)}</span></li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span><span class="RuleText">{elem.to_html(config, model_data)}</span></li>'
         case TimingStructure(): result += elem.to_html(config, model_data)
     result += '</ol>'
     return result
@@ -334,7 +352,7 @@ class Chapter:
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
     chapnr:str = f'{model_data.id_map[self.id].reference}.'
-    result = f'<h1 class="Chapter" id="{self.id}"><a class="RuleLink" href="#{self.id}">{chapnr} {self.text}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>'
+    result = f'<h1 class="Chapter" id="{self.id}"><a class="RuleLink" href="#{self.id}">{chapnr} {self.text}</a></a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></h1>'
     for section in self.sections:
       result += section.to_html(config, model_data)
     return result

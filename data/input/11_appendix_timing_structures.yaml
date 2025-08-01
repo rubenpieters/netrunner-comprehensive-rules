@@ -32,9 +32,11 @@ sections:
           Paid ability window: (P) (R) (S).
       - text: Does the Corp have unspent clicks?
         elements:
-        - text: If no, go to (3).
+        - text: If no, go to {n}(d){/n}.
         - text: If yes, the Corp takes an action.
       - text: Return to (a).
+      - text: The Corp's action phase ends.
+        new:
     - text: Discard Phase
       elements:
       - text: The Corp discards cards.
@@ -61,9 +63,11 @@ sections:
           Paid ability window: (P) (R).
       - text: Does the Runner have unspent clicks?
         elements:
-        - text: If no, go to (2).
+        - text: If no, go to {n}(h){/n}.
         - text: If yes, the Runner takes an action.
       - text: Return to (e).
+      - text: The Runner's action phase ends.
+        new:
     - text: Discard Phase
       elements:
       - text: The Runner discards cards.
@@ -84,7 +88,13 @@ sections:
       - text: The Runner announces the attacked server.
       - text: The Runner gains bad publicity credits.
       - text: The run begins.
-      - text: Is there ice protecting server?
+      - text: The Runner's position is set to the outermost ice, if any.
+        new:
+      - text: |-
+          Paid ability window: (P) (R).
+        new:
+      - text: Does the Runner have a position corresponding to a piece of ice?
+        new:
         elements:
         - text: If yes, go to (2).
         - text: If no, go to (4).

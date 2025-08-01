@@ -33,11 +33,11 @@ elems.forEach(a => {
 
         // Replace link symbol with clipboard symbol
         navigator.clipboard.writeText(a.href);
-        a.parentElement.getElementsByClassName('material-symbols-outlined')[0].innerText = "content_paste_go";
+        a.parentElement.getElementsByClassName('fas')[0].className = "fas fa-check fa-xs RuleLinkSymbol";
         
         // Revert back to link symbol after 1s
         setTimeout(() => {
-            a.parentElement.getElementsByClassName('material-symbols-outlined')[0].innerText = "link";
+            a.parentElement.getElementsByClassName('fas')[0].className = "fas fa-link fa-xs RuleLinkSymbol";
 
         }, 1000);
     }

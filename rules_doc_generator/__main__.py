@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 from dataclasses import replace
+import glob
 import os
 import shutil
 import yaml
@@ -25,6 +26,7 @@ with open('config.yaml') as f:
     config = replace(config, effective_year=yaml_config["date"]["year"], effective_month=yaml_config["date"]["month"], effective_day=yaml_config["date"]["day"])
 
 # Parse command line arguments.
+print("Reading Config...")
 parser = ArgumentParser()
 parser.add_argument("-a", "--annotated", const=True, help="Also generate annotated version with highlights of new parts", action="store_const")
 parser.add_argument("-y", "--year", help="Effective year", action="store")
@@ -70,6 +72,7 @@ ref_dict = construct_reference_map(document)
 model_data = ModelData(ref_dict, nrdb_info)
 
 print("Writing Output...")
+
 # PDF Version Output
 if "pdf" in config.output_types:
   if os.path.exists('latex'):
@@ -85,7 +88,9 @@ if "web" in config.output_types:
   if os.path.exists('html'):
     shutil.rmtree('html')
   write_to_file('html', 'rules.html', standalone_html(document, config, model_data))
-  shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('html', 'credit.svg'))
+  files = glob.iglob(os.path.join(os.path.join('data', 'images'), "*.svg"))
+  for file in files:
+    shutil.copyfile(file, os.path.join('html', os.path.basename(file)))
   shutil.copyfile(os.path.join('data', 'images', 'preview_placeholder.jpg'), os.path.join('html', 'preview_placeholder.jpg'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.js'), os.path.join('html', 'rules.js'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('html', 'rules.css'))

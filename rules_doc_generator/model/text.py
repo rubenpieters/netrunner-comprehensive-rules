@@ -19,10 +19,24 @@ class Image:
     return f'<img class="Symbol" src="{self.text}.svg" alt="{self.text}"/>'
 
   def to_latex(self, config: Config, model_data: ModelData) -> str:
-    return f'\includegraphics[height=8pt]{{{self.text}.png}}'
+    # White-colored text overlapping with the image, to act as pseudo alt text.
+    text = f'\\rlap{{\\color{{white}} {self.text}}}'
+    text += '\hspace*{1pt}\\raisebox{-1pt}{\includesvg[height = 10pt]{'
+    text += self.text
+    return text + '}}'
   
   def to_json(self, config: Config, model_data: ModelData) -> str:
-    return '<img>'
+    match self.text:
+      case "credit": return "[c]"
+      case "click": return "[click]"
+      case "recurring": return "[recurring]"
+      case "link": return "[link]"
+      case "mu": return "[MU]"
+      case "sub": return "[sub]"
+      case "trash": return "[trash]"
+      case "interrupt": return "[interrupt]"
+      case "trashcost": return "[trashcost]"
+      case default: raise Exception(f'Unknown image: {self.text}')
 
 @dataclass
 class Text:
@@ -35,7 +49,7 @@ class Text:
     return self.text
 
   def to_latex(self, config: Config, model_data: ModelData) -> str:
-    return self.text
+    return self.text.replace('{', '\{').replace('}', '\}')
   
   def to_json(self, config: Config, model_data: ModelData) -> str:
     return self.text

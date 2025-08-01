@@ -38,6 +38,8 @@ def parseTextElement(str: str) -> TextElement:
     text = text_and_link[0]
     link = text_and_link[1]
     return Link(text, link)
+  elif str.startswith('curly:'):
+    return Text(f'{{{str[6:]}}}')
   elif str == '/n':
     return NewEnd()
   elif str == 'n':
@@ -46,6 +48,15 @@ def parseTextElement(str: str) -> TextElement:
     return Text(str)
 
 def parse_format_text(str: str) -> FormatText:
+  str = str.replace('[c]', '{img:credit}')
+  str = str.replace('[click]', '{img:click}')
+  str = str.replace('[recurring]', '{img:recurring}')
+  str = str.replace('[link]', '{img:link}')
+  str = str.replace('[MU]', '{img:mu}')
+  str = str.replace('[sub]', '{img:sub}')
+  str = str.replace('[trash]', '{img:trash}')
+  str = str.replace('[interrupt]', '{img:interrupt}')
+  str = str.replace('[trashcost]', '{img:trashcost}')
   split_curly = re.split('[\{\}]', str)
   parsed = list(map(parseTextElement, split_curly))
   return FormatText(parsed)
@@ -58,7 +69,8 @@ def parse_example(yaml_example: Any) -> Example:
 def parse_timing_structure_element(yaml_timing_structure_element: Any) -> TimingStructureElement:
   text = parse_format_text_field(yaml_timing_structure_element, 'text')
   elements = parse_subelements(yaml_timing_structure_element, 'elements', parse_timing_structure_element)
-  return TimingStructureElement(text, elements)
+  new = parse_boolean(yaml_timing_structure_element, 'new')
+  return TimingStructureElement(text, elements, new)
 
 def parse_timing_structure(yaml_timing_structure: Any) -> TimingStructure:
   bold = parse_boolean(yaml_timing_structure, 'bold')

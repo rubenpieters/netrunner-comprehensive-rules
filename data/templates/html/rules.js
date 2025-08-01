@@ -159,68 +159,83 @@ jQuery.fn.showHeadingsForEachRule = function() {
     });
 };
 
+jQuery.fn.executeSearch = function(searchValue) {
+
+    if (searchValue !== '') {
+        const exactMatch = buildExactMatchExpression(searchValue);
+
+        const matchingTags = $("#SelectedTags>.CustomTag").filter(function() {
+            return exactMatch.test($(this).text());
+        })
+
+        if (matchingTags.length === 0) {
+            $(".TitleContainer").hide();
+            $("main").children().hide();
+            $(".RulesTocList>li").hide();
+            
+            $("#SelectedTags").append(`<li class="CustomTag"><i class="fa-solid fa-xs fa-xmark"></i>${searchValue}</li>`);
+
+            const selectedTagExpressions = $.map($("#SelectedTags>.CustomTag"), function(tag) {
+                return buildPartialMatchFromWordStartExpression($(tag).text());
+            });
+
+            const $selectedRules = $("main>.Rules").filter(function() {
+                let aRuleContainsSelectedTags = false;
+
+                $(this).children(".Rule").each(function() {
+                    const $rule = $(this);
+
+                    const textNodes = $(this).extractNestedTextNodes()
+                    
+                    const allTagsMatch = selectedTagExpressions.every((selectedTagExpression) => {
+                        return textNodes.some((textNode) => {
+                            return selectedTagExpression.test(textNode.get(0).nodeValue)
+                        })
+                    });
+                    
+                    $rule.addHighlightsToRule(searchValue);
+
+                    if (allTagsMatch) {            
+                        $rule.show();
+                        aRuleContainsSelectedTags = true;
+                    } else {
+                        $rule.hide();
+                    };
+                });
+
+                return aRuleContainsSelectedTags;
+            })
+
+            $selectedRules.showHeadingsForEachRule();
+
+            $selectedRules.show();
+        }
+        
+        $('#SearchInput').val('');
+    };
+}
+
 jQuery(document).ready(function($) {
-    // Filters available tags
+
+    // Toggles search bar and tags visibility
+    $('#SearchFilters').on("dblclick", function() {
+        $('#SearchBar').toggle()
+        $('#SelectedTagsContainer').toggle()
+    })
+
     $('#SearchInput').on("keyup", function(e) {
         if (e.key === 'Enter') {
             const searchValue = $(this).val();
 
-            if (searchValue !== '') {
-                const exactMatch = buildExactMatchExpression(searchValue);
-
-                const matchingTags = $("#SelectedTags>.CustomTag").filter(function() {
-                    return exactMatch.test($(this).text());
-                })
-
-                if (matchingTags.length === 0) {
-                    $(".TitleContainer").hide();
-                    $("main").children().hide();
-                    $(".RulesTocList>li").hide();
-                    
-                    $("#SelectedTags").append(`<li class="CustomTag">${searchValue}</li>`);
-
-                    const selectedTagExpressions = $.map($("#SelectedTags>.CustomTag"), function(tag) {
-                        return buildPartialMatchFromWordStartExpression($(tag).text());
-                    });
-
-                    console.log(selectedTagExpressions)
-
-                    const $selectedRules = $("main>.Rules").filter(function() {
-                        let aRuleContainsSelectedTags = false;
-
-                        $(this).children(".Rule").each(function() {
-                            const $rule = $(this);
-
-                            const textNodes = $(this).extractNestedTextNodes()
-                            
-                            const allTagsMatch = selectedTagExpressions.every((selectedTagExpression) => {
-                                return textNodes.some((textNode) => {
-                                    return selectedTagExpression.test(textNode.get(0).nodeValue)
-                                })
-                            });
-                            
-                            $rule.addHighlightsToRule(searchValue);
-
-                            if (allTagsMatch) {            
-                                $rule.show();
-                                aRuleContainsSelectedTags = true;
-                            } else {
-                                $rule.hide();
-                            };
-                        });
-
-                        return aRuleContainsSelectedTags;
-                    })
-
-                    $selectedRules.showHeadingsForEachRule();
-
-                    $selectedRules.show();
-                }
-                
-                $('#SearchInput').val('');
-            };
+            $(this).executeSearch(searchValue);
         }
     });
+
+    $('#SearchButton').on("click", function() {
+        const searchValue = $('#SearchInput').val();
+
+        $('#SearchInput').executeSearch(searchValue);
+    })
 
     // Handles tag deselection, removing from selected tags list
     $("#SelectedTags").on('click', '.CustomTag', function() {

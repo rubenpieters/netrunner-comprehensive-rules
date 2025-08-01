@@ -312,8 +312,13 @@ a.RuleLink:link, a.RuleLink:visited {
   flex-direction: column;
 }
 
-#SearchInput {
+#SearchBar {
+  display: none;
   align-self: flex-end;
+}
+
+#SelectedTagsContainer {
+  display: none;
 }
 
 #SelectedTags {

@@ -102,7 +102,9 @@ if "opengraph" in config.output_types:
     shutil.rmtree('php')
   write_to_file('php', 'rules.html', standalone_html(document, config, model_data))
   write_to_file('php', 'rules.json', standalone_json(document, config, model_data))
-  shutil.copyfile(os.path.join('data', 'images', 'credit.svg'), os.path.join('php', 'credit.svg'))
+  files = glob.iglob(os.path.join(os.path.join('data', 'images'), "*.svg"))
+  for file in files:
+    shutil.copyfile(file, os.path.join('php', os.path.basename(file)))
   shutil.copyfile(os.path.join('data', 'images', 'preview_placeholder.jpg'), os.path.join('php', 'preview_placeholder.jpg'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.js'), os.path.join('php', 'rules.js'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('php', 'rules.css'))

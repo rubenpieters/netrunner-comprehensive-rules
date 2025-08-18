@@ -109,11 +109,15 @@ class SubRule:
   examples: list[Example]
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
-    result = self.format_text.to_html(config, model_data)
-    result += '<ol class="Examples ExamplesSubRule">'
-    for example in self.examples:
-      result += example.to_html(config, model_data)
-    result += '</ol>'
+    result = f'<span class="RuleText">{self.format_text.to_html(config, model_data)}</span>'
+
+    # Print examples, if any.
+    if len(self.examples) > 0:
+      result += '<ol class="Examples ExamplesSubRule">'
+      for example in self.examples:
+        result += example.to_html(config, model_data)
+      result += '</ol>'
+
     return result
   
   def to_latex(self, config: Config, model_data: ModelData) -> str:
@@ -153,11 +157,15 @@ class Rule:
   examples: list[Example]
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
-    result = self.format_text.to_html(config, model_data)
-    result += '<ol class="Examples ExamplesRule">'
-    for example in self.examples:
-      result += example.to_html(config, model_data)
-    result += '</ol>'
+    result = f'<span class="RuleText">{self.format_text.to_html(config, model_data)}</span>'
+
+    # Print examples, if any.
+    if len(self.examples) > 0:
+      result += '<ol class="Examples ExamplesRule">'
+      for example in self.examples:
+        result += example.to_html(config, model_data)
+      result += '</ol>'
+
     return result
 
   def to_latex(self, config: Config, model_data: ModelData) -> str:
@@ -205,15 +213,19 @@ class SubSection:
     if self.toc:
       result = f'<span class="SubSection">{self.format_text.to_html(config, model_data)}</span>'
     else:
-      result = self.format_text.to_html(config, model_data)
+      result = f'<span class="RuleText">{self.format_text.to_html(config, model_data)}</span>'
     if self.rules:
       result += '<ol class="SubRules">'
       if self.snippet:
         result += f'<p class="Snippet">{self.snippet.to_html(config, model_data)}</p>'
-      result += '<ol class="Examples ExamplesSubSection">'
-      for example in self.examples:
-        result += example.to_html(config, model_data)
-      result += '</ol>'
+
+      # Print examples, if any.
+      if len(self.examples) > 0:
+        result += '<ol class="Examples ExamplesSubSection">'
+        for example in self.examples:
+          result += example.to_html(config, model_data)
+        result += '</ol>'
+
       for rule in self.rules:
         ruleletter:str = f'{model_data.id_map[rule.id].reference[-1]}.'
         result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{rule.to_html(config, model_data)}</li>'
@@ -295,8 +307,8 @@ class Section:
       rulenr:str = f'{model_data.id_map[self.id].reference}.{n+1}.'
 
       match elem:
-        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span><span class="RuleText">{elem.to_html(config, model_data)}</span></li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span><span class="RuleText">{elem.to_html(config, model_data)}</span></li>'
+        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span>{elem.to_html(config, model_data)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span>{elem.to_html(config, model_data)}</span></li>'
         case TimingStructure(): result += elem.to_html(config, model_data)
     result += '</ol>'
     return result

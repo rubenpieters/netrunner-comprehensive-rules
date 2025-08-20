@@ -1,6 +1,6 @@
 FROM python:3.11.4-bookworm AS build
 
-# RUN apt-cache policy
+RUN apt-cache policy
 RUN apt-get clean
 RUN apt-get update
 RUN apt-get -y install texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-fonts-extra latexmk inkscape
@@ -16,8 +16,9 @@ RUN python3 -m rules_doc_generator
 
 ENTRYPOINT /bin/sh 
 
-FROM alpine:3.19 AS final
+FROM php:8.2-cli-alpine AS final
 
-COPY --from=build /workdir/php/* /rules/
+COPY --from=build /workdir/php/* /var/www/html/
 
-ENTRYPOINT ["/bin/sh", "-c", "rm -rf /var/www/html/* && cp -r /rules/* /var/www/html/ && exit"]
+WORKDIR /var/www/html
+ENTRYPOINT ["/bin/sh", "-c", "php -S 0.0.0.0:80"]

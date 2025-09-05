@@ -25,9 +25,22 @@
               </ul>
             </nav>
          </div>
-         <div id="TocOpen" class="TocOpen noprint" onClick="openToc()"><b>☰ Table of Contents</b></div>
+         <div id="MainPageContent">
+            <div id="TocOpen" class="TocOpen noprint" onClick="openToc()"><b>☰ Table of Contents</b></div>
+
+         <header id="SearchFilters">
+            <div id="SearchBar">
+               <input id="SearchInput" type="text" placeholder="Search..." />
+               <button id="SearchButton">Search</button>
+            </div>
+            <div id="SelectedTagsContainer">
+               <ul id="SelectedTags">
+            </div>
+            </ul>
+         </header>
+         <div id="RulesContentWrapper">
          <div id="RulesContent" class="RulesContent">
-            <div>
+            <div class="TitleContainer">
                <p class="Title">Netrunner Comprehensive Rules</p>
                <p class="SubTitle">Null Signal Games</p>
                <p>This rules document is to be used as reference material. It is not intended to be read straight through. If you still have questions after consulting this document, please ask us online via <a href="mailto:rules@nullsignal.games">email</a>. This version of the Comprehensive Rules document is effective <b><!--EFFECTIVE_DATE-->30 March 2024<!--END_EFFECTIVE_DATE--></b>.</p>
@@ -66,7 +79,7 @@
                   <p>Netrunner is a ™ of R. Talsorian Games, Inc. Android is ™ & © Fantasy Flight Games. Although these rules are made to be compatible with cards from Android: Netrunner, they are not in any way associated with or endorsed by Fantasy Flight Games, R. Talsorian Games, or Wizards of the Coast.</p>
                </details>
             </div>
-            <div>
+            <main>
               <!--MAIN_CONTENT-->
               <h1 class="Chapter" id="chpt_one"><a class="RuleLink" href="#chpt_one">1. Sample Chapter</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>
               <h2 class="Section" id="sec_one"><a class="RuleLink" href="#sec_one">1.1. Sample Section</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>
@@ -86,7 +99,11 @@
                 </li>
               </ol>
               <!--END_MAIN_CONTENT-->
-            </div>
+            </main>
+         </div>
+         </div>
+
+
          </div>
       </div>
    </body>

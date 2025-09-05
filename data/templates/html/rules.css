@@ -1,3 +1,8 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: 'Atkinson Hyperlegible';
   margin: 0;
@@ -14,29 +19,43 @@ body {
 }
 
 #RulesParent {
-  max-width: 100vw;
-  overflow-x: clip;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .Clickable {
   cursor: pointer;
 }
 
+#MainPageContent {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 100%;
+}
+
+#RulesContentWrapper {
+  overflow-y: scroll;
+}
+
 #RulesContent {
   padding: 2rem;
-  padding-left: 2.4rem;
-  transform: translateX(0);
-}
-#RulesParent[data-tocopen] #RulesContent {
-  transform: translateX(var(--toc-width));
-  transition: transform 0.05s ease-out 100ms
+  padding-inline: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  max-width: 60ch;
 }
 
-
-#RulesParent[data-tocopen] #RulesToc{
-  transform: translateX(var(--toc-width));
-  transition: transform 0.05s ease-out 100ms;
+#RulesParent[data-tocopen] #MainPageContent {
+  flex-basis: 0;
 }
+
 #RulesParent[data-tocopen] #TocClose {
   visibility: visible;
 }
@@ -51,26 +70,28 @@ body {
      it may be hiding offscreen content due to scroll */
   box-shadow: 0px 4px 10px -10px black; 
 }
+
 #TocTitle {
   flex: 1;
   padding: 1rem;
 }
+
 #TocClose {
   flex: 1;
 }
 
 #RulesToc {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+
+  height: 100%;
+  max-width: var(--toc-width);
+
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  width:var(--toc-width);
-  position: fixed;
-  height: 100%;
-  transform: translateX(0);
-  top: 0;
-  left: 0;
   background-color: beige;
-  margin: 0 0 0 calc(-1 * var(--toc-width));
   padding: 0;
 }
 
@@ -113,14 +134,6 @@ body {
 
 .TocOpen:hover {
   width: 10em;
-}
-
-/* on desktop or sufficiently wide displays, leave whitespace on right 
-   equal to the space the TOC will take up, to allow browsing with TOC open */
-@media only screen and (min-width: 768px) {
-  #RulesContent {
-     padding-right: calc(var(--toc-width) + 2rem);
-  }
 }
 
 .Title {
@@ -262,24 +275,72 @@ a.RuleLink:link, a.RuleLink:visited {
   }
 }
 
+.Thumbnail {
+  position: relative;
+}
+
 .Thumbnail:hover {
   background-color: transparent;
   z-index: 50;
 }
 
-.Thumbnail span {
-  position: fixed;
+.Thumbnail .ThumbnailImageContainer {
+  position: absolute;
   background-color: transparent;
   visibility: hidden;
   text-decoration: none;
 }
 
-.Thumbnail span img {
+.Thumbnail .ThumbnailImageContainer img {
   border-width: 0;
   padding: 4px;
   border-radius: 15px;
 }
 
-.Thumbnail:hover span {
+.Thumbnail:hover .ThumbnailImageContainer {
   visibility: visible;
+}
+
+.Highlight {
+  background-color: #FFFF00;
+}
+
+#SearchFilters {
+  padding-inline: 2.4rem;
+  padding-block-start: 2.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#SearchBar {
+  display: none;
+  align-self: flex-end;
+}
+
+#SelectedTagsContainer {
+  display: none;
+}
+
+#SelectedTags {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  margin-block: 10px;
+  list-style-type: unset;
+  padding-inline-start: unset;
+  flex-wrap: wrap;
+}
+
+.CustomTag {
+  display: inline;
+  padding-inline: 10px;
+  padding-block: 2px;
+  background-color: beige;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.CustomTag:hover {
+  background-color: darkgray;
 }

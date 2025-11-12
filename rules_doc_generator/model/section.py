@@ -228,7 +228,7 @@ class SubSection:
 
       for rule in self.rules:
         ruleletter:str = f'{model_data.id_map[rule.id].reference[-1]}.'
-        result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>{rule.to_html(config, model_data)}</li>'
+        result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a><span class="fas fa-link fa-xs RuleLinkSymbol"></span></span></span>{rule.to_html(config, model_data)}</li>'
       result += '</ol>'
     return result
 

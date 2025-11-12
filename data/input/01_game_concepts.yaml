@@ -811,18 +811,14 @@ sections:
     rules:
     - rule: rule_memory_unused_mu
       text: The Runner's {term:unused} [MU] is their memory limit minus the total memory cost of all of their installed programs. The Runner's [MU] is {term:full} if they have 0 unused [MU].
-      new:
   - rule: rule_memory_cost
     text: Programs have a {term:memory cost} that is continually applied against the memory limit. {ref:Rule_program_memory_cost} details how the Runner's installed programs are constrained by the memory limit.
   - subsection: rule_memory_restricted_mu
-    new:
     text: Some abilities give the Runner [MU] that can only be used for programs that meet a given requirement.
     rules:
     - rule: rule_memory_counting_mu_ignores_restrictions
-      new:
       text: If a calculated value refers directly to the Runner's memory limit or to their unused [MU], that calculation ignores requirements about how that [MU] can be filled.
     - rule: rule_memory_check_mu_restrictions
-      new:
       text: |-
         To determine if the Runner's installed programs satisfy the restrictions on their [MU], create a mapping that assigns each 1[MU] in the memory cost of each installed program to a specific source (either the Runner's starting memory limit or an ability providing additional [MU]). The total [MU] assigned to each source must not exceed the amount of [MU] it provides, and all programs with [MU] assigned to a given source must meet all restrictions imposed on that [MU]. If it is not possible to create such a mapping, the Runner is considered to have exceeded their memory limit, and they must trash installed programs as described in {ref:rule_program_memory_cost}.
 
@@ -848,6 +844,6 @@ sections:
   - rule: rule_look_reveal_expose_access_distinct
     text: Effects that instruct a player to look at, reveal, expose, or access a card are not the same, even if they would be performed similarly at times. See {ref:chpt_access_breach} for more information on accessing.
   - rule: rule_remain_visible
-    text: If a resolving ability directs one or both players to look at or reveal a card or set of cards, each such card remains visible to the relevant player(s) until the entire ability is finished resolving or the card moves to a different location. {n}See also {ref:rule_visibility_after_access}.{/n}
+    text: If a resolving ability directs one or both players to look at or reveal a card or set of cards, each such card remains visible to the relevant player(s) until the entire ability is finished resolving or the card moves to a different location. See also {ref:rule_visibility_after_access}.
   - rule: rule_ambush_text
     text: The ability "While the Runner is accessing this [type] in R&D, they must reveal it." is a static ability that applies for the entire duration of the access. This is also the case for cards with the older wording, "If [this card] is accessed from R&D, the Runner must reveal it."

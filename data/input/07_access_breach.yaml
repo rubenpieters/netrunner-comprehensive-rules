@@ -131,7 +131,7 @@ sections:
     examples:
     - text: The Runner is breaching Archives during a run made with {card:Immolation Script}. They choose a piece of ice from the set of candidates, and apply {card:Immolation Script}'s replacement effect to trash another card instead of accessing the chosen ice. After resolving this, the chosen ice is no longer a candidate and cannot be accessed again this breach. (The newly-trashed card, however, could be a candidate.)
     - text: |-
-      The Corp is playing {card:Gagarin Deep Space: Expanding the Horizon}, and the Runner breaches a remote server. When the Runner chooses a candidate from the root of that server, an additional cost to access is imposed. The Runner declines to pay the cost and therefore does not perform the access. That card still ceases to be a candidate.
+        The Corp is playing {card:Gagarin Deep Space: Expanding the Horizon}, and the Runner breaches a remote server. When the Runner chooses a candidate from the root of that server, an additional cost to access is imposed. The Runner declines to pay the cost and therefore does not perform the access. That card still ceases to be a candidate.
   - rule: rule_after_reaching_random_access_limit
     text: When the random access limit is reached during a breach of HQ or R&D, all candidates in the zone corresponding to the breached server cease to be candidates, and no cards in that zone can become candidates for the remainder of that breach. See {ref:rule_random_access_limit}.
   - rule: rule_candidates_leaving_server

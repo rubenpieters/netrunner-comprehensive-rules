@@ -1,9 +1,9 @@
 # Doc generation config
 
 date:
-  year: "2025"
-  month: "08"
+  year: "2026"
+  month: "01"
   day: "01"
 output_types: [all]
 annotated: True
-allow_unknown_cards: False
+allow_unknown_cards: True

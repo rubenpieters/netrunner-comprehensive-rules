@@ -24,6 +24,8 @@ with open('config.yaml') as f:
     config = replace(config, output_types=parse_output_types(yaml_config["output_types"]))
   if yaml_config["date"] is not None:
     config = replace(config, effective_year=yaml_config["date"]["year"], effective_month=yaml_config["date"]["month"], effective_day=yaml_config["date"]["day"])
+  if yaml_config["allow_unknown_cards"] is not None:
+    config = replace(config, allow_unknown_cards=yaml_config["allow_unknown_cards"])
 
 # Parse command line arguments.
 print("Reading Config...")
@@ -35,6 +37,7 @@ parser.add_argument("-d", "--day", help="Effective day", action="store")
 parser.add_argument("-b", "--php-base-path", help="Basepath of php server", action="store")
 parser.add_argument("-t", "--output-types", help="Output types", nargs="*", action="store")
 parser.add_argument("-n", "--nrdb-info-folder", type=validate_nrdb_info_folder, help="Folder to generate the NRDB info file from", action="store")
+parser.add_argument("-u", "--allow-unknown-cards", const=True, help="Allows unknown cards in input", action="store_const")
 args = parser.parse_args()
 if args.annotated is not None:
   config = replace(config, annotated=args.annotated)
@@ -46,6 +49,8 @@ if args.php_base_path is not None:
   config = replace(config, php_base_path=args.php_base_path)
 if args.output_types is not None:
   config = replace(config, php_base_path=parse_output_types(args.output_types))
+if args.allow_unknown_cards is not None:
+  config = replace(config, allow_unknown_cards=args.allow_unknown_cards)
 
 not_annotated_config = replace(config, annotated=False)
 
@@ -55,6 +60,7 @@ print("- Effective Date: " + str(config.effective_date_str()))
 print("- Annotated: " + str(config.annotated))
 print("- Output Types: " + str(config.output_types))
 print("- Generate NRDB Info: " + str(config.nrdb_info_folder))
+print("- Allow Unknown Cards: " + str(config.allow_unknown_cards))
 
 if config.generate_nrdb_info:
   print(f"Generating NRDB Info From {config.nrdb_info_folder}...")

@@ -6,3 +6,4 @@ date:
   day: "01"
 output_types: [all]
 annotated: True
+allow_unknown_cards: False

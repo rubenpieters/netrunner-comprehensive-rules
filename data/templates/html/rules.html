@@ -25,67 +25,86 @@
               </ul>
             </nav>
          </div>
-         <div id="TocOpen" class="TocOpen noprint" onClick="openToc()"><b>☰ Table of Contents</b></div>
-         <div id="RulesContent" class="RulesContent">
-            <div>
-               <p class="Title">Netrunner Comprehensive Rules</p>
-               <p class="SubTitle">Null Signal Games</p>
-               <p>This rules document is to be used as reference material. It is not intended to be read straight through. If you still have questions after consulting this document, please ask us online via <a href="mailto:rules@nullsignal.games">email</a>. This version of the Comprehensive Rules document is effective <b><!--EFFECTIVE_DATE-->30 March 2024<!--END_EFFECTIVE_DATE--></b>.</p>
-               <details>
-                  <summary class="Clickable"><b>Summary of Changes (<!--VERSION_STRING-->v24.03<!--END_VERSION_STRING-->)</b></summary>
-                  <ul>
-                    <!--CHANGELOG_ENTRIES-->
-                    <li>Sample changelog entry</li>
-                    <!--END_CHANGELOG_ENTRIES-->
+         <div id="MainPageContent">
+            <header id="Header" class="noprint">
+               <div id="HeaderGrid">
+                  <ul id="HeaderItems">
+                     <li class="fas fa-bars fa-2xl HeaderMenuItem" id="TocOpen" onClick="openToc()"></li>
+                     <li class="fas fa-search fa-2xl HeaderMenuItem" id="SearchToolBar"></li>
                   </ul>
-               </details>
-               <details>
-                  <summary class="Clickable"><b>Acknowledgements</b></summary>
-                  <ul>
-                     <li>Netrunner Original Game Design: Richard Garfield</li>
-                     <li>
-                        Android: Netrunner
+                  <div id="SearchBar" class="display-none">
+                     <input id="SearchInput" type="text" placeholder="Search..." />
+                     <button id="SearchButton">Search</button>
+                  </div>
+                  <div id="SelectedTagsContainer">
+                     <ul id="SelectedTags">
+                     </ul>
+                  </div>
+               </div>
+            </header>
+            <div id="RulesContentWrapper">
+               <div id="RulesContent" class="RulesContent">
+                  <div class="TitleContainer">
+                     <p id="NRTitle" class="Title">Netrunner Comprehensive Rules</p>
+                     <p class="SubTitle">Null Signal Games</p>
+                     <p>This rules document is to be used as reference material. It is not intended to be read straight through. If you still have questions after consulting this document, please ask us online via <a href="mailto:rules@nullsignal.games">email</a>. This version of the Comprehensive Rules document is effective <b><!--EFFECTIVE_DATE-->30 March 2024<!--END_EFFECTIVE_DATE--></b>.</p>
+                     <details>
+                        <summary class="Clickable"><b>Summary of Changes (<!--VERSION_STRING-->v24.03<!--END_VERSION_STRING-->)</b></summary>
                         <ul>
-                           <li>Game Development: Lukas Litzsinger</li>
-                           <li>Expansion Development: Lukas Litzsinger, Damon Stone, and Michael Boggs</li>
-                           <li>Rules by: Adam Baker, Michael Boggs, and Erik Dahlman</li>
-                           <li>Android Universe created by: Kevin Wilson with Daniel Lovat Clark</li>
+                        <!--CHANGELOG_ENTRIES-->
+                        <li>Sample changelog entry</li>
+                        <!--END_CHANGELOG_ENTRIES-->
                         </ul>
-                     </li>
-                     <li>
-                        Null Signal Games
+                     </details>
+                     <details>
+                        <summary class="Clickable"><b>Acknowledgements</b></summary>
                         <ul>
-                           <li>Rules Manager: Jamie Perconti</li>
-                           <li>Rules Associates: Ruben P. Pieters and Justin Prentice</li>
-                           <li>Rules Editors: Jonny Foster</li>
-                           <li>Additional Contributions: Kayli Ammen, Noah Bogart, Pat Chapman, Tim Vaduva, and Olive Wesley</li>
+                           <li>Netrunner Original Game Design: Richard Garfield</li>
+                           <li>
+                              Android: Netrunner
+                              <ul>
+                                 <li>Game Development: Lukas Litzsinger</li>
+                                 <li>Expansion Development: Lukas Litzsinger, Damon Stone, and Michael Boggs</li>
+                                 <li>Rules by: Adam Baker, Michael Boggs, and Erik Dahlman</li>
+                                 <li>Android Universe created by: Kevin Wilson with Daniel Lovat Clark</li>
+                              </ul>
+                           </li>
+                           <li>
+                              Null Signal Games
+                              <ul>
+                                 <li>Rules Manager: Jamie Perconti</li>
+                                 <li>Rules Associates: Ruben P. Pieters and Justin Prentice</li>
+                                 <li>Rules Editors: Jonny Foster</li>
+                                 <li>Additional Contributions: Kayli Ammen, Noah Bogart, Pat Chapman, Tim Vaduva, and Olive Wesley</li>
+                              </ul>
+                           </li>
+                           <li>Github Repository Contributions: James Chamberlain, lostgeek, plural, and qwitwa</li>
                         </ul>
+                        <p>Netrunner is a ™ of R. Talsorian Games, Inc. Android is ™ & © Fantasy Flight Games. Although these rules are made to be compatible with cards from Android: Netrunner, they are not in any way associated with or endorsed by Fantasy Flight Games, R. Talsorian Games, or Wizards of the Coast.</p>
+                     </details>
+                  </div>
+                  <main>
+                  <!--MAIN_CONTENT-->
+                  <h1 class="Chapter" id="chpt_one"><a class="RuleLink" href="#chpt_one">1. Sample Chapter</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>
+                  <h2 class="Section" id="sec_one"><a class="RuleLink" href="#sec_one">1.1. Sample Section</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>
+                  <p class="Snippet">Sample Snippet</p>
+                  <ol class="Rules">
+                     <li class="Rule" id="rule_one">
+                        <span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#rule_one"></a><a class="RuleLink" href="#rule_one">1.1.1.</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>Sample Rule 1.
+                        <ol class="Examples ExamplesRule"></ol>
                      </li>
-                     <li>Github Repository Contributions: lostgeek, plural, and qwitwa</li>
-                  </ul>
-                  <p>Netrunner is a ™ of R. Talsorian Games, Inc. Android is ™ & © Fantasy Flight Games. Although these rules are made to be compatible with cards from Android: Netrunner, they are not in any way associated with or endorsed by Fantasy Flight Games, R. Talsorian Games, or Wizards of the Coast.</p>
-               </details>
-            </div>
-            <div>
-              <!--MAIN_CONTENT-->
-              <h1 class="Chapter" id="chpt_one"><a class="RuleLink" href="#chpt_one">1. Sample Chapter</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h1>
-              <h2 class="Section" id="sec_one"><a class="RuleLink" href="#sec_one">1.1. Sample Section</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></h2>
-              <p class="Snippet">Sample Snippet</p>
-              <ol class="Rules">
-                <li class="Rule" id="rule_one">
-                    <span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#rule_one"></a><a class="RuleLink" href="#rule_one">1.1.1.</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>Sample Rule 1.
-                    <ol class="Examples ExamplesRule"></ol>
-                </li>
-                <li class="Rule" id="rule_two">
-                    <span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#rule_two"></a><a class="RuleLink" href="#rule_two">1.1.2.</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>Sample Rule 2.
-                    <ol class="Examples ExamplesRule"></ol>
-                </li>
-                <li class="Rule" id="rule_three">
-                    <span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#rule_three"></a><a class="RuleLink" href="#rule_three">1.1.3.</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>Sample Rule 3.
-                    <ol class="Examples ExamplesRule"></ol>
-                </li>
-              </ol>
-              <!--END_MAIN_CONTENT-->
+                     <li class="Rule" id="rule_two">
+                        <span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#rule_two"></a><a class="RuleLink" href="#rule_two">1.1.2.</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>Sample Rule 2.
+                        <ol class="Examples ExamplesRule"></ol>
+                     </li>
+                     <li class="Rule" id="rule_three">
+                        <span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#rule_three"></a><a class="RuleLink" href="#rule_three">1.1.3.</a><span class="RuleLinkSymbol material-symbols-outlined">link</span></span></span>Sample Rule 3.
+                        <ol class="Examples ExamplesRule"></ol>
+                     </li>
+                  </ol>
+                  <!--END_MAIN_CONTENT-->
+                  </main>
+               </div>
             </div>
          </div>
       </div>

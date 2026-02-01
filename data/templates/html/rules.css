@@ -13,6 +13,13 @@ body {
     'opsz' 24;
 }
 
+#Header {
+  width: 100%;
+  position: fixed;
+  background-color: #15153c;
+  z-index: 10;
+}
+
 #RulesParent {
   max-width: 100vw;
   overflow-x: clip;
@@ -27,6 +34,11 @@ body {
   padding-left: 2.4rem;
   transform: translateX(0);
 }
+
+#NRTitle {
+  margin-top: 1.5em;
+}
+
 #RulesParent[data-tocopen] #RulesContent {
   transform: translateX(var(--toc-width));
   transition: transform 0.05s ease-out 100ms
@@ -39,9 +51,6 @@ body {
 }
 #RulesParent[data-tocopen] #TocClose {
   visibility: visible;
-}
-#RulesParent[data-tocopen] #TocOpen {
-  visibility: hidden;
 }
 
 #TocHeader {
@@ -69,9 +78,10 @@ body {
   transform: translateX(0);
   top: 0;
   left: 0;
-  background-color: beige;
+  background-color: #f1f1f1;
   margin: 0 0 0 calc(-1 * var(--toc-width));
   padding: 0;
+  z-index: 20;
 }
 
 #RulesToc nav {
@@ -113,6 +123,12 @@ body {
 
 .TocOpen:hover {
   width: 10em;
+}
+
+.HeaderMenuItem {
+  cursor: pointer;
+  color: #f2f2f2;
+  padding: 0.2em;
 }
 
 /* on desktop or sufficiently wide displays, leave whitespace on right 
@@ -257,21 +273,26 @@ a.RuleLink:link, a.RuleLink:visited {
 }
 
 @media print{
-  .noprint {
-      display:none;
-  }
+  .noprint { display:none; }
+  * { overflow: visible !important; } 
+  .page { page-break-after:always; }
 }
 
-.Thumbnail:hover {
-  background-color: transparent;
-  z-index: 50;
-}
-
-.Thumbnail span {
-  position: fixed;
+.Thumbnail .ThumbnailImageContainer {
+  position: absolute;
   background-color: transparent;
   visibility: hidden;
   text-decoration: none;
+}
+
+.Thumbnail .ThumbnailImageContainer img {
+  border-width: 0;
+  padding: 4px;
+  border-radius: 15px;
+}
+
+.Thumbnail:hover .ThumbnailImageContainer {
+  visibility: visible;
 }
 
 .Thumbnail span img {
@@ -282,4 +303,94 @@ a.RuleLink:link, a.RuleLink:visited {
 
 .Thumbnail:hover span {
   visibility: visible;
+}
+
+.Highlight {
+  background-color: #FFFF00;
+}
+
+#HeaderGrid {
+  display: grid;
+  grid-template-columns: 5fr 10fr 40fr 40fr 5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+}
+
+#HeaderItems {
+  grid-column: 2;
+  display: flex;
+  gap: 0.8em;
+}
+
+#SearchBar {
+  grid-column: 3;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8em;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-flex {
+  display: flex;
+}
+
+#SearchInput {
+  padding: 0.3em 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 0.4em;
+  font-size: 1em;
+  width: 12em;
+  background-color: #fff;
+}
+
+#SearchInput:focus {
+  outline: none;
+  border-color: #888;
+}
+
+#SearchButton {
+  padding: 0.3em 0.8em;
+  border: none;
+  border-radius: 0.4em;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#SearchButton:hover {
+  background-color: #c8c8c8;
+}
+
+#SelectedTagsContainer {
+  grid-column: 4;
+  display: none;
+}
+
+#SelectedTags {
+  display: flex;
+  gap: 10px;
+  list-style-type: unset;
+  padding-inline-start: unset;
+  flex-wrap: wrap;
+}
+
+.CustomTag {
+  display: inline;
+  padding-inline: 10px;
+  padding-block: 2px;
+  background-color: lightsalmon;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.CustomTagIcon {
+  padding-right: 0.5em;
+}
+
+.CustomTag:hover {
+  background-color: darkgray;
 }

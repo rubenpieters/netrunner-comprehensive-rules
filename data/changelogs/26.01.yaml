@@ -1,2 +1,3 @@
 changelog:
+- text: Added {ref:rule_pass_after_breaking} to define what it means for the Runner to pass a piece of ice "after fully breaking it".
 - text: Updated the list of subtypes ({ref:rule_subtypes_list}) to remove {subtype:illicit} and add {subtype:liability}.

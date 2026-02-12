@@ -36,6 +36,9 @@ sections:
       text: If a condition refers to encountering a piece of ice "after" an approach or passing a piece of ice "after" an encounter, then that condition is only met by the indicated phases or steps occurring in direct sequence according to the standard progression of the run.
       examples:
       - text: The Runner uses {card:Inversificator} to break the subroutine on a {card:Mirāju} that is protecting Archives. When the encounter ends, {card:Mirāju}'s ability creates a replacement effect so that the Runner moves to the outermost position of Archives instead of passing {card:Mirāju}. Because the ice is not passed, {card:Inversificator}'s ability does not meet its trigger condition. Later, the Runner encounters the same {card:Mirāju} again and does not break its subroutine. When this encounter ends, the Runner passes {card:Mirāju}. Even though the Runner has used {card:Inversificator} to fully break {card:Mirāju} during an encounter earlier in the run, {card:Inversificator}'s trigger condition is not met when the Runner passes {card:Mirāju} because the Runner is not passing it after the relevant encounter.
+    - rule: rule_pass_after_breaking
+      new:
+      text: If a condition refers to passing a piece of ice "after" fully breaking it, then that condition is only met when the Runner passes that piece of ice after an encounter (as defined by {ref:rule_run_phase_after}), and only if the Runner fully broke that ice during that encounter. See {ref:subsec_fully_break}.
   - rule: rule_end_the_run
     text: To {term:end the run} is to halt the Runner's progress toward the server. When an effect ends the run, the current phase of the run ends without following any of its remaining steps, and before completing open priority windows. The game immediately moves from the current timing point to {ref:rule_sec_run_run_ends_phase}, the Run Ends Phase.
   - subsection: rule_jacking_out

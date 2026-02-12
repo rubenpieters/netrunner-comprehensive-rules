@@ -3,3 +3,5 @@ changelog:
 - text: Expanded {ref:rule_arrange_secretly} to add a rule ensuring that cards about to be arranged in any order don't need to have their order maintained for other effects in the same instruction.
 - text: Added {ref:rule_pass_after_breaking} to define what it means for the Runner to pass a piece of ice "after fully breaking it".
 - text: Updated the list of subtypes ({ref:rule_subtypes_list}) to remove {subtype:illicit} and add {subtype:liability}.
+- text: Simplified rules about counting accessed cards in {ref:rule_number_of_accesses} and {ref:rule_counting_random_access_limit}.
+- text: Clarified rules about prohibitions on accesses in {ref:rule_prohibiting_access}.

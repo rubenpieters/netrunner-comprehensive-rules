@@ -86,18 +86,16 @@ sections:
     - rule: rule_increasing_random_access_limit
       text: If an ability allows the Runner to "access additional cards" during a breach of HQ or R&D, the effect of that ability is to increase the random access limit. Such an ability can only be applied at the beginning of the breach, before the value of the random access limit is set.
     - rule: rule_counting_random_access_limit
-      text: Cards are counted against the random access limit in the manner described in {ref:rule_counting_candidates_during_breach}.
-  - subsection: rule_number_of_accesses
-    text: Some rules and abilities refer to the number of cards the Runner accesses or the number of times the Runner accesses a card.
-    rules:
-    - rule: rule_counting_candidates_during_breach
-      text: If such a reference applies while a breach is in progress, it counts the number of times a candidate has been chosen so far during that breach, regardless of how many of those candidates have actually been accessed.
-      examples:
-      - text: The Runner plays {card:Immolation Script}, and the subroutine on {card:Hudson 1.0} resolves before Archives is breached. The Runner will only be able to choose 1 candidate during the breach, regardless of whether they choose to access that card or apply {card:Immolation Script}'s replacement effect.
-    - rule: rule_counting_candidates_after_breach
-      text: If such a reference applies after a breach is complete, it counts only the number of times the Runner actually resolved an access during that breach.
-      examples:
-      - text: The Runner plays {card:Rip Deal} while they have {card:Obelus} installed. If they use {card:Rip Deal}'s ability to replace accesses of cards in HQ with adding cards from the heap to the grip, the cards those replacement effects applied to were not accessed. When {card:Obelus}'s ability resolves after the breach ends, it will only cause the Runner to draw cards for upgrades they accessed in the root of HQ.
+      text: |-
+        {n}If the Runner chooses a candidate in HQ or R&D but does not actually access that card for any reason, that candidate still counts towards reaching the random access limit.{/n} 
+  - rule: rule_number_of_accesses
+    text: |-
+      {n}Some abilities count accesses in order to establish a quantity. An ability that counts in this way only includes accesses that are actually performed.{/n}
+    examples:
+    - text: |-
+        The Runner uses {card:Hades Shard} to breach Archives during a run on HQ. For 1 of the accesses in that breach, after choosing a candidate, they use {card:Archives Interface} to apply a replacement effect, removing the chosen candidate from the game instead of accessing it. When the run ends, the Runner uses {card:Zahya Sadeghi: Versatile Smuggler} to gain 1[c] for each time they accessed a card during the run. The access that was replaced does not contribute to the number of credits the Runner gains.
+      new:
+    - text: The Runner plays {card:Immolation Script}, and the subroutine on {card:Hudson 1.0} resolves before Archives is breached. {n}When the Runner breaches Archives, the first candidate they choose is a piece of ice, and they apply the replacement effect from {card:Immolation Script} to trash a rezzed copy of the chosen ice instead of accessing the candidate copy. No card was actually accessed, so the Runner can proceed to choose another candidate. However, if the Runner had first accessed a card without applying {card:Immolation Script}'s replacement effect, they would then be prohibited from accessing any more cards, so there would be no more candidates to choose and they could not apply a replacement effect afterward.{/n}
   - rule: rule_end_run_ends_breach
     text: If a run is in progress, an instruction to end the run ends any breach taking place. If there is no run in progress, an instruction to end the run has no effect on a breach.
   - rule: rule_consecutive_breaches
@@ -124,8 +122,19 @@ sections:
     examples:
     - text: The Corp performs a successful trace with the ability on {card:Ash 2X3ZB9CY}, prohibiting the Runner from accessing any card other than Ash for the remainder of the current run. When the server is breached, Ash will be the only candidate for the Runner's first selection, and then there will be no candidates remaining, so the breach will end.
     rules:
+    - rule: rule_prohibition_removed
+      text: |-
+        If an ability prohibiting some or all accesses becomes inactive during a breach, each card in the root of the breached server that is not already a candidate is reevaluated: if no other effects prohibit accessing that card, and if it was not already chosen as a candidate for access during that breach, then that card becomes a candidate. During a breach of Archives, each card in the Corp's discard pile is reevaluated in the same way. During a breach of HQ, if the random access limit has not been reached, each card in the Corp's hand is reevaluated the same way. During a breach of R&D, if the random access limit has not been reached and the top card of R&D is not already a candidate, it is reevaluated in the same way.
+      new:
+      examples:
+      - text: The Runner breaches HQ during a run on HQ while {card:Flagship} is rezzed in the root of HQ. They have an installed copy of {card:Docklands Pass}, so the random access limit is set to 2. The Runner accesses a card in HQ, meaning that {card:Flagship}'s restriction applies and all the other cards in HQ cease to be candidates. The Runner then accesses {card:Flagship} and uses {card:Cupellation}'s ability to host {card:Flagship} on {card:Cupellation}, thereby uninstalling it without its persistent ability remaining active (see {ref:subsec_persistent}). Since the restriction on accessing cards other than Flagship no longer applies, the cards in HQ become candidates again, except for the card the Runner previously accessed.
+        new:
     - rule: rule_prohibiting_access_to_1
-      text: One card, {card:Hudson 1.0}, creates an effect that prohibits the Runner from accessing more than 1 card during a run. This effect always considers whether the Runner has actually accessed a card during that run, even when {ref:rule_counting_candidates_during_breach} would normally apply. If the Runner has accessed any cards, this effect prohibits all accesses, and therefore there will be no candidates.
+      text: |-
+        {n}Some abilities state that the Runner "cannot access more than 1 card" during a particular run. The effect of this ability is that as long as the Runner has accessed a card during the indicated run, they are prohibited from accessing other cards during that run. The ability has no effect on breaches or candidates until a card has been accessed, and for breaches of HQ and R&D, it never affects the random access limit, even if a card was accessed before the breach began.{/n}
+      examples:
+      - text: The Runner breaches HQ during a run on HQ while {card:Flagship} is rezzed in the root of HQ, and they have an installed copy of {card:Docklands Pass}, but they have previously accessed a card during that run because of {card:Otoroshi}'s ability. The random access limit is still set to 2, but since the Runner is not allowed to access any cards other than {card:Flagship}, none of the cards in the Corp's hand will be candidates. If {card:Flagship}'s ability becomes inactive before the breach ends, the cards in the Corp's hand will become candidates and the Runner will be able to access 2 of them.
+        new:
   - rule: rule_candidates_already_accessed
     text: Once the Runner chooses a candidate for access, it ceases to be a candidate for the remainder of that breach. It does not matter whether the chosen candidate is actually accessed. As long as the card is chosen, it ceases to be a candidate.
     examples:

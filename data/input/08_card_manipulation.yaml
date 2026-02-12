@@ -39,7 +39,7 @@ sections:
     text: Some abilities can install Runner cards facedown or turn already-installed Runner cards facedown.
     rules:
     - rule: rule_facedown_runner_cards_are_blank
-      text: Installed Runner cards that are facedown do not have a name, type, or subtypes, and their abilities are not active.
+      text: Installed Runner cards that are facedown {n}do not have any characteristics (name, card type, faction, cost, subtypes, influence, etc){/n}, and their abilities are not active.
     - rule: rule_facedown_runner_cards_are_distinct
       text: |-
         Facedown installed Runner cards are distinct. The origin of each such card (when and how it was installed facedown, or what faceup installed card was turned facedown) is open information.
@@ -49,7 +49,7 @@ sections:
       text: A Runner card turned facedown is not considered to be uninstalled and simply remains in the play area.
     - rule: rule_unflipping_runner_cards
       text: |-
-        If an installed facedown Runner card is turned faceup, the card gains its name, type, and subtypes, and it becomes active. Turning an installed facedown Runner card faceup does not meet the trigger conditions of "when installed" abilities.
+        If an installed facedown Runner card is turned faceup, the {n}card regains its printed characteristics{/n} and it becomes active. Turning an installed facedown Runner card faceup does not meet the trigger conditions of "when installed" abilities.
     - rule: rule_runner_cards_neither_rezzed_nor_unrezzed
       text: Runner cards are never considered rezzed or unrezzed.
 

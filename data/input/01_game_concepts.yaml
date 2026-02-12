@@ -235,7 +235,7 @@ sections:
         Cards are inactive in R&D, HQ, Archives, the heap, the grip, the stack, the Runner's score area, while set aside, and while removed from the game. Facedown cards in the play area are also inactive.
     - rule: rule_inactive_cards_characteristics
       text: |-
-        Inactive cards in most zones retain their printed characteristics (name, card type, faction, cost, subtypes, influence, etc). Facedown installed Runner cards have no characteristics.
+        Inactive cards{n}, except facedown installed Runner cards,{/n} retain their printed characteristics (name, card type, faction, cost, subtypes, influence, etc). {n}See {ref:sec_facedown_runner_cards} for information about facedown installed Runner cards.{/n}
   - rule: rule_card_draw
     text: |-
       For a player to {term:draw} 1 or more cards is to take that many cards from the top of their deck and put them into their hand. {ref:Sec_drawing_cards} provides more details about drawing cards.

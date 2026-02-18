@@ -243,3 +243,18 @@ sections:
   - rule: rule_reminder_text
     text: |-
       Some cards have italicised text in parentheses. This is {term:reminder text}, and has no effect on the game or the function of the card, nor can other abilities reference or interact with it directly. Reminder text simply summarizes a rule that may apply to that card text.
+
+- section: sec_server_indicator
+  text: Server Indicator
+  new:
+  rules:
+  - rule: rule_server_back
+    text: One Corp identity, {card:Méliès U}, has several versions of its back face with different subtitles, and each of those versions features an additional icon next its the faction icon to aid in distinguishing the versions. The icons each represent a particular central server referred to in the trigger condition of the card's first ability.
+    new:
+  - rule: rule_server_icon
+    text: |-
+      The 3 server indicator icons are: an office building (representing HQ), a laboratory flask (representing R&D), and a computer server (representing Archives).
+    new:
+  - rule: sec_server_indicator_no_gameplay
+    text: The server indicator is a visual aid only and has no direct gameplay function.
+    new:

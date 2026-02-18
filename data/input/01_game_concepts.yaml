@@ -110,13 +110,17 @@ sections:
   rules:
   - rule: rule_outside_deck
     text: Some abilities allow for the use of additional cards from outside the deck.
-  - subsection: rule_jinteki_biotech
+  - subsection: rule_identity_copy
     text: |-
-      One Corp identity, {card:Jinteki Biotech: Life Imagined}, has the ability, "Before taking your first turn, you may switch this card with any copy of Jinteki Biotech." There are 3 versions of this identity, which have different abilities on their reverse side.
+      {n}{card:Jinteki Biotech: Life Imagined} and {card:Méliès U: Only the Brightest} each have an ability which references different copies of the identity. There are different versions of those identities which have different abilities on their reverse side.{/n}
     rules:
     - rule: rule_jinteki_biotech_detail
       text: |-
-        A player playing Jinteki Biotech as their identity may bring any number of copies of that identity along with their deck. After completing game setup, that player may choose any copy they own to be their active identity for the duration of the game. All other copies are placed outside the game.
+        A player playing {card:Jinteki Biotech} as their identity may bring any number of copies of that identity along with their deck. After completing game setup, that player may choose any copy they own to be their active identity for the duration of the game. All other copies are placed outside the game.
+    - rule: rule_melies_u_detail
+      text: |-
+        A player playing {card:Méliès U} as their identity may bring any number of copies of that identity along with their deck. At the start of the game, 1 copy will be their active identity, and all other copies are placed outside the game. Whenever the first ability on {card:Méliès U: Only the Brightest} resolves, that player is instructed to "secretly set" their identity. To complete this instruction, the player secretly chooses either their current identity card or 1 of the {card:Méliès U} identity cards outside the game, and the chosen copy becomes their active identity. The player can shuffle their current identity card into the set of copies outside the game in order to obscure whether they choose to keep the same copy or switch to another copy. The chosen identity card always enters the play area with its {card:Méliès U: Only the Brightest} side faceup. All other copies are placed outside the game until the ability resolves again.
+      new:
   - subsection: rule_adam
     text: |-
       One Runner identity, {card:Adam: Compulsive Hacker}, has the ability, "You start the game with 3 different {subtype:directive} cards installed (these cards are not considered part of your deck)."

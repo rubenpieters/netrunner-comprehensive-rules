@@ -449,6 +449,16 @@ sections:
       text: If an installed Corp card becomes hosted on a Runner card, the Corp card becomes uninstalled.
     - rule: rule_install_from_hosted
       text: If a card is installed from a hosted state, it ceases to be hosted. The hosting relationship ends at step {ref:rule_steps_installing_place} of the installation.
+  - rule: rule_hosted_counters_not_on_player
+    text: Hosted counters do not count as "on" a player or as objects a player "has". They are not counted by abilities that check the number of counters on a player and cannot be affected by abilities that remove counters from a player.
+    new:
+    examples:
+    - text: The Corp resolves the first subroutine on {card:Whitespace}, forcing the Runner to lose 3{c}. The Runner cannot lose credits hosted on their cards, even if they do not have 3{c} in their credit pool.
+      new:
+    - text: The Corp has a rezzed {card:Superdeep Borehole} with hosted bad publicity counters. When the Runner fills their bad publicity fund in {ref:step_initiation_bad_publicity}, they do not receive credits for the hosted bad publicity.
+      new:
+    - text: The Corp plays {card:Scapegoat} to remove 2 bad publicity. They cannot remove bad publicity counters hosted on {card:Superdeep Borehole}.
+      new:
   - rule: rule_hosted_limit
     text: An object can only be hosted on a single card at any given time.
   - rule: rule_hosting_limit
@@ -494,6 +504,12 @@ sections:
     text: If an ability on a card refers to a "hosted" card or counter, that ability only references objects hosted on that card.
   - rule: rule_remove_spend_hosted_objects
     text: Hosted objects can be removed or spent from their host without affecting the host.
+  - rule: rule_hosted_object_same_zone_as_host
+    text: Creating a hosting relationship moves the hosted object to the same zone as the host. If the hosted object is subsequently moved to another zone or hosted on a different card, the hosting relationship ends.
+    new:
+    examples:
+    - text: The Runner uses the action on {card:Madani}, choosing 2 programs in their grip to host on {card:Madani}. The chosen cards change zones, moving from the Runner's grip to the play area.
+      new:
   - rule: rule_trash_hosted_objects_when_host_trashed
     text: If a host card changes zones, except by moving from a player's score area to another player's score area, all objects hosted on that card (and all objects hosted on those objects, and so on) are trashed during the next checkpoint. This cannot be prevented. See {ref:sec_checkpoints} for details on checkpoints.
     examples:

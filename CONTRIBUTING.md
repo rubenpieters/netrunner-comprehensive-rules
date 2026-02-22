@@ -8,7 +8,8 @@ Overview of the folder structure in the project:
 
 ```
 - .github             | files for github actions
-- data                | input data for the document generation 
+- data                | input data for the document generation
+- generated           | folder with generated data
 - rules_doc_generator | python project for the format conversion
 ```
 

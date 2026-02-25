@@ -534,6 +534,12 @@ sections:
       examples:
       - text: |-
           {card:Joshua B.}'s ability allows the Runner to gain [click]. If they do, it creates a delayed conditional ability that is independent of {card:Joshua B.} itself, which will meet its trigger condition only once, when that turn ends. After that ability resolves, the game no longer maintains the lingering effect creating the ability.
+    - rule: rule_delayed_run_ends_condition_outside_run
+      text: If an effect tries to create a delayed conditional ability with the trigger condition "When this run ends", but there is no run in progress, then the lingering effect is not created.
+      new:
+      examples:
+      - text: The Runner encounters a piece of ice outside of a run, and uses {card:Mayfly} to break its subroutines. Since there is no run in progress, the delayed conditional ability inside {card:Mayfly}'s interface ability cannot be created, and {card:Mayfly} will not be trashed.
+        new:
 
   - subsection: rule_references_to_trigger_conditions
     text: |-

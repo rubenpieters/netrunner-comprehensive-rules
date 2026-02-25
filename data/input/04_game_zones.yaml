@@ -202,9 +202,11 @@ sections:
     - rule: rule_play_area_operation_events
       text: There is no specific location in the play area for operations or events. They are simply played into the play area, where they resolve before being trashed. See {ref:sec_playing_events_and_operations}.
     - rule: rule_play_area_credit_pool
-      text: Each player has a credit pool, which is a location in the play area where credits they control are kept.
+      text: |-
+        {n}Credits in the play area are always placed in a designated location: the Corp's credit pool, the Runner's credit pool, the bad publicity fund, or hosted on a card. See {ref:sec_credits} for information about credit pools, and see {ref:sec_bad_publicity} for information about the bad publicity fund.{/n}
     - rule: rule_play_area_counters
-      text: Counters other than credits have no specific location in the play area. Tag counters are always controlled by the Runner, and bad publicity counters are always controlled by the Corp. Other types of counters are either nonfunctional gameplay aids or appear only in host relationships. See also {ref:sec_counters_and_tokens}.
+      text: |-
+        {n}Tag counters and bad publicity counters{/n} have no specific location in the play area {n}unless hosted on a card{/n}. Other types of counters are either nonfunctional gameplay aids or appear only in host relationships. See also {ref:sec_counters_and_tokens}.
     - rule: rule_play_area_installed_hosted
       text: Some cards can act as install locations for other cards while in the play area, such that cards of a specific type can be hosted directly onto them during the installation process. In this type of host relationship, both the host card and the hosted card are in the play area, but the host relationship can affect certain aspects of either the card or the installation process. See {ref:sec_host}.
     - rule: rule_play_area_not_installed_hosted

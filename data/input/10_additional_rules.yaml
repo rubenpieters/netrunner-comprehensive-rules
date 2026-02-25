@@ -180,11 +180,6 @@ sections:
   - rule: rule_tagged_remove_tag
     text: |-
       While the Runner is tagged, they can, as an action, spend [click] and 2[c] to remove one tag, returning it to the bank.
-  - rule: rule_corp_can_pay_tag_costs
-    text: The Runner controls each tag on them, but the Corp can pay costs involving tags as if they controlled the Runner's tags.
-    examples:
-    - text: |-
-        The Runner has a tag, and makes a run on a server with {card:Keegan Lane} installed. Even though the tag token is controlled by the Runner, the Corp can remove it to pay the cost of {card:Keegan Lane}'s ability to trash one of the Runner's programs.    
 - section: sec_bad_publicity
   text: Bad Publicity
   snippet: |-
@@ -193,14 +188,21 @@ sections:
   - rule: rule_bad_publicity
     text: |-
       {term:bad publicity} refers to a bad publicity counter placed on the Corp. Bad publicity is used by card abilities and during runs.
-  - subsection: rule_bad_publicity_beginning_run
-    text: |-
-      For each bad publicity the Corp has, the Runner gains 1[c] at the beginning of each run, during {ref:step_initiation_bad_publicity}. Any unspent bad publicity credits return to the bank at the end of the run, during {ref:step_run_ends_bad_publicity}.
+  - rule: rule_bad_publicity_fund
+    text: The {term:bad publicity fund} is a location in the play area that can contain credits. Credits in the bad publicity fund are controlled by the Runner, but are not part of the Runner's credit pool. The Runner can spend credits in the bad publicity fund during runs.
+    new:
+  - subsection: rule_bad_publicity_added_and_removed
+    text: Credits are added to and removed from the bad publicity fund during each run.
+    new:
     rules:
+    - rule: rule_bad_publicity_beginning_run
+      text: During {ref:step_initiation_bad_publicity}, the Runner adds 1[c] from the bank to the bad publicity fund for each bad publicity the Corp has.
+      new:
+    - rule: rule_bad_publicity_gone_in_run_ends_phase
+      text: During {ref:step_run_ends_bad_publicity}, the Runner returns any remaining credits from the bad publicity fund to the bank.
+      new:
     - rule: rule_bad_publicity_during_run
-      text: If the Corp takes bad publicity while a run is already underway, the Runner does not gain additional bad publicity credits for that run.
-  - rule: rule_runner_can_pay_bad_publicity_costs
-    text: The Corp controls each bad publicity on them, but the Runner can pay costs involving bad publicity as if they controlled the Corp's bad publicity.
+      text: If the Corp takes bad publicity {n}or removes bad publicity after {ref:step_initiation_bad_publicity} of a run, this has no effect on the credits in the bad publicity fund for that run.{/n}
 
 - section: sec_link
   text: Link

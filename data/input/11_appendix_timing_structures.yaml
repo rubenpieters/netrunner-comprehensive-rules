@@ -84,7 +84,7 @@ sections:
     - text: Initiation Phase
       elements:
       - text: The Runner announces the attacked server.
-      - text: The Runner gains bad publicity credits.
+      - text: The Runner {n}fills their bad publicity fund.{/n}
       - text: The run begins.
       - text: The Runner's position is set to the outermost ice, if any.
       - text: |-
@@ -136,7 +136,7 @@ sections:
     - text: Run Ends Phase
       elements:
       - text: Close or resolve priority windows from before "end the run".
-      - text: The Runner loses unspent bad publicity credits.
+      - text: The Runner {n}empties their bad publicity fund.{/n}
       - text: If applicable, the run is declared unsuccessful.
       - text: The run is complete.
 - section: sec_appendix_timing_structure_of_breaching_a_server

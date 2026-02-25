@@ -151,15 +151,8 @@ sections:
           {card:Off the Grid} states in part, "The Runner cannot initiate a run on this server." This only prohibits the Runner from announcing this particular remote server as the attacked server at the beginning of the run. If an ability changes the attacked server while a run is in progress, {card:Off the Grid} does not interfere with that ability.
     - rule: rule_additional_cost_to_run
       text: Some abilities impose an additional cost to run, either generally or on a particular server. Any costs to run a server must be paid at the time that server is announced as the attacked server.
-  - subsection: rule_initiation_bad_publicity
-    text: After the attacked server is announced, the Runner receives credits equal to the number of bad publicity the Corp has. See {ref:sec_bad_publicity} for an explanation of bad publicity.
-    rules:
-    - rule: rule_bad_publicity_cost_to_run
-      text: Credits from bad publicity cannot be spent to pay costs to make the run, as they are received after the attacked server is announced.
-    - rule: rule_bad_publicity_in_credit_pool
-      text: Once they are received, credits from bad publicity are in the Runner's credit pool and behave just as any other credits. They can be spent, lost, placed on cards, and so on as normally allowed.
-    - rule: rule_bad_publicity_gone_in_run_ends_phase
-      text: During the Run Ends Phase, any credits from bad publicity remaining in the Runner's credit pool are lost.
+  - rule: rule_initiation_bad_publicity
+    text: After the attacked server is announced, {n}credits are added to the Runner's bad publicity fund.{/n} See {ref:sec_bad_publicity} for an explanation of bad publicity.
   - rule: rule_abilities_during_a_run
     text: Some abilities look for particular conditions occurring "during a run" or are restricted to being used "during a run." For purposes of abilities, the run formally begins only after the attacked server is announced and any costs are paid.
     examples:
@@ -297,7 +290,7 @@ sections:
     - rule: rule_run_ends_other_priority_windows
       text: Any other open priority window is completed normally. If more than one priority window needs to be completed this way, they are resolved in the usual order described in {ref:rule_resolve_ability}.
   - rule: rule_run_ends_lose_bad_pub_credits
-    text: During the Run Ends Phase, if the Runner has any credits from bad publicity remaining in their credit pool, the Runner loses those credits.
+    text: During the Run Ends Phase, if {n}there are any credits remaining in the Runner's bad publicity fund, those credits are returned to the bank.{/n}
   - subsection: rule_unsuccessful_run
     text: |-
       As part of the Run Ends Phase, the game determines whether the run should be declared an {term:unsuccessful run}. This is a label applied to runs in which the Runner failed to reach the server they attacked, and is referred to by card abilities. The run is declared unsuccessful if neither of the following conditions have been met:
@@ -324,7 +317,7 @@ sections:
     - rule: step_initiation_announce
       text: The Runner announces the attacked server.
     - rule: step_initiation_bad_publicity
-      text: The Runner gains 1[c] to spend during the run for each bad publicity the Corp has.
+      text: The Runner {n}adds 1[c] from the bank to their bad publicity fund{/n} for each bad publicity the Corp has.
     - rule: step_initiation_formal_begin
       text: The run formally begins. Conditions related to the run beginning or initiating are met.
     - rule: step_runner_position
@@ -395,7 +388,7 @@ sections:
     - rule: step_open_priority_windows_closed
       text: Any priority windows that were open when the run moved to this phase are completed or closed as described in {ref:rule_run_ends_process_priority_windows}.
     - rule: step_run_ends_bad_publicity
-      text: The Runner loses any unspent bad publicity credits.
+      text: The Runner {n}returns any remaining credits in the bad publicity fund to the bank.{/n}
     - rule: step_run_declared_unsuccessful
       text: If the Success Phase was not reached during this run and the attacked server still exists, the run becomes unsuccessful.
     - rule: step_run_complete

@@ -288,7 +288,7 @@ sections:
         {term:Tag counters} are used to represent tags on the Runner. Rules for tags are given in {ref:sec_tags}.
     - rule: rule_type_bad_pub_counter
       text: |-
-        {term:Bad publicity counters} represent bad publicity the Corp has earned. Rules for bad publicity are in {ref:sec_bad_publicity}.
+        {term:Bad publicity counters} {n}are used to represent bad publicity on the Corp{/n}. Rules for bad publicity are in {ref:sec_bad_publicity}.
     - rule: rule_type_core_damage_counter
       text: |-
         {term:Core damage counters} are a gameplay aid used to track core damage the Runner has suffered. Each point of core damage the Runner suffers forces them to take a core damage counter. See {ref:sec_damage}.
@@ -541,13 +541,17 @@ sections:
     - rule: rule_controller_credits
       text: Each player controls the credits in their credit pool.
     - rule: rule_controller_bad_publicity_tag
-      text: The Corp controls each bad publicity counter. The Runner controls each tag counter. However, see {ref:rule_corp_can_pay_tag_costs} and {ref:rule_runner_can_pay_bad_publicity_costs} regarding paying costs that involve tags and bad publicity, respectively.
+      text: The Corp controls each bad publicity counter. The Runner controls each tag counter.
     - rule: rule_controller_hosted_counter
       text: The controller of a counter hosted on a card is the player who controls the host card.
     - rule: rule_controller_click_core_damage
       text: Click counters and core damage counters are gameplay aids only and have no controller.
-  - rule: rule_pay_costs_controlled_objects
-    text: A player can only pay costs using objects they control.
+  - subsection: rule_pay_costs_controlled_objects
+    text: A player can only pay costs using objects they control{n}, unless specifically indicated.{/n}
+    rules:
+    - rule: rule_remove_tags_or_bad_publicity_as_cost
+      text: Either player can remove tags or bad publicity from themself or their opponent to pay costs.
+      new:
   - subsection: rule_controller_ability
     text: The {term:controller of an ability} is the player responsible for that ability. By default, this is the player who controls the ability's source. See also {ref:rule_source}. A player can only use abilities they control.
     rules:

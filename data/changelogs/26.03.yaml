@@ -1,4 +1,5 @@
 changelog:
+- text: Updated rules about the locations of counters in the play area in {ref:rule_play_area_organization}.
 - text: Clarify link between {ref:rule_inactive_cards_characteristics,sec_facedown_runner_cards} referencing facedown installed Runner cards.
 - text: Expanded {ref:rule_arrange_secretly} to add a rule ensuring that cards about to be arranged in any order don't need to have their order maintained for other effects in the same instruction.
 - text: Added {ref:rule_pass_after_breaking} to define what it means for the Runner to pass a piece of ice "after fully breaking it".

@@ -10,6 +10,15 @@ function openToc() {
 addEventListener("load", (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const ruleId = urlParams.get('r');
+    const element = document.getElementById(ruleId);
+    const rootFontSize = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+    );
+    const headerOffset = 3.5 * rootFontSize;
+    const top =
+        element.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerOffset;
     if(ruleId) {
         document.getElementById(ruleId).scrollIntoView();
     }

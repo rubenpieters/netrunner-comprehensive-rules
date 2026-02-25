@@ -9,3 +9,4 @@ changelog:
 - text: Simplified rules about counting accessed cards in {ref:rule_number_of_accesses} and {ref:rule_counting_random_access_limit}.
 - text: Clarified rules about prohibitions on accesses in {ref:rule_prohibiting_access}.
 - text: Added {ref:rule_hosted_object_same_zone_as_host} and {ref:rule_hosted_counters_not_on_player} to clarify properties of hosted objects.
+- text: Updated {ref:rule_calculated_quantity} to handle cases where an ability includes multiple effects under a "for each" or other quantifier. Also updated related examples and moved them from {ref:rule_aggregated_instructions} to {ref:rule_calculated_quantity}.

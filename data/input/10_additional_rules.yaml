@@ -143,10 +143,10 @@ sections:
     rules:
     - rule: rule_meat_net_damage
       text: |-
-        {term:meat damage} and {term:net damage} are resolved the same way. For each point of damage suffered, 1 card is randomly trashed from the grip.
+        {term:meat damage} and {term:net damage} are resolved the same way. For each point of damage suffered, {n}the player responsible for the damage trashes 1 randomly-chosen card{/n} from the grip.
     - rule: rule_core_damage
       text: |-
-        For each point of {term:core damage} suffered, 1 card is randomly trashed from the grip, and the Runner's maximum hand size is permanently reduced by 1. The Runner takes a core damage counter for each core damage suffered to track the reduction in hand size.
+        For each point of {term:core damage} suffered, {n}the player responsible for the damage trashes 1 randomly-chosen card{/n} from the grip, and the Runner's maximum hand size is permanently reduced by 1. The Runner takes a core damage counter for each core damage suffered to track the reduction in hand size.
     - rule: rule_brain_damage
       text: Some cards refer to "brain damage". This is an older term for core damage. The two terms are interchangeable.
   - subsection: rule_multiple_damage_taken_simultaneously

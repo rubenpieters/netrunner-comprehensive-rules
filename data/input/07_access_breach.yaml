@@ -33,7 +33,8 @@ sections:
   - rule: rule_moved_while_accessing
     text: If a card moves to another location while it is being accessed, the access ends immediately.
   - rule: rule_end_run_ends_access
-    text: If a run is in progress, an instruction to end the run ends any access taking place. If an access is occurring outside of a run, an instruction to end the run has no effect on that access.
+    text: |-
+      {n}An "end the run" effect that resolves while a card is being accessed can sometimes end that access. See {ref:rule_end_the_run}.{/n}
   - rule: rule_access_set_of_cards
     text: One card, {card:Information Sifting}, uses a method other than a breach to establish a set of cards for the Runner to access. The Runner accesses those cards one at a time in the order of their choice. Each access is performed as a separate instruction. See {ref:rule_split_up_instruction}. Accessing cards in this way is an exception to {ref:rule_act_on_multiple_cards}.
   - rule: rule_access_cards_without_breach
@@ -97,7 +98,8 @@ sections:
       new:
     - text: The Runner plays {card:Immolation Script}, and the subroutine on {card:Hudson 1.0} resolves before Archives is breached. {n}When the Runner breaches Archives, the first candidate they choose is a piece of ice, and they apply the replacement effect from {card:Immolation Script} to trash a rezzed copy of the chosen ice instead of accessing the candidate copy. No card was actually accessed, so the Runner can proceed to choose another candidate. However, if the Runner had first accessed a card without applying {card:Immolation Script}'s replacement effect, they would then be prohibited from accessing any more cards, so there would be no more candidates to choose and they could not apply a replacement effect afterward.{/n}
   - rule: rule_end_run_ends_breach
-    text: If a run is in progress, an instruction to end the run ends any breach taking place. If there is no run in progress, an instruction to end the run has no effect on a breach.
+    text: |-
+      {n}An "end the run" effect that resolves while a server is being breached can sometimes end that breach. See {ref:rule_end_the_run}.{/n}
   - rule: rule_consecutive_breaches
     text: If a server would be breached while a breach is already in progress, instead the new breach takes place when the current breach ends. The effect creating the delayed breach is treated as a conditional ability controlled by the Runner.
     examples:

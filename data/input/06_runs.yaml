@@ -39,8 +39,24 @@ sections:
     - rule: rule_pass_after_breaking
       new:
       text: If a condition refers to passing a piece of ice "after" fully breaking it, then that condition is only met when the Runner passes that piece of ice after an encounter (as defined by {ref:rule_run_phase_after}), and only if the Runner fully broke that ice during that encounter. See {ref:subsec_fully_break}.
-  - rule: rule_end_the_run
+  - subsection: rule_end_the_run
     text: To {term:end the run} is to halt the Runner's progress toward the server. When an effect ends the run, the current phase of the run ends without following any of its remaining steps, and before completing open priority windows. The game immediately moves from the current timing point to {ref:rule_sec_run_run_ends_phase}, the Run Ends Phase.
+    rules:
+    - rule: rule_end_run_access_or_breach_during_run
+      text: If a run is in progress, an instruction to end the run also ends any breach and/or access taking place.
+      new:
+    - rule: rule_end_encounter_outside_run
+      text: If an instruction to end the run resolves while there is no run in progress, but there is an encounter in progress, that encounter ends without resolving any more of its steps. Process any open priority windows in the same way as described in {ref:rule_run_ends_process_priority_windows}, but do not resolve any other steps of the Run Ends Phase. Any breach and/or access initiated during the encounter also ends, but a breach and/or access that was already in progress when the encounter began is not ended.
+      new:
+      examples:
+      - text: The Runner uses {card:Detente} to access a card in HQ while there is no run in progress. They access {card:Ganked!} and are forced to encounter {card:Loot Box}. The Runner chooses to neither break any subroutines nor spend credits for {card:Loot Box}'s first subroutine, so that subroutine tries to end the run. There is no run to end, but this effect still ends the encounter. The second subroutine on {card:Loot Box} will not resolve.
+        new:
+    - rule: rule_end_run_no_run_or_encounter
+      text: If an instruction to end the run resolves while there is neither a run nor an encounter in progress, that effect does nothing.
+      new:
+      examples:
+      - text: The Corp plays {card:Unleash} and resolves the last subroutine on {card:Lycian Multi-Munition}. The Corp will gain 1[c], but there is no further effect.
+        new:
   - subsection: rule_jacking_out
     text: |-
       {term:Jacking out} is the process by which a Runner voluntarily ends a run. Jacking out follows the usual process for ending the run as described in {ref:rule_end_the_run}, but some card abilities function differently depending on whether or not the Runner chose to end the run by jacking out.
@@ -220,7 +236,8 @@ sections:
       examples:
       - text: If {card:Shiro} causes {card:Chrysalis} to be accessed, resolve the encounter with {card:Chrysalis} and then return to resolving subroutines on {card:Shiro}.
     - rule: rule_forced_encounter_during_run
-      text: If a forced encounter occurs during a run, an instruction to end the run during that encounter is applied to both the Encounter Ice Phase being resolved and the phase from which the additional encounter was initiated. If a forced encounter occurs outside of a run, an instruction to end the run simply closes the Encounter Ice Phase and returns the game to the effect that called for the encounter.
+      text: |-
+        {n}During a forced encounter,{/n} an instruction to end the run is applied to both the Encounter Ice Phase being resolved and the phase from which the additional encounter was initiated. {n}See also {ref:rule_end_encounter_outside_run}.{/n}
       examples:
       - text: The Corp uses {card:The Twins} to force the Runner to encounter a piece of ice again when they pass it. If a subroutine directs the Corp to end the run during the extra encounter, both that encounter and the original Movement Phase are aborted, and the game proceeds to the Run Ends phase. 
     - rule: rule_forced_encounter_end
@@ -288,7 +305,10 @@ sections:
       examples:
       - text: The Runner uses the ability on {card:Security Nexus} during a reaction window at the beginning of the Encounter Ice Phase. The trace is successful, so the ability ends the run. If {card:Tollbooth}'s ability is also pending in this reaction window, it will not be resolved, since the encounter has ended. 
     - rule: rule_run_ends_other_priority_windows
-      text: Any other open priority window is completed normally. If more than one priority window needs to be completed this way, they are resolved in the usual order described in {ref:rule_resolve_ability}.
+      text: Any other open priority window is completed normally, {n}except that new timing structures (including a breach that was delayed according to {ref:rule_consecutive_breaches}) cannot be initiated{/n}. If more than one priority window needs to be completed this way, they are resolved in the usual order described in {ref:rule_resolve_ability}.
+      examples:
+      - text: The run is ended during the reaction window following {ref:step_approach_server}, while {card:Formicary}'s ability is still pending. The Corp can rez {card:Formicary} and move it to the approached server, but the Runner's position cannot be moved and an encounter cannot be initiated.
+        new:
   - rule: rule_run_ends_lose_bad_pub_credits
     text: During the Run Ends Phase, if {n}there are any credits remaining in the Runner's bad publicity fund, those credits are returned to the bank.{/n}
   - subsection: rule_unsuccessful_run

@@ -9,6 +9,7 @@ changelog:
 - text: Added {ref:sec_server_indicator} to clarify the server indicators on the back of Méliès U.
 - text: Simplified rules about counting accessed cards in {ref:rule_number_of_accesses} and {ref:rule_counting_random_access_limit}.
 - text: Clarified rules about prohibitions on accesses in {ref:rule_prohibiting_access}.
+- text: Expand rules about how "end the run" effects interact with other timing structures, particularly for cases where there is not actually a run in progress to end. Consolidate {ref:rule_forced_encounter_during_run, rule_end_run_ends_access, rule_end_run_ends_breach} to cover all of these cases in {ref:rule_end_the_run}.
 - text: Added {ref:rule_delayed_run_ends_condition_outside_run} to clarify that abilities cannot create delayed "When this run ends" conditional abilities if there is not a run in progress.
 - text: Added {ref:rule_hosted_object_same_zone_as_host} and {ref:rule_hosted_counters_not_on_player} to clarify properties of hosted objects.
 - text: Updated {ref:rule_calculated_quantity} to handle cases where an ability includes multiple effects under a "for each" or other quantifier. Also updated related examples and moved them from {ref:rule_aggregated_instructions} to {ref:rule_calculated_quantity}.

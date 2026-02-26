@@ -112,7 +112,7 @@ sections:
     - rule: rule_determine_actual_abilities
       text: To determine the actual abilities present on an object (as well as its other characteristics), follow the procedure described in {ref:rule_dependent_effects} and {ref:rule_independent_effects}.
     - rule: rule_abilities_no_inherent_order
-      text: Abilities on an object have no particular order, except for play abilities and subroutines. Play abilities cannot be added to or removed from an event or operation, and their order is the order they appear on their source card. To determine the order of subroutines on an object, refer to {ref:rule_subroutines_ordered} and {ref:rule_subroutines_static_ability}.
+      text: Abilities on an object have no particular order, except for play abilities and subroutines. Play abilities cannot be added to or removed from an event or operation, and their order is the order they appear on their source card. To determine the order of subroutines on an object, refer to {ref:rule_subroutines_ordered} and {ref:rule_subroutine_origins}.
 
 - section: sec_timing_and_priority
   text: Timing and Priority
@@ -610,32 +610,51 @@ sections:
     text: A {term:subroutine} is an ability beginning with the [sub] symbol. Only ice can have subroutines.
 
   - subsection: rule_subroutines_ordered
-    text: Subroutines always have a specified order.
+    text: Subroutines always have a specified order. {n}Subroutines on a piece of ice are categorized based on how the ice gained them, as described in {ref:rule_subroutine_origins}. All subroutines in the first category presented ({ref:rule_subroutine_origin_external_before}) are ordered first, followed by all subroutines in the second category ({ref:rule_subroutine_origin_static_before}), and so on. Each category's description includes the rule for how multiple subroutines within that category are ordered.{/n}
     rules:
-    - rule: rule_printed_subroutines_order
-      text: The order of the subroutines printed on a piece of ice is the order in which they appear on that ice.
-    - rule: rule_subroutines_added_to_end_default
-      text: Unless otherwise specified, subroutines a piece of ice gains from an ability are added after all other subroutines the ice has at the time that ability begins to apply to that ice.
+    - rule: rule_subroutines_duplicated
+      text: One card, {card:TL;DR}, has an ability which can grant a second copy of each subroutine on a piece of ice. Each subroutine created this way is ordered immediately after the subroutine it copied, regardless of categories. If any subroutines are removed while the copies are still active, the copies remain in their relative order as if the removed subroutines were still present.
+      new:
+    - rule: rule_subroutines_static_ability_remove_subroutines
+      text: One card, {card:Hive}, has a static ability that removes its own printed subroutines. Subroutines are lost to this ability beginning with the last printed subroutine and working backwards.
+    - rule: rule_gain_subroutines_in_any_order
+      text: Some Corp abilities grant 1 or more subroutines "in the order of your choice". When such an ability resolves, the Corp declares the order of each subroutine added by the ability relative to each other subroutine the ice has at that time, regardless of categories.
+      new:
+      examples:
+      - text: The Runner encounters a copy of {card:Lancelot} hosting a condition counter from {card:Sub Boost}. The Corp reveals a copy of {card:Merlin} in HQ to add a "[sub] Do 2 net damage." subroutine to {card:Lancelot}. The Corp declares whether the subroutine from {card:Merlin} will be added before {card:Lancelot}'s printed "[sub] Trash 1 installed program." subroutine, between the printed subroutine and the "[sub] End the run." subroutine granted by the condition counter, or after the "[sub] End the run." subroutine.
+        new:
+    - rule: rule_corp_decides_unspecified_order
+      text: If multiple subroutines are added to a piece of ice {n}by the same category of effect{/n} at the same time in an unspecified order, the Corp declares the relative order of those subroutines at the time the ice gains them.
+
+  - subsection: rule_subroutine_origins
+    text: |-
+      The categories of subroutines used to determine their order, as described in {ref:rule_subroutines_ordered}, are as follows:
+    new:
+    rules:
+    - rule: rule_subroutine_origin_external_before
+      text: Subroutines gained from an ability, except a static ability on the ice itself, where the ability granting the subroutines states they are added before other subroutines. Subroutines within this category are ordered based on when the effect granting them began to apply, with the most recently added subroutines first.
+      new:
+      examples:
+      - text: |-
+          The Runner encounters a copy of {card:Loki} while {card:Stick and Poke} is installed and {card:Warden Fatuma} is rezzed. Since {card:Warden Fatuma}'s ability is a static ability, the subroutine it grants is already present when the encounter begins. The Runner resolves the ability from {card:Stick and Poke}, then the Corp resolves the ability from {card:Loki}, choosing a copy of {card:Tithe}. The subroutines on {card:Loki} are, in order: "[sub] Do 1 net damage.", "[sub] Gain 1[c].", "[sub] Do 1 net damage. The Runner draws 1 card.", "[sub] The Runner loses [click].", and "[sub] End the run unless the Runner shuffles all cards from the grip into the stack."
+        new:
+    - rule: rule_subroutine_origin_static_before
+      text: Subroutines gained from a static ability on the ice itself, where the ability states the subroutines are added before other subroutines. Subroutines in this category on a single piece of ice are always identical. If the number of such subroutines increases, the new copies are added after any previously-existing subroutines in this category. If the number of such subroutines decreases, subroutines are lost beginning with the last subroutine the ice previously had from the same ability and working backwards.
+      new:
+    - rule: rule_subroutine_origin_printed
+      text: Subroutines printed on the ice. Subroutines this category are ordered in the same way as they are written in the ice's card text.
+      new:
+    - rule: rule_subroutine_origin_static_after
+      text: Subroutines gained from a static ability on the ice itself, where the ability either states the subroutines are added after other subroutines or does not specify an order. Subroutines in this category on a single piece of ice are always identical. If the number of such subroutines increases, the new copies are added after any previously-existing subroutines in this category. If the number of such subroutines decreases, subroutines are lost beginning with the last subroutine the ice previously had from the same ability and working backwards.
+      new:
+      examples:
+      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:Ashigaru}. After the Runner breaks {card:Ashigaru}'s 3 subroutines, the Corp uses {card:Panic Button} to draw another card. The new subroutine is added after the previous 3, so the Runner can use {card:Gbahali} to break it.
+      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:Ashigaru}. The Runner breaks the first subroutine, then uses {card:Utopia Shard} to force the Corp to discard 2 cards. {card:Ashigaru} correspondingly loses its last 2 subroutines, leaving behind the subroutine that was already broken.
+    - rule: rule_subroutine_origin_external_after
+      text: Subroutines gained from an ability, except a static ability on the ice itself, where the ability either states the subroutines are added after other subroutines or does not specify an order. Subroutines within this category are ordered based on when the effect granting them began to apply, with the oldest subroutines first.
+      new:
       examples:
       - text: The Runner encounters {card:Marker}, and its subroutine resolves. The next ice the Runner encounters is {card:Brainstorm}. When the encounter begins, the lingering effect from {card:Marker} gives {card:Brainstorm} an "[sub] End the run." subroutine. Then, {card:Brainstorm}'s conditional ability resolves, giving it the appropriate number of "[sub] Do 1 core damage." subroutines. The "[sub] Do 1 core damage." subroutines are all ordered after the "[sub] End the run." subroutine.
-    - rule: rule_corp_decides_unspecified_order
-      text: If multiple subroutines are added to a piece of ice at the same time in an unspecified order, the Corp declares the relative order of those subroutines at the time the ice gains them.
-
-  - subsection: rule_subroutines_static_ability
-    text: Some ice have static abilities that grant that piece of ice a variable number of subroutines. Subroutines from such an ability are always ordered before any other subroutines on that ice.
-    rules:
-    - rule: rule_subroutines_static_ability_increase
-      text: If the number of subroutines granted to a piece of ice by its own static ability increases, the additional subroutines are added immediately after the previously-existing subroutines from the same ability.
-      examples:
-      - text: The Corp has no bad publicity and controls a rezzed copy of Ireress hosting a condition counter from {card:Sub Boost}. If the Corp takes bad publicity, the corresponding subroutines from {card:Ireress}'s ability are added before the "[sub] End the run." from the condition counter.
-      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:Ashigaru}. After the Runner breaks {card:Ashigaru}'s 3 subroutines, the Corp uses {card:Panic Button} to draw another card. The new subroutine is added after the previous 3, so the Runner can use {card:Gbahali} to break it.
-    - rule: rule_subroutines_static_ability_decrease
-      text: If the number of subroutines granted to a piece of ice by its own static ability decreases, subroutines are lost beginning with the last subroutine the ice previously had from the same ability and working backwards.
-      examples:
-      - text: The Corp has 3 cards in HQ while the Runner is encountering {card:Ashigaru}. The Runner breaks the first subroutine, then uses {card:Utopia Shard} to force the Corp to discard 2 cards. {card:Ashigaru} correspondingly loses its last 2 subroutines, leaving behind the subroutine that was already broken.
-
-  - rule: rule_subroutines_static_ability_remove_subroutines
-    text: One card, {card:Hive}, has a static ability that removes its own printed subroutines. Subroutines are lost to this ability beginning with the last printed subroutine and working backwards.
 
   - subsection: rule_subroutines_status
     text: For each encounter, the subroutines on the encountered ice have a status of {term:broken} or {term:unbroken} with respect to that encounter.

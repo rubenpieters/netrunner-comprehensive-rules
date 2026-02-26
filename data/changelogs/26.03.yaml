@@ -1,17 +1,17 @@
 changelog:
-- text: Added {ref:rule_reveal_not_turn_faceup} to clarify that revealing does not turn cards faceup.
-- text: Updated rules about the locations of counters in the play area in {ref:rule_play_area_organization}.
-- text: Clarify link between {ref:rule_inactive_cards_characteristics,sec_facedown_runner_cards} referencing facedown installed Runner cards.
-- text: Expanded {ref:rule_arrange_secretly} to add a rule ensuring that cards about to be arranged in any order don't need to have their order maintained for other effects in the same instruction.
-- text: Added {ref:rule_pass_after_breaking} to define what it means for the Runner to pass a piece of ice "after fully breaking it".
-- text: Updated the list of subtypes ({ref:rule_subtypes_list}) to remove {subtype:illicit} and add {subtype:liability}.
 - text: Added {ref:rule_melies_u_detail} to support Méliès U's ability.
+- text: Clarify link between {ref:rule_inactive_cards_characteristics,sec_facedown_runner_cards} referencing facedown installed Runner cards.
+- text: Added {ref:rule_hosted_object_same_zone_as_host} and {ref:rule_hosted_counters_not_on_player} to clarify properties of hosted objects.
+- text: Added {ref:rule_reveal_not_turn_faceup} to clarify that revealing does not turn cards faceup.
+- text: Updated the list of subtypes ({ref:rule_subtypes_list}) to remove {subtype:illicit} and add {subtype:liability}.
 - text: Added {ref:sec_server_indicator} to clarify the server indicators on the back of Méliès U.
+- text: Updated rules about the locations of counters in the play area in {ref:rule_play_area_organization}.
+- text: Added {ref:rule_pass_after_breaking} to define what it means for the Runner to pass a piece of ice "after fully breaking it".
+- text: Expand rules about how "end the run" effects interact with other timing structures, particularly for cases where there is not actually a run in progress to end. Consolidate {ref:rule_forced_encounter_during_run,rule_end_run_ends_access,rule_end_run_ends_breach} to cover all of these cases in {ref:rule_end_the_run}.
 - text: Simplified rules about counting accessed cards in {ref:rule_number_of_accesses} and {ref:rule_counting_random_access_limit}.
 - text: Clarified rules about prohibitions on accesses in {ref:rule_prohibiting_access}.
-- text: Expand rules about how "end the run" effects interact with other timing structures, particularly for cases where there is not actually a run in progress to end. Consolidate {ref:rule_forced_encounter_during_run, rule_end_run_ends_access, rule_end_run_ends_breach} to cover all of these cases in {ref:rule_end_the_run}.
+- text: Expanded {ref:rule_arrange_secretly} to add a rule ensuring that cards about to be arranged in any order don't need to have their order maintained for other effects in the same instruction.
 - text: Added {ref:rule_delayed_run_ends_condition_outside_run} to clarify that abilities cannot create delayed "When this run ends" conditional abilities if there is not a run in progress.
-- text: Added {ref:rule_hosted_object_same_zone_as_host} and {ref:rule_hosted_counters_not_on_player} to clarify properties of hosted objects.
 - text: Updated {ref:rule_subroutines_ordered} and added {ref:rule_subroutine_origins} to detail the ordering of added subroutines from multiple effects. Incorporated material into these sections from previous rules in {ref:sec_subroutines} about {card:Hive} and about static abilities that grant a variable number of subroutines to a piece of ice.
-- text: Updated {ref:rule_meat_net_damage} and {ref:rule_core_damage} to specify which player performs card trashing when the Runner suffers damage.
 - text: Updated {ref:rule_calculated_quantity} to handle cases where an ability includes multiple effects under a "for each" or other quantifier. Also updated related examples and moved them from {ref:rule_aggregated_instructions} to {ref:rule_calculated_quantity}.
+- text: Updated {ref:rule_meat_net_damage} and {ref:rule_core_damage} to specify which player performs card trashing when the Runner suffers damage.

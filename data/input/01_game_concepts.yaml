@@ -861,8 +861,12 @@ sections:
     rules:
     - rule: rule_look_at_controlled_facedown
       text: A player may look at facedown cards they control at any time.
-  - rule: rule_reveal
+  - subsection: rule_reveal
     text: To {term:reveal} a card is to show its front face to all players, then return it to its previous state.
+    rules:
+    - rule: rule_reveal_not_turn_faceup
+      text: Revealing a facedown card does not count as turning it faceup.
+      new:
   - rule: rule_expose
     text: Some abilities instruct the Runner to {term:expose} one or more cards. To expose a card is to reveal it, except that only installed, unrezzed cards can be exposed.
   - rule: rule_look_reveal_expose_access_distinct

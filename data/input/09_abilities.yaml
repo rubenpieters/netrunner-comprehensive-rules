@@ -305,7 +305,7 @@ sections:
     - rule: rule_once_per_turn_flag
       text: The "once per turn" flag appears on paid and conditional abilities. An ability with this flag can only be used once per turn. {ref:rule_using} explains what it means to "use" an ability.
       examples:
-      - text: The Runner is playing as {card:Zahya Sadeghi} and finishes a run on HQ, having accessed 1 card. They choose not to gain 1{c} with Zahya's ability. The ability was not "used", so its "once per turn" restriction has not been expended, even though the ability was able to resolve. The Runner can make another run later in the turn and gain credits with the ability.
+      - text: The Runner is playing as {card:Zahya Sadeghi} and finishes a run on HQ, having accessed 1 card. They choose not to gain 1[c] with Zahya's ability. The ability was not "used", so its "once per turn" restriction has not been expended, even though the ability was able to resolve. The Runner can make another run later in the turn and gain credits with the ability.
 
   - subsection: rule_ability_classification
     text: The five types of abilities can be identified by the types of text they are made of.
@@ -473,7 +473,7 @@ sections:
       text: Some conditional abilities refer to the game state before the trigger condition was met, using the word "had". The previous game state referred to is the game state at the time of {ref:step_checkpoint_conditional_abilities} of the checkpoint immediately preceding the checkpoint in which the ability became pending.
       examples:
       - text: |-
-          The ability of {card:Weyland Consortium: Built to Last} only causes the Corp to gain 2{c} when they advance a card that "had no advancement counters". This ability becomes pending immediately after an instruction resolves in which the Corp advances a card, and the requirement is checked against the state of the game at the previous checkpoint, before that advancement took place.
+          The ability of {card:Weyland Consortium: Built to Last} only causes the Corp to gain 2[c] when they advance a card that "had no advancement counters". This ability becomes pending immediately after an instruction resolves in which the Corp advances a card, and the requirement is checked against the state of the game at the previous checkpoint, before that advancement took place.
 
   - subsection: rule_conditional_ability_with_static_condition
     text: Conditional abilities with a static condition instead of a trigger condition describe an effect that must be performed repeatedly, if possible, while the condition is true. Such abilities usually attempt to end their own repetition by uninstalling their source.

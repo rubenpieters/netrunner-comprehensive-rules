@@ -453,7 +453,7 @@ sections:
     text: Hosted counters do not count as "on" a player or as objects a player "has". They are not counted by abilities that check the number of counters on a player and cannot be affected by abilities that remove counters from a player.
     new:
     examples:
-    - text: The Corp resolves the first subroutine on {card:Whitespace}, forcing the Runner to lose 3{c}. The Runner cannot lose credits hosted on their cards, even if they do not have 3{c} in their credit pool.
+    - text: The Corp resolves the first subroutine on {card:Whitespace}, forcing the Runner to lose 3[c]. The Runner cannot lose credits hosted on their cards, even if they do not have 3[c] in their credit pool.
       new:
     - text: The Corp has a rezzed {card:Superdeep Borehole} with hosted bad publicity counters. When the Runner fills their bad publicity fund in {ref:step_initiation_bad_publicity}, they do not receive credits for the hosted bad publicity.
       new:

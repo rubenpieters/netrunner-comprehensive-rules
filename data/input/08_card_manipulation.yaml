@@ -264,7 +264,7 @@ sections:
       text: After the install cost is paid, a checkpoint occurs, as required by {ref:rule_checkpoint_after_paying_cost}.
 
   - rule: rule_x_server_only
-    text: Some upgrades have an ability that specifies 1 or more central servers or "remote server" followed by the word "only". This is a restriction on the locations an upgrade can occupy that applies at all times, even if the upgrade is inactive. The Corp cannot choose the root of a non-specified server as the installation destination for such an upgrade, and such an upgrade cannot be swapped into the root of a non-specified server.
+    text: Some upgrades have an ability that specifies {n}"central server", "remote server", or 1 or more particular central servers{/n} followed by the word "only". This is a restriction on the locations an upgrade can occupy that applies at all times, even if the upgrade is inactive. The Corp cannot choose the root of a non-specified server as the installation destination for such an upgrade, and such an upgrade cannot be {n}moved or{/n} swapped into the root of a non-specified server.
 
   - subsection: rule_install_from_hidden_or_secret_zone
     text: If a player attempts to install a facedown card or a card from a hidden or secret zone, they are required in certain cases to reveal that card in order to verify that the installation is valid.

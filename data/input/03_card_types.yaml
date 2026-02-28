@@ -134,7 +134,8 @@ sections:
     - rule: rule_region_install
       text: When the Corp installs a card with the subtype {subtype:region} into the root of a server that already has a {subtype:region}, they must trash the already-installed {subtype:region}. See {ref:sec_install_uninstall}.
     - rule: rule_region_swap
-      text: The Corp cannot swap a {subtype:region} card with a non-{subtype:region} card in another location if there is another {subtype:region} card already installed in the destination location.
+      text: |-
+        {n}The Corp cannot use an effect that swaps cards or moves an installed card between servers to put more than 1 {subtype:region} into the root of a server.{/n}
 
 - section: sec_events
   text: Events

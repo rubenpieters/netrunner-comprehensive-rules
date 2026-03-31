@@ -11,16 +11,13 @@ addEventListener("load", (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const ruleId = urlParams.get('r');
     const element = document.getElementById(ruleId);
-    const rootFontSize = parseFloat(
-        getComputedStyle(document.documentElement).fontSize
-    );
-    const headerOffset = 3.5 * rootFontSize;
-    const top =
-        element.getBoundingClientRect().top +
-        window.pageYOffset -
-        headerOffset;
     if(ruleId) {
-        document.getElementById(ruleId).scrollIntoView();
+        // Timeout seems to be necessary, because without it the scrolling sometimes
+        // could happen before the element was fully loaded. This meant that the
+        // scrollIntoView didn't move to exactly the right place it should.
+        setTimeout(() => {
+          document.getElementById(ruleId)?.scrollIntoView();
+        }, 10);
     }
 });
 

@@ -13,6 +13,7 @@ class TimingStructureElement:
   text: FormatText
   elements: list[TimingStructureElement]
   new: bool
+  id: Optional[str] = None
 
   def to_html_l1(self, config: Config, model_data: ModelData, bold: bool) -> str:
     if bold:
@@ -74,6 +75,42 @@ class TimingStructureElement:
     result += '\n'
     return result
 
+  def to_json_l1(self, config: Config, model_data: ModelData) -> str:
+    children = ','.join(f'"{e.id}"' for e in self.elements)
+    obj = '{'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{model_data.id_map[self.id].reference}",'
+    obj += f'"type": "appendix",'
+    obj += f'"text": "{self.text.to_json(config, model_data)}",'
+    obj += f'"children": [{children}]'
+    obj += '}'
+    if self.elements:
+      return obj + ',\n' + ',\n'.join(e.to_json_l2(config, model_data) for e in self.elements)
+    return obj
+
+  def to_json_l2(self, config: Config, model_data: ModelData) -> str:
+    children = ','.join(f'"{e.id}"' for e in self.elements)
+    obj = '{'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{model_data.id_map[self.id].reference}",'
+    obj += f'"type": "appendix",'
+    obj += f'"text": "{self.text.to_json(config, model_data)}",'
+    obj += f'"children": [{children}]'
+    obj += '}'
+    if self.elements:
+      return obj + ',\n' + ',\n'.join(e.to_json_l3(config, model_data) for e in self.elements)
+    return obj
+
+  def to_json_l3(self, config: Config, model_data: ModelData) -> str:
+    obj = '{'
+    obj += f'"id": "{self.id}",'
+    obj += f'"nr": "{model_data.id_map[self.id].reference}",'
+    obj += f'"type": "appendix",'
+    obj += f'"text": "{self.text.to_json(config, model_data)}",'
+    obj += f'"children": []'
+    obj += '}'
+    return obj
+
 
 @dataclass
 class TimingStructure:
@@ -99,7 +136,7 @@ class TimingStructure:
     return result
   
   def to_json(self, config: Config, model_data: ModelData) -> str:
-    return 'TODO'
+    return ',\n'.join(e.to_json_l1(config, model_data) for e in self.elements)
 
 @dataclass
 class SubRule:
@@ -346,7 +383,13 @@ class Section:
     obj += f'"nr": "{model_data.id_map[self.id].reference}",'
     obj += f'"type": "{model_data.id_map[self.id].type}",'
     obj += f'"text": "{self.text.to_json(config, model_data)}",'
-    childrenIds = ','.join(map(lambda element: f'"{element.id}"' if hasattr(element, "id") else "TODO", self.section_elements))
+    def _child_ids(element):
+      if isinstance(element, TimingStructure):
+        return [f'"{e.id}"' for e in element.elements]
+      if hasattr(element, 'id'):
+        return [f'"{element.id}"']
+      return []
+    childrenIds = ','.join(id for el in self.section_elements for id in _child_ids(el))
     obj += f'"children": [{childrenIds}]'
     obj += "}"
     return f'{obj},\n' + \
@@ -445,6 +488,6 @@ class Document:
     return latex_content
   
   def to_json(self, config: Config, model_data: ModelData) -> str:
-    return ',\n'.join(map(lambda chapter: chapter.to_json(config, model_data), self.chapters[:-1]))
+    return ',\n'.join(map(lambda chapter: chapter.to_json(config, model_data), self.chapters))
 
 ModelElement = Union[Document, Chapter, Section, SectionElement, SubRule]

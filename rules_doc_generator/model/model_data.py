@@ -10,6 +10,9 @@ class RefInfo:
 
 RefDict = dict[str, RefInfo]
 
+def ref_info_depth(ref_info: RefInfo) -> int:
+  return ref_info.reference.count('.') + 1
+
 @dataclass
 class ModelData:
   id_map: RefDict

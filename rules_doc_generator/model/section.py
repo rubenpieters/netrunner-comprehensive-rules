@@ -6,7 +6,7 @@ import re
 
 from rules_doc_generator.config import (Config)
 from rules_doc_generator.model.text import (FormatText, Example)
-from rules_doc_generator.model.model_data import (ModelData)
+from rules_doc_generator.model.model_data import (ModelData, ref_info_depth)
 
 @dataclass
 class TimingStructureElement:
@@ -448,11 +448,40 @@ class Document:
   chapters: list[Chapter]
 
   def create_toc_html(self, model_data: ModelData):
+    items = [ref_info for ref_info in model_data.id_map.values() if ref_info.toc]
+
     result = ''
-    for id in model_data.id_map:
-      ref_info = model_data.id_map[id]
-      if ref_info.toc:
-        result += f'<li><a href="#{ref_info.id}">{ref_info.reference} {ref_info.text}</a></li>'
+    in_chapter = False
+
+    for i, ref_info in enumerate(items):
+      d = ref_info_depth(ref_info)
+      next_d = ref_info_depth(items[i + 1]) if i + 1 < len(items) else 0
+
+      label = f'{ref_info.reference} {ref_info.text}'
+      nav = f'<a class="TocNavBtn" href="#{ref_info.id}" onclick="event.stopPropagation()">&#x27A1;</a>'
+
+      # This is a chapter.
+      if d == 1:
+        # Close previous chapter block.
+        if in_chapter:
+          result += '</ul></details></li>'
+          in_chapter = False
+        # Start chapter collapsible block.
+        if next_d > 1:
+          result += f'<li><details><summary><span class="TocLabel">{label}</span>{nav}</summary><ul>'
+          in_chapter = True
+        # Should not happen in normal circumstances, chapter without any children.
+        # Just print the top-level chapter in that case.
+        else:
+          result += f'<li><span class="TocLeafRow"><a class="TocLabel" href="#{ref_info.id}">{label}</a>{nav}</span></li>'
+      # This is a section/subsection, simply add it to the TOC.
+      else:
+        result += f'<li><span class="TocLeafRow"><a class="TocLabel" href="#{ref_info.id}">{label}</a>{nav}</span></li>'
+
+    # Close final chapter.
+    if in_chapter:
+      result += '</ul></details></li>'
+
     return result
 
   def to_html(self, config: Config, model_data: ModelData) -> str:

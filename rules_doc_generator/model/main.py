@@ -2,15 +2,7 @@ import os
 
 from rules_doc_generator.config import (Config)
 from rules_doc_generator.model.section import (Document)
-from rules_doc_generator.model.model_data import (ModelData, RefDict)
-
-def create_toc_html(model_data: ModelData):
-  result = ''
-  for id in model_data.id_map:
-    ref_info = model_data.id_map[id]
-    if ref_info.toc:
-      result += f'<li><a href="#{ref_info.id}">{ref_info.reference} {ref_info.text}</a></li>'
-  return result
+from rules_doc_generator.model.model_data import (ModelData)
 
 def standalone_html(document: Document, config: Config, model_data: ModelData):
   result = document.to_html(config, model_data)

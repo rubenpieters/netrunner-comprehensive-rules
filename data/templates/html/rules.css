@@ -42,6 +42,10 @@ body {
   transform: translateX(0);
 }
 
+/* ============================================================
+   TOC
+   ============================================================ */
+
 #RulesParent[data-tocopen] #RulesContent {
   transform: translateX(var(--toc-width));
   transition: transform 0.05s ease-out 100ms
@@ -96,6 +100,64 @@ body {
   padding: 0.2em;
   margin: 0;
   z-index: 0;
+}
+
+#RulesToc ul {
+  list-style-type: none;
+  padding-left: 1em;
+  margin: 0;
+}
+
+#RulesToc summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.1em 0;
+}
+
+#RulesToc summary::-webkit-details-marker {
+  display: none;
+}
+
+#RulesToc summary::before {
+  content: '\25B6';
+  font-size: 0.6em;
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+#RulesToc details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+#RulesToc .TocLabel {
+  flex: 1;
+}
+
+#RulesToc .TocLeafRow {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.1em 0;
+}
+
+#RulesToc .TocLeafRow .TocLabel {
+  text-decoration: none;
+}
+
+.TocNavBtn {
+  flex-shrink: 0;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;
+  opacity: 0.5;
+  padding: 0 0.2em;
+}
+
+.TocNavBtn:hover {
+  opacity: 1;
 }
 
 .TocClose {

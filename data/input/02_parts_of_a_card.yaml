@@ -82,7 +82,7 @@ sections:
       Strength is a number appearing on ice and on {subtype:icebreaker} programs. It appears on the bottom-left corner of the card within a large semicircle.
   - rule: rule_strength_dash
     text: |-
-      Non-{subtype:icebreaker} programs have a dash ([dash]) in the bottom-left corner instead of a strength value.
+      Non-{subtype:icebreaker} programs have a dash (‒) in the bottom-left corner instead of a strength value.
   - rule: rule_strength_citation
     text: |-
       {ref:Subsec_icebreakers} discusses the interaction between ice strength and {subtype:icebreaker} strength.

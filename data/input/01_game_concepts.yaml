@@ -690,7 +690,7 @@ sections:
       text: When a player takes an action that plays or installs one or more cards and has no other effects, the play cost or install cost of each of those cards is considered to have been spent to take that action, even though other steps take place between initiating the action and paying that cost.
       examples:
       - text: |-
-          The Corp has {card:Jeeves Model Bioroids} rezzed, and uses the basic action "[Click]: Play an operation." to play {card:Blue Level Clearance}. Both the click spent for the cost of the basic action and the click spent for {card:Blue Level Clearance}'s additional cost count as clicks spent to take the "[Click]: Play an operation." action.
+          The Corp has {card:Jeeves Model Bioroids} rezzed, and uses the basic action "[click]: Play an operation." to play {card:Blue Level Clearance}. Both the click spent for the cost of the basic action and the click spent for {card:Blue Level Clearance}'s additional cost count as clicks spent to take the "[click]: Play an operation." action.
   - subsection: rule_ignoring_costs
     text: Some abilities direct a player to ignore certain costs when performing particular effects.
     rules:

@@ -253,25 +253,23 @@ class SubSection:
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
     if self.toc:
-      result = f'<span class="SubSection">{self.format_text.to_html(config, model_data)}</span>'
+      return f'<span class="SubSection">{self.format_text.to_html(config, model_data)}</span>'
     else:
-      result = f'<span class="RuleText">{self.format_text.to_html(config, model_data)}</span>'
-    if self.rules:
-      result += '<ol class="SubRules">'
-      if self.snippet:
-        result += f'<p class="Snippet">{self.snippet.to_html(config, model_data)}</p>'
+      return f'<span class="RuleText">{self.format_text.to_html(config, model_data)}</span>'
 
-      # Print examples, if any.
-      if len(self.examples) > 0:
-        result += '<ol class="Examples ExamplesSubSection">'
-        for example in self.examples:
-          result += example.to_html(config, model_data)
-        result += '</ol>'
-
-      for rule in self.rules:
-        ruleletter:str = f'{model_data.id_map[rule.id].reference[-1]}.'
-        result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a>{_rule_link_icons()}</span>{rule.to_html(config, model_data)}</li>'
+  def subrules_to_html(self, config: Config, model_data: ModelData) -> str:
+    result = '<ol class="SubRules">'
+    if self.snippet:
+      result += f'<p class="Snippet">{self.snippet.to_html(config, model_data)}</p>'
+    if len(self.examples) > 0:
+      result += '<ol class="Examples ExamplesSubSection">'
+      for example in self.examples:
+        result += example.to_html(config, model_data)
       result += '</ol>'
+    for rule in self.rules:
+      ruleletter:str = f'{model_data.id_map[rule.id].reference[-1]}.'
+      result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a>{_rule_link_icons()}</span>{rule.to_html(config, model_data)}</li>'
+    result += '</ol>'
     return result
 
   def to_latex(self, config: Config, model_data: ModelData) -> str:
@@ -344,15 +342,31 @@ class Section:
     result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, model_data)}</a>{_rule_link_icons()}</h2>'
     if self.snippet:
       result += f'<p class="Snippet">{self.snippet.to_html(config, model_data)}</p>'
-    result += '<ol class="Rules">'
+    in_rules = False
     for n, elem in enumerate(self.section_elements):
       rulenr:str = f'{model_data.id_map[self.id].reference}.{n+1}.'
 
       match elem:
-        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a>{_rule_link_icons()}</span>{elem.to_html(config, model_data)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a>{_rule_link_icons()}</span>{elem.to_html(config, model_data)}</li>'
-        case TimingStructure(): result += elem.to_html(config, model_data)
-    result += '</ol>'
+        case Rule():
+          if not in_rules:
+            result += '<ol class="Rules">'
+            in_rules = True
+          result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a>{_rule_link_icons()}</span>{elem.to_html(config, model_data)}</li>'
+        case SubSection():
+          if not in_rules:
+            result += '<ol class="Rules">'
+            in_rules = True
+          result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a>{_rule_link_icons()}</span>{elem.to_html(config, model_data)}</li>'
+          result += '</ol>'
+          in_rules = False
+          result += elem.subrules_to_html(config, model_data)
+        case TimingStructure():
+          if in_rules:
+            result += '</ol>'
+            in_rules = False
+          result += elem.to_html(config, model_data)
+    if in_rules:
+      result += '</ol>'
     return result
 
   def to_latex(self, config: Config, model_data: ModelData) -> str:

@@ -290,13 +290,15 @@ ol.Rules, ol.SubRules {
 }
 
 .Rules, .SubRules {
-  margin-top: 0;
+  margin: 0;
 }
 .Rules {
-  margin-left: 2em;
+  padding-left: 2em;
+  margin-left: 2.2em;
 }
 .SubRules {
-  margin-left: 1em;
+  padding-left: 2em;
+  margin-left: 2.8em;
 }
 
 li.Rule, li.SubRule {
@@ -351,18 +353,6 @@ a.RuleLink:link, a.RuleLink:visited {
 
 .Example {
   font-style: italic;
-}
-
-.ExamplesSubRule {
-  margin-left: -1.3em;
-}
-
-.ExamplesRule {
-  margin-left: -2em;
-}
-
-.ExamplesSubSection {
-  margin-left: -6em;
 }
 
 .Examples {

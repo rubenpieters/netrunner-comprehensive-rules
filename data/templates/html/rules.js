@@ -20,12 +20,7 @@ addEventListener("load", (event) => {
     const ruleId = urlParams.get('r');
     const element = document.getElementById(ruleId);
     if(ruleId) {
-        // Timeout seems to be necessary, because without it the scrolling sometimes
-        // could happen before the element was fully loaded. This meant that the
-        // scrollIntoView didn't move to exactly the right place it should.
-        setTimeout(() => {
-          document.getElementById(ruleId)?.scrollIntoView();
-        }, 10);
+        document.getElementById(ruleId)?.scrollIntoView();
     }
 });
 
@@ -34,7 +29,7 @@ addEventListener("load", (event) => {
 const $elems = document.querySelectorAll('a.RuleLink')
 const elems = Array.from($elems)
 elems.forEach(a => {
-    url = new URL(a.href);
+    const url = new URL(a.href);
     url.search = url.hash.replace('#', '?r=');
     url.hash = "";
     a.href = url.href;
@@ -76,7 +71,7 @@ function buildAllPartialMatchesFromWordStartExpression(searchValue) {
 };
 
 function buildExactMatchExpression(searchValue) {
-    return new RegExp(`(?<=^)${RegExp.escape(searchValue)}(?=$)`, 'i');
+    return new RegExp(`^${RegExp.escape(searchValue)}$`, 'i');
 };
 
 function buildAllMatchesExpression(searchValue) {
@@ -116,17 +111,17 @@ jQuery.fn.addHighlightsToRule = function(textToHighlight) {
     });
 };
 
-jQuery.fn.removeHighlightsFromRule = function(textToRemoveHightlight) {    
-    let textWithHighlightsRemoved = this.html().replace(buildAllMatchesExpression(`<span class="Highlight">${textToRemoveHightlight}</span>`), function(match) {
-        return match.replace('<span class="Highlight">', '').replace('</span>', '');
+jQuery.fn.removeHighlightsFromRule = function(textToRemoveHighlight) {
+    this.find('span.Highlight').filter(function() {
+        return $(this).text().toLowerCase() === textToRemoveHighlight.toLowerCase();
+    }).each(function() {
+        $(this).replaceWith(document.createTextNode($(this).text()));
     });
-    
-    this.html(textWithHighlightsRemoved);
 };
 
 // Returns false if no chapter heading is found before running out of siblings
 jQuery.fn.findChapterHeading = function() {
-    if ($.isEmptyObject(this.prev())) {
+    if (this.prev().length === 0) {
         return false;
     } else if (this.prev().is(".Chapter")) {
         return this.prev();
@@ -137,12 +132,12 @@ jQuery.fn.findChapterHeading = function() {
 
 // Returns false if no section heading is found before finding a chapter heading or running out of siblings
 jQuery.fn.findSectionHeading = function() {
-    if ($.isEmptyObject(this.prev()) | this.prev().is(".Chapter")) {
+    if (this.prev().length === 0 || this.prev().is(".Chapter")) {
         return false;
     } else if (this.prev().is(".Section")) {
         return this.prev();
     }
-    
+
     return this.prev().findSectionHeading();
 };
 

@@ -457,24 +457,26 @@ class Document:
 
     result = ''
     in_chapter = False
+    pending_nav = ''
 
     for i, ref_info in enumerate(items):
       d = ref_info_depth(ref_info)
       next_d = ref_info_depth(items[i + 1]) if i + 1 < len(items) else 0
 
       label = f'{ref_info.reference} {ref_info.text}'
-      nav = f'<a class="TocNavBtn" href="#{ref_info.id}" onclick="event.stopPropagation()">&#x27A1;</a>'
+      nav = f'<a class="TocNavBtn" href="#{ref_info.id}">&#x27A1;</a>'
 
       # This is a chapter.
       if d == 1:
         # Close previous chapter block.
         if in_chapter:
-          result += '</ul></details></li>'
+          result += f'</ul></details>{pending_nav}</li>'
           in_chapter = False
         # Start chapter collapsible block.
         if next_d > 1:
-          result += f'<li><details><summary><span class="TocLabel">{label}</span>{nav}</summary><ul>'
+          result += f'<li class="TocChapterItem"><details><summary><span class="TocLabel">{label}</span></summary><ul>'
           in_chapter = True
+          pending_nav = nav
         # Should not happen in normal circumstances, chapter without any children.
         # Just print the top-level chapter in that case.
         else:
@@ -485,7 +487,7 @@ class Document:
 
     # Close final chapter.
     if in_chapter:
-      result += '</ul></details></li>'
+      result += f'</ul></details>{pending_nav}</li>'
 
     return result
 

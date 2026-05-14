@@ -176,6 +176,20 @@ body {
   text-decoration: none;
 }
 
+#RulesToc li.TocChapterItem {
+  position: relative;
+}
+
+#RulesToc li.TocChapterItem > details > summary {
+  padding-right: 2em;
+}
+
+#RulesToc li.TocChapterItem > .TocNavBtn {
+  position: absolute;
+  right: 0;
+  top: 0.1em;
+}
+
 .TocNavBtn {
   flex-shrink: 0;
   text-decoration: none;

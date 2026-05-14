@@ -1,3 +1,8 @@
+/* Disable chrome scroll anchoring, it causes the wrong element to be navigated to when linked. */
+html, body {
+  overflow-anchor: none !important;
+}
+
 @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: url('fonts/AtkinsonHyperlegible-Regular.woff2') format('woff2');

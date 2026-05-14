@@ -1,8 +1,3 @@
-/* Disable chrome scroll anchoring, it causes the wrong element to be navigated to when linked. */
-html, body {
-  overflow-anchor: none !important;
-}
-
 @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: url('fonts/AtkinsonHyperlegible-Regular.woff2') format('woff2');
@@ -35,6 +30,7 @@ html, body {
 body {
   font-family: 'Atkinson Hyperlegible';
   margin: 0;
+  overflow-x: hidden;
   --toc-width: 15rem;
 }
 
@@ -48,22 +44,24 @@ body {
 }
 
 #Header {
-  top: 0;
   width: 100%;
-  position: fixed;
   background-color: #15153c;
-  z-index: 10;
 }
 
-/* Ensures that the target of a link is shown offset by the header size */
-[id] {
-  scroll-margin-top: 3.5em;
+#MainPageContent {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#RulesContentWrapper {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: clip;
 }
 
 #RulesParent {
   max-width: 100vw;
-  overflow-x: clip;
-  margin-top: 3.5em;
 }
 
 .Clickable {

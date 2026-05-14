@@ -514,8 +514,9 @@ class Document:
     icon_sprite += _svg_symbol('icon-search.svg', 'icon-search')
     icon_sprite += '</svg>'
 
-    document_content = icon_sprite + ''.join(map(lambda x: x.to_html(config, model_data), self.chapters))
+    document_content = ''.join(map(lambda x: x.to_html(config, model_data), self.chapters))
     html_content = re.sub(r"<!--MAIN_CONTENT-->(.*?)<!--END_MAIN_CONTENT-->", document_content, html_content, flags=re.DOTALL)
+    html_content = html_content.replace('<!--ICON_SPRITE-->', icon_sprite)
     html_content = re.sub(r"<!--VERSION_STRING-->(.*?)<!--END_VERSION_STRING-->", f"v{config.version_string()}", html_content, flags=re.DOTALL)
     html_content = re.sub(r"<!--EFFECTIVE_DATE-->(.*?)<!--END_EFFECTIVE_DATE-->", f"{config.effective_date_str()}", html_content, flags=re.DOTALL)
     return html_content

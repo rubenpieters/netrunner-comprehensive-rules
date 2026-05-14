@@ -398,6 +398,12 @@ a.RuleLink:link, a.RuleLink:visited {
   background-color: transparent;
   visibility: hidden;
   text-decoration: none;
+  z-index: 100;
+}
+
+li.Rule:has(.Thumbnail:hover),
+li.SubRule:has(.Thumbnail:hover) {
+  z-index: 100;
 }
 
 .Thumbnail .ThumbnailImageContainer img {

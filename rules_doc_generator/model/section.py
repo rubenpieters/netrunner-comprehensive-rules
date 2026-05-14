@@ -8,6 +8,11 @@ from rules_doc_generator.config import (Config)
 from rules_doc_generator.model.text import (FormatText, Example)
 from rules_doc_generator.model.model_data import (ModelData, ref_info_depth)
 
+def _rule_link_icons() -> str:
+    link  = '<svg class="RuleLinkSymbol RuleLinkSymbol--link" width="0.75em" height="0.75em"><use href="#icon-link"></use></svg>'
+    check = '<svg class="RuleLinkSymbol RuleLinkSymbol--check" width="0.75em" height="0.75em" hidden><use href="#icon-check"></use></svg>'
+    return link + check
+
 @dataclass
 class TimingStructureElement:
   text: FormatText
@@ -265,7 +270,7 @@ class SubSection:
 
       for rule in self.rules:
         ruleletter:str = f'{model_data.id_map[rule.id].reference[-1]}.'
-        result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a><span class="fas fa-link fa-xs RuleLinkSymbol"></span></span></span>{rule.to_html(config, model_data)}</li>'
+        result += f'<li class="SubRule" id="{rule.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{rule.id}"></a><a class="RuleLink" href="#{rule.id}">{ruleletter}</a>{_rule_link_icons()}</span>{rule.to_html(config, model_data)}</li>'
       result += '</ol>'
     return result
 
@@ -336,7 +341,7 @@ class Section:
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
     secnr:str = f'{model_data.id_map[self.id].reference}.'
-    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, model_data)}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></h2>'
+    result = f'<h2 class="Section" id="{self.id}"><a class="RuleLink" href="#{self.id}">{secnr} {self.text.to_html(config, model_data)}</a>{_rule_link_icons()}</h2>'
     if self.snippet:
       result += f'<p class="Snippet">{self.snippet.to_html(config, model_data)}</p>'
     result += '<ol class="Rules">'
@@ -344,8 +349,8 @@ class Section:
       rulenr:str = f'{model_data.id_map[self.id].reference}.{n+1}.'
 
       match elem:
-        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span>{elem.to_html(config, model_data)}</li>'
-        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkOuterWrapper"><span class="RuleLinkInnerWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></span></span>{elem.to_html(config, model_data)}</span></li>'
+        case Rule():       result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a>{_rule_link_icons()}</span>{elem.to_html(config, model_data)}</li>'
+        case SubSection(): result += f'<li class="Rule" id="{elem.id}"><span class="RuleLinkWrapper"><a class="RuleAnchor" href="#{elem.id}"></a><a class="RuleLink" href="#{elem.id}">{rulenr}</a>{_rule_link_icons()}</span>{elem.to_html(config, model_data)}</li>'
         case TimingStructure(): result += elem.to_html(config, model_data)
     result += '</ol>'
     return result
@@ -407,7 +412,7 @@ class Chapter:
 
   def to_html(self, config: Config, model_data: ModelData) -> str:
     chapnr:str = f'{model_data.id_map[self.id].reference}.'
-    result = f'<h1 class="Chapter" id="{self.id}"><a class="RuleLink" href="#{self.id}">{chapnr} {self.text}</a></a><i class="fas fa-link fa-xs RuleLinkSymbol"></i></h1>'
+    result = f'<h1 class="Chapter" id="{self.id}"><a class="RuleLink" href="#{self.id}">{chapnr} {self.text}</a>{_rule_link_icons()}</h1>'
     for section in self.sections:
       result += section.to_html(config, model_data)
     return result
@@ -495,7 +500,19 @@ class Document:
     changelog_content = "<li>" + '</li><li>'.join(map(lambda x: x.to_html(config, model_data), self.changelog)) + "</li>"
     html_content = re.sub(r"<!--CHANGELOG_ENTRIES-->(.*?)<!--END_CHANGELOG_ENTRIES-->", changelog_content, html_content, flags=re.DOTALL)
 
-    document_content = ''.join(map(lambda x: x.to_html(config, model_data), self.chapters))
+    # Inline SVG as a <symbol> so fill:currentColor from CSS applies via <use> references.
+    def _svg_symbol(filename: str, symbol_id: str) -> str:
+      content = open(f'data/templates/html/{filename}').read().strip()
+      return content.replace('<svg ', f'<symbol id="{symbol_id}" ', 1).replace('</svg>', '</symbol>', 1)
+
+    icon_sprite = '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">'
+    icon_sprite += _svg_symbol('icon-link.svg', 'icon-link')
+    icon_sprite += _svg_symbol('icon-check.svg', 'icon-check')
+    icon_sprite += _svg_symbol('icon-menu.svg', 'icon-menu')
+    icon_sprite += _svg_symbol('icon-search.svg', 'icon-search')
+    icon_sprite += '</svg>'
+
+    document_content = icon_sprite + ''.join(map(lambda x: x.to_html(config, model_data), self.chapters))
     html_content = re.sub(r"<!--MAIN_CONTENT-->(.*?)<!--END_MAIN_CONTENT-->", document_content, html_content, flags=re.DOTALL)
     html_content = re.sub(r"<!--VERSION_STRING-->(.*?)<!--END_VERSION_STRING-->", f"v{config.version_string()}", html_content, flags=re.DOTALL)
     html_content = re.sub(r"<!--EFFECTIVE_DATE-->(.*?)<!--END_EFFECTIVE_DATE-->", f"{config.effective_date_str()}", html_content, flags=re.DOTALL)

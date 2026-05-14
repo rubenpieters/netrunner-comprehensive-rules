@@ -38,13 +38,16 @@ elems.forEach(a => {
         history.replaceState(null, null, a.href);
 
         // Replace link symbol with clipboard symbol
-        navigator.clipboard.writeText(a.href);
-        a.parentElement.getElementsByClassName('fas')[0].className = "fas fa-check fa-xs RuleLinkSymbol";
-        
+        navigator.clipboard?.writeText(a.href).catch(() => {});
+        const link  = a.parentElement.querySelector('.RuleLinkSymbol--link');
+        const check = a.parentElement.querySelector('.RuleLinkSymbol--check');
+        link.setAttribute('hidden', '');
+        check.removeAttribute('hidden');
+
         // Revert back to link symbol after 1s
         setTimeout(() => {
-            a.parentElement.getElementsByClassName('fas')[0].className = "fas fa-link fa-xs RuleLinkSymbol";
-
+            link.removeAttribute('hidden');
+            check.setAttribute('hidden', '');
         }, 1000);
     }
 })
@@ -179,7 +182,7 @@ jQuery.fn.executeSearch = function(searchValue) {
             $("main").children().hide();
             $(".RulesTocList>li").hide();
             
-            $("#SelectedTags").append(`<li class="CustomTag"><span class="fas fa-xs fa-times CustomTagIcon"></span>${searchValue}</li>`);
+            $("#SelectedTags").append(`<li class="CustomTag"><svg class="CustomTagIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>${searchValue}</li>`);
 
             const selectedTagExpressions = $.map($("#SelectedTags>.CustomTag"), function(tag) {
                 return buildPartialMatchFromWordStartExpression($(tag).text());

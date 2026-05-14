@@ -196,6 +196,15 @@ body {
   padding: 0.2em;
 }
 
+.HeaderMenuItem svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 25;
+  vertical-align: middle;
+}
+
 /* on desktop or sufficiently wide displays, leave whitespace on right 
    equal to the space the TOC will take up, to allow browsing with TOC open */
 @media only screen and (min-width: 768px) {
@@ -233,15 +242,12 @@ ol.Rules, ol.SubRules {
   margin-left: 1em;
 }
 
-.RuleLinkOuterWrapper{
-  display: inline-block;
-  width: 0;
+li.Rule, li.SubRule {
   position: relative;
-  left: -.5em;
 }
-.RuleLinkInnerWrapper{
-  display: inline-block;
-  transform: translateX(-100%);
+.RuleLinkWrapper {
+  position: absolute;
+  transform: translateX(calc(-100% - 0.5em));
 }
 a.RuleLink:link, a.RuleLink:visited {
   color: inherit;
@@ -386,6 +392,7 @@ a.RuleLink:link, a.RuleLink:visited {
   grid-column: 2;
   display: flex;
   gap: 0.8em;
+  list-style: none;
 }
 
 #SearchBar {
@@ -454,7 +461,11 @@ a.RuleLink:link, a.RuleLink:visited {
 }
 
 .CustomTagIcon {
-  padding-right: 0.5em;
+  width: 0.75em;
+  height: 0.75em;
+  fill: currentColor;
+  vertical-align: middle;
+  margin-right: 0.5em;
 }
 
 .CustomTag:hover {

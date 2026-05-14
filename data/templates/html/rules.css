@@ -78,16 +78,6 @@ body {
    TOC
    ============================================================ */
 
-#RulesParent[data-tocopen] #RulesContent {
-  transform: translateX(var(--toc-width));
-  transition: transform 0.05s ease-out 100ms
-}
-
-
-#RulesParent[data-tocopen] #RulesToc{
-  transform: translateX(var(--toc-width));
-  transition: transform 0.05s ease-out 100ms;
-}
 #RulesParent[data-tocopen] #TocClose {
   visibility: visible;
 }
@@ -111,20 +101,26 @@ body {
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  width:var(--toc-width);
   position: fixed;
-  height: 100%;
-  transform: translateX(0);
-  top: 0;
   left: 0;
+  top: 0;
+  width: var(--toc-width);
+  height: 100vh;
   background-color: #f1f1f1;
-  margin: 0 0 0 calc(-1 * var(--toc-width));
+  margin: 0;
   padding: 0;
-  z-index: 20;
+  z-index: 200;
+  transform: translateX(-100%);
+  transition: transform 0.18s ease-out;
+}
+
+#RulesParent[data-tocopen] #RulesToc {
+  transform: translateX(0);
 }
 
 #RulesToc nav {
-  overflow-y: scroll;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .RulesTocList {
@@ -251,11 +247,26 @@ body {
   vertical-align: middle;
 }
 
-/* on desktop or sufficiently wide displays, leave whitespace on right 
-   equal to the space the TOC will take up, to allow browsing with TOC open */
-@media only screen and (min-width: 768px) {
+/* TOC for desktop */
+@media (min-width: 1024px) {
   #RulesContent {
-     padding-right: calc(var(--toc-width) + 2rem);
+    padding-left: calc(var(--toc-width) + 2.4rem);
+    padding-right: calc(var(--toc-width) + 2rem);
+  }
+}
+
+/* TOC for mobile */
+@media (max-width: 1023px) {
+  #TocBackdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 199;
+  }
+
+  #RulesParent[data-tocopen] #TocBackdrop {
+    display: block;
   }
 }
 

@@ -7,6 +7,14 @@ function openToc() {
     parent.setAttribute("data-tocopen", "");
 }
 
+// Mobile version has a backdrop, which can also close the TOC.
+document.getElementById('TocBackdrop').addEventListener('click', closeToc);
+
+// Close TOC immediately on mobile after navigation to a section.
+document.querySelector('#RulesToc nav').addEventListener('click', function(e) {
+  if (e.target.closest('a') && window.innerWidth < 1024) closeToc();
+});
+
 addEventListener("load", (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const ruleId = urlParams.get('r');

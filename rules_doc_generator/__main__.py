@@ -101,6 +101,7 @@ if "web" in config.output_types:
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.js'), os.path.join('html', 'rules.js'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('html', 'rules.css'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'extended.css'), os.path.join('html', 'extended.css'))
+  shutil.copytree(os.path.join('data', 'templates', 'html', 'fonts'), os.path.join('html', 'fonts'))
 
 # Opengraph Web Version Output
 if "opengraph" in config.output_types:
@@ -115,6 +116,7 @@ if "opengraph" in config.output_types:
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.js'), os.path.join('php', 'rules.js'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'rules.css'), os.path.join('php', 'rules.css'))
   shutil.copyfile(os.path.join('data', 'templates', 'html', 'extended.css'), os.path.join('php', 'extended.css'))
+  shutil.copytree(os.path.join('data', 'templates', 'html', 'fonts'), os.path.join('php', 'fonts'))
   shutil.copyfile(os.path.join('data', 'templates', 'php', 'index.php'), os.path.join('php', 'index.php'))
   shutil.copyfile(os.path.join('data', 'templates', 'php', 'logo.png'), os.path.join('php', 'logo.png'))
   phpConfigFile = "<?php\n$CONFIG = array (\n"
